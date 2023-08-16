@@ -2,7 +2,7 @@
 name = "web-stuff"
 version = "0.0.1"
 description = "Main calendar display interface for ambient design stuff (whee!)"
-authors = ["Skill Issue team <deco-team@ajbrown.au>"]
+authors = ["Skill Issue deco3801 team"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
