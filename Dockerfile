@@ -22,5 +22,5 @@ COPY pyproject.toml poetry.lock /app/
 RUN poetry install
 COPY ./website ./website
 
-EXPOSE 9003
+EXPOSE 443
 CMD python -m website "0.0.0.0"
