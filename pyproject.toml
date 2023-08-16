@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "web-stuff"
+version = "0.0.1"
+description = "Main calendar display interface for ambient design stuff (whee!)"
+authors = ["Skill Issue team <deco-team@ajbrown.au>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+sqlalchemy = "^1.4.46"
+mako = "^1.2.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
