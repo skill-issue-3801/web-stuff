@@ -11,7 +11,8 @@ ENV PYTHONFAULTHANDLER=1 \
     POETRY_VIRTUALENVS_CREATE=false \
     POETRY_CACHE_DIR='/var/cache/pypoetry'
 
-RUN apt-get update && apt-get install -y build-essential unzip wget python-dev
+RUN apt-get update
+RUN apt-get install -y build-essential unzip wget python-dev
 RUN pip install "poetry==$POETRY_VERSION" && poetry --version
 
 WORKDIR /app
