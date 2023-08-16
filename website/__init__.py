@@ -10,4 +10,4 @@ def main(args):
     
     app = Flask(__name__, static_folder=None);
     app.config["SERVER_NAME"] = os.environ.get("APP_BASE_URL")
-    waitress.serve(app, host=args[1], port=9003)
+    waitress.serve(app, host=args[1], port=443)
