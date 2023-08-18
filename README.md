@@ -31,5 +31,5 @@ python -m poetry shell
 ```
 4. To run
 ```
-python -m poetry run python -m localhost
+python -m poetry run python -m website localhost
 ```
