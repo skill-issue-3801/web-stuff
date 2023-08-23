@@ -9,7 +9,15 @@ readme = "README.md"
 python = "^3.10"
 waitress = "^2.1.2"
 flask = "^2.2.2"
+SQLAlchemy = {version = "^2.0.12", extras = ["postgresql_psycopg2binary"]}
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+pyright = "^1.1.316"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+strict = ["**"]
