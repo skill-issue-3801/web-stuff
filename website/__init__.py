@@ -1,6 +1,8 @@
 import os
 import logging
 
+from sqlalchemy import create_engine
+from .models import Base
 import waitress
 
 from .app import app
