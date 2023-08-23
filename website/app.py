@@ -1,6 +1,13 @@
 from flask import Flask
 
-app = Flask(__name__, static_folder=None);
+
+class DecoWebsite(Flask):
+    def set_db_engine(self, db_engine):
+        self.db = db_engine
+
+
+app = DecoWebsite(__name__, static_folder=None)
+
 
 @app.route("/")
 def hello_world():
