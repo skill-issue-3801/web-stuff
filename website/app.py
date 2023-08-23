@@ -5,6 +5,7 @@ class DecoWebsite(Flask):
     def set_db_engine(self, db_engine):
         self.db = db_engine
 
+
 app = DecoWebsite(__name__, static_folder=None)
 
 
