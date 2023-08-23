@@ -11,7 +11,7 @@ from .app import app
 def main(db_url, args):
     logging.basicConfig(level=logging.INFO)
 
-    app.config["SERVER_NAME"] = os.environ.get("APP_BASE_URL")
+    # app.config["SERVER_NAME"] = os.environ.get("APP_BASE_URL")
 
     db_engine = create_engine(db_url, echo=True)
     Base.metadata.create_all(db_engine)
