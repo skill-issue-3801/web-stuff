@@ -1,13 +1,13 @@
 :root {
     --coloumn-size: 40px;
     --row-size: 30px;
-}
+};
 
 .calendarGrid {
     display: grid;
     grid-template-columns: [Monday] var(--coloumn-size) [Tuesday] var(--coloumn-size) [Wednesday] var(--coloumn-size) [Thursday] var(--coloumn-size) [Friday] var(--coloumn-size) [Saturday] var(--coloumn-size);
-    /* TODO eli come back and fix up the row size and names */
-    grid-template-rows: [row1-start] 25% [row1-end] 100px [third-line] auto [last-line];
+    /* Regex for later if below needs to change -- find: \([0-9][0-9]\-[0-9][0-9]\) replace: \[\1\] var\(\-\-row\-size\) */
+    grid-template-rows: [r00-00] var(--row-size) [r00-15] var(--row-size) [r00-30] var(--row-size) [r00-45] var(--row-size) [r01-00] var(--row-size) [r01-15] var(--row-size) [r01-30] var(--row-size) [r01-45] var(--row-size) [r02-00] var(--row-size) [r02-15] var(--row-size) [r02-30] var(--row-size) [r02-45] var(--row-size) [r03-00] var(--row-size) [r03-15] var(--row-size) [r03-30] var(--row-size) [r03-45] var(--row-size) [r04-00] var(--row-size) [r04-15] var(--row-size) [r04-30] var(--row-size) [r04-45] var(--row-size) [r05-00] var(--row-size) [r05-15] var(--row-size) [r05-30] var(--row-size) [r05-45] var(--row-size) [r06-00] var(--row-size) [r06-15] var(--row-size) [r06-30] var(--row-size) [r06-45] var(--row-size) [r07-00] var(--row-size) [r07-15] var(--row-size) [r07-30] var(--row-size) [r07-45] var(--row-size) [r08-00] var(--row-size) [r08-15] var(--row-size) [r08-30] var(--row-size) [r08-45] var(--row-size) [r09-00] var(--row-size) [r09-15] var(--row-size) [r09-30] var(--row-size) [r09-45] var(--row-size) [r10-00] var(--row-size) [r10-15] var(--row-size) [r10-30] var(--row-size) [r10-45] var(--row-size) [r11-00] var(--row-size) [r11-15] var(--row-size) [r11-30] var(--row-size) [r11-45] var(--row-size) [r12-00] var(--row-size) [r12-15] var(--row-size) [r12-30] var(--row-size) [r12-45] var(--row-size) [r13-00] var(--row-size) [r13-15] var(--row-size) [r13-30] var(--row-size) [r13-45] var(--row-size) [r14-00] var(--row-size) [r14-15] var(--row-size) [r14-30] var(--row-size) [r14-45] var(--row-size) [r15-00] var(--row-size) [r15-15] var(--row-size) [r15-30] var(--row-size) [r15-45] var(--row-size) [r16-00] var(--row-size) [r16-15] var(--row-size) [r16-30] var(--row-size) [r16-45] var(--row-size) [r17-00] var(--row-size) [r17-15] var(--row-size) [r17-30] var(--row-size) [r17-45] var(--row-size) [r18-00] var(--row-size) [r18-15] var(--row-size) [r18-30] var(--row-size) [r18-45] var(--row-size) [r19-00] var(--row-size) [r19-15] var(--row-size) [r19-30] var(--row-size) [r19-45] var(--row-size) [r20-00] var(--row-size) [r20-15] var(--row-size) [r20-30] var(--row-size) [r20-45] var(--row-size) [r21-00] var(--row-size) [r21-15] var(--row-size) [r21-30] var(--row-size) [r21-45] var(--row-size) [r22-00] var(--row-size) [r22-15] var(--row-size) [r22-30] var(--row-size) [r22-45] var(--row-size) [r23-00] var(--row-size) [r23-15] var(--row-size) [r23-30] var(--row-size) [r23-45] var(--row-size);   
     grid-template-areas: "00-00-Sunday 00-00-Monday 00-00-Tuesday 00-00-Wednesday 00-00-Thursday 00-00-Friday 00-00-Saturday "
     "00-15-Sunday 00-15-Monday 00-15-Tuesday 00-15-Wednesday 00-15-Thursday 00-15-Friday 00-15-Saturday "
     "00-30-Sunday 00-30-Monday 00-30-Tuesday 00-30-Wednesday 00-30-Thursday 00-30-Friday 00-30-Saturday "
@@ -103,6 +103,5 @@
     "23-00-Sunday 23-00-Monday 23-00-Tuesday 23-00-Wednesday 23-00-Thursday 23-00-Friday 23-00-Saturday "
     "23-15-Sunday 23-15-Monday 23-15-Tuesday 23-15-Wednesday 23-15-Thursday 23-15-Friday 23-15-Saturday "
     "23-30-Sunday 23-30-Monday 23-30-Tuesday 23-30-Wednesday 23-30-Thursday 23-30-Friday 23-30-Saturday "
-    "23-45-Sunday 23-45-Monday 23-45-Tuesday 23-45-Wednesday 23-45-Thursday 23-45-Friday 23-45-Saturday "
-    ;
+    "23-45-Sunday 23-45-Monday 23-45-Tuesday 23-45-Wednesday 23-45-Thursday 23-45-Friday 23-45-Saturday ";
 }
