@@ -16,4 +16,4 @@ app = DecoWebsite(__name__, static_folder="templates")
 
 @app.route("/")
 def home():
-    return render_template('calendar-attempt-1.html')
+    return render_template('index.html')

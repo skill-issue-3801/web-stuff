@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %} - CalendarApp</title>
+    <!-- Main.css is for global styles only -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <!-- Calendar.css is for calendar view styles only -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/calendar.css')}}">
+
+</head>
+<!-- 
+    For example details on how templating works please see the following website
+    https://www.digitalocean.com/community/tutorials/how-to-use-templates-in-a-flask-application
+ -->
+<body>
+    <nav>
+        <a href="/">Index page - home</a>
+        <a href="{{url_for('admin.default')}}">the admin page</a>
+        <a href="{{url_for('calendar.default')}}">Calendar</a>
+    </nav>
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>
