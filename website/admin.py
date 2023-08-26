@@ -5,7 +5,6 @@ from flask import Blueprint
 from .models import CalendarLocations
 from .app import app
 
-
 admin = Blueprint("admin", __name__)
 logger = logging.getLogger(__name__)
 

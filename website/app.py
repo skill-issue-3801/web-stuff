@@ -2,7 +2,6 @@ from flask import Flask
 from sqlalchemy.orm import sessionmaker
 
 from .models import CalendarLocations
-from .admin import admin
 
 
 class DecoWebsite(Flask):
@@ -13,7 +12,6 @@ class DecoWebsite(Flask):
 
 
 app = DecoWebsite(__name__, static_folder=None)
-app.register_blueprint(admin, url_prefix="/admin")
 
 @app.route("/")
 def hello_world():
