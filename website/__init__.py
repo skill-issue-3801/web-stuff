@@ -6,6 +6,7 @@ import waitress
 
 from .app import app
 from .admin import admin
+from .calendar import calendar
 
 
 def main(db_url, args):
@@ -18,6 +19,7 @@ def main(db_url, args):
     app.set_db_engine(db_engine)
 
     app.register_blueprint(admin, url_prefix="/admin")
+    app.register_blueprint(calendar, url_prefix="/calendar")
 
     waitress.serve(app, host=args[1], port=9003)
 

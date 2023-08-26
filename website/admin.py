@@ -28,14 +28,17 @@ def add_calendars():
     db_session.commit()
     db_session.close()
 
+
 @admin.route("/my_family", methods=["GET", "POST"])
 def my_family():
     if request.method == "GET":
         return "<p>This is the page for user settings.</p>"
 
+
 @admin.route("/help", methods=["GET"])
 def help():
     return "<p>This is the help page.</p>"
+
 
 @admin.route("/settings", methods=["GET", "POST"])
 def settings():
