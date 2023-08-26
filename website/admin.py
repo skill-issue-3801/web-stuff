@@ -9,6 +9,10 @@ admin = Blueprint("admin", __name__)
 logger = logging.getLogger(__name__)
 
 
+@admin.route('/', methods=["GET"], subdomain="<subdomain>")
+def default():
+    return """<p>This is the admin page.</p>"""
+
 @admin.route('/add_calendars', methods=["GET", "POST"], subdomain="<subdomain>")
 def add_calendars():
     if request.method == "GET":
