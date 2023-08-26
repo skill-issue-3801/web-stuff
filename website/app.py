@@ -8,11 +8,10 @@ class DecoWebsite(Flask):
     def set_db_engine(self, db_engine):
         self.db_session = sessionmaker(bind=db_engine)
 
-    def send_static_file(self, filename: str, subdomain=None):
-        return super(DecoWebsite, self).send_static_file(filename)
 
-
-app = DecoWebsite(__name__, static_folder=None)
+# In theory what static_folder="templates" does is whenever app 
+# looks for a static folder it looks under templates
+app = DecoWebsite(__name__, static_folder="templates")
 
 
 @app.route("/")
