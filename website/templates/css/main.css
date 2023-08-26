@@ -1,0 +1,56 @@
+/** Univeral varibles and styles **/
+
+
+/** Belgiano Font**/
+@font-face {
+    font-family: 'Belgiano Serif';
+    font-display: swap;
+    src: url('fonts/belgiano_serif/Belgiano_Serif_2.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open_Sans';
+    display: swap;
+    src: url('fonts/Open_Sans/OpenSans-VariableFont_wdth_wght.ttf') format('truetype');
+}
+
+
+/** 
+
+    *Global Varibles*
+      To use write var(--heading-font) in place of where you'd type 'Belgiano'
+
+**/
+
+:root {
+    /** Global Fonts **/
+    --heading-font: Belgiano;
+    --body-font: Open_Sans;
+
+
+    /* CSS HEX */
+    --mint-green: #d3f2e9ff;
+    --cambridge-blue: #7ca8a1ff;
+    --skobeloff: #0a7b79ff;
+    --indigo-dye: #1d406bff;
+    --sandy-brown: #f4a363ff;
+    --light-coral: #db767dff;
+
+    /* CSS HSL */
+    --mint-green: hsla(163, 54%, 89%, 1);
+    --cambridge-blue: hsla(170, 20%, 57%, 1);
+    --skobeloff: hsla(179, 85%, 26%, 1);
+    --indigo-dye: hsla(213, 57%, 27%, 1);
+    --sandy-brown: hsla(26, 87%, 67%, 1);
+    --light-coral: hsla(356, 58%, 66%, 1);
+} 
+
+
+h1, h2, h3, h4, h5 {
+    font-family: var(--heading-font);
+    color: var(--indigo-dye);
+}
+p {
+    font-family: var(--body-font);
+    color: var(--indigo-dye);
+}
