@@ -1,6 +1,6 @@
 import logging
 
-from flask import Blueprint
+from flask import Blueprint, request
 
 from .models import CalendarLocations
 from .app import app
