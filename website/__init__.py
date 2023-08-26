@@ -5,7 +5,8 @@ from .models import Base
 import waitress
 
 from .app import app
-from .admin import admin 
+from .admin import admin
+
 
 def main(db_url, args):
     logging.basicConfig(level=logging.INFO)
