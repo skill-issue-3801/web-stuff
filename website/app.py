@@ -15,4 +15,7 @@ app = DecoWebsite(__name__, static_folder=None)
 
 @app.route("/")
 def hello_world():
-    return "<p>Hello, World!</p>"
+    return """<p>
+The website for deco3801 2023 team 'skill issue'.
+Check out <a href="/admin">the admin page</a>.
+    </p>"""
