@@ -1,0 +1,71 @@
+/* base.html and it's inheriting files css */
+
+
+/* TODO FIX SIDE NAV
+https://www.freecodecamp.org/news/fixed-side-and-bottom-navbar-with-css-flexbox/
+*/
+.baseContent {
+    overflow: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    width: 100vw;
+    gap: 3%;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: flex-start;
+}
+
+
+.navWrapper .navigationBar {
+    width: 15vw;
+    height: 100vh;
+    background-color: var(--indigo-dye);
+    color: var(--mint-green);
+    display: flex;
+    flex-direction: column;
+}
+
+.navigationBar a {
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--body-font);
+}
+
+.navigationBar a:link {
+    color: var(--mint-green);
+}
+
+.navigationBar a:visited {
+    color: var(--cambridge-blue);
+}
+
+.navigationBar a:focus {
+    text-decoration: underline;
+    color: var(--indigo-dye);
+    background: var(--cambridge-blue);
+}
+
+.navigationBar a:hover {
+    text-decoration: underline;
+    color: var(--indigo-dye);
+    background: var(--cambridge-blue);
+}
+
+.navigationBar a:active {
+    background: var(--light-cora);
+    color: var(--cambridge-blue);
+    text-decoration: underline;
+}
+
+
+
+/* Body content */
+.content {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+}
+
