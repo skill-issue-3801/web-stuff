@@ -18,29 +18,41 @@ def default():
 <a href="/admin/settings">Advanced settings.</a></p>"""
 
 # Connects to the Calendar set up page (config)
-@admin.route("/add_calendars", methods=["GET", "POST"])
+@admin.route("/add_calendars", methods=["GET"])
 def add_calendars():
     if request.method == "GET":
         return render_template('calendarSetUp.html')
 
+@admin.route("/add_calendars", methods=["POST"])
+def calendars_post():
     db_session = app.db_session()
     db_session.add(CalendarLocations(name="NAME", url="URL"))
     db_session.commit()
     db_session.close()
 
-
-@admin.route("/my_family", methods=["GET", "POST"])
+@admin.route("/my_family", methods=["GET"])
 def my_family():
-    if request.method == "GET":
-        return render_template('family.html')
+    return render_template('family.html')
 
+@admin.route("/my_family", methods=["POST"])
+def family_post():
+    db_session = app.db_session()
+    db_session.add()
+    db_session.commit()
+    db_session.close()
+    
 # Connects to the Guide page
 @admin.route("/help", methods=["GET"])
 def help():
     return render_template('guide.html')
 
-
-@admin.route("/settings", methods=["GET", "POST"])
+@admin.route("/settings", methods=["GET"])
 def settings():
-    if request.method == "GET":
-        return render_template('settings.html')
+    return render_template('settings.html')
+
+@admin.route("/settings", methods=["POST"])
+def settings_post():
+    db_session = app.db_session()
+    db_session.add()
+    db_session.commit()
+    db_session.close()
