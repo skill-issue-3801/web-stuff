@@ -17,15 +17,16 @@
 }
 
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .baseContent {
         flex-direction: column;
     }
 
     .navWrapper .navigationBar {
-        width: 100vw;
-        height: 10vh;
-        flex-direction: row;
+        /*!important because it wasn't being applied :(*/
+        width: 100vw !important;
+        height: 10vh !important;
+        flex-direction: row !important;
     }
 }
 
