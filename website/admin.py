@@ -17,11 +17,12 @@ def default():
 <a href="/admin/help">Get help.</a><br>
 <a href="/admin/settings">Advanced settings.</a></p>"""
 
+
 # Connects to the Calendar set up page (config)
 @admin.route("/add_calendars", methods=["GET", "POST"])
 def add_calendars():
     if request.method == "GET":
-        return render_template('calendarSetUp.html')
+        return render_template("calendarSetUp.html")
 
     db_session = app.db_session()
     db_session.add(CalendarLocations(name="NAME", url="URL"))
@@ -32,15 +33,16 @@ def add_calendars():
 @admin.route("/my_family", methods=["GET", "POST"])
 def my_family():
     if request.method == "GET":
-        return render_template('family.html')
+        return render_template("family.html")
+
 
 # Connects to the Guide page
 @admin.route("/help", methods=["GET"])
 def help():
-    return render_template('guide.html')
+    return render_template("guide.html")
 
 
 @admin.route("/settings", methods=["GET", "POST"])
 def settings():
     if request.method == "GET":
-        return render_template('settings.html')
+        return render_template("settings.html")
