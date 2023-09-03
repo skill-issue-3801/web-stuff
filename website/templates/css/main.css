@@ -1,4 +1,4 @@
-/** Univeral varibles and styles **/
+/** Univeral variables and styles **/
 
 * {
     margin: 0;
@@ -17,6 +17,23 @@
 }
 
 
+@media (max-width: 480px) {
+    .baseContent {
+        flex-direction: column;
+    }
+
+    .navWrapper .navigationBar {
+        width: 100vw;
+        height: 10vh;
+        display: flex;
+        flex-direction: row;
+        gap: 5%;
+        align-content: space-around;
+    }
+}
+
+
+
 /** 
 
     *Global Varibles*
@@ -24,6 +41,8 @@
 
 **/
 
+
+/**DO NOT TOUCH ANYTHING HERE**/
 :root {
     /** Global Fonts **/
     --heading-font: Belgiano;
