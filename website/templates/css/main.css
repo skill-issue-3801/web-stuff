@@ -25,10 +25,7 @@
     .navWrapper .navigationBar {
         width: 100vw;
         height: 10vh;
-        display: flex;
         flex-direction: row;
-        gap: 5%;
-        align-content: space-around;
     }
 }
 
@@ -66,7 +63,7 @@
     --light-coral: hsla(356, 58%, 66%, 1);
 } 
 
-
+/**Below is fine to touch, carefully (notes to keep Ali from breaking things)**/
 h1, h2, h3, h4, h5 {
     font-family: var(--heading-font);
     color: var(--indigo-dye);
@@ -75,6 +72,29 @@ p {
     font-family: var(--body-font);
     color: var(--indigo-dye);
 }
+
+/** https://matthewjamestaylor.com/responsive-font-size#how - trusting this formula**/
+body {
+    font-size: calc(15px + 0.390625vw);
+}
+
+h1 {
+    font-size: 1.8rem;
+}
+h2 {
+    font-size: 1.5rem;
+}
+h3 {
+    font-size: 1.2rem;
+}
+h4 {
+    font-size: 1rem;
+}
+h5 {
+    font-size: 0.8rem;
+}
+
+
 
 /* TODO move base styles into their own sheet */
 .baseContent {
@@ -128,8 +148,8 @@ p {
 }
 
 .navigationBar a:active {
-background: var(--light-cora);
-color: var(--cambridge-blue);
+    background: var(--light-cora);
+    color: var(--cambridge-blue);
 }
 
 .content {
