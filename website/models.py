@@ -1,28 +1,27 @@
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import String
+from sqlalchemy import String, Column
+from sqlalchemy.ext.declarative import declarative_base
 
-
-class Base(DeclarativeBase):
-    pass
+Base = declarative_base()
 
 
 class CalendarLocations(Base):
     __tablename__ = "calendars"
 
-    family_member_name: Mapped[str] = mapped_column("name", String, primary_key=True)
-    url: Mapped[str] = mapped_column("url", String, primary_key=True)
+    family_member_name = Column("name", String, primary_key=True)
+    url = Column("url", String, primary_key=True)
 
 
 class Settings(Base):
     __tablename__ = "settings"
 
-    setting_name: Mapped[str] = mapped_column("key", String, primary_key=True)
-    setting_value: Mapped[str] = mapped_column("val", String)
+    setting_name = Column("key", String, primary_key=True)
+    setting_value = Column("val", String)
 
 
 class Family(Base):
     __tablename__ = "family"
 
-    name: Mapped[str] = mapped_column("name", String)
-    icon: Mapped[str] = mapped_column("icon", String)
-    gmail: Mapped[str] = mapped_column("email", String, primary_key=True)
+    name = Column("name", String)
+    icon = Column("icon", String)
+    gmail = Column("email", String, primary_key=True)
+
