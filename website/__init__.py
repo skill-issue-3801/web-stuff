@@ -1,22 +1,27 @@
 import logging
 
-from sqlalchemy import create_engine
-from .models import Base
+import sqlalchemy
 import waitress
 
 from .app import app
 from .admin import admin
 from .calendar import calendar
+from .base import Session, DB
+from .models import Base
 
 
 def main(db_url, args):
     logging.basicConfig(level=logging.INFO)
 
-    # app.config["SERVER_NAME"] = os.environ.get("APP_BASE_URL")
+    app.config["SQLALCHEMY_DATABASE_URI"] = db_url
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-    db_engine = create_engine(db_url, echo=True)
-    Base.metadata.create_all(db_engine)
-    app.set_db_engine(db_engine)
+    DB.init_app(app)
+
+    with app.app_context():
+        s = Session()
+        Base.metadata.create_all(s.connection())
+        s.commit()
 
     app.register_blueprint(admin, url_prefix="/admin")
     app.register_blueprint(calendar, url_prefix="/calendar")
