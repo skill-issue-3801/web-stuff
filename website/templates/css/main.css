@@ -1,8 +1,10 @@
-/** Univeral varibles and styles **/
+/** Univeral variables and styles **/
 
 * {
     margin: 0;
+    box-sizing: border-box;
 }
+
 /** Belgiano Font**/
 @font-face {
     font-family: 'Belgiano Serif';
@@ -18,6 +20,21 @@
 }
 
 
+@media (max-width: 600px) {
+    .baseContent {
+        flex-direction: column;
+    }
+
+    .navWrapper .navigationBar {
+        /*!important because it wasn't being applied :(*/
+        width: 100vw !important;
+        height: 10vh !important;
+        flex-direction: row !important;
+    }
+}
+
+
+
 /** 
 
     *Global Varibles*
@@ -25,6 +42,8 @@
 
 **/
 
+
+/**DO NOT TOUCH ANYTHING HERE**/
 :root {
     /** Global Fonts **/
     --heading-font: Belgiano;
@@ -48,8 +67,7 @@
     --light-coral: hsla(356, 58%, 66%, 1);
 } 
 
-
-/* Changing default colours and font */
+/**Below is fine to touch, carefully (notes to keep Ali from breaking things)**/
 h1, h2, h3, h4, h5 {
     font-family: var(--heading-font);
     color: var(--indigo-dye);
@@ -58,3 +76,96 @@ p {
     font-family: var(--body-font);
     color: var(--indigo-dye);
 }
+
+/** https://matthewjamestaylor.com/responsive-font-size#how - trusting this formula**/
+body {
+    font-size: calc(15px + 0.390625vw);
+}
+
+h1 {
+    font-size: 1.8rem;
+}
+h2 {
+    font-size: 1.5rem;
+}
+h3 {
+    font-size: 1.2rem;
+}
+h4 {
+    font-size: 1rem;
+}
+h5 {
+    font-size: 0.8rem;
+}
+
+
+
+/* TODO move base styles into their own sheet */
+.baseContent {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    width: 100vw;
+    gap: 3%;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: flex-start;
+    background: var(--mint-green);
+}
+/* TODO workout why display is throwing an invalid property type */
+.navWrapper .navigationBar {
+    /* top: 0;
+    left: 0; */
+    width: 15vw;
+    height: 100vh;
+    background-color: var(--indigo-dye);
+    color: var(--mint-green);
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigationBar a {
+    outline: none;
+    text-align: center;
+    font-family: var(--body-font);
+}
+
+.navigationBar a:link {
+    color: var(--mint-green);
+}
+
+.navigationBar a:visited {
+    color: var(--cambridge-blue);
+}
+
+.navigationBar a:focus {
+    text-decoration: none;
+    color: var(--indigo-dye);
+    background: var(--cambridge-blue);
+}
+
+.navigationBar a:hover {
+    text-decoration: none;
+    color: var(--indigo-dye);
+    background: var(--cambridge-blue);
+}
+
+.navigationBar a:active {
+    background: var(--light-cora);
+    color: var(--cambridge-blue);
+}
+
+.content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1.5em;
+}
+
