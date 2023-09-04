@@ -24,4 +24,3 @@ class Family(Base):
     name = Column("name", String)
     icon = Column("icon", String)
     gmail = Column("email", String, primary_key=True)
-

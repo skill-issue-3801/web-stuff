@@ -16,4 +16,5 @@ def has_db(fn):
             result = fn(s, *args, **kwargs)
         s.commit()
         return result
+
     return decorated
