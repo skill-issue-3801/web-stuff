@@ -4,5 +4,10 @@
     <h1>{% block title %} Calendar Set Up {% endblock %}</h1>
     <p>This is the page for calendar setup.<br>
         e.g. add google calendar link</p>
+    <form>
+        <label for="calendarURL">Calendar URL:</label><br>
+        <input type="text" id="calendarURL" name="calendarURL" value=""><br>
+        <input type="submit" value="Submit">
+    </form>
     
 {% endblock %}
