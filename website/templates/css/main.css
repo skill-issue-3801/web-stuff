@@ -21,7 +21,9 @@
 
 @media (max-width: 600px) {
     .baseContent {
-        flex-direction: column;
+        flex-direction: column !important;
+        margin-top: 10vh !important;
+        margin-left: 0 !important;
     }
 
     .navWrapper .navigationBar {
@@ -29,6 +31,16 @@
         width: 100vw !important;
         height: 10vh !important;
         flex-direction: row !important;
+
+    }
+    /*TODO - fix why this isn't centering and instnead sits at top of screen ??*/
+    .navigationBar a {
+        height: 10vh !important;
+        padding-left: 4vw !important;
+        padding-right: 2vw !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        width: auto !important;
     }
 }
 
@@ -101,20 +113,24 @@ h5 {
 
 /* TODO move base styles into their own sheet */
 .baseContent {
+    margin-left: 15vw;
     display: flex;
     flex-wrap: nowrap;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 75vw;
     gap: 3%;
     justify-content: flex-start;
     align-items: stretch;
+    /*flex-wrap being nowrap means align-content has no effect*/
     align-content: flex-start;
     background: var(--mint-green);
 }
+
 /* TODO workout why display is throwing an invalid property type */
 .navWrapper .navigationBar {
-    /* top: 0;
-    left: 0; */
+    top: 0;
+    left: 0;
+    position: fixed;
     width: 15vw;
     height: 100vh;
     background-color: var(--indigo-dye);
@@ -123,14 +139,19 @@ h5 {
     flex-direction: column;
     gap: 5%;
     align-content: space-around;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
 .navigationBar a {
     outline: none;
     text-align: center;
+    width:15vw;
+    padding-top: 6vh;
+    padding-bottom: 6vh;
+    border-radius: 0.5vw;
     font-family: var(--body-font);
+    transition: 0.2s;
 }
 
 .navigationBar a:link {
@@ -151,6 +172,7 @@ h5 {
     text-decoration: none;
     color: var(--indigo-dye);
     background: var(--cambridge-blue);
+    transition: 0.4s;
 }
 
 .navigationBar a:active {
