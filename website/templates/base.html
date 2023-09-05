@@ -5,6 +5,8 @@
     <title>{% block title %} {% endblock %} - CalendarApp</title>
     <!-- Main.css is for global styles only -->
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <!-- Base.css is for base.css globals -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}">
     <!-- Calendar.css is for calendar view styles only -->
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/calendar.css')}}">
 
@@ -14,23 +16,23 @@
     https://www.digitalocean.com/community/tutorials/how-to-use-templates-in-a-flask-application
  -->
 
- <!-- TODO make calendar not use base!!!!-->
 <body class="baseContent" >
-    <div class="navWrapper">
+    <aside class="navWrapper">
         <nav class="navigationBar">
             <a href="{{url_for('admin.help')}}">Guide</a>
             <a href="{{url_for('admin.add_calendars')}}">Calendar</a>
             <a href="{{url_for('admin.my_family')}}">Family</a>
             <a href="{{url_for('admin.settings')}}">Settings</a>
-    </div>
+        </nav>
+    </aside>
     
-    <div class="content">
+    <main class="content">
         <a href="/">Index page - home</a>
-            <a href="{{url_for('admin.default')}}">the admin page</a>
-            <a href="{{url_for('calendar.default')}}">Calendar</a>
-            {% block content %} {% endblock %}
+        <a href="{{url_for('admin.default')}}">the admin page</a>
+        <a href="{{url_for('calendar.default')}}">Calendar</a>
+        {% block content %} {% endblock %}
 
-    </div>
+    </main>
 
 </body>
 </html>

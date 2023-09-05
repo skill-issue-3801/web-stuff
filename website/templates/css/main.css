@@ -12,6 +12,7 @@
     src: url('fonts/belgiano_serif/Belgiano_Serif_2.ttf') format('truetype');
 }
 
+/* Open Sans font */
 @font-face {
     font-family: 'Open_Sans';
     display: swap;
