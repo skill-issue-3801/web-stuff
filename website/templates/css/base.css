@@ -4,32 +4,35 @@
 /* TODO FIX SIDE NAV
 https://www.freecodecamp.org/news/fixed-side-and-bottom-navbar-with-css-flexbox/
 */
-.baseContent {
-    overflow: hidden;
-    display: flex;
-    flex-wrap: nowrap;
-    height: 100vh;
-    width: 100vw;
-    gap: 3%;
-    justify-content: flex-start;
-    align-items: stretch;
-    align-content: flex-start;
-}
 
 
-.navWrapper .navigationBar {
+/* --------------------------Ali's nav--------------- */
+/* TODO workout why display is throwing an invalid property type */
+/* .navWrapper .navigationBar {
+    top: 0;
+    left: 0;
+    position: fixed;
     width: 15vw;
     height: 100vh;
     background-color: var(--indigo-dye);
     color: var(--mint-green);
     display: flex;
     flex-direction: column;
+    gap: 5%;
+    align-content: space-around;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .navigationBar a {
+    outline: none;
     text-align: center;
-    text-decoration: none;
+    width:15vw;
+    padding-top: 6vh;
+    padding-bottom: 6vh;
+    border-radius: 0.5vw;
     font-family: var(--body-font);
+    transition: 0.2s;
 }
 
 .navigationBar a:link {
@@ -41,31 +44,152 @@ https://www.freecodecamp.org/news/fixed-side-and-bottom-navbar-with-css-flexbox/
 }
 
 .navigationBar a:focus {
-    text-decoration: underline;
+    text-decoration: none;
     color: var(--indigo-dye);
     background: var(--cambridge-blue);
 }
 
 .navigationBar a:hover {
-    text-decoration: underline;
+    text-decoration: none;
     color: var(--indigo-dye);
     background: var(--cambridge-blue);
+    transition: 0.4s;
 }
 
 .navigationBar a:active {
     background: var(--light-cora);
     color: var(--cambridge-blue);
-    text-decoration: underline;
 }
 
-
-
-/* Body content */
 .content {
     height: 100%;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-content: space-around;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1.5em;
+} */
+
+/* --------------------------Ali's nav above--------------- */
+
+
+
+/* -------------------Eli Trying to fix styling issues */
+
+/* Nav A tag styling */
+.navigationBar a:link {
+    color: var(--mint-green);
+    text-decoration: none;
+}
+
+.navigationBar a:visited {
+    color: var(--mint-green);
+    text-decoration: none;
+}
+
+.navigationBar a:focus {
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--indigo-dye);
+    background: var(--light-coral);
+}
+
+.navigationBar a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+    color: var(--indigo-dye);
+    background: var(--light-coral);
+    transition: 0.4s;
+}
+
+.navigationBar a:active {
+    background: var(--light-coral);
+    color: var(--mint-green);
+    text-decoration: none;
+}
+
+
+/*For when it's full screen*/
+.baseContent {
+    margin-left: 15vw;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100%;
+    width: 75vw;
+    gap: 3%;
+    justify-content: flex-start;
+    align-items: stretch;
+    /*flex-wrap being nowrap means align-content has no effect*/
+    align-content: flex-start;
+    background: var(--mint-green);
+}
+
+
+.navWrapper .navigationBar {
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 15vw;
+    height: 100vh;
+    background-color: var(--indigo-dye);
+    color: var(--mint-green);
+    display: flex;
+    flex-direction: column;
+    /* Trying to work out if side nav bunched at the top looks better?? */
+    /* gap: 5%;
+    align-content: space-around;
+    justify-content: space-evenly; */
+    align-items: stretch;
+}
+
+.navigationBar a {
+    outline: none;
+    text-align: center;
+    /* width:15vw;
+    padding-top: 6vh;
+    padding-bottom: 6vh; */
+    border-radius: 0.5vw;
+    font-family: var(--body-font);
+    transition: 0.2s;
+    line-height: 3em;
+}
+
+
+@media (max-width: 600px) {
+    .baseContent {
+        flex-direction: column !important;
+        margin-top: 10vh !important;
+        margin-left: 0 !important;
+    }
+
+    .navWrapper .navigationBar {
+        /*!important because it wasn't being applied :(*/
+        width: 100vw !important;
+        height: 10vh !important;
+        flex-direction: row !important;
+        gap: 0% !important;
+
+    }
+
+    .navigationBar a {
+        /* height: 10vh !important;
+        padding-left: 4vw !important;
+        padding-right: 2vw !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important; */
+        width: 25vw !important;
+        line-height: 3em;
+    }
+}
+
+.content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1.5em;
 }
 
