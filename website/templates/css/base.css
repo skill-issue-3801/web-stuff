@@ -1,82 +1,5 @@
 /* base.html and it's inheriting files css */
 
-
-/* TODO FIX SIDE NAV
-https://www.freecodecamp.org/news/fixed-side-and-bottom-navbar-with-css-flexbox/
-*/
-
-
-/* --------------------------Ali's nav--------------- */
-/* TODO workout why display is throwing an invalid property type */
-/* .navWrapper .navigationBar {
-    top: 0;
-    left: 0;
-    position: fixed;
-    width: 15vw;
-    height: 100vh;
-    background-color: var(--indigo-dye);
-    color: var(--mint-green);
-    display: flex;
-    flex-direction: column;
-    gap: 5%;
-    align-content: space-around;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.navigationBar a {
-    outline: none;
-    text-align: center;
-    width:15vw;
-    padding-top: 6vh;
-    padding-bottom: 6vh;
-    border-radius: 0.5vw;
-    font-family: var(--body-font);
-    transition: 0.2s;
-}
-
-.navigationBar a:link {
-    color: var(--mint-green);
-}
-
-.navigationBar a:visited {
-    color: var(--cambridge-blue);
-}
-
-.navigationBar a:focus {
-    text-decoration: none;
-    color: var(--indigo-dye);
-    background: var(--cambridge-blue);
-}
-
-.navigationBar a:hover {
-    text-decoration: none;
-    color: var(--indigo-dye);
-    background: var(--cambridge-blue);
-    transition: 0.4s;
-}
-
-.navigationBar a:active {
-    background: var(--light-cora);
-    color: var(--cambridge-blue);
-}
-
-.content {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-content: space-around;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 1.5em;
-} */
-
-/* --------------------------Ali's nav above--------------- */
-
-
-
-/* -------------------Eli Trying to fix styling issues */
-
 /* Nav A tag styling */
 .navigationBar a:link {
     color: var(--mint-green);
@@ -155,7 +78,7 @@ https://www.freecodecamp.org/news/fixed-side-and-bottom-navbar-with-css-flexbox/
     line-height: 3em;
 }
 
-
+/* For when it's less than full screen */
 @media (max-width: 600px) {
     .baseContent {
         flex-direction: column !important;
