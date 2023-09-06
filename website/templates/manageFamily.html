@@ -1,8 +1,59 @@
+
+
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Family {% endblock %}</h1>
-    <p>This is the page for family member setup.<br>
-        e.g. add and remove family members, get name and gmail</p>
+<h1>{% block title %} Family {% endblock %}</h1>
+<p>This is the page for family member setup.<br>
+    e.g. add and remove family members, get name and gmail, calendar type as radio buttons</p>
+
+<div id="familyContainer">
+
+    <!--add user(name, calendar link, calendar type(google or apple), [email])
+
+    Update user name(new name)
+    Update user email(new email)
+    Update user calendar link(new link, calendar type)
+    Update user icon(path to image)-->
+
+
+    <!--family member icons w names above them and edit and delete buttons below them-->
+
+
+
+</div>
+
+
+<!--form stuff!!!-->
+
+    <!-- A button to open the popup form -->
+    <button class="open-button" onclick="openForm()">Open Form</button>
+
+    <!-- The form -->
+    <div class="form-popup" id="familyForm">
+        <form action="" class="form-container">
+            <h1>Login</h1>
+
+            <label for="name"><b>Name</b></label>
+            <input type="text" placeholder="Enter Name" name="name" required>
+            <br>
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" name="email" required>
+            <br>
+            <label for="link"><b>Calendar Link</b></label>
+            <input type="text" placeholder="Enter Calendar Link" name="link" required>
+            <br>
+            <input type="radio" id="google" name="type" value="google">
+            <label for="google">Google</label>
+            <input type="radio" id="apple" name="fav_language" value="apple">
+            <label for="apple">Apple</label>
+
+            <!--icon choices here, more complicated so I'm doing them last-->
+
+            <button type="submit" class="btn confirm">Confirm</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+        </form>
+    </div>
+
 
 {% endblock %}

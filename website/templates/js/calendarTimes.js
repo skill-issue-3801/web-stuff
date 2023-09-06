@@ -24,3 +24,24 @@ document.getElementById("timeRows").innerHTML = timeDivs;
 
 
 // grid-area: a00-00
+
+
+
+
+//family management things
+function deleteUser {
+    //delete a user from existence
+
+}
+
+function addUser {
+    //add a new user :)
+
+}
+
+
+function editUser {
+    //edit user
+
+
+}
