@@ -1,15 +1,33 @@
 :root {
-    --coloumn-size: 40px;
+    --coloumn-size: 13.6%;
+    --time-coloumn-size: 5%;
     --row-size: 60px;
 }
+.content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1.5em;
+}
+
+
+
+#calendarWrapper {
+    margin-left: 5vw;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100%;
+    /* background: var(--mint-green); */
+}
+
 /* Key:
     "c" - coloumn name (soz for the spelling mistake, its embedded  now)
     "r" - row name
     "a" - grid area name
     */
-#calendarWrapper{
-    /* TODO use this section to align the child calendarGrid to centre */
-}
 .calendarGrid {
     background-color: #fed9ff;
     width: 95vw;
@@ -18,111 +36,166 @@
     overflow-y: auto;
     font-size: small;
     display: grid;
-    grid-template-columns: [cSunday] var(--coloumn-size) [cMonday] var(--coloumn-size) [cTuesday] var(--coloumn-size) [cWednesday] var(--coloumn-size) [cThursday] var(--coloumn-size) [cFriday] var(--coloumn-size) [cSaturday] var(--coloumn-size);
+    grid-template-columns: [c00-00] var(--time-coloumn-size) [cSunday] var(--coloumn-size) [cMonday] var(--coloumn-size) [cTuesday] var(--coloumn-size) [cWednesday] var(--coloumn-size) [cThursday] var(--coloumn-size) [cFriday] var(--coloumn-size) [cSaturday] var(--coloumn-size);
     /* Regex for later if below needs to change -- find: \([0-9][0-9]\-[0-9][0-9]\) replace: \[\1\] var\(\-\-row\-size\) */
     grid-template-rows: [r00-00] var(--row-size) [r00-15] var(--row-size) [r00-30] var(--row-size) [r00-45] var(--row-size) [r01-00] var(--row-size) [r01-15] var(--row-size) [r01-30] var(--row-size) [r01-45] var(--row-size) [r02-00] var(--row-size) [r02-15] var(--row-size) [r02-30] var(--row-size) [r02-45] var(--row-size) [r03-00] var(--row-size) [r03-15] var(--row-size) [r03-30] var(--row-size) [r03-45] var(--row-size) [r04-00] var(--row-size) [r04-15] var(--row-size) [r04-30] var(--row-size) [r04-45] var(--row-size) [r05-00] var(--row-size) [r05-15] var(--row-size) [r05-30] var(--row-size) [r05-45] var(--row-size) [r06-00] var(--row-size) [r06-15] var(--row-size) [r06-30] var(--row-size) [r06-45] var(--row-size) [r07-00] var(--row-size) [r07-15] var(--row-size) [r07-30] var(--row-size) [r07-45] var(--row-size) [r08-00] var(--row-size) [r08-15] var(--row-size) [r08-30] var(--row-size) [r08-45] var(--row-size) [r09-00] var(--row-size) [r09-15] var(--row-size) [r09-30] var(--row-size) [r09-45] var(--row-size) [r10-00] var(--row-size) [r10-15] var(--row-size) [r10-30] var(--row-size) [r10-45] var(--row-size) [r11-00] var(--row-size) [r11-15] var(--row-size) [r11-30] var(--row-size) [r11-45] var(--row-size) [r12-00] var(--row-size) [r12-15] var(--row-size) [r12-30] var(--row-size) [r12-45] var(--row-size) [r13-00] var(--row-size) [r13-15] var(--row-size) [r13-30] var(--row-size) [r13-45] var(--row-size) [r14-00] var(--row-size) [r14-15] var(--row-size) [r14-30] var(--row-size) [r14-45] var(--row-size) [r15-00] var(--row-size) [r15-15] var(--row-size) [r15-30] var(--row-size) [r15-45] var(--row-size) [r16-00] var(--row-size) [r16-15] var(--row-size) [r16-30] var(--row-size) [r16-45] var(--row-size) [r17-00] var(--row-size) [r17-15] var(--row-size) [r17-30] var(--row-size) [r17-45] var(--row-size) [r18-00] var(--row-size) [r18-15] var(--row-size) [r18-30] var(--row-size) [r18-45] var(--row-size) [r19-00] var(--row-size) [r19-15] var(--row-size) [r19-30] var(--row-size) [r19-45] var(--row-size) [r20-00] var(--row-size) [r20-15] var(--row-size) [r20-30] var(--row-size) [r20-45] var(--row-size) [r21-00] var(--row-size) [r21-15] var(--row-size) [r21-30] var(--row-size) [r21-45] var(--row-size) [r22-00] var(--row-size) [r22-15] var(--row-size) [r22-30] var(--row-size) [r22-45] var(--row-size) [r23-00] var(--row-size) [r23-15] var(--row-size) [r23-30] var(--row-size) [r23-45] var(--row-size);   
-    grid-template-areas: "aSunday aMonday aTuesday aWednesday aThursday aFriday aSaturday"
-    "00-00-Sunday 00-00-Monday 00-00-Tuesday 00-00-Wednesday 00-00-Thursday 00-00-Friday 00-00-Saturday "
-    "00-15-Sunday 00-15-Monday 00-15-Tuesday 00-15-Wednesday 00-15-Thursday 00-15-Friday 00-15-Saturday "
-    "00-30-Sunday 00-30-Monday 00-30-Tuesday 00-30-Wednesday 00-30-Thursday 00-30-Friday 00-30-Saturday "
-    "00-45-Sunday 00-45-Monday 00-45-Tuesday 00-45-Wednesday 00-45-Thursday 00-45-Friday 00-45-Saturday "
-    "01-00-Sunday 01-00-Monday 01-00-Tuesday 01-00-Wednesday 01-00-Thursday 01-00-Friday 01-00-Saturday "
-    "01-15-Sunday 01-15-Monday 01-15-Tuesday 01-15-Wednesday 01-15-Thursday 01-15-Friday 01-15-Saturday "
-    "01-30-Sunday 01-30-Monday 01-30-Tuesday 01-30-Wednesday 01-30-Thursday 01-30-Friday 01-30-Saturday "
-    "01-45-Sunday 01-45-Monday 01-45-Tuesday 01-45-Wednesday 01-45-Thursday 01-45-Friday 01-45-Saturday "
-    "02-00-Sunday 02-00-Monday 02-00-Tuesday 02-00-Wednesday 02-00-Thursday 02-00-Friday 02-00-Saturday "
-    "02-15-Sunday 02-15-Monday 02-15-Tuesday 02-15-Wednesday 02-15-Thursday 02-15-Friday 02-15-Saturday "
-    "02-30-Sunday 02-30-Monday 02-30-Tuesday 02-30-Wednesday 02-30-Thursday 02-30-Friday 02-30-Saturday "
-    "02-45-Sunday 02-45-Monday 02-45-Tuesday 02-45-Wednesday 02-45-Thursday 02-45-Friday 02-45-Saturday "
-    "03-00-Sunday 03-00-Monday 03-00-Tuesday 03-00-Wednesday 03-00-Thursday 03-00-Friday 03-00-Saturday "
-    "03-15-Sunday 03-15-Monday 03-15-Tuesday 03-15-Wednesday 03-15-Thursday 03-15-Friday 03-15-Saturday "
-    "03-30-Sunday 03-30-Monday 03-30-Tuesday 03-30-Wednesday 03-30-Thursday 03-30-Friday 03-30-Saturday "
-    "03-45-Sunday 03-45-Monday 03-45-Tuesday 03-45-Wednesday 03-45-Thursday 03-45-Friday 03-45-Saturday "
-    "04-00-Sunday 04-00-Monday 04-00-Tuesday 04-00-Wednesday 04-00-Thursday 04-00-Friday 04-00-Saturday "
-    "04-15-Sunday 04-15-Monday 04-15-Tuesday 04-15-Wednesday 04-15-Thursday 04-15-Friday 04-15-Saturday "
-    "04-30-Sunday 04-30-Monday 04-30-Tuesday 04-30-Wednesday 04-30-Thursday 04-30-Friday 04-30-Saturday "
-    "04-45-Sunday 04-45-Monday 04-45-Tuesday 04-45-Wednesday 04-45-Thursday 04-45-Friday 04-45-Saturday "
-    "05-00-Sunday 05-00-Monday 05-00-Tuesday 05-00-Wednesday 05-00-Thursday 05-00-Friday 05-00-Saturday "
-    "05-15-Sunday 05-15-Monday 05-15-Tuesday 05-15-Wednesday 05-15-Thursday 05-15-Friday 05-15-Saturday "
-    "05-30-Sunday 05-30-Monday 05-30-Tuesday 05-30-Wednesday 05-30-Thursday 05-30-Friday 05-30-Saturday "
-    "05-45-Sunday 05-45-Monday 05-45-Tuesday 05-45-Wednesday 05-45-Thursday 05-45-Friday 05-45-Saturday "
-    "06-00-Sunday 06-00-Monday 06-00-Tuesday 06-00-Wednesday 06-00-Thursday 06-00-Friday 06-00-Saturday "
-    "06-15-Sunday 06-15-Monday 06-15-Tuesday 06-15-Wednesday 06-15-Thursday 06-15-Friday 06-15-Saturday "
-    "06-30-Sunday 06-30-Monday 06-30-Tuesday 06-30-Wednesday 06-30-Thursday 06-30-Friday 06-30-Saturday "
-    "06-45-Sunday 06-45-Monday 06-45-Tuesday 06-45-Wednesday 06-45-Thursday 06-45-Friday 06-45-Saturday "
-    "07-00-Sunday 07-00-Monday 07-00-Tuesday 07-00-Wednesday 07-00-Thursday 07-00-Friday 07-00-Saturday "
-    "07-15-Sunday 07-15-Monday 07-15-Tuesday 07-15-Wednesday 07-15-Thursday 07-15-Friday 07-15-Saturday "
-    "07-30-Sunday 07-30-Monday 07-30-Tuesday 07-30-Wednesday 07-30-Thursday 07-30-Friday 07-30-Saturday "
-    "07-45-Sunday 07-45-Monday 07-45-Tuesday 07-45-Wednesday 07-45-Thursday 07-45-Friday 07-45-Saturday "
-    "08-00-Sunday 08-00-Monday 08-00-Tuesday 08-00-Wednesday 08-00-Thursday 08-00-Friday 08-00-Saturday "
-    "08-15-Sunday 08-15-Monday 08-15-Tuesday 08-15-Wednesday 08-15-Thursday 08-15-Friday 08-15-Saturday "
-    "08-30-Sunday 08-30-Monday 08-30-Tuesday 08-30-Wednesday 08-30-Thursday 08-30-Friday 08-30-Saturday "
-    "08-45-Sunday 08-45-Monday 08-45-Tuesday 08-45-Wednesday 08-45-Thursday 08-45-Friday 08-45-Saturday "
-    "09-00-Sunday 09-00-Monday 09-00-Tuesday 09-00-Wednesday 09-00-Thursday 09-00-Friday 09-00-Saturday "
-    "09-15-Sunday 09-15-Monday 09-15-Tuesday 09-15-Wednesday 09-15-Thursday 09-15-Friday 09-15-Saturday "
-    "09-30-Sunday 09-30-Monday 09-30-Tuesday 09-30-Wednesday 09-30-Thursday 09-30-Friday 09-30-Saturday "
-    "09-45-Sunday 09-45-Monday 09-45-Tuesday 09-45-Wednesday 09-45-Thursday 09-45-Friday 09-45-Saturday "
-    "10-00-Sunday 10-00-Monday 10-00-Tuesday 10-00-Wednesday 10-00-Thursday 10-00-Friday 10-00-Saturday "
-    "10-15-Sunday 10-15-Monday 10-15-Tuesday 10-15-Wednesday 10-15-Thursday 10-15-Friday 10-15-Saturday "
-    "10-30-Sunday 10-30-Monday 10-30-Tuesday 10-30-Wednesday 10-30-Thursday 10-30-Friday 10-30-Saturday "
-    "10-45-Sunday 10-45-Monday 10-45-Tuesday 10-45-Wednesday 10-45-Thursday 10-45-Friday 10-45-Saturday "
-    "11-00-Sunday 11-00-Monday 11-00-Tuesday 11-00-Wednesday 11-00-Thursday 11-00-Friday 11-00-Saturday "
-    "11-15-Sunday 11-15-Monday 11-15-Tuesday 11-15-Wednesday 11-15-Thursday 11-15-Friday 11-15-Saturday "
-    "11-30-Sunday 11-30-Monday 11-30-Tuesday 11-30-Wednesday 11-30-Thursday 11-30-Friday 11-30-Saturday "
-    "11-45-Sunday 11-45-Monday 11-45-Tuesday 11-45-Wednesday 11-45-Thursday 11-45-Friday 11-45-Saturday "
-    "12-00-Sunday 12-00-Monday 12-00-Tuesday 12-00-Wednesday 12-00-Thursday 12-00-Friday 12-00-Saturday "
-    "12-15-Sunday 12-15-Monday 12-15-Tuesday 12-15-Wednesday 12-15-Thursday 12-15-Friday 12-15-Saturday "
-    "12-30-Sunday 12-30-Monday 12-30-Tuesday 12-30-Wednesday 12-30-Thursday 12-30-Friday 12-30-Saturday "
-    "12-45-Sunday 12-45-Monday 12-45-Tuesday 12-45-Wednesday 12-45-Thursday 12-45-Friday 12-45-Saturday "
-    "13-00-Sunday 13-00-Monday 13-00-Tuesday 13-00-Wednesday 13-00-Thursday 13-00-Friday 13-00-Saturday "
-    "13-15-Sunday 13-15-Monday 13-15-Tuesday 13-15-Wednesday 13-15-Thursday 13-15-Friday 13-15-Saturday "
-    "13-30-Sunday 13-30-Monday 13-30-Tuesday 13-30-Wednesday 13-30-Thursday 13-30-Friday 13-30-Saturday "
-    "13-45-Sunday 13-45-Monday 13-45-Tuesday 13-45-Wednesday 13-45-Thursday 13-45-Friday 13-45-Saturday "
-    "14-00-Sunday 14-00-Monday 14-00-Tuesday 14-00-Wednesday 14-00-Thursday 14-00-Friday 14-00-Saturday "
-    "14-15-Sunday 14-15-Monday 14-15-Tuesday 14-15-Wednesday 14-15-Thursday 14-15-Friday 14-15-Saturday "
-    "14-30-Sunday 14-30-Monday 14-30-Tuesday 14-30-Wednesday 14-30-Thursday 14-30-Friday 14-30-Saturday "
-    "14-45-Sunday 14-45-Monday 14-45-Tuesday 14-45-Wednesday 14-45-Thursday 14-45-Friday 14-45-Saturday "
-    "15-00-Sunday 15-00-Monday 15-00-Tuesday 15-00-Wednesday 15-00-Thursday 15-00-Friday 15-00-Saturday "
-    "15-15-Sunday 15-15-Monday 15-15-Tuesday 15-15-Wednesday 15-15-Thursday 15-15-Friday 15-15-Saturday "
-    "15-30-Sunday 15-30-Monday 15-30-Tuesday 15-30-Wednesday 15-30-Thursday 15-30-Friday 15-30-Saturday "
-    "15-45-Sunday 15-45-Monday 15-45-Tuesday 15-45-Wednesday 15-45-Thursday 15-45-Friday 15-45-Saturday "
-    "16-00-Sunday 16-00-Monday 16-00-Tuesday 16-00-Wednesday 16-00-Thursday 16-00-Friday 16-00-Saturday "
-    "16-15-Sunday 16-15-Monday 16-15-Tuesday 16-15-Wednesday 16-15-Thursday 16-15-Friday 16-15-Saturday "
-    "16-30-Sunday 16-30-Monday 16-30-Tuesday 16-30-Wednesday 16-30-Thursday 16-30-Friday 16-30-Saturday "
-    "16-45-Sunday 16-45-Monday 16-45-Tuesday 16-45-Wednesday 16-45-Thursday 16-45-Friday 16-45-Saturday "
-    "17-00-Sunday 17-00-Monday 17-00-Tuesday 17-00-Wednesday 17-00-Thursday 17-00-Friday 17-00-Saturday "
-    "17-15-Sunday 17-15-Monday 17-15-Tuesday 17-15-Wednesday 17-15-Thursday 17-15-Friday 17-15-Saturday "
-    "17-30-Sunday 17-30-Monday 17-30-Tuesday 17-30-Wednesday 17-30-Thursday 17-30-Friday 17-30-Saturday "
-    "17-45-Sunday 17-45-Monday 17-45-Tuesday 17-45-Wednesday 17-45-Thursday 17-45-Friday 17-45-Saturday "
-    "18-00-Sunday 18-00-Monday 18-00-Tuesday 18-00-Wednesday 18-00-Thursday 18-00-Friday 18-00-Saturday "
-    "18-15-Sunday 18-15-Monday 18-15-Tuesday 18-15-Wednesday 18-15-Thursday 18-15-Friday 18-15-Saturday "
-    "18-30-Sunday 18-30-Monday 18-30-Tuesday 18-30-Wednesday 18-30-Thursday 18-30-Friday 18-30-Saturday "
-    "18-45-Sunday 18-45-Monday 18-45-Tuesday 18-45-Wednesday 18-45-Thursday 18-45-Friday 18-45-Saturday "
-    "19-00-Sunday 19-00-Monday 19-00-Tuesday 19-00-Wednesday 19-00-Thursday 19-00-Friday 19-00-Saturday "
-    "19-15-Sunday 19-15-Monday 19-15-Tuesday 19-15-Wednesday 19-15-Thursday 19-15-Friday 19-15-Saturday "
-    "19-30-Sunday 19-30-Monday 19-30-Tuesday 19-30-Wednesday 19-30-Thursday 19-30-Friday 19-30-Saturday "
-    "19-45-Sunday 19-45-Monday 19-45-Tuesday 19-45-Wednesday 19-45-Thursday 19-45-Friday 19-45-Saturday "
-    "20-00-Sunday 20-00-Monday 20-00-Tuesday 20-00-Wednesday 20-00-Thursday 20-00-Friday 20-00-Saturday "
-    "20-15-Sunday 20-15-Monday 20-15-Tuesday 20-15-Wednesday 20-15-Thursday 20-15-Friday 20-15-Saturday "
-    "20-30-Sunday 20-30-Monday 20-30-Tuesday 20-30-Wednesday 20-30-Thursday 20-30-Friday 20-30-Saturday "
-    "20-45-Sunday 20-45-Monday 20-45-Tuesday 20-45-Wednesday 20-45-Thursday 20-45-Friday 20-45-Saturday "
-    "21-00-Sunday 21-00-Monday 21-00-Tuesday 21-00-Wednesday 21-00-Thursday 21-00-Friday 21-00-Saturday "
-    "21-15-Sunday 21-15-Monday 21-15-Tuesday 21-15-Wednesday 21-15-Thursday 21-15-Friday 21-15-Saturday "
-    "21-30-Sunday 21-30-Monday 21-30-Tuesday 21-30-Wednesday 21-30-Thursday 21-30-Friday 21-30-Saturday "
-    "21-45-Sunday 21-45-Monday 21-45-Tuesday 21-45-Wednesday 21-45-Thursday 21-45-Friday 21-45-Saturday "
-    "22-00-Sunday 22-00-Monday 22-00-Tuesday 22-00-Wednesday 22-00-Thursday 22-00-Friday 22-00-Saturday "
-    "22-15-Sunday 22-15-Monday 22-15-Tuesday 22-15-Wednesday 22-15-Thursday 22-15-Friday 22-15-Saturday "
-    "22-30-Sunday 22-30-Monday 22-30-Tuesday 22-30-Wednesday 22-30-Thursday 22-30-Friday 22-30-Saturday "
-    "22-45-Sunday 22-45-Monday 22-45-Tuesday 22-45-Wednesday 22-45-Thursday 22-45-Friday 22-45-Saturday "
-    "23-00-Sunday 23-00-Monday 23-00-Tuesday 23-00-Wednesday 23-00-Thursday 23-00-Friday 23-00-Saturday "
-    "23-15-Sunday 23-15-Monday 23-15-Tuesday 23-15-Wednesday 23-15-Thursday 23-15-Friday 23-15-Saturday "
-    "23-30-Sunday 23-30-Monday 23-30-Tuesday 23-30-Wednesday 23-30-Thursday 23-30-Friday 23-30-Saturday "
-    "23-45-Sunday 23-45-Monday 23-45-Tuesday 23-45-Wednesday 23-45-Thursday 23-45-Friday 23-45-Saturday ";
+    grid-template-areas: "a00-00 aSunday aMonday aTuesday aWednesday aThursday aFriday aSaturday"
+    "00-00 00-00-Sunday 00-00-Monday 00-00-Tuesday 00-00-Wednesday 00-00-Thursday 00-00-Friday 00-00-Saturday "
+    "00-15 00-15-Sunday 00-15-Monday 00-15-Tuesday 00-15-Wednesday 00-15-Thursday 00-15-Friday 00-15-Saturday "
+    "00-30 00-30-Sunday 00-30-Monday 00-30-Tuesday 00-30-Wednesday 00-30-Thursday 00-30-Friday 00-30-Saturday "
+    "00-45 00-45-Sunday 00-45-Monday 00-45-Tuesday 00-45-Wednesday 00-45-Thursday 00-45-Friday 00-45-Saturday "
+    "01-00 01-00-Sunday 01-00-Monday 01-00-Tuesday 01-00-Wednesday 01-00-Thursday 01-00-Friday 01-00-Saturday "
+    "01-15 01-15-Sunday 01-15-Monday 01-15-Tuesday 01-15-Wednesday 01-15-Thursday 01-15-Friday 01-15-Saturday "
+    "01-30 01-30-Sunday 01-30-Monday 01-30-Tuesday 01-30-Wednesday 01-30-Thursday 01-30-Friday 01-30-Saturday "
+    "01-45 01-45-Sunday 01-45-Monday 01-45-Tuesday 01-45-Wednesday 01-45-Thursday 01-45-Friday 01-45-Saturday "
+    "02-00 02-00-Sunday 02-00-Monday 02-00-Tuesday 02-00-Wednesday 02-00-Thursday 02-00-Friday 02-00-Saturday "
+    "02-15 02-15-Sunday 02-15-Monday 02-15-Tuesday 02-15-Wednesday 02-15-Thursday 02-15-Friday 02-15-Saturday "
+    "02-30 02-30-Sunday 02-30-Monday 02-30-Tuesday 02-30-Wednesday 02-30-Thursday 02-30-Friday 02-30-Saturday "
+    "02-45 02-45-Sunday 02-45-Monday 02-45-Tuesday 02-45-Wednesday 02-45-Thursday 02-45-Friday 02-45-Saturday "
+    "03-00 03-00-Sunday 03-00-Monday 03-00-Tuesday 03-00-Wednesday 03-00-Thursday 03-00-Friday 03-00-Saturday "
+    "03-15 03-15-Sunday 03-15-Monday 03-15-Tuesday 03-15-Wednesday 03-15-Thursday 03-15-Friday 03-15-Saturday "
+    "03-30 03-30-Sunday 03-30-Monday 03-30-Tuesday 03-30-Wednesday 03-30-Thursday 03-30-Friday 03-30-Saturday "
+    "03-45 03-45-Sunday 03-45-Monday 03-45-Tuesday 03-45-Wednesday 03-45-Thursday 03-45-Friday 03-45-Saturday "
+    "04-00 04-00-Sunday 04-00-Monday 04-00-Tuesday 04-00-Wednesday 04-00-Thursday 04-00-Friday 04-00-Saturday "
+    "04-15 04-15-Sunday 04-15-Monday 04-15-Tuesday 04-15-Wednesday 04-15-Thursday 04-15-Friday 04-15-Saturday "
+    "04-30 04-30-Sunday 04-30-Monday 04-30-Tuesday 04-30-Wednesday 04-30-Thursday 04-30-Friday 04-30-Saturday "
+    "04-45 04-45-Sunday 04-45-Monday 04-45-Tuesday 04-45-Wednesday 04-45-Thursday 04-45-Friday 04-45-Saturday "
+    "05-00 05-00-Sunday 05-00-Monday 05-00-Tuesday 05-00-Wednesday 05-00-Thursday 05-00-Friday 05-00-Saturday "
+    "05-15 05-15-Sunday 05-15-Monday 05-15-Tuesday 05-15-Wednesday 05-15-Thursday 05-15-Friday 05-15-Saturday "
+    "05-30 05-30-Sunday 05-30-Monday 05-30-Tuesday 05-30-Wednesday 05-30-Thursday 05-30-Friday 05-30-Saturday "
+    "05-45 05-45-Sunday 05-45-Monday 05-45-Tuesday 05-45-Wednesday 05-45-Thursday 05-45-Friday 05-45-Saturday "
+    "06-00 06-00-Sunday 06-00-Monday 06-00-Tuesday 06-00-Wednesday 06-00-Thursday 06-00-Friday 06-00-Saturday "
+    "06-15 06-15-Sunday 06-15-Monday 06-15-Tuesday 06-15-Wednesday 06-15-Thursday 06-15-Friday 06-15-Saturday "
+    "06-30 06-30-Sunday 06-30-Monday 06-30-Tuesday 06-30-Wednesday 06-30-Thursday 06-30-Friday 06-30-Saturday "
+    "06-45 06-45-Sunday 06-45-Monday 06-45-Tuesday 06-45-Wednesday 06-45-Thursday 06-45-Friday 06-45-Saturday "
+    "07-00 07-00-Sunday 07-00-Monday 07-00-Tuesday 07-00-Wednesday 07-00-Thursday 07-00-Friday 07-00-Saturday "
+    "07-15 07-15-Sunday 07-15-Monday 07-15-Tuesday 07-15-Wednesday 07-15-Thursday 07-15-Friday 07-15-Saturday "
+    "07-30 07-30-Sunday 07-30-Monday 07-30-Tuesday 07-30-Wednesday 07-30-Thursday 07-30-Friday 07-30-Saturday "
+    "07-45 07-45-Sunday 07-45-Monday 07-45-Tuesday 07-45-Wednesday 07-45-Thursday 07-45-Friday 07-45-Saturday "
+    "08-00 08-00-Sunday 08-00-Monday 08-00-Tuesday 08-00-Wednesday 08-00-Thursday 08-00-Friday 08-00-Saturday "
+    "08-15 08-15-Sunday 08-15-Monday 08-15-Tuesday 08-15-Wednesday 08-15-Thursday 08-15-Friday 08-15-Saturday "
+    "08-30 08-30-Sunday 08-30-Monday 08-30-Tuesday 08-30-Wednesday 08-30-Thursday 08-30-Friday 08-30-Saturday "
+    "08-45 08-45-Sunday 08-45-Monday 08-45-Tuesday 08-45-Wednesday 08-45-Thursday 08-45-Friday 08-45-Saturday "
+    "09-00 09-00-Sunday 09-00-Monday 09-00-Tuesday 09-00-Wednesday 09-00-Thursday 09-00-Friday 09-00-Saturday "
+    "09-15 09-15-Sunday 09-15-Monday 09-15-Tuesday 09-15-Wednesday 09-15-Thursday 09-15-Friday 09-15-Saturday "
+    "09-30 09-30-Sunday 09-30-Monday 09-30-Tuesday 09-30-Wednesday 09-30-Thursday 09-30-Friday 09-30-Saturday "
+    "09-45 09-45-Sunday 09-45-Monday 09-45-Tuesday 09-45-Wednesday 09-45-Thursday 09-45-Friday 09-45-Saturday "
+    "10-00 10-00-Sunday 10-00-Monday 10-00-Tuesday 10-00-Wednesday 10-00-Thursday 10-00-Friday 10-00-Saturday "
+    "10-15 10-15-Sunday 10-15-Monday 10-15-Tuesday 10-15-Wednesday 10-15-Thursday 10-15-Friday 10-15-Saturday "
+    "10-30 10-30-Sunday 10-30-Monday 10-30-Tuesday 10-30-Wednesday 10-30-Thursday 10-30-Friday 10-30-Saturday "
+    "10-45 10-45-Sunday 10-45-Monday 10-45-Tuesday 10-45-Wednesday 10-45-Thursday 10-45-Friday 10-45-Saturday "
+    "11-00 11-00-Sunday 11-00-Monday 11-00-Tuesday 11-00-Wednesday 11-00-Thursday 11-00-Friday 11-00-Saturday "
+    "11-15 11-15-Sunday 11-15-Monday 11-15-Tuesday 11-15-Wednesday 11-15-Thursday 11-15-Friday 11-15-Saturday "
+    "11-30 11-30-Sunday 11-30-Monday 11-30-Tuesday 11-30-Wednesday 11-30-Thursday 11-30-Friday 11-30-Saturday "
+    "11-45 11-45-Sunday 11-45-Monday 11-45-Tuesday 11-45-Wednesday 11-45-Thursday 11-45-Friday 11-45-Saturday "
+    "12-00 12-00-Sunday 12-00-Monday 12-00-Tuesday 12-00-Wednesday 12-00-Thursday 12-00-Friday 12-00-Saturday "
+    "12-15 12-15-Sunday 12-15-Monday 12-15-Tuesday 12-15-Wednesday 12-15-Thursday 12-15-Friday 12-15-Saturday "
+    "12-30 12-30-Sunday 12-30-Monday 12-30-Tuesday 12-30-Wednesday 12-30-Thursday 12-30-Friday 12-30-Saturday "
+    "12-45 12-45-Sunday 12-45-Monday 12-45-Tuesday 12-45-Wednesday 12-45-Thursday 12-45-Friday 12-45-Saturday "
+    "13-00 13-00-Sunday 13-00-Monday 13-00-Tuesday 13-00-Wednesday 13-00-Thursday 13-00-Friday 13-00-Saturday "
+    "13-15 13-15-Sunday 13-15-Monday 13-15-Tuesday 13-15-Wednesday 13-15-Thursday 13-15-Friday 13-15-Saturday "
+    "13-30 13-30-Sunday 13-30-Monday 13-30-Tuesday 13-30-Wednesday 13-30-Thursday 13-30-Friday 13-30-Saturday "
+    "13-45 13-45-Sunday 13-45-Monday 13-45-Tuesday 13-45-Wednesday 13-45-Thursday 13-45-Friday 13-45-Saturday "
+    "14-00 14-00-Sunday 14-00-Monday 14-00-Tuesday 14-00-Wednesday 14-00-Thursday 14-00-Friday 14-00-Saturday "
+    "14-15 14-15-Sunday 14-15-Monday 14-15-Tuesday 14-15-Wednesday 14-15-Thursday 14-15-Friday 14-15-Saturday "
+    "14-30 14-30-Sunday 14-30-Monday 14-30-Tuesday 14-30-Wednesday 14-30-Thursday 14-30-Friday 14-30-Saturday "
+    "14-45 14-45-Sunday 14-45-Monday 14-45-Tuesday 14-45-Wednesday 14-45-Thursday 14-45-Friday 14-45-Saturday "
+    "15-00 15-00-Sunday 15-00-Monday 15-00-Tuesday 15-00-Wednesday 15-00-Thursday 15-00-Friday 15-00-Saturday "
+    "15-15 15-15-Sunday 15-15-Monday 15-15-Tuesday 15-15-Wednesday 15-15-Thursday 15-15-Friday 15-15-Saturday "
+    "15-30 15-30-Sunday 15-30-Monday 15-30-Tuesday 15-30-Wednesday 15-30-Thursday 15-30-Friday 15-30-Saturday "
+    "15-45 15-45-Sunday 15-45-Monday 15-45-Tuesday 15-45-Wednesday 15-45-Thursday 15-45-Friday 15-45-Saturday "
+    "16-00 16-00-Sunday 16-00-Monday 16-00-Tuesday 16-00-Wednesday 16-00-Thursday 16-00-Friday 16-00-Saturday "
+    "16-15 16-15-Sunday 16-15-Monday 16-15-Tuesday 16-15-Wednesday 16-15-Thursday 16-15-Friday 16-15-Saturday "
+    "16-30 16-30-Sunday 16-30-Monday 16-30-Tuesday 16-30-Wednesday 16-30-Thursday 16-30-Friday 16-30-Saturday "
+    "16-45 16-45-Sunday 16-45-Monday 16-45-Tuesday 16-45-Wednesday 16-45-Thursday 16-45-Friday 16-45-Saturday "
+    "17-00 17-00-Sunday 17-00-Monday 17-00-Tuesday 17-00-Wednesday 17-00-Thursday 17-00-Friday 17-00-Saturday "
+    "17-15 17-15-Sunday 17-15-Monday 17-15-Tuesday 17-15-Wednesday 17-15-Thursday 17-15-Friday 17-15-Saturday "
+    "17-30 17-30-Sunday 17-30-Monday 17-30-Tuesday 17-30-Wednesday 17-30-Thursday 17-30-Friday 17-30-Saturday "
+    "17-45 17-45-Sunday 17-45-Monday 17-45-Tuesday 17-45-Wednesday 17-45-Thursday 17-45-Friday 17-45-Saturday "
+    "18-00 18-00-Sunday 18-00-Monday 18-00-Tuesday 18-00-Wednesday 18-00-Thursday 18-00-Friday 18-00-Saturday "
+    "18-15 18-15-Sunday 18-15-Monday 18-15-Tuesday 18-15-Wednesday 18-15-Thursday 18-15-Friday 18-15-Saturday "
+    "18-30 18-30-Sunday 18-30-Monday 18-30-Tuesday 18-30-Wednesday 18-30-Thursday 18-30-Friday 18-30-Saturday "
+    "18-45 18-45-Sunday 18-45-Monday 18-45-Tuesday 18-45-Wednesday 18-45-Thursday 18-45-Friday 18-45-Saturday "
+    "19-00 19-00-Sunday 19-00-Monday 19-00-Tuesday 19-00-Wednesday 19-00-Thursday 19-00-Friday 19-00-Saturday "
+    "19-15 19-15-Sunday 19-15-Monday 19-15-Tuesday 19-15-Wednesday 19-15-Thursday 19-15-Friday 19-15-Saturday "
+    "19-30 19-30-Sunday 19-30-Monday 19-30-Tuesday 19-30-Wednesday 19-30-Thursday 19-30-Friday 19-30-Saturday "
+    "19-45 19-45-Sunday 19-45-Monday 19-45-Tuesday 19-45-Wednesday 19-45-Thursday 19-45-Friday 19-45-Saturday "
+    "20-00 20-00-Sunday 20-00-Monday 20-00-Tuesday 20-00-Wednesday 20-00-Thursday 20-00-Friday 20-00-Saturday "
+    "20-15 20-15-Sunday 20-15-Monday 20-15-Tuesday 20-15-Wednesday 20-15-Thursday 20-15-Friday 20-15-Saturday "
+    "20-30 20-30-Sunday 20-30-Monday 20-30-Tuesday 20-30-Wednesday 20-30-Thursday 20-30-Friday 20-30-Saturday "
+    "20-45 20-45-Sunday 20-45-Monday 20-45-Tuesday 20-45-Wednesday 20-45-Thursday 20-45-Friday 20-45-Saturday "
+    "21-00 21-00-Sunday 21-00-Monday 21-00-Tuesday 21-00-Wednesday 21-00-Thursday 21-00-Friday 21-00-Saturday "
+    "21-15 21-15-Sunday 21-15-Monday 21-15-Tuesday 21-15-Wednesday 21-15-Thursday 21-15-Friday 21-15-Saturday "
+    "21-30 21-30-Sunday 21-30-Monday 21-30-Tuesday 21-30-Wednesday 21-30-Thursday 21-30-Friday 21-30-Saturday "
+    "21-45 21-45-Sunday 21-45-Monday 21-45-Tuesday 21-45-Wednesday 21-45-Thursday 21-45-Friday 21-45-Saturday "
+    "22-00 22-00-Sunday 22-00-Monday 22-00-Tuesday 22-00-Wednesday 22-00-Thursday 22-00-Friday 22-00-Saturday "
+    "22-15 22-15-Sunday 22-15-Monday 22-15-Tuesday 22-15-Wednesday 22-15-Thursday 22-15-Friday 22-15-Saturday "
+    "22-30 22-30-Sunday 22-30-Monday 22-30-Tuesday 22-30-Wednesday 22-30-Thursday 22-30-Friday 22-30-Saturday "
+    "22-45 22-45-Sunday 22-45-Monday 22-45-Tuesday 22-45-Wednesday 22-45-Thursday 22-45-Friday 22-45-Saturday "
+    "23-00 23-00-Sunday 23-00-Monday 23-00-Tuesday 23-00-Wednesday 23-00-Thursday 23-00-Friday 23-00-Saturday "
+    "23-15 23-15-Sunday 23-15-Monday 23-15-Tuesday 23-15-Wednesday 23-15-Thursday 23-15-Friday 23-15-Saturday "
+    "23-30 23-30-Sunday 23-30-Monday 23-30-Tuesday 23-30-Wednesday 23-30-Thursday 23-30-Friday 23-30-Saturday "
+    "23-45 23-45-Sunday 23-45-Monday 23-45-Tuesday 23-45-Wednesday 23-45-Thursday 23-45-Friday 23-45-Saturday ";
 }
 
+/* Forces the items in the calendar to max out their width */
+.calendarGrid div {
+    width: 100%;
+    text-align: center;
+}
 #Sunday {
     justify-self: center;
-    background-color: aquamarine;
+    background-color: aqua;
+    grid-area: aSunday;
     grid-column: cSunday / cSunday / span 1;
     grid-row: r00-00 / r00-00 / span 1;
 }
+
+#Monday {
+    justify-self: center;
+    background-color: rosybrown;
+    grid-area: aMonday;
+    grid-column: cMonday / cMonday / span 1;
+    grid-row: r00-00 / r00-00 / span 1;
+}
+
+#Tuesday {
+    justify-self: center;
+    background-color: aqua;
+    grid-area: aTuesday;
+    grid-column: cTuesday / cTuesday / span 1;
+    grid-row: r00-00 / r00-00 / span 1;
+}
+
+#Wednesday {
+    justify-self: center;
+    background-color: rosybrown;
+    grid-area: aWednesday;
+    grid-column: cWednesday / cWednesday / span 1;
+    grid-row: r00-00 / r00-00 / span 1;
+}
+
+#Thursday {
+    justify-self: center;
+    background-color: aqua;
+    grid-area: aThursday;
+    grid-column: cThursday / cThursday / span 1;
+    grid-row: r00-00 / r00-00 / span 1;
+}
+
+#Friday {
+    justify-self: center;
+    background-color: rosybrown;
+    grid-area: aFriday;
+    grid-column: cFriday / cFriday / span 1;
+    grid-row: r00-00 / r00-00 / span 1;
+}
+
+#Saturday {
+    justify-self: center;
+    background-color: aqua;
+    grid-area: aSaturday;
+    grid-column: cSaturday / cSaturday / span 1;
+    grid-row: r00-00 / r00-00 / span 1;
+}
+

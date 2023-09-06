@@ -20,19 +20,7 @@
 }
 
 
-@media (max-width: 600px) {
-    .baseContent {
-        flex-direction: column;
-    }
-
-    .navWrapper .navigationBar {
-        /*!important because it wasn't being applied :(*/
-        width: 100vw !important;
-        height: 10vh !important;
-        flex-direction: row !important;
-    }
-}
-
+/* Media moved to base.css! */
 
 
 /** 
@@ -98,74 +86,4 @@ h5 {
     font-size: 0.8rem;
 }
 
-
-
-/* TODO move base styles into their own sheet */
-.baseContent {
-    display: flex;
-    flex-wrap: nowrap;
-    height: 100vh;
-    width: 100vw;
-    gap: 3%;
-    justify-content: flex-start;
-    align-items: stretch;
-    align-content: flex-start;
-    background: var(--mint-green);
-}
-/* TODO workout why display is throwing an invalid property type */
-.navWrapper .navigationBar {
-    /* top: 0;
-    left: 0; */
-    width: 15vw;
-    height: 100vh;
-    background-color: var(--indigo-dye);
-    color: var(--mint-green);
-    display: flex;
-    flex-direction: column;
-    gap: 5%;
-    align-content: space-around;
-    justify-content: center;
-    align-items: center;
-}
-
-.navigationBar a {
-    outline: none;
-    text-align: center;
-    font-family: var(--body-font);
-}
-
-.navigationBar a:link {
-    color: var(--mint-green);
-}
-
-.navigationBar a:visited {
-    color: var(--cambridge-blue);
-}
-
-.navigationBar a:focus {
-    text-decoration: none;
-    color: var(--indigo-dye);
-    background: var(--cambridge-blue);
-}
-
-.navigationBar a:hover {
-    text-decoration: none;
-    color: var(--indigo-dye);
-    background: var(--cambridge-blue);
-}
-
-.navigationBar a:active {
-    background: var(--light-cora);
-    color: var(--cambridge-blue);
-}
-
-.content {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-content: space-around;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 1.5em;
-}
-
+/* Nav content has been moved to base.css! */
