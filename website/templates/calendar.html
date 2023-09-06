@@ -1,14 +1,64 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CalendarApp</title>
+    <!-- Main.css is for global styles only -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <!-- Calendar.css is for calendar view styles only -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/calendar.css')}}">
+    <script src="./js/calendarTimes.js"></script>
 
-{% block content %}
-    <h1>{% block title %} Calendar {% endblock %}</h1>
-    <p>Hi I'm calendar - You shouldn't be able to see me...</p>
-    <section id="calendarWrapper">
-        <div class="calendarGrid">
-            <!-- Aw fuck here we go -->
-            <div id="Sunday">
-                <h4>Sunday</h4>
+</head>
+<!-- 
+    For example details on how templating works please see the following website
+    https://www.digitalocean.com/community/tutorials/how-to-use-templates-in-a-flask-application
+ -->
+
+<body class="baseContent" >
+    <main class="content">
+        <h1>Calendar</h1>
+        <p>Hi I'm calendar - You shouldn't be able to see me...</p>
+        <section id="calendarWrapper">
+
+            <div class="calendarGrid">
+                <!-- Aw fuck here we go -->
+
+                <!-- Time rows -->
+                <div class="timeRows">
+
+                </div>
+                <!-- !!!!!!!!!!!!!!!!!!!!!!!!! Below is the top row of the calendar -->
+                <div id="Sunday">
+                    <h4>Sunday</h4>
+                </div>
+
+                <div id="Monday">
+                    <h4>Monday</h4>
+                </div>
+
+                <div id="Tuesday">
+                    <h4>Tuesday</h4>
+                </div>
+
+                <div id="Wednesday">
+                    <h4>Wednesday</h4>
+                </div>
+
+                <div id="Thursday">
+                    <h4>Thursday</h4>
+                </div>
+
+                <div id="Friday">
+                    <h4>Friday</h4>
+                </div>
+
+                <div id="Saturday">
+                    <h4>Saturday</h4>
+                </div>
             </div>
-        </div>
-    </section>
-{% endblock %}
+        </section>
+</main>
+
+</body>
+</html>

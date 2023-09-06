@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 def default():
     return """<p>This is the admin page.<br>
 <a href="/admin/add_calendars">Add calendars.</a><br>
-<a href="/admin/my_family">Change family settings.</a><br>
+<a href="/admin/manage_family">Change family settings.</a><br>
 <a href="/admin/help">Get help.</a><br>
 <a href="/admin/settings">Advanced settings.</a></p>"""
 
@@ -35,19 +35,19 @@ def calendars_post(db_session):
     return add_calendars()
 
 
-@admin.route("/my_family", methods=["GET"])
-def my_family():
-    return render_template("family.html")
+@admin.route("/manage_family", methods=["GET"])
+def manage_family():
+    return render_template("manageFamily.html")
 
 
-@admin.route("/my_family", methods=["POST"])
+@admin.route("/manage_family", methods=["POST"])
 @has_db
 def family_post(db_session):
     db_session.add()
     db_session.commit()
     db_session.close()
 
-    return my_family()
+    return manage_family()
 
 
 # Connects to the Guide page
@@ -56,16 +56,16 @@ def help():
     return render_template("guide.html")
 
 
-@admin.route("/settings", methods=["GET"])
-def settings():
-    return render_template("settings.html")
+@admin.route("/customise", methods=["GET"])
+def customise():
+    return render_template("customise.html")
 
 
-@admin.route("/settings", methods=["POST"])
+@admin.route("/customise", methods=["POST"])
 @has_db
-def settings_post(db_session):
+def customise_post(db_session):
     db_session.add()
     db_session.commit()
     db_session.close()
 
-    return settings()
+    return customise()
