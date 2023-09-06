@@ -1,11 +1,11 @@
-<script src="./js/calendarTimes.js"></script>
+
 
 {% extends 'base.html' %}
 
 {% block content %}
 <h1>{% block title %} Family {% endblock %}</h1>
 <p>This is the page for family member setup.<br>
-    e.g. add and remove family members, get name and gmail</p>
+    e.g. add and remove family members, get name and gmail, calendar type as radio buttons</p>
 
 <div id="familyContainer">
 
@@ -21,8 +21,10 @@
 
 
 
-    <!--form stuff!!!-->
+</div>
 
+
+<!--form stuff!!!-->
 
     <!-- A button to open the popup form -->
     <button class="open-button" onclick="openForm()">Open Form</button>
@@ -48,26 +50,18 @@
 
             <!--icon choices here, more complicated so I'm doing them last-->
 
-            <button type="submit" class="btn">Login</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            <button type="submit" class="btn">Confirm</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
         </form>
     </div>
 
 
-
-
-    <h1>{% block title %} Calendar Set Up {% endblock %}</h1>
-    <p>This is the page for calendar setup.<br>
+ <p>This is the page for calendar setup.<br>
         e.g. add google calendar link</p>
     <form>
         <label for="calendarURL">Calendar URL:</label><br>
         <input type="text" id="calendarURL" name="calendarURL" value=""><br>
         <input type="submit" value="Submit">
     </form>
-
-
-
-
-</div>
 
 {% endblock %}
