@@ -111,29 +111,33 @@ h5 {
     display: none;
     position: fixed;
     bottom: 0;
-    right: 15px;
+    right: 0;
     border: 3px solid #f1f1f1;
     z-index: 9;
   }
   
   /* Add styles to the form container */
   .form-container {
-    max-width: 300px;
-    padding: 10px;
-    background-color: white;
+    width:100vw;
+    height:100vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    background-color: var(--indigo-dye);
   }
   
   /* Full-width input fields */
-  .form-container input[type=text], .form-container input[type=text] {
+  .form-container input[type=text], .form-container input[type=email] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
     border: none;
-    background: #f1f1f1;
+    background: var(--mint-green);
   }
   
   /* When the inputs get focus, do something */
-  .form-container input[type=text]:focus, .form-container input[type=text]:focus {
+  .form-container input[type=text]:focus, .form-container input[type=email]:focus {
     background-color: #ddd;
     outline: none;
   }
@@ -147,15 +151,43 @@ h5 {
     cursor: pointer;
     width: 100%;
     margin-bottom:10px;
-    opacity: 0.8;
+    opacity: 1;
   }
   
   /* Add a red background color to the cancel button */
   .form-container .cancel {
-    background-color: red;
+    background-color: var(--light-coral);
+  }
+
+  .form-container .confirm {
+    background-color: var(--skobeloff);
   }
   
   /* Add some hover effects to buttons */
   .form-container .btn:hover, .open-button:hover {
-    opacity: 1;
+    text-decoration: underline;
+    font-weight: bold;
+    transition: 0.4s;
+    background-color: var(--sandy-brown);
   }
+
+  .navigationBar a:focus {
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--indigo-dye);
+    background: var(--light-coral);
+}
+
+.navigationBar a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+    color: var(--indigo-dye);
+    background: var(--light-coral);
+    transition: 0.4s;
+}
+
+.navigationBar a:active {
+    background: var(--light-coral);
+    color: var(--mint-green);
+    text-decoration: none;
+}
