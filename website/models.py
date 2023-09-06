@@ -15,7 +15,7 @@ class FamilyMember(Base):
     name = Column("name", String, primary_key=True)
     url = Column("url", String, unique=True, nullable=False)
     calendarType = Column("calendarType", String, nullable=False)
-    email = Column("email", String, nullable=True)
+    email = Column("email", String, nullable=True, unique=True)
     # string for path to icon image
     icon = Column("icon", String, nullable=True)
     # hash of a string of this users' events, used to quickly check if there have been any changes 
