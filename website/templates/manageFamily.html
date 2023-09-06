@@ -1,8 +1,73 @@
+<script src="./js/calendarTimes.js"></script>
+
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{% block title %} Family {% endblock %}</h1>
-    <p>This is the page for family member setup.<br>
-        e.g. add and remove family members, get name and gmail</p>
+<h1>{% block title %} Family {% endblock %}</h1>
+<p>This is the page for family member setup.<br>
+    e.g. add and remove family members, get name and gmail</p>
+
+<div id="familyContainer">
+
+    <!--add user(name, calendar link, calendar type(google or apple), [email])
+
+    Update user name(new name)
+    Update user email(new email)
+    Update user calendar link(new link, calendar type)
+    Update user icon(path to image)-->
+
+
+    <!--family member icons w names above them and edit and delete buttons below them-->
+
+
+
+    <!--form stuff!!!-->
+
+
+    <!-- A button to open the popup form -->
+    <button class="open-button" onclick="openForm()">Open Form</button>
+
+    <!-- The form -->
+    <div class="form-popup" id="myForm">
+        <form action="" class="form-container">
+            <h1>Login</h1>
+
+            <label for="name"><b>Name</b></label>
+            <input type="text" placeholder="Enter Email" name="name" required>
+
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter Password" name="email" required>
+
+            <label for="link"><b>Calendar Link</b></label>
+            <input type="text" placeholder="Enter Calendar Link" name="link" required>
+
+            <input type="radio" id="html" name="fav_language" value="HTML">
+            <label for="html">HTML</label>
+            <input type="radio" id="css" name="fav_language" value="CSS">
+            <label for="css">CSS</label>
+
+            <!--icon choices here, more complicated so I'm doing them last-->
+
+            <button type="submit" class="btn">Login</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+
+
+
+
+    <h1>{% block title %} Calendar Set Up {% endblock %}</h1>
+    <p>This is the page for calendar setup.<br>
+        e.g. add google calendar link</p>
+    <form>
+        <label for="calendarURL">Calendar URL:</label><br>
+        <input type="text" id="calendarURL" name="calendarURL" value=""><br>
+        <input type="submit" value="Submit">
+    </form>
+
+
+
+
+</div>
 
 {% endblock %}
