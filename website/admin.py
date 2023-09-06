@@ -2,7 +2,7 @@ import logging
 
 from flask import Blueprint, request, render_template, redirect
 
-from .models import CalendarLocations
+from .models import FamilyMember
 from .base import has_db
 
 
@@ -28,7 +28,7 @@ def add_calendars():
 @admin.route("/add_calendars", methods=["POST"])
 @has_db
 def calendars_post(db_session):
-    db_session.add(CalendarLocations(family_member_name="NAME", url="URL"))
+    db_session.add(FamilyMember(name="NAME", url="URL", calendarType="apple", eventsHash=0, userObject=None))
     db_session.commit()
     db_session.close()
 
