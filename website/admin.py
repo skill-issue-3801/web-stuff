@@ -2,6 +2,7 @@ import logging
 
 from flask import Blueprint, request, render_template, redirect
 
+from .cal import User
 from .models import FamilyMember
 from .base import has_db
 
@@ -43,6 +44,27 @@ def manage_family():
 @admin.route("/manage_family", methods=["POST"])
 @has_db
 def family_post(db_session):
+    name = request.form.get('name')
+    link = request.form.get('link')
+    caltype = request.form.get('calendarType')
+    email = request.form.get('email')
+    icon = "icons/fish.jpeg" 
+    eventsHash = 0
+    logger.warning(type(request.form.get('email')), file=sys.stderr)
+    #userObject = User(name, link, caltype, email)
+    
+    db_session.add()
+    db_session.commit()
+    db_session.close()
+
+    return manage_family()
+
+def family_edit(db_session):
+    name = request.form.get('name')
+    email = request.form.get('email')
+    link = request.form.get('link')
+    caltype = request.form.get('calendarType')
+    
     db_session.add()
     db_session.commit()
     db_session.close()
