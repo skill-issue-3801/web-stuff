@@ -31,9 +31,10 @@
 
     <!-- The form -->
     <div class="form-popup" id="familyForm">
-        <form action="" class="form-container">
+        <form action="" class="form-container" method ="POST">
             <h1>Login</h1>
 
+            <input type="hidden" name="formName" value="addFamilyMember">
             <label for="name"><b>Name</b></label>
             <input type="text" placeholder="Enter Name" name="name" required>
             <br>
@@ -50,7 +51,7 @@
 
             <!--icon choices here, more complicated so I'm doing them last-->
 
-            <button type="submit" class="btn confirm">Confirm</button>
+            <button type="submit" class="btn confirm" method="POST">Confirm</button>
             <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
         </form>
     </div>

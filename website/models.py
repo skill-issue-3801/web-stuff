@@ -23,4 +23,3 @@ class FamilyMember(Base):
     eventsHash = Column("eventsHash", Integer, nullable=False)
     # pickled python object of class User
     userObject = Column("userObject", PickleType, nullable=False)
-
