@@ -9,13 +9,11 @@ Session.expire_on_commit = False
 class GlobalStuff(object):
     def __init__(self):
         self.events = []
-        self.hashes = {}
+        self.empty = True
 
     def set_events(self, new):
         self.events = new
 
-    def set_hashes(self, new):
-        self.hashes = new
 
 Global = GlobalStuff()
 
@@ -34,7 +32,11 @@ def has_db(fn):
 def has_global_stuff(fn):
     @wraps(fn)
     def decorated(*args, **kwargs):
-        result = fn(Global, *args, **kwargs)
+        s = Session()
+        s.expire_on_commit = False
+        with s.begin_nested():
+            result = fn(s, Global, *args, **kwargs)
+        s.commit()
         return result
 
     return decorated
