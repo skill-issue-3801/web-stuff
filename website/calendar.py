@@ -23,27 +23,31 @@ def default(db_session, globals):
     today = datetime.utcnow().replace(tzinfo=pytz.utc).date()
     hashes = {}
     for member in family:
-        logging.warning(member.name)
         newHash = check_cal_for_updates(member.url, member.calendarType, member.eventsHash, today)
         if newHash == False:
             hashes[member.name] = member.eventsHash
         else:
             hashes[member.name] = newHash
             anyChanges = True
-    if anyChanges or globals.empty:
+    if anyChanges or globals.familyChanges:
         #unpickle
-        userObjects = []
+        log_events(globals.events)
+        userObjects = {}
         for member in family:
-            userObjects.append(member.userObject)
-        globals.set_events(do_update(userObjects, today, hashes))
+            userObjects[member.name] = member.userObject
+        globals.set_events(do_update(userObjects.values(), today, hashes))
         
         for member in family:
-            member.hash = hashes[member.name]
-    globals.empty = False
+            member.eventsHash = hashes[member.name]
+            member.userObject = userObjects[member.name]
+    db_session.commit()
+    globals.familyChanges = False
+    anyChanges = False
     log_events(globals.events)
     return render_template("calendar.html", events = globals.events)
 
 def do_update(userObjects, today, hashes):
+    logging.warning("doing update")
     names = []
     emails = []
     for user in userObjects:
@@ -55,8 +59,7 @@ def do_update(userObjects, today, hashes):
 def log_events(events):
     logging.warning("Events:")
     for event in events:
-        logging.warning(event.summary)
-        logging.warning("\n")
+        logging.warning("{} {} {} {}".format(event.summary, str(event.start.strftime('%A, %d/%m/%y %H:%M')), event.uid, str(event.attendee)))
 
 @calendar.route("/do_update")
 @has_global_stuff

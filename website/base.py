@@ -9,7 +9,7 @@ Session.expire_on_commit = False
 class GlobalStuff(object):
     def __init__(self):
         self.events = []
-        self.empty = True
+        self.familyChanges = True
 
     def set_events(self, new):
         self.events = new

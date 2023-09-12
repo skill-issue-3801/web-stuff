@@ -4,7 +4,7 @@ from flask import Blueprint, request, render_template, redirect
 
 from .cal import User
 from .models import FamilyMember
-from .base import has_db
+from .base import has_db, has_global_stuff
 
 
 admin = Blueprint("admin", __name__)
@@ -40,19 +40,24 @@ def calendars_post(db_session):
 @has_db
 def manage_family(db_session):
     family = db_session.query(FamilyMember).all()
+    db_session.close()
     return render_template("manageFamily.html", family=family)
 
 
 @admin.route("/manage_family", methods=["POST"])
-@has_db
-def family_post(db_session):
+@has_global_stuff
+def family_post(db_session, globals):
     if (request.form.get('formName') == "addFamilyMember"):
         add_family_member(db_session)
+        globals.familyChanges = True
     elif (request.form.get('formName') == "editFamilyMember"):
         edit_family_member(db_session)
+        globals.familyChanges = True
     elif (request.form.get('formName') == "deleteFamilyMember"):
         delete_family_member(db_session)
-        
+        globals.familyChanges = True
+    db_session.commit()
+    db_session.close()
     return redirect("/admin/manage_family")
 
 def add_family_member(db_session):
@@ -68,7 +73,6 @@ def add_family_member(db_session):
     userObject = User(name, link, caltype, email)
     column = FamilyMember(name=name, url=link, calendarType=caltype, email=email, icon=icon, eventsHash=eventsHash, userObject=userObject)
     db_session.add(column)
-    db_session.commit()
 
 def edit_family_member(db_session):
     logging.warning("i dont know how to do this yet")
