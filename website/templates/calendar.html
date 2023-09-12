@@ -19,6 +19,21 @@
     <main class="content">
         <h1>Calendar</h1>
         <p>Hi I'm calendar - You shouldn't be able to see me...</p>
+        <br>
+        {% for event in events %}
+            <div class="event", id ="{{event.uid}}div">
+                <p>Summary: {{event.summary}}</p>
+                <p>Start: {{event.start}}</p>
+                <p>End: {{event.end}}</p>
+                <p>Attendees:</p>
+                {% for person in event.attendees %}
+                    <p>----- {{person}} {{family[person].icon}}</p>
+                {% endfor %}
+                <br>
+            </div>
+            
+        {% endfor %}
+        <br>
         <section id="calendarWrapper">
 
             <div class="calendarGrid">

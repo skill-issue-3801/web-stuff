@@ -4,6 +4,13 @@ from datetime import datetime, timedelta
 from icalevents import icalevents, icalparser
 
 accepted_calendars = ['google', 'apple']
+weekdays = { 0 : 'Monday', 
+             1 : 'Tuesday',
+             2 : 'Wednesday',
+             3 : 'Thursday',
+             4 : 'Friday',
+             5 : 'Saturday',
+             6 : 'Sunday'}
 
 class User:
     """ An object representing a user/family member
@@ -198,39 +205,17 @@ def update_user_name(names, name, newName, user):
             " using their old name will not appear unless you update them in your calendar!")
     return True     
 
-
-
-
-
-
-
-"""
-this thing is gonna be used like:
-changes = False
-today = blahblahblah
-hashes = {}
-for row in FamilyMembers table:
-    newHash = check_cal_for_updates(row.url, row.caltype, row.hash, today)
-    if newHash = False:
-        hashes[row.name] = hash
-    else:
-        hashes[row.name] = newHash
-        changes = True
-
-if changes == True:
-    <unpickle users>
-    newEvents = update_events(<array of unpickled users>, today, hashes)
-    for row in FamilyMembers table:
-        <extract changes from user object and update table entries>
-        <re-pickle user and store>
-    <update events table with newEvents, there will be overlap>
-else:
-    all good, no changes needed
-"""
+def days_to_end(today, weekday):
+    day = today.weekday()
+    if weekday == 0:
+        return (today - timedelta(days=day))
+    if weekday == 6:
+        return (today + timedelta(days=(6-day)))
 
 def check_cal_for_updates(url, caltype, hash, today):
-    evs = icalevents.events(url=url, start=(today - timedelta(days=14)), 
-            end = (today + timedelta(days=14)), sort = True, fix_apple=(caltype == 'apple'))
+    
+    evs = icalevents.events(url=url, start=days_to_end(today, 0), 
+            end=days_to_end(today, 6), sort = True, fix_apple=(caltype == 'apple'))
     evshash = events_get_hash(evs)
     if evshash == hash:
         return False # no update needed
@@ -245,8 +230,8 @@ def update_events(family, today, hashes, names, emails):
         else:
             # their evenys have changed somehow, reprocess
             member.set_hash(hashes[member.get_name()]) # record hash of events before processing
-            evs = icalevents.events(url=member.get_link(), start=(today - timedelta(days=14)), 
-                    end = (today + timedelta(days=14)), sort = True, fix_apple=(member.get_caltype() == 'apple'))
+            evs = icalevents.events(url=member.get_link(), start=days_to_end(today, 0), 
+            end=days_to_end(today, 6), sort = True, fix_apple=(member.get_caltype() == 'apple'))
             for event in evs:
                 if (process_attendees(member.get_name(), event, family, names, emails)):
                     return_events.append(event)
@@ -320,4 +305,22 @@ def get_email_owner(email, family):
         if member.get_email() == email:
             return member.get_name()
     return None    
-     
+
+def calendarise_events(events):
+    parsedEvents = []
+    for event in events:
+        parsedEvents.append(htmlEvent(event.summary, event.uid, event.attendee, event.start, event.end))
+    return parsedEvents
+
+class htmlEvent:
+    def __init__(self, summary, uid, attendees, start, end):
+        self.summary = summary
+        self.uid = uid
+        self.attendees = attendees
+        self.start = date_to_id(start)
+        self.end = date_to_id(end)
+
+def date_to_id(date):
+    m = 15 * round(date.minute/15)
+    d = date.weekday()
+    return("{}-{}-{}".format(date.strftime("%H"), m, weekdays[d]))

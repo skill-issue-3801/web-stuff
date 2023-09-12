@@ -31,20 +31,22 @@ def default(db_session, globals):
             anyChanges = True
     if anyChanges or globals.familyChanges:
         #unpickle
-        log_events(globals.events)
         userObjects = {}
         for member in family:
             userObjects[member.name] = member.userObject
-        globals.set_events(do_update(userObjects.values(), today, hashes))
-        
+        evs = do_update(userObjects.values(), today, hashes)   
         for member in family:
             member.eventsHash = hashes[member.name]
             member.userObject = userObjects[member.name]
+        globals.set_events(calendarise_events(evs))
     db_session.commit()
     globals.familyChanges = False
     anyChanges = False
     log_events(globals.events)
-    return render_template("calendar.html", events = globals.events)
+    familyMembers = {}
+    for person in family:
+        familyMembers[person.name] = person
+    return render_template("calendar.html", events = globals.events, family = familyMembers)
 
 def do_update(userObjects, today, hashes):
     logging.warning("doing update")
@@ -59,7 +61,9 @@ def do_update(userObjects, today, hashes):
 def log_events(events):
     logging.warning("Events:")
     for event in events:
-        logging.warning("{} {} {} {}".format(event.summary, str(event.start.strftime('%A, %d/%m/%y %H:%M')), event.uid, str(event.attendee)))
+        logging.warning("{} {} {} {}".format(event.summary, event.start, event.uid, str(event.attendees)))
+
+    
 
 @calendar.route("/do_update")
 @has_global_stuff
