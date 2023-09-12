@@ -209,13 +209,11 @@ def days_to_end(today, weekday):
     day = today.weekday()
     if weekday == 0:
         return (today - timedelta(days=day))
-    if weekday == 6:
-        return (today + timedelta(days=(6-day)))
+    return (today + timedelta(days=(6-day)))
 
 def check_cal_for_updates(url, caltype, hash, today):
-    
-    evs = icalevents.events(url=url, start=days_to_end(today, 0), 
-            end=days_to_end(today, 6), sort = True, fix_apple=(caltype == 'apple'))
+    evs = icalevents.events(url=url, start=(days_to_end(today, 0)), 
+            end=(days_to_end(today, 6)), sort = True, fix_apple=(caltype == 'apple'))
     evshash = events_get_hash(evs)
     if evshash == hash:
         return False # no update needed
