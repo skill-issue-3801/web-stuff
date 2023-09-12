@@ -27,8 +27,9 @@
                 <p>End: {{event.end}}</p>
                 <p>Attendees:</p>
                 {% for person in event.attendees %}
-                    <p>----- {{person}} {{family[person].icon}}</p>
+                    <p> - {{person}} {{family[person].icon}}</p>
                 {% endfor %}
+                <p>From {{event.top}} to {{event.bottom}}</p>
                 <br>
             </div>
             

@@ -85,35 +85,15 @@ class User:
 
 
 
-
-def is_google_url(url):
-    """ Check if the given string is a valid google calendar url
-
-    Args:
-        url (string): The url to check
-
-    Returns:
-        Bool: Return True if the string is a valid google calendar url, False otherwise.
-    """
-    
-    if (validators.url(url.strip()) and
+def is_valid_url(url, caltype):
+    if (caltype == 'google' and validators.url(url.strip()) and
         url[0:42] == "https://calendar.google.com/calendar/ical/" and 
         url[-10:] == "/basic.ics"):
         return True
-    return False
-        
-def is_apple_url(url):
-    """ Check if the given string is a valid apple calendar url
-
-    Args:
-        url (string): The url to check
-
-    Returns:
-        Bool: Return True if the string is a valid apple calendar url, False otherwise.
-    """
-    if (url[0:42] == "webcal://p122-caldav.icloud.com/published/"):
+    elif (caltype == 'apple' and url[0:42] == "webcal://p122-caldav.icloud.com/published/"):
         return True
-    return False
+    else:
+        return False
      
 def events_get_hash(events):
     uidstr = ""
@@ -315,8 +295,10 @@ class htmlEvent:
         self.summary = summary
         self.uid = uid
         self.attendees = attendees
-        self.start = date_to_id(start)
-        self.end = date_to_id(end)
+        self.start = start
+        self.end = end
+        self.top = date_to_id(start)
+        self.bottom = date_to_id(end)
 
 def date_to_id(date):
     m = 15 * round(date.minute/15)
