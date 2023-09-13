@@ -21,15 +21,14 @@
         <p>Hi I'm calendar - You shouldn't be able to see me...</p>
         <br>
         {% for event in events %}
-            <div class="event", id ="{{event.uid}}div">
-                <p>Summary: {{event.summary}}</p>
-                <p>Start: {{event.start}}</p>
-                <p>End: {{event.end}}</p>
+            <div class="event" id ="{{event['uid']}}div" style = "grid-column-start: {{event['colstart']}}; grid-column-end:{{event['colend']}}; grid-row-start:{{event['rowstart']}}; grid-row-end:{{event['rowend']}}">
+                <p>Summary: {{event['summary']}}</p>
+                <p>Start: {{event['start']}}</p>
+                <p>End: {{event['end']}}</p>
                 <p>Attendees:</p>
-                {% for person in event.attendees %}
+                {% for person in event['attendees'] %}
                     <p> - {{person}} {{family[person].icon}}</p>
                 {% endfor %}
-                <p>From {{event.top}} to {{event.bottom}}</p>
                 <br>
             </div>
             
