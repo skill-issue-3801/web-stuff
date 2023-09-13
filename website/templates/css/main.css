@@ -122,18 +122,35 @@ h5 {
 
 /*family member form things*/
 
-/* Button used to open the contact form - fixed at the bottom of the page */
+/* Button used to open the add family member form */
 #form-button {
+  font-family: var(--body-font);
   background-color: var(--cambridge-blue);
-  color: var(--mint-green);
+  color: var(--indigo-dye);
   width: 15vw;
   height: 15vw;
-  padding: 16px 20px;
+  padding: 5% 5%;
   border: none;
   border-radius: 25%;
   cursor: pointer;
   transition: 0.4s;
 }
+
+/* Button used to open the add family member form */
+#form-button >  p {
+  font-family: var(--body-font);
+  color: var(--mint-green);
+  text-decoration: none;
+}
+
+/* Button used to open the add family member form */
+#form-button:hover >  p {
+  font-family: var(--body-font);
+  color: var(--mint-green);
+  text-decoration: underline;
+  text-decoration-color: var(--mint-green);
+}
+
 
 #familyForm {
   transition: 0.4s;
@@ -251,8 +268,8 @@ input[type=radio]:checked {
 #form-button:hover {
   text-decoration: underline;
   font-weight: bold;
-  transition: 0.4s;
   background-color: var(--skobeloff);
+  transition: 0.4s;
 }
 
 .navigationBar a:focus {
@@ -289,4 +306,12 @@ input[type=radio]:checked {
   height: 15vw;
   background-color: var(--sandy-brown);
   border-radius: 25%;
+  display: flex;
+  align-items: center;
+  background-image: "{{ member.icon }}";
+}
+
+.familyMember:hover {
+  font-weight: bold;
+  transition: 0.4s;
 }

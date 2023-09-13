@@ -13,7 +13,7 @@
         <!--<p> Url: {{ member.url }}</p>
         <p> calendarType: {{ member.calendarType }}</p>
         <p> email: {{ member.email }}</p>-->
-        <p> Icon: {{ member.icon}} </p>
+        <p> Icon: {{ member.icon }} </p>
         <form method="POST">
             <input type="hidden" name="formName" value="editFamilyMember">
             <button type="submit" name="submit" class="btn confirm" method="POST" value="{{member.name}}"> Edit
@@ -31,7 +31,7 @@
     <!--form stuff!!!-->
 
     <!-- A button to open the popup form -->
-    <button id="form-button" onclick="openForm()">Add Family Member</button>
+    <button id="form-button" onclick="openForm()"><p>Add Family Member</p></button>
 
     <!-- The form -->
     <div class="form-popup" id="familyForm">
