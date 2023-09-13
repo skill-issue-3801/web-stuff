@@ -7,7 +7,6 @@
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
     <!-- Calendar.css is for calendar view styles only -->
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/calendar.css')}}">
-    <script src="./js/calendarTimes.js"></script>
 
 </head>
 <!-- 
@@ -15,10 +14,18 @@
     https://www.digitalocean.com/community/tutorials/how-to-use-templates-in-a-flask-application
  -->
 
-<body class="baseContent" >
+<body class="baseContent">
+    <div>
+        <video autoplay muted loop id="waterBackgroundVideo">
+            <source src="{{url_for('static', filename='graphics/Water_HD.mp4')}}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
     <main class="content">
-        <h1>Calendar</h1>
-        <p>Hi I'm calendar - You shouldn't be able to see me...</p>
+       
+        <h1 class="calendarViewTopText">Calendar</h1>
+        <p class="calendarViewTopText">Hi I'm calendar - You shouldn't be able to see me...</p>
         <br>
         {% for event in events %}
             <div class="event" id ="{{event['uid']}}div" style = "grid-column-start: {{event['colstart']}}; grid-column-end:{{event['colend']}}; grid-row-start:{{event['rowstart']}}; grid-row-end:{{event['rowend']}}">
@@ -35,6 +42,7 @@
         {% endfor %}
         <br>
         <section id="calendarWrapper">
+                
 <!-- From Kiah about viewing events at, 12/09: 
     add ppl using the form then just going to /calendar should show
     the events they have this week. i restricted the search to the current
@@ -78,6 +86,7 @@
             </div>
         </section>
 </main>
-
+<script type="text/javascript" src="{{url_for('static', filename='js/calendarTimes.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename='js/mainLoop.js')}}"></script>
 </body>
 </html>
