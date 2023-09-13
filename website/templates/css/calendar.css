@@ -25,7 +25,6 @@
 
 
 #calendarWrapper {
-    margin-left: 5vw;
     display: flex;
     flex-wrap: nowrap;
     height: 100%;
@@ -38,6 +37,10 @@
     "r" - row name
     "a" - grid area name
     */
+.calendarGrid::-webkit-scrollbar{
+    display: none;
+  }
+  
 .calendarGrid {
     background-color: rgba(252, 251, 244, 0.3);
     
@@ -45,6 +48,9 @@
     height: 80vh;
     overflow-x: hidden;
     overflow-y: auto;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll;
     font-size: small;
     display: grid;
     grid-template-columns: [c00-00] var(--time-coloumn-size) [cSunday] var(--coloumn-size) [cMonday] var(--coloumn-size) [cTuesday] var(--coloumn-size) [cWednesday] var(--coloumn-size) [cThursday] var(--coloumn-size) [cFriday] var(--coloumn-size) [cSaturday] var(--coloumn-size);
