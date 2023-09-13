@@ -14,17 +14,18 @@
     https://www.digitalocean.com/community/tutorials/how-to-use-templates-in-a-flask-application
  -->
 
-<body class="baseContent" >
-    <div id="backgroundVideoWrapper">
+<body class="baseContent">
+    <div>
         <video autoplay muted loop id="waterBackgroundVideo">
             <source src="{{url_for('static', filename='graphics/Water_HD.mp4')}}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
+
     <main class="content">
        
-        <h1>Calendar</h1>
-        <p>Hi I'm calendar - You shouldn't be able to see me...</p>
+        <h1 class="calendarViewTopText">Calendar</h1>
+        <p class="calendarViewTopText">Hi I'm calendar - You shouldn't be able to see me...</p>
         <br>
         {% for event in events %}
             <div class="event", id ="{{event.uid}}div">
