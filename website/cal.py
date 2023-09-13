@@ -1,6 +1,6 @@
-import pytz 
+import json 
 import validators
-from datetime import datetime, timedelta
+from datetime import timedelta
 from icalevents import icalevents, icalparser
 
 accepted_calendars = ['google', 'apple']
@@ -290,17 +290,10 @@ def calendarise_events(events):
         parsedEvents.append(htmlEvent(event.summary, event.uid, event.attendee, event.start, event.end))
     return parsedEvents
 
-class htmlEvent:
+class htmlEvent(dict):
     def __init__(self, summary, uid, attendees, start, end):
-        self.summary = summary
-        self.uid = uid
-        self.attendees = attendees
-        self.start = start
-        self.end = end
-        self.top = date_to_id(start)
-        self.bottom = date_to_id(end)
+        dict.__init__(self, summary = summary, uid = uid, attendees = list(attendees), start = str(start), end = str(end), colstart = start.strftime('%A'), colend = end.strftime('%A'), rowstart = date_to_id(start), rowend = date_to_id(end))
+        
 
 def date_to_id(date):
-    m = 15 * round(date.minute/15)
-    d = date.weekday()
-    return("{}-{}-{}".format(date.strftime("%H"), m, weekdays[d]))
+    return("{}-{}".format(date.strftime("%H"), 15 * round(date.minute/15)))
