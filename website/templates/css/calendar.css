@@ -13,6 +13,15 @@
     padding-top: 1.5em;
 }
 
+/* Background Video */
+#waterBackgroundVideo{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
 
 
 #calendarWrapper {
@@ -21,6 +30,7 @@
     flex-wrap: nowrap;
     height: 100%;
     /* background: var(--mint-green); */
+    position: relative;
 }
 
 /* Key:
@@ -29,9 +39,10 @@
     "a" - grid area name
     */
 .calendarGrid {
-    background-color: #fed9ff;
+    background-color: rgba(252, 251, 244, 0.3);
+    
     width: 95vw;
-    height: 65vh;
+    height: 80vh;
     overflow-x: hidden;
     overflow-y: auto;
     font-size: small;
