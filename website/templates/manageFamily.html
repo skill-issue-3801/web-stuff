@@ -1,5 +1,3 @@
-
-
 {% extends 'base.html' %}
 
 {% block content %}
@@ -8,64 +6,60 @@
     e.g. add and remove family members, get name and gmail, calendar type as radio buttons</p>
 
 <div id="familyContainer">
-    <br>
-    {% for member in family%}
-        <div class="familyMember", id="{{member.name}}div">
-            <p> Name: {{ member.name }}</p>
-            <p> Url: {{ member.url }}</p>
-            <p> calendarType: {{ member.calendarType }}</p>
-            <p> email: {{ member.email }}</p>
-            <p> Icon: {{ member.icon}} </p>
-            <form method ="POST">
-                <input type="hidden" name="formName" value="editFamilyMember">
-                <button type="submit" name="submit" class="btn confirm" method="POST" value="{{member.name}}"> Edit </button>
-            </form>
-            <form method ="POST">
-                <input type="hidden" name="formName" value="deleteFamilyMember">
-                <button type="submit" name="submit" class="btn confirm" method="POST" value="{{member.name}}"> Delete </button>
-            </form>
-            <br>
-        </div>
-    {% endfor %}
-    <!--add user(name, calendar link, calendar type(google or apple), [email])
-
-    Update user name(new name)
-    Update user email(new email)
-    Update user calendar link(new link, calendar type)
-    Update user icon(path to image)-->
-
-
     <!--family member icons w names above them and edit and delete buttons below them-->
+    {% for member in family%}
+    <div class="familyMember" , id="{{member.name}}div">
+        <p> Name: {{ member.name }}</p>
+        <!--<p> Url: {{ member.url }}</p>
+        <p> calendarType: {{ member.calendarType }}</p>
+        <p> email: {{ member.email }}</p>-->
+        <p> Icon: {{ member.icon}} </p>
+        <form method="POST">
+            <input type="hidden" name="formName" value="editFamilyMember">
+            <button type="submit" name="submit" class="btn confirm" method="POST" value="{{member.name}}"> Edit
+            </button>
+        </form>
+        <form method="POST">
+            <input type="hidden" name="formName" value="deleteFamilyMember">
+            <button type="submit" name="submit" class="btn confirm" method="POST" value="{{member.name}}"> Delete
+            </button>
+        </form>
+    </div>
+    {% endfor %}
 
 
-
-</div>
-
-
-<!--form stuff!!!-->
+    <!--form stuff!!!-->
 
     <!-- A button to open the popup form -->
-    <button class="open-button" onclick="openForm()">Open Form</button>
+    <button id="form-button" onclick="openForm()">Add Family Member</button>
 
     <!-- The form -->
     <div class="form-popup" id="familyForm">
-        <form action="" class="form-container" method ="POST">
-            <h1>Login</h1>
+        <form action="" class="form-container" method="POST">
+            <h1>Add Family Member</h1>
 
             <input type="hidden" name="formName" value="addFamilyMember">
-            <label for="name"><b>Name</b></label>
+            <label for="name"><b>Name:</b></label>
             <input type="text" placeholder="Enter Name" name="name" required>
             <br>
-            <label for="email"><b>Email</b></label>
-            <input type="email" placeholder="Enter Email (optional)" name="email">
+            <label for="email"><b>Email:</b></label>
+            <input type="email" placeholder="Enter Email" name="email">
             <br>
-            <label for="link"><b>Calendar Link</b></label>
+            <label for="link"><b>Calendar Link:</b></label>
             <input type="text" placeholder="Enter Calendar Link" name="link" required>
             <br>
-            <input type="radio" id="google" name="calendarType" value="google" required>
-            <label for="google">Google</label>
-            <input type="radio" id="apple" name="calendarType" value="apple" required>
-            <label for="apple">Apple</label>
+            <b>Calendar Type:</b>
+            <div class="radio-button-container">
+                <div class="radio-button-and-label">
+                    <input type="radio" id="google" name="calendarType" value="google" required>
+                    <label for="google">Google</label>
+                </div>
+                <div class="radio-button-and-label">
+                    <input type="radio" id="apple" name="calendarType" value="apple" required>
+                    <label for="apple">Apple</label>
+                </div>
+            </div>
+            <br>
 
             <!--icon choices here, more complicated so I'm doing them last-->
 
@@ -73,6 +67,11 @@
             <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
         </form>
     </div>
+
+</div>
+
+
+
 
 
 {% endblock %}
