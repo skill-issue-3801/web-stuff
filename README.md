@@ -35,3 +35,13 @@ python -m poetry shell
 ```
 python -m poetry run python -m website localhost
 ```
+
+-------------------------
+Ali's setup:
+start: crtl shift `
+1. cd .\web-stuff\ (don't need if in vs terminal)
+2. py -m pip install poetry
+3. py -m poetry install
+4. py -m poetry shell
+5. py -m poetry run python -m website localhost
+end: ctrl `
