@@ -124,15 +124,18 @@ h5 {
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 #form-button {
-  background-color: var(--skobeloff);
+  background-color: var(--cambridge-blue);
   color: var(--mint-green);
+  width: 15vw;
+  height: 15vw;
   padding: 16px 20px;
   border: none;
+  border-radius: 25%;
   cursor: pointer;
-  opacity: 0.8;
-  bottom: 23px;
-  right: 28px;
-  width: 280px;
+  transition: 0.4s;
+}
+
+#familyForm {
   transition: 0.4s;
 }
 
@@ -249,7 +252,7 @@ input[type=radio]:checked {
   text-decoration: underline;
   font-weight: bold;
   transition: 0.4s;
-  background-color: var(--sandy-brown);
+  background-color: var(--skobeloff);
 }
 
 .navigationBar a:focus {
@@ -271,4 +274,19 @@ input[type=radio]:checked {
   background: var(--light-coral);
   color: var(--mint-green);
   text-decoration: none;
+}
+
+/* family container stuff here */
+#familyContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.familyMember {
+  width: 15vw;
+  height: 15vw;
+  background-color: var(--sandy-brown);
+  border-radius: 25%;
 }
