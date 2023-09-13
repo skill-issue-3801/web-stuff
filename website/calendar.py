@@ -18,23 +18,28 @@ logger = logging.getLogger(__name__)
 @calendar.route("/", methods=["GET"])
 @has_global_stuff
 def default(db_session, globals):
+    if not __debug__:
+        return "Raspberry Pi access only.", 403
+
     family = db_session.query(FamilyMember).all()
     anyChanges = False
     today = datetime.utcnow().replace(tzinfo=pytz.utc).date()
     hashes = {}
     for member in family:
-        newHash = check_cal_for_updates(member.url, member.calendarType, member.eventsHash, today)
+        newHash = check_cal_for_updates(
+            member.url, member.calendarType, member.eventsHash, today
+        )
         if newHash == False:
             hashes[member.name] = member.eventsHash
         else:
             hashes[member.name] = newHash
             anyChanges = True
     if anyChanges or globals.familyChanges:
-        #unpickle
+        # unpickle
         userObjects = {}
         for member in family:
             userObjects[member.name] = member.userObject
-        evs = do_update(userObjects.values(), today, hashes)   
+        evs = do_update(userObjects.values(), today, hashes)
         for member in family:
             member.eventsHash = hashes[member.name]
             member.userObject = userObjects[member.name]
@@ -46,7 +51,8 @@ def default(db_session, globals):
     familyMembers = {}
     for person in family:
         familyMembers[person.name] = person
-    return render_template("calendar.html", events = globals.events, family = familyMembers)
+    return render_template("calendar.html", events=globals.events, family=familyMembers)
+
 
 def do_update(userObjects, today, hashes):
     logging.warning("doing update")
@@ -58,16 +64,28 @@ def do_update(userObjects, today, hashes):
             emails.append(user.get_email())
     return update_events(userObjects, today, hashes, names, emails)
 
+
 def log_events(events):
     logging.warning("Events:")
     for event in events:
-        logging.warning("{} {} {} {}".format(event.summary, event.start, event.uid, str(event.attendees)))
+        logging.warning(
+            "{} {} {} {}".format(
+                event.summary, event.start, event.uid, str(event.attendees)
+            )
+        )
 
-    
 
-@calendar.route("/do_update")
+@calendar.route("/do_update", methods=["POST"])
 @has_global_stuff
-@has_db
-def update(session, global_state):
-    global_state.set_events(global_state.events + ["xyz"])
-    return str(global_state.events)
+def update(db_session, globals):
+    family = db_session.query(FamilyMember).all()
+    anyChanges = False
+    today = datetime.utcnow().replace(tzinfo=pytz.utc).date()
+    hashes = {}
+    check_for_update(family, anyChanges, today, hashes)
+
+    if anyChanges or globals.familyChanges:
+        jsonfile = do_update(family, today, hashes)
+        return jsonfile
+    else:
+        return json.dumps(globals.events)
