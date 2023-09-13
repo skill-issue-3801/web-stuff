@@ -1,22 +1,22 @@
 /** Univeral variables and styles **/
 
 * {
-    margin: 0;
-    box-sizing: border-box;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 /** Belgiano Font**/
 @font-face {
-    font-family: 'Belgiano Serif';
-    font-display: swap;
-    src: url('fonts/belgiano_serif/Belgiano_Serif_2.ttf') format('truetype');
+  font-family: 'Belgiano Serif';
+  font-display: swap;
+  src: url('fonts/belgiano_serif/Belgiano_Serif_2.ttf') format('truetype');
 }
 
 /* Open Sans font */
 @font-face {
-    font-family: 'Open_Sans';
-    display: swap;
-    src: url('fonts/Open_Sans/OpenSans-VariableFont_wdth_wght.ttf') format('truetype');
+  font-family: 'Open_Sans';
+  display: swap;
+  src: url('fonts/Open_Sans/OpenSans-VariableFont_wdth_wght.ttf') format('truetype');
 }
 
 
@@ -33,161 +33,242 @@
 
 /**DO NOT TOUCH ANYTHING HERE**/
 :root {
-    /** Global Fonts **/
-    --heading-font: Belgiano;
-    --body-font: Open_Sans;
+  /** Global Fonts **/
+  --heading-font: Belgiano;
+  --body-font: Open_Sans;
 
 
-    /* CSS HEX */
-    --mint-green: #d3f2e9ff;
-    --cambridge-blue: #7ca8a1ff;
-    --skobeloff: #0a7b79ff;
-    --indigo-dye: #1d406bff;
-    --sandy-brown: #f4a363ff;
-    --light-coral: #db767dff;
+  /* CSS HEX */
+  --mint-green: #d3f2e9ff;
+  --cambridge-blue: #7ca8a1ff;
+  --skobeloff: #0a7b79ff;
+  --indigo-dye: #1d406bff;
+  --sandy-brown: #f4a363ff;
+  --light-coral: #db767dff;
 
-    /* CSS HSL */
-    --mint-green: hsla(163, 54%, 89%, 1);
-    --cambridge-blue: hsla(170, 20%, 57%, 1);
-    --skobeloff: hsla(179, 85%, 26%, 1);
-    --indigo-dye: hsla(213, 57%, 27%, 1);
-    --sandy-brown: hsla(26, 87%, 67%, 1);
-    --light-coral: hsla(356, 58%, 66%, 1);
-} 
+  /* CSS HSL */
+  --mint-green: hsla(163, 54%, 89%, 1);
+  --cambridge-blue: hsla(170, 20%, 57%, 1);
+  --skobeloff: hsla(179, 85%, 26%, 1);
+  --indigo-dye: hsla(213, 57%, 27%, 1);
+  --sandy-brown: hsla(26, 87%, 67%, 1);
+  --light-coral: hsla(356, 58%, 66%, 1);
+}
 
 /**Below is fine to touch, carefully (notes to keep Ali from breaking things)**/
-h1, h2, h3, h4, h5 {
-    font-family: var(--heading-font);
-    color: var(--indigo-dye);
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--heading-font);
+  color: var(--indigo-dye);
 }
+
 p {
-    font-family: var(--body-font);
-    color: var(--indigo-dye);
+  font-family: var(--body-font);
+  color: var(--indigo-dye);
 }
 
 /** https://matthewjamestaylor.com/responsive-font-size#how - trusting this formula**/
 body {
-    font-size: calc(15px + 0.390625vw);
+  font-size: calc(15px + 0.390625vw);
 }
 
 h1 {
-    font-size: 1.8rem;
+  font-size: 1.8rem;
 }
+
 h2 {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
+
 h3 {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
+
 h4 {
-    font-size: 1rem;
+  font-size: 1rem;
 }
+
 h5 {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 /* Nav content has been moved to base.css! */
 
 
+/*change colour of placeholder text in inputs*/
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  font-family: var(--body-font);
+  color: var(--indigo-dye);
+  opacity: 1;
+  /* Firefox */
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  font-family: var(--body-font);
+  color: var(--indigo-dye);
+}
+
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  font-family: var(--body-font);
+  color: var(--indigo-dye);
+}
+
 
 /*family member form things*/
 
 /* Button used to open the contact form - fixed at the bottom of the page */
-.open-button {
-    background-color: #555;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    position: fixed;
-    bottom: 23px;
-    right: 28px;
-    width: 280px;
-  }
-  
-  /* The popup form - hidden by default */
-  .form-popup {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    border: 3px solid #f1f1f1;
-    z-index: 9;
-  }
-  
-  /* Add styles to the form container */
-  .form-container {
-    width:100vw;
-    height:100vh;
-    padding-left: 5vw;
-    padding-right: 5vw;
-    padding-top: 5vh;
-    padding-bottom: 5vh;
-    background-color: var(--indigo-dye);
-  }
-  
-  /* Full-width input fields */
-  .form-container input[type=text], .form-container input[type=email] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    border: none;
-    background: var(--mint-green);
-  }
-  
-  /* When the inputs get focus, do something */
-  .form-container input[type=text]:focus, .form-container input[type=email]:focus {
-    background-color: #ddd;
-    outline: none;
-  }
-  
-  /* Set a style for the submit/login button */
-  .form-container .btn {
-    background-color: #04AA6D;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom:10px;
-    opacity: 1;
-  }
-  
-  /* Add a red background color to the cancel button */
-  .form-container .cancel {
-    background-color: var(--light-coral);
-  }
+#form-button {
+  background-color: var(--skobeloff);
+  color: var(--mint-green);
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+  transition: 0.4s;
+}
 
-  .form-container .confirm {
-    background-color: var(--skobeloff);
-  }
-  
-  /* Add some hover effects to buttons */
-  .form-container .btn:hover, .open-button:hover {
-    text-decoration: underline;
-    font-weight: bold;
-    transition: 0.4s;
-    background-color: var(--sandy-brown);
-  }
+/* The popup form - hidden by default */
+.form-popup {
+  font-family: var(--body-font);
+  color: var(--mint-green);
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 25vw;
+  z-index: 9;
+}
 
-  .navigationBar a:focus {
-    text-decoration: none;
-    font-weight: bold;
-    color: var(--indigo-dye);
-    background: var(--light-coral);
+.form-popup p {
+  font-family: var(--body-font);
+  color: var(--mint-green);
+}
+
+/* Add styles to the form container */
+.form-container {
+  width: 50vw;
+  height: 100vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  background-color: var(--indigo-dye);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.radio-button-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.radio-button-and-label {
+  display: flex;
+  width: auto;
+  max-width: 50%;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.radio-button-and-label:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+input[type=radio] {
+  appearance: none;
+  width: 1.5vw;
+  height: 1.5vw;
+  background-color: var(--mint-green);
+  border-radius: 50%;
+  margin: 1vw;
+  transition: 0.2s;
+}
+
+input[type=radio]:checked {
+  background-color: var(--sandy-brown);
+}
+
+
+/* Full-width input fields */
+.form-container input[type=text],
+.form-container input[type=email] {
+  color: var(--skobeloff);
+  width: 100%;
+  padding: 5%;
+  margin: 1% 0 2% 0;
+  border: none;
+  background: var(--cambridge-blue);
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus,
+.form-container input[type=email]:focus {
+  background-color: var(--mint-green);
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  font-family: var(--body-font);
+  color: var(--mint-green);
+  padding: 5% 1%;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: var(--light-coral);
+}
+
+.form-container .confirm {
+  background-color: var(--skobeloff);
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover,
+#form-button:hover {
+  text-decoration: underline;
+  font-weight: bold;
+  transition: 0.4s;
+  background-color: var(--sandy-brown);
+}
+
+.navigationBar a:focus {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--indigo-dye);
+  background: var(--light-coral);
 }
 
 .navigationBar a:hover {
-    text-decoration: underline;
-    font-weight: bold;
-    color: var(--indigo-dye);
-    background: var(--light-coral);
-    transition: 0.4s;
+  text-decoration: underline;
+  font-weight: bold;
+  color: var(--indigo-dye);
+  background: var(--light-coral);
+  transition: 0.4s;
 }
 
 .navigationBar a:active {
-    background: var(--light-coral);
-    color: var(--mint-green);
-    text-decoration: none;
+  background: var(--light-coral);
+  color: var(--mint-green);
+  text-decoration: none;
 }
