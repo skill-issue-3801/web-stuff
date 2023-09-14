@@ -6,6 +6,7 @@ DB = SQLAlchemy()
 Session = DB.session
 Session.expire_on_commit = False
 
+
 class GlobalStuff(object):
     def __init__(self):
         self.events = []
@@ -16,6 +17,7 @@ class GlobalStuff(object):
 
 
 Global = GlobalStuff()
+
 
 def has_db(fn):
     @wraps(fn)
@@ -28,6 +30,7 @@ def has_db(fn):
         return result
 
     return decorated
+
 
 def has_global_stuff(fn):
     @wraps(fn)

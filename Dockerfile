@@ -23,4 +23,4 @@ RUN poetry install
 COPY ./website ./website
 
 EXPOSE 443
-CMD python -m website "0.0.0.0"
+CMD python -O -m website "0.0.0.0"

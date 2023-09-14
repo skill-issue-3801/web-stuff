@@ -19,6 +19,9 @@ logger = logging.getLogger(__name__)
 @calendar.route("/", methods=["GET"])
 @has_global_stuff
 def default(db_session, globals):
+    if not __debug__:
+        return "Raspberry Pi access only.", 403
+
     family = db_session.query(FamilyMember).all()
     anyChanges = False
     today = datetime.utcnow().replace(tzinfo=pytz.utc).date()
@@ -36,7 +39,8 @@ def default(db_session, globals):
     familyMembers = {}
     for person in family:
         familyMembers[person.name] = person
-    return render_template("calendar.html", events = globals.events, family = familyMembers)
+    return render_template("calendar.html", events=globals.events, family=familyMembers)
+
 
 def check_for_update(family, anyChanges, today, hashes):
     for member in family:
@@ -63,14 +67,14 @@ def do_update(family, today, hashes):
         member.userObject = userObjects[member.name]
     return(json.dumps(calendarise_events(evs)))
 
+
 def log_events(events):
     logging.warning("Events:")
     for event in events:
         logging.warning("{} {} {} {}".format(event['summary'], event['start'], event['uid'], str(event['attendees'])))
 
-    
 
-@calendar.route("/do_update")
+@calendar.route("/do_update", methods=["POST"])
 @has_global_stuff
 def update(db_session, globals):
     family = db_session.query(FamilyMember).all()
@@ -78,9 +82,9 @@ def update(db_session, globals):
     today = datetime.utcnow().replace(tzinfo=pytz.utc).date()
     hashes = {}
     check_for_update(family, anyChanges, today, hashes)
-    
+
     if anyChanges or globals.familyChanges:
         jsonfile = do_update(family, today, hashes)
-        return(jsonfile)
+        return jsonfile
     else:
-        return(json.dumps(globals.events))
+        return json.dumps(globals.events)
