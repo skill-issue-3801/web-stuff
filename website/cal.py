@@ -5,13 +5,13 @@ from icalevents import icalevents, icalparser
 
 accepted_calendars = ["google", "apple"]
 weekdays = {
-    0: "Monday",
-    1: "Tuesday",
-    2: "Wednesday",
-    3: "Thursday",
-    4: "Friday",
-    5: "Saturday",
-    6: "Sunday",
+    0: "Sunday",
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday",
+    6: "Saturday",
 }
 
 
@@ -207,25 +207,26 @@ def update_user_name(names, name, newName, user):
         "Warning: events where",
         newName,
         "was invited by tagging them in the description"
-        " using their old name will not appear unless you update them in your calendar!",
+        " using their old name will not appear unless you update them in your calendar!"
     )
     return True
 
 
-def days_to_end(today, weekday):
-    day = today.weekday()
-    if weekday == 0:
-        return today - timedelta(days=day)
-    return today + timedelta(days=(6 - day))
+def edges_of_week(today):
+    day = (today.weekday() + 1) % 7
+    sunday = today - timedelta(days=day)
+    saturday = sunday + timedelta(days=6)
+    return (sunday, saturday)
 
 
 def check_cal_for_updates(url, caltype, hash, today):
+    start, end  = edges_of_week(today)
     evs = icalevents.events(
         url=url,
-        start=(days_to_end(today, 0)),
-        end=(days_to_end(today, 6)),
+        start = start, 
+        end = end,
         sort=True,
-        fix_apple=(caltype == "apple"),
+        fix_apple=(caltype == "apple")
     )
     evshash = events_get_hash(evs)
     if evshash == hash:
@@ -244,10 +245,11 @@ def update_events(family, today, hashes, names, emails):
             member.set_hash(
                 hashes[member.get_name()]
             )  # record hash of events before processing
+            start, end  = edges_of_week(today)
             evs = icalevents.events(
                 url=member.get_link(),
-                start=days_to_end(today, 0),
-                end=days_to_end(today, 6),
+                start = start, 
+                end = end,
                 sort=True,
                 fix_apple=(member.get_caltype() == "apple"),
             )
@@ -341,9 +343,26 @@ def calendarise_events(events):
 
 class htmlEvent(dict):
     def __init__(self, summary, uid, attendees, start, end):
-        dict.__init__(self, summary = summary, uid = uid, attendees = list(attendees), start = str(start), end = str(end), colstart = start.strftime('%A'), colend = end.strftime('%A'), rowstart = date_to_id(start), rowend = date_to_id(end))
+        dict.__init__(self, 
+                      summary = summary, 
+                      uid = uid, attendees = list(attendees), 
+                      start = str(start.strftime("%H:%M")), 
+                      end = str(end.strftime("%H:%M")), 
+                      colstart = start.strftime('%A'), 
+                      colend = adjust_for_midnight(end), 
+                      rowstart = get_timecode(start, 'start'), 
+                      rowend = get_timecode(end, 'end'))
         
 
 
-def date_to_id(date):
-    return("{}-{}".format(date.strftime("%H"), 15 * round(date.minute/15)))
+def get_timecode(date, startEnd):
+    if (date.strftime("%H:%M") == "00:00"):
+            return("23-45")
+    else:
+        return("{}-{}".format(date.strftime("%H"), (str(15 * round(date.minute/15))).zfill(2)))
+    
+def adjust_for_midnight(date):
+    if (date.strftime("%H:%M") == "00:00"):
+        return((date-timedelta(days=1)).strftime("%A"))
+    else:
+        return (date.strftime('%A'))
