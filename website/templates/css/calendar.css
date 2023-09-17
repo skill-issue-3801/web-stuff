@@ -233,3 +233,8 @@
     grid-column: cSaturday / cSaturday / span 1;
     grid-row: r00-00 / r00-00 / span 1;
 }
+
+.icon {
+    height: 100px;
+    width: auto;
+}
