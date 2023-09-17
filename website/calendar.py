@@ -23,10 +23,9 @@ def default(db_session, globals):
         return "Raspberry Pi access only.", 403
 
     family = db_session.query(FamilyMember).all()
-    anyChanges = False
     today = datetime.utcnow().replace(tzinfo=pytz.utc).date()
     hashes = {}
-    check_for_update(family, anyChanges, today, hashes)
+    anyChanges = check_for_update(family, today, hashes)
     
     if anyChanges or globals.familyChanges:
         jsonfile = do_update(family, today, hashes)
@@ -39,10 +38,16 @@ def default(db_session, globals):
     familyMembers = {}
     for person in family:
         familyMembers[person.name] = person
-    return render_template("calendar.html", events=globals.events, family=familyMembers)
+    firstDay = today - timedelta(days = ((today.weekday() + 1) % 7))
+    dates = []
+    for i in range (0, 7):
+        dates.append((firstDay + timedelta (days=i)).strftime('%d'))
+    return render_template("calendar.html", events=globals.events, family=familyMembers, 
+            dates = dates, today = (today.weekday() + 1) % 7)
 
 
-def check_for_update(family, anyChanges, today, hashes):
+def check_for_update(family, today, hashes):
+    anyChanges = False
     for member in family:
         newHash = check_cal_for_updates(member.url, member.calendarType, member.eventsHash, today)
         if newHash == False:
@@ -50,6 +55,7 @@ def check_for_update(family, anyChanges, today, hashes):
         else:
             hashes[member.name] = newHash
             anyChanges = True
+    return anyChanges
 
 def do_update(family, today, hashes):
     userObjects = {}
@@ -78,10 +84,9 @@ def log_events(events):
 @has_global_stuff
 def update(db_session, globals):
     family = db_session.query(FamilyMember).all()
-    anyChanges = False
     today = datetime.utcnow().replace(tzinfo=pytz.utc).date()
     hashes = {}
-    check_for_update(family, anyChanges, today, hashes)
+    anyChanges = check_for_update(family, today, hashes)
 
     if anyChanges or globals.familyChanges:
         jsonfile = do_update(family, today, hashes)

@@ -26,59 +26,67 @@
        
         <h1 class="calendarViewTopText">Calendar</h1>
         <p class="calendarViewTopText">Hi I'm calendar - You shouldn't be able to see me...</p>
-        <br>
-        {% for event in events %}
-            <div class="event" id ="{{event['uid']}}div" style = "grid-column-start: {{event['colstart']}}; grid-column-end:{{event['colend']}}; grid-row-start:{{event['rowstart']}}; grid-row-end:{{event['rowend']}}">
-                <p>Summary: {{event['summary']}}</p>
-                <p>Start: {{event['start']}}</p>
-                <p>End: {{event['end']}}</p>
-                <p>Attendees:</p>
-                {% for person in event['attendees'] %}
-                    <p> - {{person}} {{family[person].icon}}</p>
-                {% endfor %}
-                <br>
-            </div>
-            
-        {% endfor %}
-        <br>
+       
         <section>
             <div class="calendarContent">
                 <div class="calendarDays">
                     <div id="timeEmptySpace">
                         <h4>time</h4>
                     </div>
-                    <div id="Sunday">
+                    <div id="Sunday" class="{{'todayHeader' if today == 0 else ''}}">
                         <h4>Sunday</h4>
+                        <p>{{dates[0]}}</p>
                     </div>
 
-                    <div id="Monday">
+                    <div id="Monday" class="{{'todayHeader' if today == 1 else ''}}">
                         <h4>Monday</h4>
+                        <p>{{dates[1]}}</p>
                     </div>
 
-                    <div id="Tuesday">
+                    <div id="Tuesday" class="{{'todayHeader' if today == 2 else ''}}">
                         <h4>Tuesday</h4>
+                        <p>{{dates[2]}}</p>
                     </div>
 
-                    <div id="Wednesday">
+                    <div id="Wednesday" class="{{'todayHeader' if today == 3 else ''}}">
                         <h4>Wednesday</h4>
+                        <p>{{dates[3]}}</p>
                     </div>
 
-                    <div id="Thursday">
+                    <div id="Thursday" class="{{'todayHeader' if today == 4 else ''}}">
                         <h4>Thursday</h4>
+                        <p>{{dates[4]}}</p>
                     </div>
 
-                    <div id="Friday">
+                    <div id="Friday" class="{{'todayHeader' if today == 5 else ''}}">
                         <h4>Friday</h4>
+                        <p>{{dates[5]}}</p>
                     </div>
 
-                    <div id="Saturday">
+                    <div id="Saturday" class="{{'todayHeader' if today == 6 else ''}}">
                         <h4>Saturday</h4>
+                        <p>{{dates[6]}}</p>
                     </div>
                 </div>
                 <div class="calendarGrid">
                     <div id="EVENT1">
                         <h4>Saturday</h4>
                     </div>
+                {% for event in events %}
+                    <div class="event" id ="{{event['uid']}}div" style = "grid-area: r{{event['rowstart']}} / 
+                            a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}}; background-color: aqua;">
+                        <h4>Summary: {{event['summary']}}</h4>
+                        <p>Start: {{event['start']}}</p>
+                        <p>End: {{event['end']}}</p>
+                        <h4>Attendees:</h4>
+                        {% for person in event['attendees'] %}
+                            <img class="icon" src="{{url_for('static', filename=family[person].icon)}}"> 
+                            <p>{{person}}</p>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+
                     <!-- Time rows -->
                     <div class="timeRows">
 

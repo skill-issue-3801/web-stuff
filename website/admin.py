@@ -86,7 +86,7 @@ def add_family_member(db_session):
     if email != None and db_session.query(FamilyMember).filter_by(email=email).first():
         logging.warning("that email is already being used")
         return
-    icon = "templates/graphics/fish.png"
+    icon = "/graphics/fish.png"
     eventsHash = 0
     userObject = User(name, link, caltype, email)
     column = FamilyMember(
