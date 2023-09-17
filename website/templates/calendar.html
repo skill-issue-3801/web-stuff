@@ -73,12 +73,11 @@
                         <p>End: {{event['end']}}</p>
                         <h4>Attendees:</h4>
                         {% for person in event['attendees'] %}
-                        <p> {{person}} {{family[person].icon}}</p>
+                            <img class="icon" src="{{url_for('static', filename=family[person].icon)}}"> 
+                            <p>{{person}}</p>
+                        {% endfor %}
+                    </div>
                 {% endfor %}
-                <br>
-            </div>
-            
-        {% endfor %}
 
 
                     <!-- Time rows -->

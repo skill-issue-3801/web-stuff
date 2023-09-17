@@ -23,10 +23,9 @@ def default(db_session, globals):
         return "Raspberry Pi access only.", 403
 
     family = db_session.query(FamilyMember).all()
-    anyChanges = False
     today = datetime.utcnow().replace(tzinfo=pytz.utc).date()
     hashes = {}
-    check_for_update(family, anyChanges, today, hashes)
+    anyChanges = check_for_update(family, today, hashes)
     
     if anyChanges or globals.familyChanges:
         jsonfile = do_update(family, today, hashes)
@@ -42,7 +41,8 @@ def default(db_session, globals):
     return render_template("calendar.html", events=globals.events, family=familyMembers)
 
 
-def check_for_update(family, anyChanges, today, hashes):
+def check_for_update(family, today, hashes):
+    anyChanges = False
     for member in family:
         newHash = check_cal_for_updates(member.url, member.calendarType, member.eventsHash, today)
         if newHash == False:
@@ -50,6 +50,7 @@ def check_for_update(family, anyChanges, today, hashes):
         else:
             hashes[member.name] = newHash
             anyChanges = True
+    return anyChanges
 
 def do_update(family, today, hashes):
     userObjects = {}
@@ -74,14 +75,13 @@ def log_events(events):
         logging.warning("{} {} {} {}".format(event['summary'], event['start'], event['uid'], str(event['attendees'])))
 
 
-@calendar.route("/do_update", methods=["POST"])
+@calendar.route("/doupdate", methods=["POST"])
 @has_global_stuff
 def update(db_session, globals):
     family = db_session.query(FamilyMember).all()
-    anyChanges = False
     today = datetime.utcnow().replace(tzinfo=pytz.utc).date()
     hashes = {}
-    check_for_update(family, anyChanges, today, hashes)
+    anyChanges = check_for_update(family, today, hashes)
 
     if anyChanges or globals.familyChanges:
         jsonfile = do_update(family, today, hashes)
