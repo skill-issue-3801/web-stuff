@@ -26,21 +26,7 @@
        
         <h1 class="calendarViewTopText">Calendar</h1>
         <p class="calendarViewTopText">Hi I'm calendar - You shouldn't be able to see me...</p>
-        <br>
-        {% for event in events %}
-            <div class="event" id ="{{event['uid']}}div" style = "grid-column-start: {{event['colstart']}}; grid-column-end:{{event['colend']}}; grid-row-start:{{event['rowstart']}}; grid-row-end:{{event['rowend']}}">
-                <p>Summary: {{event['summary']}}</p>
-                <p>Start: {{event['start']}}</p>
-                <p>End: {{event['end']}}</p>
-                <p>Attendees:</p>
-                {% for person in event['attendees'] %}
-                    <p> - {{person}} {{family[person].icon}}</p>
-                {% endfor %}
-                <br>
-            </div>
-            
-        {% endfor %}
-        <br>
+       
         <section>
             <div class="calendarContent">
                 <div class="calendarDays">
@@ -79,6 +65,22 @@
                     <div id="EVENT1">
                         <h4>Saturday</h4>
                     </div>
+                {% for event in events %}
+                    <div class="event" id ="{{event['uid']}}div" style = "grid-area: r{{event['rowstart']}} / 
+                            a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}}; background-color: aqua;">
+                        <h4>Summary: {{event['summary']}}</h4>
+                        <p>Start: {{event['start']}}</p>
+                        <p>End: {{event['end']}}</p>
+                        <h4>Attendees:</h4>
+                        {% for person in event['attendees'] %}
+                        <p> {{person}} {{family[person].icon}}</p>
+                {% endfor %}
+                <br>
+            </div>
+            
+        {% endfor %}
+
+
                     <!-- Time rows -->
                     <div class="timeRows">
 
