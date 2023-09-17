@@ -103,10 +103,11 @@ def is_valid_url(url, caltype):
 
 
 def events_get_hash(events):
-    uidstr = ""
+    hashstr = ""
     for event in events:
-        uidstr += str(event)
-    return hash(uidstr)
+        hashstr += str(event)
+        hashstr += str(event.description)
+    return hash(hashstr)
 
 
 def add_user(names, urls, emails, name, caltype, url, email=None):
