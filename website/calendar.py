@@ -38,7 +38,11 @@ def default(db_session, globals):
     familyMembers = {}
     for person in family:
         familyMembers[person.name] = person
-    return render_template("calendar.html", events=globals.events, family=familyMembers)
+    firstDay = today - timedelta(days = ((today.weekday() + 1) % 7))
+    dates = []
+    for i in range (0, 7):
+        dates.append((firstDay + timedelta (days=i)).strftime('%d'))
+    return render_template("calendar.html", events=globals.events, family=familyMembers, dates = dates)
 
 
 def check_for_update(family, today, hashes):
