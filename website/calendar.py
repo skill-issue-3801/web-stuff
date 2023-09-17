@@ -42,7 +42,8 @@ def default(db_session, globals):
     dates = []
     for i in range (0, 7):
         dates.append((firstDay + timedelta (days=i)).strftime('%d'))
-    return render_template("calendar.html", events=globals.events, family=familyMembers, dates = dates)
+    return render_template("calendar.html", events=globals.events, family=familyMembers, 
+            dates = dates, today = (today.weekday() + 1) % 7)
 
 
 def check_for_update(family, today, hashes):
@@ -79,7 +80,7 @@ def log_events(events):
         logging.warning("{} {} {} {}".format(event['summary'], event['start'], event['uid'], str(event['attendees'])))
 
 
-@calendar.route("/doupdate", methods=["POST"])
+@calendar.route("/do_update", methods=["POST"])
 @has_global_stuff
 def update(db_session, globals):
     family = db_session.query(FamilyMember).all()

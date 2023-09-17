@@ -238,3 +238,7 @@
     height: 100px;
     width: auto;
 }
+
+.todayHeader {
+    border-style: solid;
+}
