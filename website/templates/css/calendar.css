@@ -1,19 +1,19 @@
 :root {
-    --coloumn-size: 13.6%;
-    --time-coloumn-size: 5%;
+    --coloumn-size: 13vw;
+    --time-coloumn-size: 5vw;
     --row-size: 60px;
+    --calendar-width: 96vw;
+    --calendar-height: 70vh;
     
 }
-
 
 .content {
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-content: space-around;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 1.5em;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-top: 3.5vh;
 }
 
 /* Background Video */
@@ -24,6 +24,7 @@
     min-width: 100%;
     min-height: 100%;
     z-index: -1;
+    object-fit: fill;
 }
 
 .calendarViewTopText {
@@ -31,14 +32,75 @@
     color: #d3f2e9ff;
 }
 
-#calendarWrapper {
-    display: flex;
-    flex-wrap: nowrap;
-    height: 100%;
-    /* background: var(--mint-green); */
-    position: relative;
+
+/* The parent of all the grids */
+.calendarContent {
+    overflow: auto; 
+    display: grid;
+    width: var(--calendar-width);
 }
 
+.calendarDays {
+    display: grid;
+    grid-template-columns: [c00-00] var(--time-coloumn-size) [cSunday] var(--coloumn-size) [cMonday] var(--coloumn-size) [cTuesday] var(--coloumn-size) [cWednesday] var(--coloumn-size) [cThursday] var(--coloumn-size) [cFriday] var(--coloumn-size) [cSaturday] var(--coloumn-size);
+    grid-template-rows: var(--row-size);
+    grid-template-areas: "time Sunday Monday Tuesday Wednesday Thursday Friday Saturday";
+}
+.calendarDays div {
+    width: 100%;
+    text-align: center;
+}
+
+/* Calendar days */
+#timeEmptySpace {
+    justify-self: center;
+    background-color: rosybrown;
+    grid-area: time;
+}
+
+#Sunday {
+    justify-self: center;
+    background-color: aqua;
+    grid-area: Sunday;
+}
+
+#Monday {
+    justify-self: center;
+    background-color: rosybrown;
+    grid-area: Monday;
+}
+
+#Tuesday {
+    justify-self: center;
+    background-color: aqua;
+    grid-area: Tuesday;
+}
+
+#Wednesday {
+    justify-self: center;
+    background-color: rosybrown;
+    grid-area: Wednesday;
+}
+
+#Thursday {
+    justify-self: center;
+    background-color: aqua;
+    grid-area: Thursday;
+}
+
+#Friday {
+    justify-self: center;
+    background-color: rosybrown;
+    grid-area: Friday;
+}
+
+#Saturday {
+    justify-self: center;
+    background-color: aqua;
+    grid-area: Saturday;
+}
+
+/* Event in the calendar grid below */
 /* Key:
     "c" - coloumn name (soz for the spelling mistake, its embedded  now)
     "r" - row name
@@ -46,10 +108,9 @@
     */
   
 .calendarGrid {
+    /* Arbitary background colour */
     background-color: rgba(252, 251, 244, 0.3);
-    
-    width: 95vw;
-    height: 80vh;
+    height: var(--calendar-height);
     overflow-x: hidden;
     overflow-y: auto;
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
@@ -164,59 +225,21 @@
     width: 100%;
     text-align: center;
 }
-#Sunday {
+/* Event example */
+/* Grid-area follows this order: grid-row-start, grid-column-start, grid-row-end and grid-column-end */
+#EVENT1 {
     justify-self: center;
     background-color: aqua;
-    grid-area: aSunday;
-    grid-column: cSunday / cSunday / span 1;
-    grid-row: r00-00 / r00-00 / span 1;
-}
-
-#Monday {
-    justify-self: center;
-    background-color: rosybrown;
-    grid-area: aMonday;
-    grid-column: cMonday / cMonday / span 1;
-    grid-row: r00-00 / r00-00 / span 1;
-}
-
-#Tuesday {
-    justify-self: center;
-    background-color: aqua;
-    grid-area: aTuesday;
-    grid-column: cTuesday / cTuesday / span 1;
-    grid-row: r00-00 / r00-00 / span 1;
-}
-
-#Wednesday {
-    justify-self: center;
-    background-color: rosybrown;
-    grid-area: aWednesday;
-    grid-column: cWednesday / cWednesday / span 1;
-    grid-row: r00-00 / r00-00 / span 1;
-}
-
-#Thursday {
-    justify-self: center;
-    background-color: aqua;
-    grid-area: aThursday;
-    grid-column: cThursday / cThursday / span 1;
-    grid-row: r00-00 / r00-00 / span 1;
-}
-
-#Friday {
-    justify-self: center;
-    background-color: rosybrown;
-    grid-area: aFriday;
-    grid-column: cFriday / cFriday / span 1;
-    grid-row: r00-00 / r00-00 / span 1;
-}
-
-#Saturday {
-    justify-self: center;
-    background-color: aqua;
-    grid-area: aSaturday;
+    grid-area:  r01-15 / aSaturday / r01-15 / aSaturday ;
     grid-column: cSaturday / cSaturday / span 1;
     grid-row: r00-00 / r00-00 / span 1;
 }
 
+.icon {
+    height: 100px;
+    width: auto;
+}
+
+.todayHeader {
+    border-style: solid;
+}

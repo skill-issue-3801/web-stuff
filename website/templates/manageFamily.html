@@ -13,7 +13,7 @@
         <!--<p> Url: {{ member.url }}</p>
         <p> calendarType: {{ member.calendarType }}</p>
         <p> email: {{ member.email }}</p>-->
-        <p> Icon: {{ member.icon }} </p>
+        <img class='icon' src="{{url_for('static', filename=member.icon)}}">
         <form method="POST">
             <input type="hidden" name="formName" value="editFamilyMember">
             <button type="submit" name="submit" class="btn confirm" method="POST" value="{{member.name}}"> Edit

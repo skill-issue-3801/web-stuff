@@ -1,5 +1,6 @@
 import logging
 import pytz
+import json
 from .cal import *
 from datetime import datetime
 from .base import has_global_stuff, has_db
@@ -18,10 +19,35 @@ logger = logging.getLogger(__name__)
 @calendar.route("/", methods=["GET"])
 @has_global_stuff
 def default(db_session, globals):
+    if not __debug__:
+        return "Raspberry Pi access only.", 403
+
     family = db_session.query(FamilyMember).all()
-    anyChanges = False
     today = datetime.utcnow().replace(tzinfo=pytz.utc).date()
     hashes = {}
+    anyChanges = check_for_update(family, today, hashes)
+    
+    if anyChanges or globals.familyChanges:
+        jsonfile = do_update(family, today, hashes)
+        globals.set_events(json.loads(jsonfile))
+        db_session.commit()
+    
+    globals.familyChanges = False
+    anyChanges = False
+    log_events(globals.events)
+    familyMembers = {}
+    for person in family:
+        familyMembers[person.name] = person
+    firstDay = today - timedelta(days = ((today.weekday() + 1) % 7))
+    dates = []
+    for i in range (0, 7):
+        dates.append((firstDay + timedelta (days=i)).strftime('%d'))
+    return render_template("calendar.html", events=globals.events, family=familyMembers, 
+            dates = dates, today = (today.weekday() + 1) % 7)
+
+
+def check_for_update(family, today, hashes):
+    anyChanges = False
     for member in family:
         newHash = check_cal_for_updates(member.url, member.calendarType, member.eventsHash, today)
         if newHash == False:
@@ -29,45 +55,41 @@ def default(db_session, globals):
         else:
             hashes[member.name] = newHash
             anyChanges = True
-    if anyChanges or globals.familyChanges:
-        #unpickle
-        userObjects = {}
-        for member in family:
-            userObjects[member.name] = member.userObject
-        evs = do_update(userObjects.values(), today, hashes)   
-        for member in family:
-            member.eventsHash = hashes[member.name]
-            member.userObject = userObjects[member.name]
-        globals.set_events(calendarise_events(evs))
-    db_session.commit()
-    globals.familyChanges = False
-    anyChanges = False
-    log_events(globals.events)
-    familyMembers = {}
-    for person in family:
-        familyMembers[person.name] = person
-    return render_template("calendar.html", events = globals.events, family = familyMembers)
+    return anyChanges
 
-def do_update(userObjects, today, hashes):
-    logging.warning("doing update")
+def do_update(family, today, hashes):
+    userObjects = {}
+    for member in family:
+        userObjects[member.name] = member.userObject  
     names = []
     emails = []
-    for user in userObjects:
+    for user in userObjects.values():
         names.append(user.get_name())
         if user.get_email() != None:
             emails.append(user.get_email())
-    return update_events(userObjects, today, hashes, names, emails)
+    evs = update_events(userObjects.values(), today, hashes, names, emails)
+    for member in family:
+        member.eventsHash = hashes[member.name]
+        member.userObject = userObjects[member.name]
+    return(json.dumps(calendarise_events(evs)))
+
 
 def log_events(events):
     logging.warning("Events:")
     for event in events:
-        logging.warning("{} {} {} {}".format(event.summary, event.start, event.uid, str(event.attendees)))
+        logging.warning("{} {} {} {}".format(event['summary'], event['start'], event['uid'], str(event['attendees'])))
 
-    
 
-@calendar.route("/do_update")
+@calendar.route("/do_update", methods=["POST"])
 @has_global_stuff
-@has_db
-def update(session, global_state):
-    global_state.set_events(global_state.events + ["xyz"])
-    return str(global_state.events)
+def update(db_session, globals):
+    family = db_session.query(FamilyMember).all()
+    today = datetime.utcnow().replace(tzinfo=pytz.utc).date()
+    hashes = {}
+    anyChanges = check_for_update(family, today, hashes)
+
+    if anyChanges or globals.familyChanges:
+        jsonfile = do_update(family, today, hashes)
+        return jsonfile
+    else:
+        return json.dumps(globals.events)

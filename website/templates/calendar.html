@@ -17,7 +17,7 @@
 <body class="baseContent">
     <div>
         <video autoplay muted loop id="waterBackgroundVideo">
-            <source src="{{url_for('static', filename='graphics/Water_HD.mp4')}}" type="video/mp4">
+            <source src="{{url_for('static', filename='graphics/Calendar_Water_HD.mp4')}}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -25,69 +25,84 @@
     <main class="content">
        
         <h1 class="calendarViewTopText">Calendar</h1>
+        <h1 class="calendarViewTopText" id="datetime">.</h1>
         <p class="calendarViewTopText">Hi I'm calendar - You shouldn't be able to see me...</p>
-        <br>
-        {% for event in events %}
-            <div class="event", id ="{{event.uid}}div">
-                <p>Summary: {{event.summary}}</p>
-                <p>Start: {{event.start}}</p>
-                <p>End: {{event.end}}</p>
-                <p>Attendees:</p>
-                {% for person in event.attendees %}
-                    <p> - {{person}} {{family[person].icon}}</p>
+       
+        <section>
+            <div class="calendarContent">
+                <div class="calendarDays">
+                    <div id="timeEmptySpace">
+                        <h4>time</h4>
+                    </div>
+                    <div id="Sunday" class="{{'todayHeader' if today == 0 else ''}}">
+                        <h4>Sunday</h4>
+                        <p>{{dates[0]}}</p>
+                    </div>
+
+                    <div id="Monday" class="{{'todayHeader' if today == 1 else ''}}">
+                        <h4>Monday</h4>
+                        <p>{{dates[1]}}</p>
+                    </div>
+
+                    <div id="Tuesday" class="{{'todayHeader' if today == 2 else ''}}">
+                        <h4>Tuesday</h4>
+                        <p>{{dates[2]}}</p>
+                    </div>
+
+                    <div id="Wednesday" class="{{'todayHeader' if today == 3 else ''}}">
+                        <h4>Wednesday</h4>
+                        <p>{{dates[3]}}</p>
+                    </div>
+
+                    <div id="Thursday" class="{{'todayHeader' if today == 4 else ''}}">
+                        <h4>Thursday</h4>
+                        <p>{{dates[4]}}</p>
+                    </div>
+
+                    <div id="Friday" class="{{'todayHeader' if today == 5 else ''}}">
+                        <h4>Friday</h4>
+                        <p>{{dates[5]}}</p>
+                    </div>
+
+                    <div id="Saturday" class="{{'todayHeader' if today == 6 else ''}}">
+                        <h4>Saturday</h4>
+                        <p>{{dates[6]}}</p>
+                    </div>
+                </div>
+                <div class="calendarGrid">
+                    <div id="EVENT1">
+                        <h4>Saturday</h4>
+                    </div>
+                {% for event in events %}
+                    <div class="event" id ="{{event['uid']}}div" style = "grid-area: r{{event['rowstart']}} / 
+                            a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}}; background-color: aqua;">
+                        <h4>Summary: {{event['summary']}}</h4>
+                        <p>Start: {{event['start']}}</p>
+                        <p>End: {{event['end']}}</p>
+                        <h4>Attendees:</h4>
+                        {% for person in event['attendees'] %}
+                            <img class="icon" src="{{url_for('static', filename=family[person].icon)}}"> 
+                            <p>{{person}}</p>
+                        {% endfor %}
+                    </div>
                 {% endfor %}
-                <p>From {{event.top}} to {{event.bottom}}</p>
-                <br>
-            </div>
-            
-        {% endfor %}
-        <br>
-        <section id="calendarWrapper">
-                
-<!-- From Kiah about viewing events at, 12/09: 
-    add ppl using the form then just going to /calendar should show
-    the events they have this week. i restricted the search to the current
-    calendar week to make it easier to figure out displaying them but i can
-    change that once we get to view changing -->
-            <div class="calendarGrid">
-                <!-- Aw fuck here we go -->
 
-                <!-- Time rows -->
-                <div class="timeRows">
 
-                </div>
-                <!-- !!!!!!!!!!!!!!!!!!!!!!!!! Below is the top row of the calendar -->
-                <div id="Sunday">
-                    <h4>Sunday</h4>
-                </div>
+                    <!-- Time rows -->
+                    <div class="timeRows">
 
-                <div id="Monday">
-                    <h4>Monday</h4>
-                </div>
-
-                <div id="Tuesday">
-                    <h4>Tuesday</h4>
-                </div>
-
-                <div id="Wednesday">
-                    <h4>Wednesday</h4>
-                </div>
-
-                <div id="Thursday">
-                    <h4>Thursday</h4>
-                </div>
-
-                <div id="Friday">
-                    <h4>Friday</h4>
-                </div>
-
-                <div id="Saturday">
-                    <h4>Saturday</h4>
+                    </div>
+                    <!-- !!!!!!!!!!!!!!!!!!!!!!!!! Below is the top row of the calendar -->
                 </div>
             </div>
         </section>
 </main>
 <script type="text/javascript" src="{{url_for('static', filename='js/calendarTimes.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/mainLoop.js')}}"></script>
+<script>
+    window.onload = function (){
+        updateTimeData();
+    }
+</script>
 </body>
 </html>
