@@ -25,6 +25,7 @@
     <main class="content">
        
         <h1 class="calendarViewTopText">Calendar</h1>
+        <h1 class="calendarViewTopText" id="datetime">.</h1>
         <p class="calendarViewTopText">Hi I'm calendar - You shouldn't be able to see me...</p>
        
         <section>
@@ -98,5 +99,10 @@
 </main>
 <script type="text/javascript" src="{{url_for('static', filename='js/calendarTimes.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/mainLoop.js')}}"></script>
+<script>
+    window.onload = function (){
+        updateTimeData();
+    }
+</script>
 </body>
 </html>
