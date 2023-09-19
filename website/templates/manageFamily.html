@@ -8,23 +8,27 @@
 <div id="familyContainer">
     <!--family member icons w names above them and edit and delete buttons below them-->
     {% for member in family%}
-    <div class="familyMember" , id="{{member.name}}div">
-        <p> Name: {{ member.name }}</p>
+
+    <div class="familyMemberContainer" , id="{{member.name}}Box">
         <!--<p> Url: {{ member.url }}</p>
         <p> calendarType: {{ member.calendarType }}</p>
         <p> email: {{ member.email }}</p>-->
-        <img class='icon' src="{{url_for('static', filename=member.icon)}}">
-        <form method="POST">
-            <input type="hidden" name="formName" value="editFamilyMember">
-            <button type="submit" name="submit" class="btn confirm" method="POST" value="{{member.name}}"> Edit
-            </button>
-        </form>
-        <form method="POST">
-            <input type="hidden" name="formName" value="deleteFamilyMember">
-            <button type="submit" name="submit" class="btn confirm" method="POST" value="{{member.name}}"> Delete
-            </button>
-        </form>
-    </div>
+        <figure class="familyMember">
+            <img class='icon' src="{{url_for('static', filename=member.icon)}}">
+        </figure>
+        <p>{{ member.name }}</p>
+        <div class="manageFamilyBtns">
+            <form method="POST">
+                <input type="hidden" name="formName" value="editFamilyMember">
+                <button type="submit" name="submit" class="editFamilyMember" method="POST" value="{{member.name}}">Edit</button>
+            </form>
+            <form method="POST">
+                <input type="hidden" name="formName" value="deleteFamilyMember">
+                <button type="submit" name="submit" class="deleteFamilyMember" method="POST" value="{{member.name}}">Remove</button>
+            </form>
+        </div>
+        
+    </div>        
     {% endfor %}
 
 
