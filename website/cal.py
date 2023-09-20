@@ -343,11 +343,11 @@ def calendarise_events(events):
         
         while(manstart.date() <= event.end.date()):
             if ((manstart.date() == event.end.date()) or 
-                    (event.end == ((event.start + timedelta(days=1)).replace(hour=0, minute=0)))):
+                    (event.end == ((event.start + timedelta(days=1)).replace(hour=00, minute=00)))):
                 parsedEvents.append(htmlEvent(event.summary, event.uid, event.attendee, event.start, event.end, manstart, event.end))
                 break
             else:
-                manualEnd = (event.start - timedelta(days=1)).replace(hour=23, minute=59)
+                manualEnd = (event.start).replace(hour=00, minute=00)
                 parsedEvents.append(htmlEvent(event.summary, event.uid, event.attendee, event.start, event.end, manstart, manualEnd))
                 manstart = (event.start + timedelta(days=1)).replace(hour=00, minute=1)
     return parsedEvents
@@ -368,7 +368,10 @@ class htmlEvent(dict):
 
 def get_timecode(date, startEnd):
     if (date.strftime("%H:%M") == "00:00"):
-            return("23-45")
+        if startEnd == 'start':
+            return("00-00")
+        else:
+            return("24-15")
     else:
         hour = date.hour
         minute = (15 * math.floor(date.minute/15))
