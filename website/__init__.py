@@ -47,6 +47,17 @@ def main(db_url, args):
                 eventsHash=eventsHash,
                 userObject=userObject,
             ))
+
+            s.add(FamilyMember(
+                name="test 2",
+                url="https://calendar.google.com/calendar/ical/406051a36534cc9f88d8df0d7fe1fb69dff521e5713ec771bc80e9d8e461f391%40group.calendar.google.com/private-3f7d09cd72dfeb37f715568fbb3ef85c/basic.ics",
+                calendarType="google",
+                email="a@c.b",
+                icon=icon,
+                eventsHash=eventsHash,
+                userObject=userObject,
+            ))
+
             s.commit()
             s.close()        
 
