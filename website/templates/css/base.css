@@ -12,6 +12,10 @@
     opacity: 0.8;
 }
 
+.navImage {
+    justify-content: center;
+    width: 15vw;
+}
 
 /* Nav A tag styling */
 .navigationBar a:link {
@@ -80,7 +84,7 @@
     align-items: stretch;
 }
 
-.navigationBar a {
+.navigationBar a, p {
     outline: none;
     text-align: center;
     /* width:15vw;
@@ -135,5 +139,10 @@
         padding-bottom: 0 !important; */
         width: 25vw !important;
         line-height: 3em;
+    }
+
+    .navImage {
+        height: 8vh;
+        width: auto;
     }
 }
