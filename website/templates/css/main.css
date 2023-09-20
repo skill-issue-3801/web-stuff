@@ -243,7 +243,7 @@ input[type=radio]:checked {
   outline: none;
 }
 
-/* Set a style for the submit/login button */
+/* Set a style for the button */
 .form-container .btn {
   font-family: var(--body-font);
   color: var(--mint-green);
