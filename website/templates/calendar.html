@@ -74,7 +74,7 @@
                         <h4>Saturday</h4>
                     </div>
                 {% for event in events %}
-                    <div class="event" id ="{{event['uid']}}div" style = "grid-area: r{{event['rowstart']}} / 
+                    <div class="event {{event['uid']}}div" style = "grid-area: r{{event['rowstart']}} / 
                             a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}}; background-color: aqua;">
                         <h4>Summary: {{event['summary']}}</h4>
                         <p>Start: {{event['start']}}</p>
