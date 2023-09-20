@@ -15,6 +15,7 @@ function openEditForm(personName, personEmail, personCaltype, personUrl, personI
   document.getElementById("editEmail").defaultValue = personEmail;
   document.getElementById("editUrl").defaultValue = personUrl;
   document.getElementById(personCaltype).checked = true;
+  document.getElementById("personName").value = personName;
 }
 
 function closeEditForm() {

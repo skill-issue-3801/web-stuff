@@ -67,7 +67,6 @@ def family_post(db_session, globals):
 
 def add_family_member(db_session):
     name = request.form.get("name")
-
     link = request.form.get("link")
     caltype = request.form.get("calendarType")
     if not is_valid_url(link, caltype):
@@ -102,7 +101,20 @@ def add_family_member(db_session):
 
 
 def edit_family_member(db_session):
-    logging.warning("i dont know how to do this yet")
+    originalName = request.form.get("personName")
+    name = request.form.get("name")
+    link = request.form.get("link")
+    caltype = request.form.get("calendarType")
+    if not is_valid_url(link, caltype):
+        logging.warning("invalid url")
+        return
+    if request.form.get("email") == "":
+        email = None
+    else:
+        email = request.form.get("email")
+        
+    person = db_session.query(FamilyMember).get(originalName)
+    logging.warning("i dont know how to do this yet")  
 
 
 def delete_family_member(db_session):
