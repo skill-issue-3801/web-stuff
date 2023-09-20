@@ -17,17 +17,13 @@
 <body class="baseContent">
     <div>
         <video autoplay muted loop id="waterBackgroundVideo">
-            <source src="{{url_for('static', filename='graphics/Calendar_Water_HD.mp4')}}" type="video/mp4">
+            <source src="{{url_for('static', filename='graphics/Base_Water_HD.mp4')}}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
     <main class="content">
-       
-        <h1 class="calendarViewTopText">Calendar</h1>
-        <h1 class="calendarViewTopText" id="datetime">.</h1>
-        <p class="calendarViewTopText">Hi I'm calendar - You shouldn't be able to see me...</p>
-       
+        <h1 class="calendarViewTopText" id="datetime">.</h1>       
         <section>
             <div class="calendarContent">
                 <div class="calendarDays">
@@ -70,16 +66,11 @@
                     </div>
                 </div>
                 <div class="calendarGrid">
-                    <div id="EVENT1">
-                        <h4>Saturday</h4>
-                    </div>
                 {% for event in events %}
                     <div class="event" id ="{{event['uid']}}div" style = "grid-area: r{{event['rowstart']}} / 
                             a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}};">
-                        <h4>Summary: {{event['summary']}}</h4>
-                        <p>Start: {{event['start']}}</p>
-                        <p>End: {{event['end']}}</p>
-                        <h4>Attendees:</h4>
+                        <p id="eventHeading">{{event['summary']}}</p>
+                        <p>{{event['start']}} - {{event['end']}}</p>
                         {% for person in event['attendees'] %}
                             <img class="icon" src="{{url_for('static', filename=family[person].icon)}}"> 
                             <p>{{person}}</p>
