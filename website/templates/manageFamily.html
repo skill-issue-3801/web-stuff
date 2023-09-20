@@ -8,32 +8,75 @@
 <div id="familyContainer">
     <!--family member icons w names above them and edit and delete buttons below them-->
     {% for member in family%}
-    <div class="familyMember" , id="{{member.name}}div">
-        <p> Name: {{ member.name }}</p>
-        <!--<p> Url: {{ member.url }}</p>
-        <p> calendarType: {{ member.calendarType }}</p>
-        <p> email: {{ member.email }}</p>-->
-        <img class='icon' src="{{url_for('static', filename=member.icon)}}">
-        <form method="POST">
-            <input type="hidden" name="formName" value="editFamilyMember">
-            <button type="submit" name="submit" class="btn confirm" method="POST" value="{{member.name}}"> Edit
-            </button>
-        </form>
-        <form method="POST">
-            <input type="hidden" name="formName" value="deleteFamilyMember">
-            <button type="submit" name="submit" class="btn confirm" method="POST" value="{{member.name}}"> Delete
-            </button>
-        </form>
+    <div class="familyMemberContainer" , id="{{member.name}}Box">
+        <!--<p> Url: {{member.url}}</p>
+        <p> calendarType: {{member.calendarType}}</p>
+        <p> email: {{member.email}}</p>-->
+        <figure class="familyMember">
+            <img class='icon' src="{{url_for('static', filename=member.icon)}}">
+        </figure>
+        <p>{{ member.name }}</p>
+        <div class="manageFamilyBtns">
+            <form>
+                <button onclick="openEditForm()" class="editFamilyMember">Edit</button>
+            </form>
+            <form method="POST">
+                <input type="hidden" name="formName" value="deleteFamilyMember">
+                <button type="submit" name="submit" class="deleteFamilyMember" method="POST"
+                    value="{{member.name}}">Remove</button>
+            </form>
+        </div>
+
     </div>
     {% endfor %}
+
 
 
     <!--form stuff!!!-->
 
     <!-- A button to open the popup form -->
-    <button id="form-button" onclick="openForm()">Add Family Member</button>
+    <button id="form-button" onclick="openForm()">
+        <p>Add Family Member</p>
+    </button>
 
-    <!-- The form -->
+    <!-- The edit form -->
+    <div class="form-popup" id="editForm">
+        <form action="" class="form-container" method="POST">
+            <h1>Add Family Member</h1>
+
+            <input type="hidden" name="formName" value="editFamilyMember">
+            <label for="name"><b>Name:</b></label>
+            <input type="text" placeholder="member.name" name="name" required>
+            <br>
+            <label for="email"><b>Email:</b></label>
+            <input type="email" placeholder="member.email" name="email" required>
+            <br>
+            <label for="link"><b>Calendar Link:</b></label>
+            <input type="text" placeholder="member.url" name="link" required>
+            <br>
+            <b>Calendar Type:</b>
+            <div class="radio-button-container">
+                <div class="radio-button-and-label">
+                    <input type="radio" id="google" name="calendarType" value="google" required>
+                    <label for="google">Google</label>
+                </div>
+                <div class="radio-button-and-label">
+                    <input type="radio" id="apple" name="calendarType" value="apple" required>
+                    <label for="apple">Apple</label>
+                </div>
+            </div>
+            <br>
+
+            <!--icon choices here, more complicated so I'm doing them last-->
+
+            <button type="submit" class="btn confirm" type="submit" name="submit" class="btn confirm" method="POST"
+                value="member.name">Confirm</button>
+            <button type="button" class="btn cancel" onclick="closeEditForm()">Cancel</button>
+        </form>
+    </div>
+
+
+    <!-- The add form -->
     <div class="form-popup" id="familyForm">
         <form action="" class="form-container" method="POST">
             <h1>Add Family Member</h1>
@@ -43,7 +86,7 @@
             <input type="text" placeholder="Enter Name" name="name" required>
             <br>
             <label for="email"><b>Email:</b></label>
-            <input type="email" placeholder="Enter Email" name="email">
+            <input type="email" placeholder="Enter Email" name="email" required>
             <br>
             <label for="link"><b>Calendar Link:</b></label>
             <input type="text" placeholder="Enter Calendar Link" name="link" required>
@@ -68,10 +111,7 @@
         </form>
     </div>
 
-</div>
 
 
 
-
-
-{% endblock %}
+    {% endblock %}
