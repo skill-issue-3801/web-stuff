@@ -122,18 +122,35 @@ h5 {
 
 /*family member form things*/
 
-/* Button used to open the contact form - fixed at the bottom of the page */
+/* Button used to open the add family member form */
 #form-button {
+  font-family: var(--body-font);
   background-color: var(--cambridge-blue);
-  color: var(--mint-green);
+  color: var(--indigo-dye);
   width: 15vw;
   height: 15vw;
-  padding: 16px 20px;
+  padding: 5% 5%;
   border: none;
   border-radius: 25%;
   cursor: pointer;
   transition: 0.4s;
 }
+
+/* Button used to open the add family member form */
+#form-button>p {
+  font-family: var(--body-font);
+  color: var(--mint-green);
+  text-decoration: none;
+}
+
+/* Button used to open the add family member form */
+#form-button:hover>p {
+  font-family: var(--body-font);
+  color: var(--mint-green);
+  text-decoration: underline;
+  text-decoration-color: var(--mint-green);
+}
+
 
 #familyForm {
   transition: 0.4s;
@@ -226,7 +243,7 @@ input[type=radio]:checked {
   outline: none;
 }
 
-/* Set a style for the submit/login button */
+/* Set a style for the button */
 .form-container .btn {
   font-family: var(--body-font);
   color: var(--mint-green);
@@ -234,7 +251,7 @@ input[type=radio]:checked {
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 5%;
 }
 
 /* Add a red background color to the cancel button */
@@ -251,8 +268,8 @@ input[type=radio]:checked {
 #form-button:hover {
   text-decoration: underline;
   font-weight: bold;
+  background-color: var(--sandy-brown);
   transition: 0.4s;
-  background-color: var(--skobeloff);
 }
 
 .navigationBar a:focus {
@@ -276,6 +293,8 @@ input[type=radio]:checked {
   text-decoration: none;
 }
 
+
+
 /* family container stuff here */
 #familyContainer {
   display: flex;
@@ -284,9 +303,76 @@ input[type=radio]:checked {
   flex-direction: row;
 }
 
+.familyMemberContainer {
+  width: 15vw;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  color: var(--indigo-dye);
+}
+
 .familyMember {
   width: 15vw;
   height: 15vw;
-  background-color: var(--sandy-brown);
+  background-color: var(--cambridge-blue);
   border-radius: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.familyMemberContainer:hover {
+  font-weight: bold;
+  transition: 0.4s;
+}
+
+.familyMemberContainer:hover .familyMember{
+  background-color: var(--sandy-brown);
+  transition: 0.4s;
+}
+
+.familyMemberContainer:hover img {
+  transform: scale(1.3) translateY(1.5vh);
+}
+
+.familyMember img {
+  max-height: 25vh;
+  transition: transform .4s;
+}
+
+.manageFamilyBtns {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.manageFamilyBtns button {
+  font-family: var(--body-font);
+  color: var(--mint-green);
+  padding: 5% 1%;
+  border: none;
+  cursor: pointer;
+  width: 4vw;
+}
+
+/* Add a red background color to the cancel button */
+.manageFamilyBtns .deleteFamilyMember {
+  background-color: var(--light-coral);
+}
+
+.manageFamilyBtns .editFamilyMember {
+  background-color: var(--skobeloff);
+}
+
+/* Add some hover effects to buttons */
+.manageFamilyBtns button:hover {
+  text-decoration: underline;
+  font-weight: bold;
+  background-color: var(--sandy-brown);
+  transition: 0.4s;
+  cursor: pointer;
 }
