@@ -8,7 +8,6 @@
     <!-- Base.css is for base.css globals -->
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}">
     <!-- Calendar.css is for calendar view styles only -->
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/calendar.css')}}">
     
 
 </head>
@@ -18,8 +17,16 @@
  -->
 
 <body class="baseContent" >
+    <div>
+        <video autoplay muted loop id="baseWaterBackgroundVideo">
+            <source src="{{url_for('static', filename='graphics/Base_Water_HD.mp4')}}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
     <aside class="navWrapper">
         <nav class="navigationBar">
+            <h1>Guppie's Home</h1>
             <a href="{{url_for('admin.help')}}">Guide</a>
             <a href="{{url_for('admin.add_calendars')}}">Calendar</a>
             <a href="{{url_for('admin.manage_family')}}">Family</a>
@@ -28,8 +35,7 @@
     </aside>
     
     <main class="content">
-        <a href="/">Index page - home</a>
-        <a href="{{url_for('admin.default')}}">the admin page</a>
+        <a href="/">Home</a>
         <a href="{{url_for('calendar.default')}}">Calendar</a>
         {% block content %} {% endblock %}
 

@@ -1,5 +1,18 @@
 /* base.html and it's inheriting files css */
 
+/* Background Video */
+#baseWaterBackgroundVideo{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    object-fit: fill;
+    opacity: 0.8;
+}
+
+
 /* Nav A tag styling */
 .navigationBar a:link {
     color: var(--mint-green);
@@ -39,8 +52,9 @@
     display: flex;
     flex-wrap: nowrap;
     height: 100%;
-    width: 75vw;
+    width: 80vw;
     gap: 3%;
+    margin-top: 5vh;
     justify-content: flex-start;
     align-items: stretch;
     /*flex-wrap being nowrap means align-content has no effect*/
@@ -108,11 +122,15 @@
 
 .content {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-content: space-around;
     padding-left: 1em;
     padding-right: 1em;
     padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
 }
 

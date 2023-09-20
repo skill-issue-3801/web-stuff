@@ -17,7 +17,7 @@
 <body class="baseContent">
     <div>
         <video autoplay muted loop id="waterBackgroundVideo">
-            <source src="{{url_for('static', filename='graphics/Water_HD.mp4')}}" type="video/mp4">
+            <source src="{{url_for('static', filename='graphics/Calendar_Water_HD.mp4')}}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -32,40 +32,40 @@
             <div class="calendarContent">
                 <div class="calendarDays">
                     <div id="timeEmptySpace">
-                        <h4>time</h4>
+                        <p>time</p>
                     </div>
                     <div id="Sunday" class="{{'todayHeader' if today == 0 else ''}}">
-                        <h4>Sunday</h4>
+                        <p>Sunday</p>
                         <p>{{dates[0]}}</p>
                     </div>
 
                     <div id="Monday" class="{{'todayHeader' if today == 1 else ''}}">
-                        <h4>Monday</h4>
+                        <p>Monday</p>
                         <p>{{dates[1]}}</p>
                     </div>
 
                     <div id="Tuesday" class="{{'todayHeader' if today == 2 else ''}}">
-                        <h4>Tuesday</h4>
+                        <p>Tuesday</p>
                         <p>{{dates[2]}}</p>
                     </div>
 
                     <div id="Wednesday" class="{{'todayHeader' if today == 3 else ''}}">
-                        <h4>Wednesday</h4>
+                        <p>Wednesday</p>
                         <p>{{dates[3]}}</p>
                     </div>
 
                     <div id="Thursday" class="{{'todayHeader' if today == 4 else ''}}">
-                        <h4>Thursday</h4>
+                        <p>Thursday</p>
                         <p>{{dates[4]}}</p>
                     </div>
 
                     <div id="Friday" class="{{'todayHeader' if today == 5 else ''}}">
-                        <h4>Friday</h4>
+                        <p>Friday</p>
                         <p>{{dates[5]}}</p>
                     </div>
 
                     <div id="Saturday" class="{{'todayHeader' if today == 6 else ''}}">
-                        <h4>Saturday</h4>
+                        <p>Saturday</p>
                         <p>{{dates[6]}}</p>
                     </div>
                 </div>

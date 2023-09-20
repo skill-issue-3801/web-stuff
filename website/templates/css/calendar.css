@@ -4,9 +4,21 @@
     --row-size: 60px;
     --calendar-width: 96vw;
     --calendar-height: 70vh;
-    
-}
 
+    --column-gap: 10px;
+    --row-gap: 10px;
+
+    
+    --mint-green: #d3f2e9ff;
+    --cambridge-blue: #7ca8a1ff;
+    --skobeloff: #0a7b79ff;
+    --indigo-dye: #1d406bff;
+    --sandy-brown: #f4a363ff;
+    --light-coral: #db767dff;
+
+    --grid-background-colour: rgba(252, 251, 244, 0.3);
+}
+/* ELI SORT OUT SPACING SIZING WITH BIGGER PADDING */
 .content {
     height: 100%;
     display: flex;
@@ -24,6 +36,7 @@
     min-width: 100%;
     min-height: 100%;
     z-index: -1;
+    object-fit: fill;
 }
 
 .calendarViewTopText {
@@ -48,54 +61,46 @@
 .calendarDays div {
     width: 100%;
     text-align: center;
+    justify-self: center;
+    color: var(--light-coral);
+    font-size: 1em;
+    background-color: var(--grid-background-colour);
+}
+
+.calendarDays p {
+    color: white;
 }
 
 /* Calendar days */
 #timeEmptySpace {
-    justify-self: center;
-    background-color: rosybrown;
     grid-area: time;
 }
 
 #Sunday {
-    justify-self: center;
-    background-color: aqua;
     grid-area: Sunday;
 }
 
 #Monday {
-    justify-self: center;
-    background-color: rosybrown;
     grid-area: Monday;
 }
 
 #Tuesday {
-    justify-self: center;
-    background-color: aqua;
     grid-area: Tuesday;
 }
 
 #Wednesday {
-    justify-self: center;
-    background-color: rosybrown;
     grid-area: Wednesday;
 }
 
 #Thursday {
-    justify-self: center;
-    background-color: aqua;
     grid-area: Thursday;
 }
 
 #Friday {
-    justify-self: center;
-    background-color: rosybrown;
     grid-area: Friday;
 }
 
 #Saturday {
-    justify-self: center;
-    background-color: aqua;
     grid-area: Saturday;
 }
 
@@ -108,7 +113,7 @@
   
 .calendarGrid {
     /* Arbitary background colour */
-    background-color: rgba(252, 251, 244, 0.3);
+    background-color: var(--grid-background-colour);
     height: var(--calendar-height);
     overflow-x: hidden;
     overflow-y: auto;
@@ -117,6 +122,8 @@
     overflow-y: scroll;
     font-size: small;
     display: grid;
+    column-gap: var(--column-gap);
+    row-gap: var(--row-gap);
     grid-template-columns: [c00-00] var(--time-coloumn-size) [cSunday] var(--coloumn-size) [cMonday] var(--coloumn-size) [cTuesday] var(--coloumn-size) [cWednesday] var(--coloumn-size) [cThursday] var(--coloumn-size) [cFriday] var(--coloumn-size) [cSaturday] var(--coloumn-size);
     /* Regex for later if below needs to change -- find: \([0-9][0-9]\-[0-9][0-9]\) replace: \[\1\] var\(\-\-row\-size\) */
     grid-template-rows: [r00-00] var(--row-size) [r00-15] var(--row-size) [r00-30] var(--row-size) [r00-45] var(--row-size) [r01-00] var(--row-size) [r01-15] var(--row-size) [r01-30] var(--row-size) [r01-45] var(--row-size) [r02-00] var(--row-size) [r02-15] var(--row-size) [r02-30] var(--row-size) [r02-45] var(--row-size) [r03-00] var(--row-size) [r03-15] var(--row-size) [r03-30] var(--row-size) [r03-45] var(--row-size) [r04-00] var(--row-size) [r04-15] var(--row-size) [r04-30] var(--row-size) [r04-45] var(--row-size) [r05-00] var(--row-size) [r05-15] var(--row-size) [r05-30] var(--row-size) [r05-45] var(--row-size) [r06-00] var(--row-size) [r06-15] var(--row-size) [r06-30] var(--row-size) [r06-45] var(--row-size) [r07-00] var(--row-size) [r07-15] var(--row-size) [r07-30] var(--row-size) [r07-45] var(--row-size) [r08-00] var(--row-size) [r08-15] var(--row-size) [r08-30] var(--row-size) [r08-45] var(--row-size) [r09-00] var(--row-size) [r09-15] var(--row-size) [r09-30] var(--row-size) [r09-45] var(--row-size) [r10-00] var(--row-size) [r10-15] var(--row-size) [r10-30] var(--row-size) [r10-45] var(--row-size) [r11-00] var(--row-size) [r11-15] var(--row-size) [r11-30] var(--row-size) [r11-45] var(--row-size) [r12-00] var(--row-size) [r12-15] var(--row-size) [r12-30] var(--row-size) [r12-45] var(--row-size) [r13-00] var(--row-size) [r13-15] var(--row-size) [r13-30] var(--row-size) [r13-45] var(--row-size) [r14-00] var(--row-size) [r14-15] var(--row-size) [r14-30] var(--row-size) [r14-45] var(--row-size) [r15-00] var(--row-size) [r15-15] var(--row-size) [r15-30] var(--row-size) [r15-45] var(--row-size) [r16-00] var(--row-size) [r16-15] var(--row-size) [r16-30] var(--row-size) [r16-45] var(--row-size) [r17-00] var(--row-size) [r17-15] var(--row-size) [r17-30] var(--row-size) [r17-45] var(--row-size) [r18-00] var(--row-size) [r18-15] var(--row-size) [r18-30] var(--row-size) [r18-45] var(--row-size) [r19-00] var(--row-size) [r19-15] var(--row-size) [r19-30] var(--row-size) [r19-45] var(--row-size) [r20-00] var(--row-size) [r20-15] var(--row-size) [r20-30] var(--row-size) [r20-45] var(--row-size) [r21-00] var(--row-size) [r21-15] var(--row-size) [r21-30] var(--row-size) [r21-45] var(--row-size) [r22-00] var(--row-size) [r22-15] var(--row-size) [r22-30] var(--row-size) [r22-45] var(--row-size) [r23-00] var(--row-size) [r23-15] var(--row-size) [r23-30] var(--row-size) [r23-45] var(--row-size);   
@@ -241,4 +248,9 @@
 
 .todayHeader {
     border-style: solid;
+}
+
+.event {
+    background-color: var(--light-coral);
+    border-radius: 10px;
 }
