@@ -2,5 +2,53 @@
 
 {% block content %}
     <h1>{% block title %} Guide {% endblock %}</h1>
-    <p>This is the page for the user guide.</p>
+    <p> This is the page for the user guide.</p>
+
+    <p> [product name] integrates digital calendars from the 2 most popular calendar platforms, <a href="#google-start">Google Calendar</a> and <a href="#apple-start">Apple/iCalendar<a>. 
+        Both of these platforms allow users to keep a private calendar that they can share read-only access to through a secret URL.</p>
+    <p> This means your calendar is only viewable to you and others you trust to share this secret URL with.</p>
+    <p> We encourage users to follow one of the below tutorial for their preferred online calendar platform to find their secret URL. 
+        This tutorial does not include account creation for any of these platforms.</p>
+    <br>
+    <h1 id="google-start"> Google calendar</h1>
+    <h2 id="google-step-1"> 1. Create a new calendar</h2>
+    <p> If you already have a calendar set up that you want to use for this purpose, please skip to <a href="#google-step-2">step 2</a>.</p>
+    <p> Open google calendar on desktop, in the left column there is a collection of “My Calendars”. To make a new calendar, click 
+        the + sign next to “Other Calendars”, then select “Create new Calendar”. You can name the calendar anything, then select 
+        “Create Calendar”. Afterwards, click the back arrow, and your newly created calendar should appear under “My Calendars”.</p>
+    <img src="{{url_for('static', filename='graphics/guide-google-1.png')}}" style="width:500px; height:auto;">
+    <img src="{{url_for('static', filename='graphics/guide-google-2.png')}}" style="width:500px; height:auto;">
+    
+    <h2 id="google-step-2"> 2. Finding the secret URL</h2>
+    <p> Click the 3 dots beside your calendar, then select “Settings and Sharing”.</p>
+    <img src="{{url_for('static', filename='graphics/guide-google-3.png')}}" style="width:500px; height:auto;">
+    <img src="{{url_for('static', filename='graphics/guide-google-4.png')}}" style="width:500px; height:auto;">
+    <p> Scroll down to the “Integrate Calendar” section, this has a censored URL labelled “Secret address in iCal format”. Click the 
+        copy button on the right side to copy the URL to your clipboard.</p>
+    <p> Google might give a security warning telling you to only give this URL to people you trust. Now you can paste this URL to the 
+        admin portal to attach this calendar to a family member.</p>
+    <img src="{{url_for('static', filename='graphics/guide-google-5.png')}}" style="width:500px; height:auto;">
+    
+    <br>
+    <h1 id="apple-start"> Apple calendar</h1>
+    <h2 id ="apple-step-1"> 1. Create a new calendar</h2>
+    <p> For an Apple Calendar to be shareable it must be on iCloud, so ensure the Calendars app is enabled in your iCloud settings.</p>
+    <p> If you already have a calendar you wish to use of this purpose, please skip to <a href="#apple-step-2">step 2</a>. </p>
+    <p> In the Apple calendar desktop app, click File, then “New Calendar”. You can name your new calendar anything, it should appear 
+        on the left-hand side along with any other calendars you have. </p>
+    <img src="{{url_for('static', filename='graphics/guide-apple-1.png')}}" style="width:500px; height:auto;">
+    <img src="{{url_for('static', filename='graphics/guide-apple-2.png')}}" style="width:500px; height:auto;">
+    
+    <h2 id ="apple-step-2"> 2. Finding the secret URL</h2>
+    <p> When you hover over your calendar, a little person icon should appear, click that, the select “Share Calendar”. </p>
+    <img src="{{url_for('static', filename='graphics/guide-apple-3.png')}}" style="width:500px; height:auto;">
+    <p>Then you will see a checkbox next to the words “Public Calendar”, check this box, then click Done. Although it says 
+        “Allow anyone to subscribe to a read-only version of this calendar”, the only people able to subscribe are those who you 
+        share a link with.</p>
+    <img src="{{url_for('static', filename='graphics/guide-apple-4.png')}}" style="width:500px; height:auto;">
+    <p> When you hover over the calendar and click the person icon again, a URL will now appear. Copy this URL and paste it into 
+        the admin portal to attach it to a family member.</p>        
+    <img src="{{url_for('static', filename='graphics/guide-apple-5.png')}}" style="width:500px; height:auto;">
+ 
+
 {% endblock %}
