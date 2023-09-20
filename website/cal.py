@@ -370,7 +370,14 @@ def get_timecode(date, startEnd):
     if (date.strftime("%H:%M") == "00:00"):
             return("23-45")
     else:
-        return("{}-{}".format(date.strftime("%H"), (str(15 * math.floor(date.minute/15))).zfill(2)))
+        hour = date.hour
+        minute = (15 * math.floor(date.minute/15))
+        if startEnd == 'end' :
+            minute += 15
+            if (minute >= 60):
+                hour += 1
+                minute = minute % 60
+        return("{}-{}".format(str(hour).zfill(2), (str(minute)).zfill(2)))
     
 def adjust_for_midnight(date):
     if (date.strftime("%H:%M") == "00:00"):

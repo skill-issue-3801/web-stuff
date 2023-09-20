@@ -283,3 +283,8 @@
     height: 40px;
     width: auto;
 }
+
+.timeLabel {
+    padding-left:10px;
+
+}
