@@ -8,10 +8,13 @@ function closeForm() {
   document.getElementById("form-button").style.display = "block";
 }
 
-
-function openEditForm() {
+function openEditForm(personName, personEmail, personCaltype, personUrl, personIcon) {
   document.getElementById("editForm").style.display = "block";
   document.getElementById("form-button").style.display = "none";
+  document.getElementById("editName").defaultValue = personName;
+  document.getElementById("editEmail").defaultValue = personEmail;
+  document.getElementById("editUrl").defaultValue = personUrl;
+  document.getElementById(personCaltype).checked = true;
 }
 
 function closeEditForm() {
