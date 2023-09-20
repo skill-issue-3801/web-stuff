@@ -92,33 +92,6 @@
     line-height: 3em;
 }
 
-/* For when it's less than full screen */
-@media (max-width: 600px) {
-    .baseContent {
-        flex-direction: column !important;
-        margin-top: 10vh !important;
-        margin-left: 0 !important;
-    }
-
-    .navWrapper .navigationBar {
-        /*!important because it wasn't being applied :(*/
-        width: 100vw !important;
-        height: 10vh !important;
-        flex-direction: row !important;
-        gap: 0% !important;
-
-    }
-
-    .navigationBar a {
-        /* height: 10vh !important;
-        padding-left: 4vw !important;
-        padding-right: 2vw !important;
-        padding-top: 0 !important;
-        padding-bottom: 0 !important; */
-        width: 25vw !important;
-        line-height: 3em;
-    }
-}
 
 .content {
     height: 100%;
@@ -134,3 +107,33 @@
     border-radius: 10px;
 }
 
+/* For when it's less than full screen */
+@media (max-width: 1000px) {
+    .baseContent {
+        flex-direction: column !important;
+        margin-top: 13vh !important;
+        margin-left: 5vw !important;
+        width: 90vw !important;
+    }
+
+    .navWrapper .navigationBar {
+        /*!important because it wasn't being applied :(*/
+        width: 100vw !important;
+        height: 10vh !important;
+        flex-direction: row !important;
+        gap: 0% !important;
+        justify-content: space-evenly;
+        align-items: center;
+
+    }
+
+    .navigationBar a {
+        /* height: 10vh !important;
+        padding-left: 4vw !important;
+        padding-right: 2vw !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important; */
+        width: 25vw !important;
+        line-height: 3em;
+    }
+}
