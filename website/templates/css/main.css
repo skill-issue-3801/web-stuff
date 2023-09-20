@@ -201,7 +201,6 @@ h5 {
   max-width: 50%;
   justify-content: flex-start;
   align-items: center;
-  cursor: pointer;
   transition: 0.4s;
 }
 
@@ -218,6 +217,7 @@ input[type=radio] {
   border-radius: 50%;
   margin: 1vw;
   transition: 0.2s;
+  cursor: pointer;
 }
 
 input[type=radio]:checked {
