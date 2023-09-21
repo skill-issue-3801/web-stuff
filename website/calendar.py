@@ -71,7 +71,7 @@ def do_update(family, today, hashes):
     for member in family:
         member.eventsHash = hashes[member.name]
         member.userObject = userObjects[member.name]
-    return(json.dumps(calendarise_events(evs)))
+    return(json.dumps(calendarise_events(evs, family)))
 
 
 def log_events(events):

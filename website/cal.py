@@ -334,19 +334,24 @@ def get_email_owner(email, family):
     return None
 
 
-def calendarise_events(events):
+def calendarise_events(events, family):
+    familyMembers = {}
+    for person in family:
+        familyMembers[person.name] = person
+
     parsedEvents = []
     for event in events:
         parsedEvents.append(
-            htmlEvent(event.summary, event.uid, event.attendee, event.start, event.end)
+            htmlEvent(event.summary, event.uid, event.attendee, familyMembers, event.start, event.end)
         )
     return parsedEvents
 
 class htmlEvent(dict):
-    def __init__(self, summary, uid, attendees, start, end):
+    def __init__(self, summary, uid, attendees, family, start, end):
         dict.__init__(self, 
                       summary = summary, 
-                      uid = uid, attendees = list(attendees), 
+                      uid = uid,
+                      attendees = [{"name": a, "icon": family[a].icon} for a in attendees], 
                       start = str(start.strftime("%H:%M")), 
                       end = str(end.strftime("%H:%M")), 
                       colstart = start.strftime('%A'), 

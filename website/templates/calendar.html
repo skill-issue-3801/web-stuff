@@ -26,7 +26,6 @@
        
         <h1 class="calendarViewTopText">Calendar</h1>
         <h1 class="calendarViewTopText" id="datetime">.</h1>
-        <p class="calendarViewTopText">Hi I'm calendar - You shouldn't be able to see me...</p>
        
         <section>
             <div class="calendarContent">
@@ -69,10 +68,7 @@
                         <p>{{dates[6]}}</p>
                     </div>
                 </div>
-                <div class="calendarGrid">
-                    <div id="EVENT1">
-                        <h4>Saturday</h4>
-                    </div>
+                <div class="calendarGrid" id="calendarGridMain">
                 {% for event in events %}
                     <div class="event" id ="{{event['uid']}}div" style = "grid-area: r{{event['rowstart']}} / 
                             a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}}; background-color: aqua;">
@@ -81,8 +77,8 @@
                         <p>End: {{event['end']}}</p>
                         <h4>Attendees:</h4>
                         {% for person in event['attendees'] %}
-                            <img class="icon" src="{{url_for('static', filename=family[person].icon)}}"> 
-                            <p>{{person}}</p>
+                            <img class="icon" src="{{url_for('static', filename=person['icon'])}}"> 
+                            <p>{{person['name']}}</p>
                         {% endfor %}
                     </div>
                 {% endfor %}
