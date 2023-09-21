@@ -17,65 +17,60 @@
 <body class="baseContent">
     <div>
         <video autoplay muted loop id="waterBackgroundVideo">
-            <source src="{{url_for('static', filename='graphics/Calendar_Water_HD.mp4')}}" type="video/mp4">
+            <source src="{{url_for('static', filename='graphics/Base_Water_HD.mp4')}}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
     <main class="content">
-       
-        <h1 class="calendarViewTopText">Calendar</h1>
-        <h1 class="calendarViewTopText" id="datetime">.</h1>
-       
+        <h1 class="calendarViewTopText" id="datetime">.</h1>       
         <section>
             <div class="calendarContent">
                 <div class="calendarDays">
                     <div id="timeEmptySpace">
-                        <h4>time</h4>
+                        <p>time</p>
                     </div>
                     <div id="Sunday" class="{{'todayHeader' if today == 0 else ''}}">
-                        <h4>Sunday</h4>
+                        <p>Sunday</p>
                         <p>{{dates[0]}}</p>
                     </div>
 
                     <div id="Monday" class="{{'todayHeader' if today == 1 else ''}}">
-                        <h4>Monday</h4>
+                        <p>Monday</p>
                         <p>{{dates[1]}}</p>
                     </div>
 
                     <div id="Tuesday" class="{{'todayHeader' if today == 2 else ''}}">
-                        <h4>Tuesday</h4>
+                        <p>Tuesday</p>
                         <p>{{dates[2]}}</p>
                     </div>
 
                     <div id="Wednesday" class="{{'todayHeader' if today == 3 else ''}}">
-                        <h4>Wednesday</h4>
+                        <p>Wednesday</p>
                         <p>{{dates[3]}}</p>
                     </div>
 
                     <div id="Thursday" class="{{'todayHeader' if today == 4 else ''}}">
-                        <h4>Thursday</h4>
+                        <p>Thursday</p>
                         <p>{{dates[4]}}</p>
                     </div>
 
                     <div id="Friday" class="{{'todayHeader' if today == 5 else ''}}">
-                        <h4>Friday</h4>
+                        <p>Friday</p>
                         <p>{{dates[5]}}</p>
                     </div>
 
                     <div id="Saturday" class="{{'todayHeader' if today == 6 else ''}}">
-                        <h4>Saturday</h4>
+                        <p>Saturday</p>
                         <p>{{dates[6]}}</p>
                     </div>
                 </div>
                 <div class="calendarGrid" id="calendarGridMain">
                 {% for event in events %}
                     <div class="event" id ="{{event['uid']}}div" style = "grid-area: r{{event['rowstart']}} / 
-                            a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}}; background-color: aqua;">
-                        <h4>Summary: {{event['summary']}}</h4>
-                        <p>Start: {{event['start']}}</p>
-                        <p>End: {{event['end']}}</p>
-                        <h4>Attendees:</h4>
+                            a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}};">
+                        <p id="eventHeading">{{event['summary']}}</p>
+                        <p>{{event['start']}} - {{event['end']}}</p>
                         {% for person in event['attendees'] %}
                             <img class="icon" src="{{url_for('static', filename=person['icon'])}}"> 
                             <p>{{person['name']}}</p>

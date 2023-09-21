@@ -1,6 +1,7 @@
 import json 
+import math
 import validators
-from datetime import timedelta
+from datetime import timedelta, datetime
 from icalevents import icalevents, icalparser
 
 accepted_calendars = ["google", "apple"]
@@ -341,23 +342,32 @@ def calendarise_events(events, family):
 
     parsedEvents = []
     for event in events:
-        parsedEvents.append(
-            htmlEvent(event.summary, event.uid, event.attendee, familyMembers, event.start, event.end)
-        )
+        
+        manstart = event.start
+        
+        while(manstart.date() <= event.end.date()):
+            if ((manstart.date() == event.end.date()) or 
+                    (event.end == ((event.start + timedelta(days=1)).replace(hour=0, minute=0)))):
+                parsedEvents.append(htmlEvent(event.summary, event.uid, event.attendee, familyMembers, event.start, event.end, manstart, event.end))
+                break
+            else:
+                manualEnd = (event.start - timedelta(days=1)).replace(hour=23, minute=59)
+                parsedEvents.append(htmlEvent(event.summary, event.uid, event.attendee, familyMembers, event.start, event.end, manstart, manualEnd))
+                manstart = (event.start + timedelta(days=1)).replace(hour=00, minute=1)
     return parsedEvents
 
 class htmlEvent(dict):
-    def __init__(self, summary, uid, attendees, family, start, end):
+    def __init__(self, summary, uid, attendees, family, start, end, gridStart, gridEnd):
         dict.__init__(self, 
                       summary = summary, 
                       uid = uid,
                       attendees = [{"name": a, "icon": family[a].icon} for a in attendees], 
                       start = str(start.strftime("%H:%M")), 
                       end = str(end.strftime("%H:%M")), 
-                      colstart = start.strftime('%A'), 
-                      colend = adjust_for_midnight(end), 
-                      rowstart = get_timecode(start, 'start'), 
-                      rowend = get_timecode(end, 'end'))
+                      colstart = gridStart.strftime('%A'), 
+                      colend = adjust_for_midnight(gridEnd), 
+                      rowstart = get_timecode(gridStart, 'start'), 
+                      rowend = get_timecode(gridEnd, 'end'))
         
 
 
@@ -365,10 +375,10 @@ def get_timecode(date, startEnd):
     if (date.strftime("%H:%M") == "00:00"):
             return("23-45")
     else:
-        return("{}-{}".format(date.strftime("%H"), (str(15 * round(date.minute/15))).zfill(2)))
+        return("{}-{}".format(date.strftime("%H"), (str(15 * math.floor(date.minute/15))).zfill(2)))
     
 def adjust_for_midnight(date):
     if (date.strftime("%H:%M") == "00:00"):
-        return((date-timedelta(days=1)).strftime("%A"))
+        return((date - timedelta(days=1)).strftime("%A"))
     else:
         return (date.strftime('%A'))
