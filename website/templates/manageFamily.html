@@ -45,7 +45,7 @@
             <h1>Edit Family Member</h1>
 
             <input type="hidden" name="formName" value="editFamilyMember">
-            <input type="hidden" name="personName" value="">
+            <input type="hidden" id = "personName" name="personName" value="">
             <label for="name"><b>Name:</b></label>
             <input id="editName" type="text" placeholder="member.name" name="name" required>
             <br>
@@ -65,6 +65,33 @@
                     <input type="radio" id="apple" name="calendarType" value="apple" required>
                     <label for="apple">Apple</label>
                 </div>
+            </div>
+            <b>Icon:</b>
+            <div class="radio-button-container iconSelect">
+                <label>
+                    <input type="radio" name="icon" id="graphics/ocean-icons/Slug_1.png" value="graphics/ocean-icons/Slug_1.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_1.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" id="graphics/ocean-icons/Slug_2.png" value="graphics/ocean-icons/Slug_2.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_2.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" id="graphics/ocean-icons/Slug_3.png" value="graphics/ocean-icons/Slug_3.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_3.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" id="graphics/ocean-icons/Slug_4.png" value="graphics/ocean-icons/Slug_4.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_4.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" id="graphics/ocean-icons/Slug_5.png" value="graphics/ocean-icons/Slug_5.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_5.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" id="graphics/ocean-icons/Slug_6.png" value="graphics/ocean-icons/Slug_6.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_6.png")}}">
+                </label>
             </div>
             <br>
 
@@ -102,6 +129,33 @@
                     <input type="radio" id="apple" name="calendarType" value="apple" required>
                     <label for="apple">Apple</label>
                 </div>
+            </div>
+            <b>Icon:</b>
+            <div class="radio-button-container iconSelect">
+                <label>
+                    <input type="radio" name="icon" value="graphics/ocean-icons/Slug_1.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_1.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" value="graphics/ocean-icons/Slug_2.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_2.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" value="graphics/ocean-icons/Slug_3.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_3.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" value="graphics/ocean-icons/Slug_4.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_4.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" value="graphics/ocean-icons/Slug_5.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_5.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" value="graphics/ocean-icons/Slug_6.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_6.png")}}">
+                </label>
             </div>
             <br>
 
