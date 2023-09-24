@@ -5,6 +5,13 @@ async function update() {
 }
 async function updateTimeData () {
     const now = new Date();
+    /* update co-ordinates for wave */
+    hour = (now.getHours()).toString().padStart(2, '0');
+    minutes = ((15 * (Math.floor(now.getMinutes()/15))).toString()).padStart(2, '0');
+    coordinates = `r${hour}-${minutes} / cSunday / r${hour}-${minutes} / c-1`;
+    document.getElementById("currentTime").style["gridArea"] = coordinates;
+
+    /* now do date and time up top*/
     const day = now.toLocaleString('en-GB', {day: 'numeric'});
     switch (day % 10) {
         case 1:

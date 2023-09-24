@@ -332,7 +332,7 @@ def get_timecode(date, startEnd):
         if startEnd == 'start':
             return("00-00")
         else:
-            return("24-15")
+            return("-1")
     else:
         hour = date.hour
         minute = (15 * math.floor(date.minute/15))

@@ -66,6 +66,7 @@
                     </div>
                 </div>
                 <div class="calendarGrid">
+                    <div id = "currentTime" style = "grid-area: r00-00 / cSunday / r-00-00 / c-1;">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
                     <div class = "timeLabel" style = "grid-area: r00-00 / c00-00 / r01-00 / c00-00;"><p>12:00 AM</p></div>
                     <div class = "timeLabel" style = "grid-area: r01-00 / c00-00 / r02-00 / c00-00;"><p>1:00 AM</p></div>
                     <div class = "timeLabel" style = "grid-area: r02-00 / a00-00 / r03-00 / a00-00;"><p>2:00 AM</p></div>
@@ -89,8 +90,7 @@
                     <div class = "timeLabel" style = "grid-area: r20-00 / a00-00 / r21-00 / a00-00;"><p>8:00 PM</p></div>
                     <div class = "timeLabel" style = "grid-area: r21-00 / a00-00 / r22-00 / a00-00;"><p>9:00 PM</p></div>
                     <div class = "timeLabel" style = "grid-area: r22-00 / a00-00 / r23-00 / a00-00;"><p>10:00 PM</p></div>
-                    <div class = "timeLabel" style = "grid-area: r23-00 / a00-00 / r24-00 / a00-00;"><p>11:00 PM</p></div>
-                    <div class = "timeLabel" style = "grid-area: r24-00 / a00-00 / r25-00 / a00-00;"><p>12:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r23-00 / a00-00 / r-1 / a00-00;"><p>11:00 PM</p></div>
                     {% for event in events %}
                         <div class="event" id ="{{event['uid']}}div" style = "grid-area: r{{event['rowstart']}} / 
                                 a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}};">
