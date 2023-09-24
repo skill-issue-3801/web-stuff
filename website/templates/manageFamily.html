@@ -2,8 +2,7 @@
 
 {% block content %}
 <h1>{% block title %} Family {% endblock %}</h1>
-<p>This is the page for family member setup.<br>
-    e.g. add and remove family members, get name and gmail, calendar type as radio buttons</p>
+<p>Edit, add and remove family members here.<br></p>
 
 <div id="familyContainer">
     <!--family member icons w names above them and edit and delete buttons below them-->
@@ -43,18 +42,14 @@
     <div class="form-popup" id="editForm">
         <form action="" class="form-container" method="POST">
             <h1>Edit Family Member</h1>
-
             <input type="hidden" name="formName" value="editFamilyMember">
             <input type="hidden" id = "personName" name="personName" value="">
             <label for="name"><b>Name:</b></label>
             <input id="editName" type="text" placeholder="member.name" name="name" required>
-            <br>
             <label for="email"><b>Email:</b></label>
             <input id="editEmail" type="email" placeholder="member.email" name="email">
-            <br>
             <label for="link"><b>Calendar Link:</b></label>
             <input id="editUrl" type="text" placeholder="member.url" name="link" onchange="updateRequirements('editUrl', 'editGoogle');">
-            <br>
             <b>Calendar Type:</b>
             <div class="radio-button-container">
                 <div class="radio-button-and-label">
@@ -108,17 +103,13 @@
     <div class="form-popup" id="familyForm">
         <form action="" class="form-container" method="POST">
             <h1>Add Family Member</h1>
-
             <input type="hidden" name="formName" value="addFamilyMember">
             <label for="name"><b>Name:</b></label>
             <input type="text" placeholder="Enter Name" name="name" required>
-            <br>
             <label for="email"><b>Email:</b></label>
             <input type="email" placeholder="Enter Email" name="email">
-            <br>
             <label for="link"><b>Calendar Link:</b></label>
             <input type="text" id="addUrl" placeholder="Enter Calendar Link" name="link" onchange="updateRequirements('addUrl', 'addGoogle');">
-            <br>
             <b>Calendar Type:</b>
             <div class="radio-button-container">
                 <div class="radio-button-and-label">
@@ -158,8 +149,6 @@
                 </label>
             </div>
             <br>
-
-            <!--icon choices here, more complicated so I'm doing them last-->
 
             <button type="submit" class="btn confirm" method="POST">Confirm</button>
             <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
