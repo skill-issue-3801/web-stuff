@@ -17,17 +17,13 @@
 <body class="baseContent">
     <div>
         <video autoplay muted loop id="waterBackgroundVideo">
-            <source src="{{url_for('static', filename='graphics/Calendar_Water_HD.mp4')}}" type="video/mp4">
+            <source src="{{url_for('static', filename='graphics/Base_Water_HD.mp4')}}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
     <main class="content">
-       
-        <h1 class="calendarViewTopText">Calendar</h1>
-        <h1 class="calendarViewTopText" id="datetime">.</h1>
-        <p class="calendarViewTopText">Hi I'm calendar - You shouldn't be able to see me...</p>
-       
+        <h1 class="calendarViewTopText" id="datetime">.</h1>       
         <section>
             <div class="calendarContent">
                 <div class="calendarDays">
@@ -70,22 +66,42 @@
                     </div>
                 </div>
                 <div class="calendarGrid">
-                    <div id="EVENT1">
-                        <h4>Saturday</h4>
-                    </div>
-                {% for event in events %}
-                    <div class="event {{event['uid']}}div" style = "grid-area: r{{event['rowstart']}} / 
-                            a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}}; background-color: aqua;">
-                        <h4>Summary: {{event['summary']}}</h4>
-                        <p>Start: {{event['start']}}</p>
-                        <p>End: {{event['end']}}</p>
-                        <h4>Attendees:</h4>
-                        {% for person in event['attendees'] %}
-                            <img class="icon" src="{{url_for('static', filename=family[person].icon)}}"> 
-                            <p>{{person}}</p>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
+                    <div id = "currentTime" style = "grid-area: r00-00 / cSunday / r-00-00 / c-1;">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
+                    <div class = "timeLabel" style = "grid-area: r00-00 / c00-00 / r01-00 / c00-00;"><p>12:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r01-00 / c00-00 / r02-00 / c00-00;"><p>1:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r02-00 / a00-00 / r03-00 / a00-00;"><p>2:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r03-00 / a00-00 / r04-00 / a00-00;"><p>3:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r04-00 / a00-00 / r05-00 / a00-00;"><p>4:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r05-00 / a00-00 / r06-00 / a00-00;"><p>5:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r06-00 / a00-00 / r07-00 / a00-00;"><p>6:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r07-00 / a00-00 / r08-00 / a00-00;"><p>7:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r08-00 / a00-00 / r09-00 / a00-00;"><p>8:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r09-00 / a00-00 / r10-00 / a00-00;"><p>9:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r10-00 / a00-00 / r11-00 / a00-00;"><p>10:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r11-00 / a00-00 / r12-00 / a00-00;"><p>11:00 AM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r12-00 / c00-00 / r13-00 / c00-00;"><p>12:00 PM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r13-00 / c00-00 / r14-00 / c00-00;"><p>1:00 PM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r14-00 / a00-00 / r15-00 / a00-00;"><p>2:00 PM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r15-00 / a00-00 / r16-00 / a00-00;"><p>3:00 PM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r16-00 / a00-00 / r17-00 / a00-00;"><p>4:00 PM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r17-00 / a00-00 / r18-00 / a00-00;"><p>5:00 PM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r18-00 / a00-00 / r19-00 / a00-00;"><p>6:00 PM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r19-00 / a00-00 / r20-00 / a00-00;"><p>7:00 PM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r20-00 / a00-00 / r21-00 / a00-00;"><p>8:00 PM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r21-00 / a00-00 / r22-00 / a00-00;"><p>9:00 PM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r22-00 / a00-00 / r23-00 / a00-00;"><p>10:00 PM</p></div>
+                    <div class = "timeLabel" style = "grid-area: r23-00 / a00-00 / r-1 / a00-00;"><p>11:00 PM</p></div>
+                    {% for event in events %}
+                        <div class="event" id ="{{event['uid']}}div" style = "grid-area: r{{event['rowstart']}} / 
+                                a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}};">
+                            <p id="eventHeading">{{event['summary']}}</p>
+                            <p>{{event['start']}} - {{event['end']}}</p>
+                            {% for person in event['attendees'] %}
+                                <img class="icon" src="{{url_for('static', filename=family[person].icon)}}"> 
+                                <p>{{person}}</p>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
 
 
                     <!-- Time rows -->

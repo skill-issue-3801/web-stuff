@@ -396,8 +396,20 @@ input[type=radio]:checked {
   cursor: pointer;
 }
 
+/* hi ali! this is the stuff for icon selection radio buttons. it looks nicer if the radio buttons
+are hidden but this also hides the "required" error message, up to you if you wanna just leave it 
+as-is or find some way to hide them that doesn't hide the message*/
+.iconSelect input[type="radio"] {
+  /*display: none;*/
+}
+.iconSelect input[type="radio"]:checked + img {
+  background-color: var(--sandy-brown);
+}
 
-
+.iconSelect img {
+  width: 10vw;
+  height: 10vw;
+}
 
 
 

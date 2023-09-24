@@ -67,26 +67,30 @@ def family_post(db_session, globals):
 
 def add_family_member(db_session):
     name = request.form.get("name")
-
-    link = request.form.get("link")
-    caltype = request.form.get("calendarType")
-    if not is_valid_url(link, caltype):
-        logging.warning("invalid url")
-        return
-    if request.form.get("email") == "":
-        email = None
-    else:
-        email = request.form.get("email")
     if db_session.query(FamilyMember).filter_by(name=name).first():
         logging.warning("that name is already being used")
+        return
+    
+    link = request.form.get("link")
+    caltype = request.form.get("calendarType")
+    if link == "":
+        link = None
+    elif not is_valid_url(link, caltype):
+        logging.warning("invalid url")
         return
     if db_session.query(FamilyMember).filter_by(url=link).first():
         logging.warning("that url is already being used")
         return
+    
+    if request.form.get("email") == "":
+        email = None
+    else:
+        email = request.form.get("email")
     if email != None and db_session.query(FamilyMember).filter_by(email=email).first():
         logging.warning("that email is already being used")
         return
-    icon = "/graphics/fish.png"
+
+    icon = request.form.get("icon")
     eventsHash = 0
     userObject = User(name, link, caltype, email)
     column = FamilyMember(
@@ -102,7 +106,20 @@ def add_family_member(db_session):
 
 
 def edit_family_member(db_session):
-    logging.warning("i dont know how to do this yet")
+    originalName = request.form.get("personName")
+    name = request.form.get("name")
+    link = request.form.get("link")
+    caltype = request.form.get("calendarType")
+    if not is_valid_url(link, caltype):
+        logging.warning("invalid url")
+        return
+    if request.form.get("email") == "":
+        email = None
+    else:
+        email = request.form.get("email")
+        
+    person = db_session.query(FamilyMember).get(originalName)
+    logging.warning("i dont know how to do this yet")  
 
 
 def delete_family_member(db_session):

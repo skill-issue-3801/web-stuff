@@ -26,7 +26,6 @@ def default(db_session, globals):
     today = datetime.utcnow().replace(tzinfo=pytz.utc).date()
     hashes = {}
     anyChanges = check_for_update(family, today, hashes)
-    
     if anyChanges or globals.familyChanges:
         jsonfile = do_update(family, today, hashes)
         globals.set_events(json.loads(jsonfile))
@@ -49,12 +48,15 @@ def default(db_session, globals):
 def check_for_update(family, today, hashes):
     anyChanges = False
     for member in family:
-        newHash = check_cal_for_updates(member.url, member.calendarType, member.eventsHash, today)
-        if newHash == False:
-            hashes[member.name] = member.eventsHash
+        if member.url != None:
+            newHash = check_cal_for_updates(member.url, member.calendarType, member.eventsHash, today)
+            if newHash == False:
+                hashes[member.name] = member.eventsHash
+            else:
+                hashes[member.name] = newHash
+                anyChanges = True
         else:
-            hashes[member.name] = newHash
-            anyChanges = True
+            hashes[member.name] = member.eventsHash
     return anyChanges
 
 def do_update(family, today, hashes):

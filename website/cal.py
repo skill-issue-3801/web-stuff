@@ -4,7 +4,7 @@ import validators
 from datetime import timedelta, datetime
 from icalevents import icalevents, icalparser
 
-accepted_calendars = ["google", "apple"]
+accepted_calendars = ["google", "apple", "none"]
 weekdays = {
     0: "Sunday",
     1: "Monday",
@@ -31,16 +31,22 @@ class User:
         _my_event_uids (list of str): the unique id of all events thsi user is attending
     """
 
-    def __init__(self, name, calendar_link, caltype, email=None):
+    def __init__(self, name, calendar_link, caltype, email):
         self._name = name
+        
         self._calendar_link = calendar_link
-        self._caltype = caltype
-        if email and email[0:7] != "mailto:":
+        if calendar_link == None:
+            self._caltype = "none"
+        else:
+            self._caltype = caltype
+           
+        if email != None:
             self._email = "mailto:" + email
         else:
-            self._email = email
+            self._email = None
+            
         self._event_list = []
-        self._events_hash = 0
+        self._events_hash = -1
         self._my_event_uids = []
 
     def get_name(self):
@@ -102,48 +108,12 @@ def is_valid_url(url, caltype):
     else:
         return False
 
-
 def events_get_hash(events):
     hashstr = ""
     for event in events:
         hashstr += str(event)
         hashstr += str(event.description)
     return hash(hashstr)
-
-
-def add_user(names, urls, emails, name, caltype, url, email=None):
-    if name in names:
-        print("Sorry, a user by that name already exists. Names must be unique")
-        return False
-
-    if url in urls:
-        print(
-            "Sorry, another user is already using that calendar! Everyone must have their own calendar"
-        )
-        return False
-
-    if email and email in emails:
-        print("Sorry, a user is already associated with this email: ", email)
-        return False
-
-    if caltype not in accepted_calendars:
-        print("Sorry, ", caltype, " is not an accepted calendar type")
-        return False
-
-    if (caltype == "google" and not is_google_url(url)) or (
-        caltype == "apple" and not is_apple_url(url)
-    ):
-        print("Sorry, that is not a valid ", caltype, " calendar url")
-        return False
-
-    if email != None and not validators.email(email.strip()):
-        print("Sorry, that is not a valid email address")
-        return False
-
-    newUser = User(name, url.strip(), caltype, email)
-    print("added ", name)
-    return newUser
-
 
 def update_user_email(names, emails, name, newEmail, user):
     if not name in names:
@@ -161,7 +131,6 @@ def update_user_email(names, emails, name, newEmail, user):
     user.set_email(newEmail.strip())
     return True
 
-
 def update_user_cal_link(names, urls, name, newLink, caltype, user):
     if not name in names:
         print("There is no user by the name ", name, "to edit")
@@ -172,21 +141,10 @@ def update_user_cal_link(names, urls, name, newLink, caltype, user):
         return False
 
     if caltype in accepted_calendars:
-        if (caltype == "google" and is_google_url(newLink)) or (
-            caltype == "apple" and is_apple_url(newLink)
-        ):
-            # acceptable, update their cal and return them
-            user.set_link(newLink, caltype)
-            return True
-        else:
-            print("Sorry, ", newLink, "is not a valid ", caltype, "calendar url")
-            return False
+        user.set_link(newLink, caltype)
+        return True
     else:
-        print(
-            "Sorry, ",
-            caltype,
-            " is not an accepted calendar type, must be 'apple' or 'google'",
-        )
+        print("Sorry, ", caltype, " is not an accepted calendar type, must be 'apple', 'google', or 'none'")
         return False
 
 
@@ -223,6 +181,8 @@ def edges_of_week(today):
 
 def check_cal_for_updates(url, caltype, hash, today):
     start, end  = edges_of_week(today)
+    if url == None:
+        return False
     evs = icalevents.events(
         url=url,
         start = start, 
@@ -239,14 +199,15 @@ def check_cal_for_updates(url, caltype, hash, today):
 def update_events(family, today, hashes, names, emails):
     return_events = []
     for member in family:
-        if hashes[member.get_name()] == member.get_hash():
-            # their events have not chnaged, we will still check if they attend anything though
+        if (member.get_link() == None):
+            # they dont have their own calendar, all their events will be added via other people
+            continue
+        elif hashes[member.get_name()] == member.get_hash():
+            # their events have not changed, we will still check if they attend anything though
             return_events.extend(member.get_events())
         else:
-            # their evenys have changed somehow, reprocess
-            member.set_hash(
-                hashes[member.get_name()]
-            )  # record hash of events before processing
+            # their events have changed somehow, reprocess
+            member.set_hash(hashes[member.get_name()])  # record hash of events before processing
             start, end  = edges_of_week(today)
             evs = icalevents.events(
                 url=member.get_link(),
@@ -343,11 +304,11 @@ def calendarise_events(events):
         
         while(manstart.date() <= event.end.date()):
             if ((manstart.date() == event.end.date()) or 
-                    (event.end == ((event.start + timedelta(days=1)).replace(hour=0, minute=0)))):
+                    (event.end == ((event.start + timedelta(days=1)).replace(hour=00, minute=00)))):
                 parsedEvents.append(htmlEvent(event.summary, event.uid, event.attendee, event.start, event.end, manstart, event.end))
                 break
             else:
-                manualEnd = (event.start - timedelta(days=1)).replace(hour=23, minute=59)
+                manualEnd = (event.start).replace(hour=00, minute=00)
                 parsedEvents.append(htmlEvent(event.summary, event.uid, event.attendee, event.start, event.end, manstart, manualEnd))
                 manstart = (event.start + timedelta(days=1)).replace(hour=00, minute=1)
     return parsedEvents
@@ -368,9 +329,19 @@ class htmlEvent(dict):
 
 def get_timecode(date, startEnd):
     if (date.strftime("%H:%M") == "00:00"):
-            return("23-45")
+        if startEnd == 'start':
+            return("00-00")
+        else:
+            return("-1")
     else:
-        return("{}-{}".format(date.strftime("%H"), (str(15 * math.floor(date.minute/15))).zfill(2)))
+        hour = date.hour
+        minute = (15 * math.floor(date.minute/15))
+        if startEnd == 'end' :
+            minute += 15
+            if (minute >= 60):
+                hour += 1
+                minute = minute % 60
+        return("{}-{}".format(str(hour).zfill(2), (str(minute)).zfill(2)))
     
 def adjust_for_midnight(date):
     if (date.strftime("%H:%M") == "00:00"):
