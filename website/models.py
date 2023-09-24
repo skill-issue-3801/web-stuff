@@ -15,8 +15,8 @@ class FamilyMember(Base):
     __tablename__ = "familyMembers"
 
     name = Column("name", String, primary_key=True)
-    url = Column("url", String, unique=True, nullable=False)
-    calendarType = Column("calendarType", String, nullable=False)
+    url = Column("url", String, unique=True, nullable=True)
+    calendarType = Column("calendarType", String, nullable=True)
     email = Column("email", String, nullable=True, unique=True)
     # string for path to icon image
     icon = Column("icon", String, nullable=True)

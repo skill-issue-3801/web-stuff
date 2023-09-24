@@ -73,7 +73,9 @@ def add_family_member(db_session):
     
     link = request.form.get("link")
     caltype = request.form.get("calendarType")
-    if not is_valid_url(link, caltype):
+    if link == "":
+        link = None
+    elif not is_valid_url(link, caltype):
         logging.warning("invalid url")
         return
     if db_session.query(FamilyMember).filter_by(url=link).first():
