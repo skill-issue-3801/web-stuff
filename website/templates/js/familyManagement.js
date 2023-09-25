@@ -10,6 +10,7 @@ function closeForm() {
 
 function openEditForm(personName, personEmail, personCaltype, personUrl, personIcon) {
   document.getElementById("edit_form").reset();
+  document.getElementById("personName").value = personName;
   document.getElementById("editForm").style.display = "block";
   document.getElementById("form-button").style.display = "none";
   document.getElementById("editName").defaultValue = personName;
@@ -58,6 +59,14 @@ function validateForm(whichForm) {
   else if (type == 'google' && 
       ((url.slice(0, 42) != "https://calendar.google.com/calendar/ical/") || (url.slice(-10) != "/basic.ics"))) {
     alert("That is not a valid Google calendar url, please use the guides to find your correct url")
+  }
+
+  if (whichForm == "editForm") {
+    var originalName = document.forms[whichForm]["personName"].value;
+    var newName = document.forms[whichForm]["name"].value;
+    if (originalName != newName) {
+      alert("You have changed '" + originalName + "'s' name to '" + newName + "'. Be sure to update their name to '" + newName + "' anywhere they have been added by name in anybody else's calendar for them to appear in group events")
+    }
   }
 }
 
