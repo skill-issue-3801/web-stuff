@@ -46,7 +46,7 @@ function updateRequirements(urlId, typeId) {
   }
 }
 
-function validateUrl(whichForm) {
+function validateForm(whichForm) {
   var url = document.forms[whichForm]["link"].value;
   var type = document.forms[whichForm]["calendarType"].value;
   if (url == "") {

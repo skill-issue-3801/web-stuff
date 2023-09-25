@@ -93,7 +93,7 @@ def add_family_member(db_session):
     icon = request.form.get("icon")
     eventsHash = 0
     userObject = User(name, link, caltype, email)
-    column = FamilyMember(
+    row = FamilyMember(
         name=name,
         url=link,
         calendarType=caltype,
@@ -102,7 +102,7 @@ def add_family_member(db_session):
         eventsHash=eventsHash,
         userObject=userObject,
     )
-    db_session.add(column)
+    db_session.add(row)
 
 
 def edit_family_member(db_session):
@@ -119,10 +119,29 @@ def edit_family_member(db_session):
         email = None
     else:
         email = request.form.get("email")
-        
+    icon = request.form.get("icon")   
+    
     person = db_session.query(FamilyMember).get(originalName)
-    logging.warning("i dont know how to do this yet")  
-
+    userObject = User(name, link, caltype, email)
+    # this still doesn't work!!! maye i will just not allow name change
+    if originalName != name:
+        logging.warning("change name")
+        userObject.name = name
+    
+    if (email != person.email):
+        logging.warning("change email address")
+        person.email = email
+    if (link != person.url):
+        logging.warning("change url")
+        person.url = link
+        person.calendarType = caltype
+    if (icon != person.icon):
+        logging.warning("change icon")
+        person.icon = icon
+    person.userObject = userObject
+        
+    
+    
 
 def delete_family_member(db_session):
     name = request.form["submit"]

@@ -40,7 +40,7 @@
 
     <!-- The edit form -->
     <div class="form-popup" id="editForm">
-        <form action="" name="editForm" class="form-container" method="POST" id="edit_form" onsubmit="return validateUrl('editForm')">
+        <form action="" name="editForm" class="form-container" method="POST" id="edit_form" onsubmit="return validateForm('editForm')">
             <h1>Edit Family Member</h1>
             <input type="hidden" name="formName" value="editFamilyMember">
             <input type="hidden" id = "personName" name="personName" value="">
@@ -100,7 +100,7 @@
 
     <!-- The add form -->
     <div class="form-popup" id="familyForm">
-        <form name="addForm" action="" class="form-container" method="POST" onsubmit="validateUrl('addForm')">
+        <form name="addForm" action="" class="form-container" method="POST" onsubmit="return validateForm('addForm')">
             <h1>Add Family Member</h1>
             <input type="hidden" name="formName" value="addFamilyMember">
             <label for="name"><b>Name:</b></label>
