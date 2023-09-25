@@ -78,7 +78,7 @@ def add_family_member(db_session):
     elif not is_valid_url(link, caltype):
         logging.warning("invalid url")
         return
-    if db_session.query(FamilyMember).filter_by(url=link).first():
+    elif db_session.query(FamilyMember).filter_by(url=link).first():
         logging.warning("that url is already being used")
         return
     
