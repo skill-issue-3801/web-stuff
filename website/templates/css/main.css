@@ -424,6 +424,22 @@ as-is or find some way to hide them that doesn't hide the message*/
 
 /*media queries*/
 @media only screen and (max-width: 1000px) {
+  h1 {
+    font-size: 2.3em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+  h3 {
+    font-size: 1.4em;
+  }
+  h4 {
+    font-size: 1.3em;
+  }
+  h5 {
+    font-size: 1.2em;
+  }
   body {
     font-size: 1.7em;
   }
@@ -493,3 +509,22 @@ as-is or find some way to hide them that doesn't hide the message*/
   }  
 
 }
+
+.guideTabLinksSelectedBorder {
+  border-bottom: 0.5vh solid var(--sandy-brown);
+}
+
+.guide-tab-link:hover {
+  background-color: darkgray !important;
+}
+
+#guide-tab-nav {
+  background-color: var(--mint-green);
+  padding: 2%;
+  display: flex;
+}
+
+#guide-tab-nav a{
+  padding-left: 2%;
+}
+
