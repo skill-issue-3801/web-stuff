@@ -14,7 +14,12 @@ function openEditForm(personName, personEmail, personCaltype, personUrl, personI
   document.getElementById("editName").defaultValue = personName;
   document.getElementById("editEmail").defaultValue = personEmail;
   document.getElementById("editUrl").defaultValue = personUrl;
-  document.getElementById(personCaltype).checked = true;
+  if (personCaltype == 'google') {
+    document.getElementById("editGoogle").checked = true;
+  }
+  if (personCaltype == 'apple') {
+    document.getElementById("editApple").checked = true;
+  }
   document.getElementById("personName").value = personName;
   document.getElementById(personIcon).checked = true;
 }
