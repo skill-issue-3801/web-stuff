@@ -65,7 +65,7 @@
                         <p>{{dates[6]}}</p>
                     </div>
                 </div>
-                <div class="calendarGrid">
+                <div class="calendarGrid" id="calendarGridMain">
                     <div id = "currentTime" style = "grid-area: r00-00 / cSunday / r-00-00 / c-1;">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
                     <div class = "timeLabel" style = "grid-area: r00-00 / c00-00 / r01-00 / c00-00;"><p>12:00 AM</p></div>
                     <div class = "timeLabel" style = "grid-area: r01-00 / c00-00 / r02-00 / c00-00;"><p>1:00 AM</p></div>
@@ -97,8 +97,8 @@
                             <p id="eventHeading">{{event['summary']}}</p>
                             <p>{{event['start']}} - {{event['end']}}</p>
                             {% for person in event['attendees'] %}
-                                <img class="icon" src="{{url_for('static', filename=family[person].icon)}}"> 
-                                <p>{{person}}</p>
+                                <img class="icon" src="{{url_for('static', filename=person['icon'])}}"> 
+                                <p>{{person['name']}}</p>
                             {% endfor %}
                         </div>
                     {% endfor %}

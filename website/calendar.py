@@ -30,26 +30,33 @@ def default(db_session, globals):
         jsonfile = do_update(family, today, hashes)
         globals.set_events(json.loads(jsonfile))
         db_session.commit()
-    
+
     globals.familyChanges = False
     anyChanges = False
     log_events(globals.events)
     familyMembers = {}
     for person in family:
         familyMembers[person.name] = person
-    firstDay = today - timedelta(days = ((today.weekday() + 1) % 7))
+    firstDay = today - timedelta(days=((today.weekday() + 1) % 7))
     dates = []
-    for i in range (0, 7):
-        dates.append((firstDay + timedelta (days=i)).strftime('%d'))
-    return render_template("calendar.html", events=globals.events, family=familyMembers, 
-            dates = dates, today = (today.weekday() + 1) % 7)
+    for i in range(0, 7):
+        dates.append((firstDay + timedelta(days=i)).strftime("%d"))
+    return render_template(
+        "calendar.html",
+        events=globals.events,
+        family=familyMembers,
+        dates=dates,
+        today=(today.weekday() + 1) % 7,
+    )
 
 
 def check_for_update(family, today, hashes):
     anyChanges = False
     for member in family:
         if member.url != None:
-            newHash = check_cal_for_updates(member.url, member.calendarType, member.eventsHash, today)
+            newHash = check_cal_for_updates(
+                member.url, member.calendarType, member.eventsHash, today
+            )
             if newHash == False:
                 hashes[member.name] = member.eventsHash
             else:
@@ -59,10 +66,11 @@ def check_for_update(family, today, hashes):
             hashes[member.name] = member.eventsHash
     return anyChanges
 
+
 def do_update(family, today, hashes):
     userObjects = {}
     for member in family:
-        userObjects[member.name] = member.userObject  
+        userObjects[member.name] = member.userObject
     names = []
     emails = []
     for user in userObjects.values():
@@ -73,13 +81,17 @@ def do_update(family, today, hashes):
     for member in family:
         member.eventsHash = hashes[member.name]
         member.userObject = userObjects[member.name]
-    return(json.dumps(calendarise_events(evs)))
+    return json.dumps(calendarise_events(evs, family))
 
 
 def log_events(events):
     logging.warning("Events:")
     for event in events:
-        logging.warning("{} {} {} {}".format(event['summary'], event['start'], event['uid'], str(event['attendees'])))
+        logging.warning(
+            "{} {} {} {}".format(
+                event["summary"], event["start"], event["uid"], str(event["attendees"])
+            )
+        )
 
 
 @calendar.route("/do_update", methods=["POST"])

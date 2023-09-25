@@ -70,7 +70,7 @@ def add_family_member(db_session):
     if db_session.query(FamilyMember).filter_by(name=name).first():
         logging.warning("that name is already being used")
         return
-    
+
     link = request.form.get("link")
     caltype = request.form.get("calendarType")
     if link == "":
@@ -81,7 +81,7 @@ def add_family_member(db_session):
     elif db_session.query(FamilyMember).filter_by(url=link).first():
         logging.warning("that url is already being used")
         return
-    
+
     if request.form.get("email") == "":
         email = None
     else:
@@ -119,27 +119,25 @@ def edit_family_member(db_session):
         email = None
     else:
         email = request.form.get("email")
-    icon = request.form.get("icon")   
-    
+    icon = request.form.get("icon")
+
     person = db_session.query(FamilyMember).get(originalName)
     userObject = User(name, link, caltype, email)
     if originalName != name:
         logging.warning("change name")
-        person.name = name    
-    if (email != person.email):
+        person.name = name
+    if email != person.email:
         logging.warning("change email address")
         person.email = email
-    if (link != person.url):
+    if link != person.url:
         logging.warning("change url")
         person.url = link
         person.calendarType = caltype
-    if (icon != person.icon):
+    if icon != person.icon:
         logging.warning("change icon")
         person.icon = icon
     person.userObject = userObject
-        
-    
-    
+
 
 def delete_family_member(db_session):
     name = request.form["submit"]
