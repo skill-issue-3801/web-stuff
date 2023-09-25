@@ -515,7 +515,7 @@ as-is or find some way to hide them that doesn't hide the message*/
 }
 
 .guide-tab-link:hover {
-  background-color: darkgray !important;
+  background-color: rgb(171, 255, 254) !important;
 }
 
 #guide-tab-nav {
