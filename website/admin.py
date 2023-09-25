@@ -67,29 +67,33 @@ def family_post(db_session, globals):
 
 def add_family_member(db_session):
     name = request.form.get("name")
-
+    if db_session.query(FamilyMember).filter_by(name=name).first():
+        logging.warning("that name is already being used")
+        return
+    
     link = request.form.get("link")
     caltype = request.form.get("calendarType")
-    if not is_valid_url(link, caltype):
+    if link == "":
+        link = None
+    elif not is_valid_url(link, caltype):
         logging.warning("invalid url")
         return
+    elif db_session.query(FamilyMember).filter_by(url=link).first():
+        logging.warning("that url is already being used")
+        return
+    
     if request.form.get("email") == "":
         email = None
     else:
         email = request.form.get("email")
-    if db_session.query(FamilyMember).filter_by(name=name).first():
-        logging.warning("that name is already being used")
-        return
-    if db_session.query(FamilyMember).filter_by(url=link).first():
-        logging.warning("that url is already being used")
-        return
     if email != None and db_session.query(FamilyMember).filter_by(email=email).first():
         logging.warning("that email is already being used")
         return
-    icon = "/graphics/fish.png"
+
+    icon = request.form.get("icon")
     eventsHash = 0
     userObject = User(name, link, caltype, email)
-    column = FamilyMember(
+    row = FamilyMember(
         name=name,
         url=link,
         calendarType=caltype,
@@ -98,12 +102,44 @@ def add_family_member(db_session):
         eventsHash=eventsHash,
         userObject=userObject,
     )
-    db_session.add(column)
+    db_session.add(row)
 
 
 def edit_family_member(db_session):
-    logging.warning("i dont know how to do this yet")
-
+    originalName = request.form.get("personName")
+    name = request.form.get("name")
+    link = request.form.get("link")
+    caltype = request.form.get("calendarType")
+    if link == "":
+        link = None
+    elif not is_valid_url(link, caltype):
+        logging.warning("invalid url")
+        return
+    if request.form.get("email") == "":
+        email = None
+    else:
+        email = request.form.get("email")
+    icon = request.form.get("icon")   
+    
+    person = db_session.query(FamilyMember).get(originalName)
+    userObject = User(name, link, caltype, email)
+    if originalName != name:
+        logging.warning("change name")
+        person.name = name    
+    if (email != person.email):
+        logging.warning("change email address")
+        person.email = email
+    if (link != person.url):
+        logging.warning("change url")
+        person.url = link
+        person.calendarType = caltype
+    if (icon != person.icon):
+        logging.warning("change icon")
+        person.icon = icon
+    person.userObject = userObject
+        
+    
+    
 
 def delete_family_member(db_session):
     name = request.form["submit"]

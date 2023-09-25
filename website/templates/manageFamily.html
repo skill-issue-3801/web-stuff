@@ -2,8 +2,7 @@
 
 {% block content %}
 <h1>{% block title %} Family {% endblock %}</h1>
-<p>This is the page for family member setup.<br>
-    e.g. add and remove family members, get name and gmail, calendar type as radio buttons</p>
+<p>Edit, add and remove family members here.<br></p>
 
 <div id="familyContainer">
     <!--family member icons w names above them and edit and delete buttons below them-->
@@ -17,9 +16,7 @@
         </figure>
         <p>{{ member.name }}</p>
         <div class="manageFamilyBtns">
-            <form>
-                <button onclick="openEditForm()" class="editFamilyMember">Edit</button>
-            </form>
+            <button onclick="openEditForm('{{member.name}}', '{{member.email}}', '{{member.calendarType}}', '{{member.url}}', '{{member.icon}}')" class="editFamilyMember">Edit</button>
             <form method="POST">
                 <input type="hidden" name="formName" value="deleteFamilyMember">
                 <button type="submit" name="submit" class="deleteFamilyMember" method="POST"
@@ -43,36 +40,59 @@
 
     <!-- The edit form -->
     <div class="form-popup" id="editForm">
-        <form action="" class="form-container" method="POST">
-            <h1>Add Family Member</h1>
-
+        <form action="" name="editForm" class="form-container" method="POST" id="edit_form" onsubmit="return validateForm('editForm')">
+            <h1>Edit Family Member</h1>
             <input type="hidden" name="formName" value="editFamilyMember">
+            <input type="hidden" id = "personName" name="personName" value="">
             <label for="name"><b>Name:</b></label>
-            <input type="text" placeholder="member.name" name="name" required>
-            <br>
+            <input id="editName" placeholder="Enter Name" type="text" name="name" required>
             <label for="email"><b>Email:</b></label>
-            <input type="email" placeholder="member.email" name="email" required>
-            <br>
+            <input id="editEmail" type="email" placeholder="Enter Email" name="email">
             <label for="link"><b>Calendar Link:</b></label>
-            <input type="text" placeholder="member.url" name="link" required>
-            <br>
+            <input id="editUrl" type="text" placeholder="Enter Calendar Link" name="link" onchange="updateRequirements('editUrl', 'editGoogle');">
             <b>Calendar Type:</b>
             <div class="radio-button-container">
                 <div class="radio-button-and-label">
-                    <input type="radio" id="google" name="calendarType" value="google" required>
+                    <input type="radio" id="editGoogle" name="calendarType" value="google">
                     <label for="google">Google</label>
                 </div>
                 <div class="radio-button-and-label">
-                    <input type="radio" id="apple" name="calendarType" value="apple" required>
+                    <input type="radio" id="editApple" name="calendarType" value="apple">
                     <label for="apple">Apple</label>
                 </div>
+            </div>
+            <b>Icon:</b>
+            <div class="radio-button-container iconSelect">
+                <label>
+                    <input type="radio" name="icon" id="graphics/ocean-icons/Slug_1.png" value="graphics/ocean-icons/Slug_1.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_1.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" id="graphics/ocean-icons/Slug_2.png" value="graphics/ocean-icons/Slug_2.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_2.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" id="graphics/ocean-icons/Slug_3.png" value="graphics/ocean-icons/Slug_3.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_3.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" id="graphics/ocean-icons/Slug_4.png" value="graphics/ocean-icons/Slug_4.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_4.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" id="graphics/ocean-icons/Slug_5.png" value="graphics/ocean-icons/Slug_5.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_5.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" id="graphics/ocean-icons/Slug_6.png" value="graphics/ocean-icons/Slug_6.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_6.png")}}">
+                </label>
             </div>
             <br>
 
             <!--icon choices here, more complicated so I'm doing them last-->
 
-            <button type="submit" class="btn confirm" type="submit" name="submit" class="btn confirm" method="POST"
-                value="member.name">Confirm</button>
+            <button type="submit" class="btn confirm" type="submit" name="submit" class="btn confirm" method="POST" value="Submit">Confirm</button>
             <button type="button" class="btn cancel" onclick="closeEditForm()">Cancel</button>
         </form>
     </div>
@@ -80,33 +100,54 @@
 
     <!-- The add form -->
     <div class="form-popup" id="familyForm">
-        <form action="" class="form-container" method="POST">
+        <form name="addForm" action="" class="form-container" method="POST" onsubmit="return validateForm('addForm')">
             <h1>Add Family Member</h1>
-
             <input type="hidden" name="formName" value="addFamilyMember">
             <label for="name"><b>Name:</b></label>
             <input type="text" placeholder="Enter Name" name="name" required>
-            <br>
             <label for="email"><b>Email:</b></label>
-            <input type="email" placeholder="Enter Email" name="email" required>
-            <br>
+            <input type="email" placeholder="Enter Email" name="email">
             <label for="link"><b>Calendar Link:</b></label>
-            <input type="text" placeholder="Enter Calendar Link" name="link" required>
-            <br>
+            <input type="text" id="addUrl" placeholder="Enter Calendar Link" name="link" onchange="updateRequirements('addUrl', 'addGoogle');">
             <b>Calendar Type:</b>
             <div class="radio-button-container">
                 <div class="radio-button-and-label">
-                    <input type="radio" id="google" name="calendarType" value="google" required>
+                    <input type="radio" id="addGoogle" name="calendarType" value="google">
                     <label for="google">Google</label>
                 </div>
                 <div class="radio-button-and-label">
-                    <input type="radio" id="apple" name="calendarType" value="apple" required>
+                    <input type="radio" id="addApple" name="calendarType" value="apple">
                     <label for="apple">Apple</label>
                 </div>
             </div>
+            <b>Icon:</b>
+            <div class="radio-button-container iconSelect">
+                <label>
+                    <input type="radio" name="icon" value="graphics/ocean-icons/Slug_1.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_1.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" value="graphics/ocean-icons/Slug_2.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_2.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" value="graphics/ocean-icons/Slug_3.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_3.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" value="graphics/ocean-icons/Slug_4.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_4.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" value="graphics/ocean-icons/Slug_5.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_5.png")}}">
+                </label>
+                <label>
+                    <input type="radio" name="icon" value="graphics/ocean-icons/Slug_6.png" required>
+                    <img class='familyMember' src="{{url_for('static', filename="graphics/ocean-icons/Slug_6.png")}}">
+                </label>
+            </div>
             <br>
-
-            <!--icon choices here, more complicated so I'm doing them last-->
 
             <button type="submit" class="btn confirm" method="POST">Confirm</button>
             <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>

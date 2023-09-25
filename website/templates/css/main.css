@@ -179,7 +179,7 @@ h5 {
   display: none;
   position: fixed;
   bottom: 0;
-  right: 25vw;
+  right: 15vw;
   z-index: 9;
 }
 
@@ -190,7 +190,7 @@ h5 {
 
 /* Add styles to the form container */
 .form-container {
-  width: 50vw;
+  width: 60vw;
   height: 95vh;
   margin-bottom: 2.5vh;
   padding-left: 5vw;
@@ -263,11 +263,11 @@ input[type=radio]:checked {
 .form-container .btn {
   font-family: var(--body-font);
   color: var(--mint-green);
-  padding: 4vh;
+  padding: 2vh;
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom: 5%;
+  margin-bottom: 1%;
 }
 
 /* Add a red background color to the cancel button */
@@ -375,7 +375,8 @@ input[type=radio]:checked {
   padding: 5% 1%;
   border: none;
   cursor: pointer;
-  width: 6vw;
+  width: 7vw;
+  height: 4vw;
 }
 
 /* Add a red background color to the cancel button */
@@ -396,8 +397,26 @@ input[type=radio]:checked {
   cursor: pointer;
 }
 
+/* hi ali! this is the stuff for icon selection radio buttons. it looks nicer if the radio buttons
+are hidden but this also hides the "required" error message, up to you if you wanna just leave it 
+as-is or find some way to hide them that doesn't hide the message*/
 
+/*hi Kiah!!! I got around this sneakily >:) btw thank you for doing the html/css!! - was not expecting that at all so will take on some new tasks :] */
+.iconSelect input[type="radio"] {
+  /*display: none;*/
+  appearance: none;
+  width: 0;
+  height: 0;
 
+}
+.iconSelect input[type="radio"]:checked + img {
+  background-color: var(--sandy-brown);
+}
+
+.iconSelect img {
+  width: 8vw;
+  height: 8vw;
+}
 
 
 
@@ -419,10 +438,6 @@ input[type=radio]:checked {
 
   b {
     font-size: 1.5em;
-  }
-
-  button {
-    /*font-size: 1.5em;*/
   }
 
   .form-container {

@@ -242,7 +242,8 @@
     "23-00 23-00-Sunday 23-00-Monday 23-00-Tuesday 23-00-Wednesday 23-00-Thursday 23-00-Friday 23-00-Saturday "
     "23-15 23-15-Sunday 23-15-Monday 23-15-Tuesday 23-15-Wednesday 23-15-Thursday 23-15-Friday 23-15-Saturday "
     "23-30 23-30-Sunday 23-30-Monday 23-30-Tuesday 23-30-Wednesday 23-30-Thursday 23-30-Friday 23-30-Saturday "
-    "23-45 23-45-Sunday 23-45-Monday 23-45-Tuesday 23-45-Wednesday 23-45-Thursday 23-45-Friday 23-45-Saturday ";
+    "23-45 23-45-Sunday 23-45-Monday 23-45-Tuesday 23-45-Wednesday 23-45-Thursday 23-45-Friday 23-45-Saturday "
+
 }
 
 /* Forces the items in the calendar to max out their width */
@@ -283,3 +284,8 @@
     height: 40px;
     width: auto;
 }
+
+.timeLabel {
+    padding-left:10px;
+}
+
