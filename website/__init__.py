@@ -86,6 +86,7 @@ def main(db_url, args):
             
             name="teste"
             url=None
+            calendarType=None
             icon="graphics/ocean-icons/Slug_5.png"
             userObject = User(name, url, 'none', email)
             s.add(FamilyMember(name=name, url=url, calendarType=calendarType, email=email, icon=icon, eventsHash=eventsHash, userObject=userObject))

@@ -40,16 +40,16 @@
 
     <!-- The edit form -->
     <div class="form-popup" id="editForm">
-        <form action="" class="form-container" method="POST">
+        <form action="" class="form-container" method="POST" id="edit_form">
             <h1>Edit Family Member</h1>
             <input type="hidden" name="formName" value="editFamilyMember">
             <input type="hidden" id = "personName" name="personName" value="">
             <label for="name"><b>Name:</b></label>
-            <input id="editName" type="text" placeholder="member.name" name="name" required>
+            <input id="editName" placeholder="Enter Name" type="text" name="name" required>
             <label for="email"><b>Email:</b></label>
-            <input id="editEmail" type="email" placeholder="member.email" name="email">
+            <input id="editEmail" type="email" placeholder="Enter Email" name="email">
             <label for="link"><b>Calendar Link:</b></label>
-            <input id="editUrl" type="text" placeholder="member.url" name="link" onchange="updateRequirements('editUrl', 'editGoogle');">
+            <input id="editUrl" type="text" placeholder="Enter Calendar Link" name="link" onchange="updateRequirements('editUrl', 'editGoogle');">
             <b>Calendar Type:</b>
             <div class="radio-button-container">
                 <div class="radio-button-and-label">

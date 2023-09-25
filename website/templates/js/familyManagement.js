@@ -9,15 +9,19 @@ function closeForm() {
 }
 
 function openEditForm(personName, personEmail, personCaltype, personUrl, personIcon) {
+  document.getElementById("edit_form").reset();
   document.getElementById("editForm").style.display = "block";
   document.getElementById("form-button").style.display = "none";
   document.getElementById("editName").defaultValue = personName;
-  document.getElementById("editEmail").defaultValue = personEmail;
-  document.getElementById("editUrl").defaultValue = personUrl;
+  if (personEmail != "None") {
+    document.getElementById("editEmail").defaultValue = personEmail;
+  }
+  if (personUrl != "None") {
+    document.getElementById("editUrl").defaultValue = personUrl;
+  }
   if (personCaltype == 'google') {
     document.getElementById("editGoogle").checked = true;
-  }
-  if (personCaltype == 'apple') {
+  } else if (personCaltype == 'apple') {
     document.getElementById("editApple").checked = true;
   }
   document.getElementById("personName").value = personName;
