@@ -96,7 +96,7 @@ async function main() {
         setInterval(update, 300000); // 300 seconds (5 minutes) for prod
     } else {
         console.log("Running in dev mode.");
-        setInterval(update, 300000); // 10 seconds for dev
+        setInterval(update, 10000); // 10 seconds for dev
     }
     update();
 }
