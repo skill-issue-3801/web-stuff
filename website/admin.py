@@ -110,7 +110,9 @@ def edit_family_member(db_session):
     name = request.form.get("name")
     link = request.form.get("link")
     caltype = request.form.get("calendarType")
-    if not is_valid_url(link, caltype):
+    if link == "":
+        link = None
+    elif not is_valid_url(link, caltype):
         logging.warning("invalid url")
         return
     if request.form.get("email") == "":

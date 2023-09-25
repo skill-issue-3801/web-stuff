@@ -39,7 +39,25 @@ function updateRequirements(urlId, typeId) {
     document.getElementById(typeId).removeAttribute("required"); 
   } else if (url == '') {
     document.getElementById(typeId).removeAttribute("required"); 
+    document.getElementById("editApple").checked = false;
+    document.getElementById("editGoogle").checked = false;
   } else {
     document.getElementById(typeId).setAttribute("required", ""); 
   }
 }
+
+function validateUrl(whichForm) {
+  var url = document.forms[whichForm]["link"].value;
+  var type = document.forms[whichForm]["calendarType"].value;
+  if (url == "") {
+    var type = document.forms[whichForm]["calendarType"].value = "none"
+  } 
+  else if (type == 'apple' && (url.slice(0,42) != "webcal://p122-caldav.icloud.com/published/")) {
+    alert("That is not a valid Apple calendar url, please use the guides to find your correct url")
+  } 
+  else if (type == 'google' && 
+      ((url.slice(0, 42) != "https://calendar.google.com/calendar/ical/") || (url.slice(-10) != "/basic.ics"))) {
+    alert("That is not a valid Google calendar url, please use the guides to find your correct url")
+  }
+}
+
