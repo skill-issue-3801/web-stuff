@@ -11,6 +11,7 @@ app = Flask(__name__, static_folder="templates")
 def home():
     return render_template("index.html")
 
+
 @app.route("/is_prod", methods=["POST"])
 def foo():
     return json.dumps(not __debug__)

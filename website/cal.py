@@ -1,4 +1,4 @@
-import json 
+import json
 import math
 import validators
 from datetime import timedelta, datetime
@@ -33,18 +33,18 @@ class User:
 
     def __init__(self, name, calendar_link, caltype, email):
         self._name = name
-        
+
         self._calendar_link = calendar_link
         if calendar_link == None:
             self._caltype = "none"
         else:
             self._caltype = caltype
-           
+
         if email != None:
             self._email = "mailto:" + email
         else:
             self._email = None
-            
+
         self._event_list = []
         self._events_hash = -1
         self._my_event_uids = []
@@ -108,12 +108,14 @@ def is_valid_url(url, caltype):
     else:
         return False
 
+
 def events_get_hash(events):
     hashstr = ""
     for event in events:
         hashstr += str(event)
         hashstr += str(event.description)
     return hash(hashstr)
+
 
 def update_user_email(names, emails, name, newEmail, user):
     if not name in names:
@@ -131,6 +133,7 @@ def update_user_email(names, emails, name, newEmail, user):
     user.set_email(newEmail.strip())
     return True
 
+
 def update_user_cal_link(names, urls, name, newLink, caltype, user):
     if not name in names:
         print("There is no user by the name ", name, "to edit")
@@ -144,7 +147,11 @@ def update_user_cal_link(names, urls, name, newLink, caltype, user):
         user.set_link(newLink, caltype)
         return True
     else:
-        print("Sorry, ", caltype, " is not an accepted calendar type, must be 'apple', 'google', or 'none'")
+        print(
+            "Sorry, ",
+            caltype,
+            " is not an accepted calendar type, must be 'apple', 'google', or 'none'",
+        )
         return False
 
 
@@ -167,7 +174,7 @@ def update_user_name(names, name, newName, user):
         "Warning: events where",
         newName,
         "was invited by tagging them in the description"
-        " using their old name will not appear unless you update them in your calendar!"
+        " using their old name will not appear unless you update them in your calendar!",
     )
     return True
 
@@ -180,15 +187,11 @@ def edges_of_week(today):
 
 
 def check_cal_for_updates(url, caltype, hash, today):
-    start, end  = edges_of_week(today)
+    start, end = edges_of_week(today)
     if url == None:
         return False
     evs = icalevents.events(
-        url=url,
-        start = start, 
-        end = end,
-        sort=True,
-        fix_apple=(caltype == "apple")
+        url=url, start=start, end=end, sort=True, fix_apple=(caltype == "apple")
     )
     evshash = events_get_hash(evs)
     if evshash == hash:
@@ -199,7 +202,7 @@ def check_cal_for_updates(url, caltype, hash, today):
 def update_events(family, today, hashes, names, emails):
     return_events = []
     for member in family:
-        if (member.get_link() == None):
+        if member.get_link() == None:
             # they dont have their own calendar, all their events will be added via other people
             continue
         elif hashes[member.get_name()] == member.get_hash():
@@ -207,12 +210,14 @@ def update_events(family, today, hashes, names, emails):
             return_events.extend(member.get_events())
         else:
             # their events have changed somehow, reprocess
-            member.set_hash(hashes[member.get_name()])  # record hash of events before processing
-            start, end  = edges_of_week(today)
+            member.set_hash(
+                hashes[member.get_name()]
+            )  # record hash of events before processing
+            start, end = edges_of_week(today)
             evs = icalevents.events(
                 url=member.get_link(),
-                start = start, 
-                end = end,
+                start=start,
+                end=end,
                 sort=True,
                 fix_apple=(member.get_caltype() == "apple"),
             )
@@ -303,53 +308,79 @@ def calendarise_events(events, family):
 
     parsedEvents = []
     for event in events:
-        
         manstart = event.start
-        
-        while(manstart.date() <= event.end.date()):
-            if ((manstart.date() == event.end.date()) or 
-                    (event.end == ((event.start + timedelta(days=1)).replace(hour=00, minute=00)))):
-                parsedEvents.append(htmlEvent(event.summary, event.uid, event.attendee, familyMembers, event.start, event.end, manstart, event.end))
+
+        while manstart.date() <= event.end.date():
+            if (manstart.date() == event.end.date()) or (
+                event.end
+                == ((event.start + timedelta(days=1)).replace(hour=00, minute=00))
+            ):
+                parsedEvents.append(
+                    htmlEvent(
+                        event.summary,
+                        event.uid,
+                        event.attendee,
+                        familyMembers,
+                        event.start,
+                        event.end,
+                        manstart,
+                        event.end,
+                    )
+                )
                 break
             else:
                 manualEnd = (event.start).replace(hour=00, minute=00)
-                parsedEvents.append(htmlEvent(event.summary, event.uid, event.attendee, familyMembers, event.start, event.end, manstart, manualEnd))
+                parsedEvents.append(
+                    htmlEvent(
+                        event.summary,
+                        event.uid,
+                        event.attendee,
+                        familyMembers,
+                        event.start,
+                        event.end,
+                        manstart,
+                        manualEnd,
+                    )
+                )
                 manstart = (event.start + timedelta(days=1)).replace(hour=00, minute=1)
     return parsedEvents
 
+
 class htmlEvent(dict):
     def __init__(self, summary, uid, attendees, family, start, end, gridStart, gridEnd):
-        dict.__init__(self, 
-                      summary = summary, 
-                      uid = uid,
-                      attendees = [{"name": a, "icon": family[a].icon} for a in attendees], 
-                      start = str(start.strftime("%H:%M")), 
-                      end = str(end.strftime("%H:%M")), 
-                      colstart = gridStart.strftime('%A'), 
-                      colend = adjust_for_midnight(gridEnd), 
-                      rowstart = get_timecode(gridStart, 'start'), 
-                      rowend = get_timecode(gridEnd, 'end'))
-        
+        dict.__init__(
+            self,
+            summary=summary,
+            uid=uid,
+            attendees=[{"name": a, "icon": family[a].icon} for a in attendees],
+            start=str(start.strftime("%H:%M")),
+            end=str(end.strftime("%H:%M")),
+            colstart=gridStart.strftime("%A"),
+            colend=adjust_for_midnight(gridEnd),
+            rowstart=get_timecode(gridStart, "start"),
+            rowend=get_timecode(gridEnd, "end"),
+        )
 
 
 def get_timecode(date, startEnd):
-    if (date.strftime("%H:%M") == "00:00"):
-        if startEnd == 'start':
-            return("00-00")
+    if date.strftime("%H:%M") == "00:00":
+        if startEnd == "start":
+            return "00-00"
         else:
-            return("-1")
+            return "-1"
     else:
         hour = date.hour
-        minute = (15 * math.floor(date.minute/15))
-        if startEnd == 'end' :
+        minute = 15 * math.floor(date.minute / 15)
+        if startEnd == "end":
             minute += 15
-            if (minute >= 60):
+            if minute >= 60:
                 hour += 1
                 minute = minute % 60
-        return("{}-{}".format(str(hour).zfill(2), (str(minute)).zfill(2)))
-    
+        return "{}-{}".format(str(hour).zfill(2), (str(minute)).zfill(2))
+
+
 def adjust_for_midnight(date):
-    if (date.strftime("%H:%M") == "00:00"):
-        return((date - timedelta(days=1)).strftime("%A"))
+    if date.strftime("%H:%M") == "00:00":
+        return (date - timedelta(days=1)).strftime("%A")
     else:
-        return (date.strftime('%A'))
+        return date.strftime("%A")
