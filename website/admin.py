@@ -123,11 +123,9 @@ def edit_family_member(db_session):
     
     person = db_session.query(FamilyMember).get(originalName)
     userObject = User(name, link, caltype, email)
-    # this still doesn't work!!! maye i will just not allow name change
     if originalName != name:
         logging.warning("change name")
-        userObject.name = name
-    
+        person.name = name    
     if (email != person.email):
         logging.warning("change email address")
         person.email = email
