@@ -29,19 +29,18 @@ document.getElementById("timeRows").innerHTML = timeDivs;
 
 
 //family management things
-function deleteUser {
+function deleteUser() {
     //delete a user from existence
-
+    return;
 }
 
-function addUser {
+function addUser() {
     //add a new user :)
-
+    return;
 }
 
 
-function editUser {
+function editUser() {
     //edit user
-
-
+    return;
 }
