@@ -46,7 +46,8 @@ def default(db_session, globals):
         events=globals.events,
         family=familyMembers,
         dates=dates,
-        today=(today.weekday() + 1) % 7,
+        todayIndex=(today.weekday() + 1) % 7,
+        todayDate = today,
         uids=uids_to_div_dict(family)
     )
 
