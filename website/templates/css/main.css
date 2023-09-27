@@ -56,11 +56,7 @@
 }
 
 /**Below is fine to touch, carefully (notes to keep Ali from breaking things)**/
-h1,
-h2,
-h3,
-h4,
-h5 {
+h1, h2, h3, h4, h5 {
   font-family: var(--heading-font);
   color: var(--indigo-dye);
 }
@@ -71,25 +67,10 @@ p {
 }
 
 /** https://matthewjamestaylor.com/responsive-font-size#how - trusting this formula**/
-body {
+body, button, input, label, b {
   font-size: calc(15px + 0.390625vw);
 }
 
-button {
-  font-size: calc(15px + 0.390625vw);
-}
-
-input {
-  font-size: calc(15px + 0.390625vw);
-}
-
-label {
-  font-size: calc(15px + 0.390625vw);
-}
-
-b {
-  font-size: calc(15px + 0.390625vw);
-}
 
 h1 {
   font-size: 1.8rem;
@@ -111,7 +92,6 @@ h5 {
   font-size: 0.8rem;
 }
 
-/* Nav content has been moved to base.css! */
 /*change colour of placeholder text in inputs*/
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -204,6 +184,11 @@ h5 {
   flex-direction: column;
 }
 
+.form-container h1, h2, h3, h4, h5 {
+  color: var(--mint-green);
+  font-family: var(--body-font);
+}
+
 .radio-button-container {
   width: 100%;
   display: flex;
@@ -224,7 +209,13 @@ h5 {
 .radio-button-and-label:hover {
   text-decoration: underline;
   font-weight: bold;
+  cursor: pointer;
 }
+/* TODO: Make cursor pointer when hover over slug icons */
+.radio-button-container label:hover {
+  cursor: pointer;
+}
+
 
 input[type=radio] {
   appearance: none;
@@ -250,6 +241,7 @@ input[type=radio]:checked {
   padding: 2vh;
   border: none;
   background: var(--cambridge-blue);
+  border-radius: 10px;
 }
 
 /* When the inputs get focus, do something */
@@ -257,6 +249,13 @@ input[type=radio]:checked {
 .form-container input[type=email]:focus {
   background-color: var(--mint-green);
   outline: none;
+}
+
+.form-popup-cancel-and-cofirm {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  gap: 10%;
 }
 
 /* Set a style for the button */
@@ -364,19 +363,25 @@ input[type=radio]:checked {
 
 .manageFamilyBtns {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-evenly;
   width: 100%;
 }
 
 .manageFamilyBtns button {
   font-family: var(--body-font);
+  font-size: calc(10px + 0.390625vw);
   color: var(--mint-green);
-  padding: 5% 1%;
+  /* padding: 5% 1%; */
   border: none;
   cursor: pointer;
-  width: 7vw;
-  height: 4vw;
+  /* width: 5vw;
+  height: 2vw; */
+  /* Below is new as of 26.09.23 */
+  border-radius: 10px;
+  padding: 0% 10% 0% 10%;
+  line-height: 2em;
+  
 }
 
 /* Add a red background color to the cancel button */
@@ -424,6 +429,22 @@ as-is or find some way to hide them that doesn't hide the message*/
 
 /*media queries*/
 @media only screen and (max-width: 1000px) {
+  h1 {
+    font-size: 2.3em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+  h3 {
+    font-size: 1.4em;
+  }
+  h4 {
+    font-size: 1.3em;
+  }
+  h5 {
+    font-size: 1.2em;
+  }
   body {
     font-size: 1.7em;
   }
@@ -476,6 +497,12 @@ as-is or find some way to hide them that doesn't hide the message*/
     height: 30vw;
   }
 
+  .form-container .btn {
+    font-size: 1.2em;
+    padding: 1vh;
+    border-radius: 10px;
+  }
+
   /* Button used to open the add family member form */
   #form-button {
     width: 30vw;
@@ -484,12 +511,32 @@ as-is or find some way to hide them that doesn't hide the message*/
 
   .manageFamilyBtns button {
     font-family: var(--body-font);
+    font-size: calc(15px + 0.390625vw);
     color: var(--mint-green);
-    padding: 5% 1%;
+    padding: 0% 5% 0% 5%;
     border: none;
     cursor: pointer;
-    width: 10vw;
-    height: 4vw;
+    /* width: 10vw;
+    height: 4vw; */
   }  
 
 }
+
+.guideTabLinksSelectedBorder {
+  border-bottom: 0.5vh solid var(--sandy-brown);
+}
+
+.guide-tab-link:hover {
+  background-color: rgb(171, 255, 254) !important;
+}
+
+#guide-tab-nav {
+  background-color: var(--mint-green);
+  padding: 2%;
+  display: flex;
+}
+
+#guide-tab-nav a{
+  padding-left: 2%;
+}
+

@@ -84,7 +84,7 @@
     align-items: stretch;
 }
 
-.navigationBar a, p {
+.navigationBar a {
     outline: none;
     text-align: center;
     /* width:15vw;
@@ -115,7 +115,7 @@
 @media (max-width: 1000px) {
     .baseContent {
         flex-direction: column !important;
-        margin-top: 13vh !important;
+        margin-top: 10vh !important;
         margin-left: 5vw !important;
         width: 90vw !important;
     }
@@ -123,7 +123,7 @@
     .navWrapper .navigationBar {
         /*!important because it wasn't being applied :(*/
         width: 100vw !important;
-        height: 10vh !important;
+        height: 7vh !important;
         flex-direction: row !important;
         gap: 0% !important;
         justify-content: space-evenly;
@@ -142,7 +142,7 @@
     }
 
     .navImage {
-        height: 8vh;
+        height: 5vh;
         width: auto;
     }
 }
