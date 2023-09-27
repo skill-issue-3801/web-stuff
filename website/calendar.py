@@ -3,11 +3,11 @@ import pytz
 import json
 from .cal import *
 from datetime import datetime
-from .base import has_global_stuff, has_db
+from .base import has_global_stuff
 from .models import FamilyMember
 
 #     Above is for later, "{{ utc_dt }}" is the variable for date time in html
-from flask import Blueprint, request, render_template
+from flask import Blueprint, render_template
 
 from .app import app
 

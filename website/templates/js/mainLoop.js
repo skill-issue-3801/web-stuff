@@ -6,7 +6,7 @@ async function updateTimeData () {
     coordinates = `r${hour}-${minutes} / cSunday / r${hour}-${minutes} / c-1`;
     document.getElementById("currentTime").style["gridArea"] = coordinates;
 
-    document.getElementById("currentTime").scrollIntoView(true);
+    document.getElementById("currentTime").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
 
     /* now do date and time up top*/
     const day = now.toLocaleString('en-GB', {day: 'numeric'});
@@ -119,8 +119,7 @@ async function update() {
     // find who is highlighted right now and click their button to highlight them
     const highlightedPerson = document.getElementById("currentlyHighlighted").value;
     document.getElementById(highlightedPerson).click();
-    
-    // generate "current time" wave
+
     updateTimeData();
 }
 
