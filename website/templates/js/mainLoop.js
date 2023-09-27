@@ -27,6 +27,16 @@ async function updateTimeData () {
     document.getElementById("datetime").innerHTML = displayString;
 }
 
+function changeWeek(today, direction) {
+    if (direction == 0) {
+        alert("reset to today")
+    } else if (direction == -1) {
+        alert("look back one week")
+    } else {
+        alert("look forward one week")
+    }
+} 
+
 function uidSelect(person, uids) {
     resetHighlighted()
     document.getElementById("currentlyHighlighted").value = person;

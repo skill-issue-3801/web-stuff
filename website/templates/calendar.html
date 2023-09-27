@@ -26,6 +26,11 @@
         <h1 class="calendarViewTopText" id="datetime">.</h1>       
         <section>
             <form name="userHighlightForm" class="tempHighlightControl">
+                <div class="viewChange">
+                    <button type="button" class="btn" onclick="changeWeek({{todayDate}}, 0); uidSelect('all', 'all');">Reset View</button>
+                    <button type="button" class="btn" id="backOneWeek" onclick="changeWeek({{todayDate}}, -1);">Back a week</button>
+                    <button type="button" class="btn" id="forwardOneWeek" onclick="changeWeek({{todayDate}}, +1);">Forward a week</button>
+                </div>
                 <div class="radio-button-container userHighlight">
                     <input type="hidden" id="currentlyHighlighted" name="currentlyHighlighted" value="all">
                     <label>
@@ -45,37 +50,37 @@
                     <div id="timeEmptySpace">
                         <p>time</p>
                     </div>
-                    <div id="Sunday" class="{{'todayHeader' if today == 0 else ''}}">
+                    <div id="Sunday" class="{{'todayHeader' if todayIndex == 0 else ''}}">
                         <p>Sunday</p>
                         <p>{{dates[0]}}</p>
                     </div>
 
-                    <div id="Monday" class="{{'todayHeader' if today == 1 else ''}}">
+                    <div id="Monday" class="{{'todayHeader' if todayIndex == 1 else ''}}">
                         <p>Monday</p>
                         <p>{{dates[1]}}</p>
                     </div>
 
-                    <div id="Tuesday" class="{{'todayHeader' if today == 2 else ''}}">
+                    <div id="Tuesday" class="{{'todayHeader' if todayIndex == 2 else ''}}">
                         <p>Tuesday</p>
                         <p>{{dates[2]}}</p>
                     </div>
 
-                    <div id="Wednesday" class="{{'todayHeader' if today == 3 else ''}}">
+                    <div id="Wednesday" class="{{'todayHeader' if todayIndex == 3 else ''}}">
                         <p>Wednesday</p>
                         <p>{{dates[3]}}</p>
                     </div>
 
-                    <div id="Thursday" class="{{'todayHeader' if today == 4 else ''}}">
+                    <div id="Thursday" class="{{'todayHeader' if todayIndex == 4 else ''}}">
                         <p>Thursday</p>
                         <p>{{dates[4]}}</p>
                     </div>
 
-                    <div id="Friday" class="{{'todayHeader' if today == 5 else ''}}">
+                    <div id="Friday" class="{{'todayHeader' if todayIndex == 5 else ''}}">
                         <p>Friday</p>
                         <p>{{dates[5]}}</p>
                     </div>
 
-                    <div id="Saturday" class="{{'todayHeader' if today == 6 else ''}}">
+                    <div id="Saturday" class="{{'todayHeader' if todayIndex == 6 else ''}}">
                         <p>Saturday</p>
                         <p>{{dates[6]}}</p>
                     </div>
