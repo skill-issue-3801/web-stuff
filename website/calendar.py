@@ -47,8 +47,14 @@ def default(db_session, globals):
         family=familyMembers,
         dates=dates,
         today=(today.weekday() + 1) % 7,
+        uids=uids_to_div_dict(family)
     )
 
+def uids_to_div_dict(family):
+    peoplesUid = {}
+    for member in family:
+        peoplesUid[member.name] = member.userObject.get_uids()
+    return (peoplesUid)
 
 def check_for_update(family, today, hashes):
     anyChanges = False
