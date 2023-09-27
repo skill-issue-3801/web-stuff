@@ -27,6 +27,28 @@ async function updateTimeData () {
     document.getElementById("datetime").innerHTML = displayString;
 }
 
+function uidSelect(person, uids) {
+    resetHighlighted()
+    document.getElementById("currentlyHighlighted").value = person;
+    if (uids != "all") {
+        for (uid in uids) {
+            var elements = document.getElementsByClassName(uids[uid]);
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].classList.add("highlightedEvent");
+            }
+        }
+    } else {
+
+    }
+}
+
+function resetHighlighted() {
+    var elements = document.getElementsByClassName("event");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.remove("highlightedEvent");
+    }
+}
+
 function render(event) {
     people = "";
     for (const person of event['attendees']) {
@@ -37,7 +59,7 @@ function render(event) {
     }
     
     constructed = `
-    <div class="event" id="${event['uid']}div" style="grid-area:r${event['rowstart']} / a${event['colstart']} / r${event['rowend']} / a${event['colend']};">
+    <div class="event ${event['uid']}" style="grid-area:r${event['rowstart']} / a${event['colstart']} / r${event['rowend']} / a${event['colend']};">
     <p id="eventHeading">${event['summary']}<p>
     <p>${event['start']} - ${event['end']}</p>
     ${people}
@@ -83,6 +105,10 @@ async function update() {
     for (const event of text) {
         render(event);
     }
+
+    // find who is highlighted right now and click their button to highlight them
+    const highlightedPerson = document.getElementById("currentlyHighlighted").value;
+    document.getElementById(highlightedPerson).click();
     
     // generate "current time" wave
     updateTimeData();

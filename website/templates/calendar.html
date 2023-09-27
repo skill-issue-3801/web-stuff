@@ -25,6 +25,21 @@
     <main class="content">
         <h1 class="calendarViewTopText" id="datetime">.</h1>       
         <section>
+            <form name="userHighlightForm" class="tempHighlightControl">
+                <div class="radio-button-container userHighlight">
+                    <input type="hidden" id="currentlyHighlighted" name="currentlyHighlighted" value="all">
+                    <label>
+                        <input type="radio" name="person" id="all" value="all" onclick="uidSelect('all', 'all');">
+                        <label for="all">All</label>
+                    </label>
+                    {% for user in uids.keys() %}
+                        <label>
+                            <input type="radio" name="person" id="{{user}}" value="{{uids[user]}}" onclick="uidSelect('{{user}}', {{uids[user]}});">
+                            <label for="{{user}}">{{user}}</label>
+                        </label>
+                    {% endfor%}
+                </div>
+            </form>
             <div class="calendarContent">
                 <div class="calendarDays">
                     <div id="timeEmptySpace">
@@ -92,7 +107,7 @@
                     <div class = "timeLabel" style = "grid-area: r22-00 / a00-00 / r23-00 / a00-00;"><p>10:00 PM</p></div>
                     <div class = "timeLabel" style = "grid-area: r23-00 / a00-00 / r-1 / a00-00;"><p>11:00 PM</p></div>
                     {% for event in events %}
-                        <div class="event" id ="{{event['uid']}}div" style = "grid-area: r{{event['rowstart']}} / 
+                        <div class="event {{event['uid']}}" style = "grid-area: r{{event['rowstart']}} / 
                                 a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}};">
                             <p id="eventHeading">{{event['summary']}}</p>
                             <p>{{event['start']}} - {{event['end']}}</p>
@@ -118,6 +133,7 @@
 <script>
     window.onload = function (){
         updateTimeData();
+        resetHighlighted();
     }
 </script>
 </body>

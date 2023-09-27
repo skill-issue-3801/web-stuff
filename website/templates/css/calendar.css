@@ -273,6 +273,20 @@
     padding: 5%;
     padding-left:10px;
 }
+
+.highlightedEvent {
+    background-color: var(--mint-green);
+}
+
+.tempHighlightControl {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: var(--mint-green);
+    padding:10px;
+
+}
+
 .event p{
     font-size: 1.3em;
 }
