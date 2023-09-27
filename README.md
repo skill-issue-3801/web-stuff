@@ -1,23 +1,41 @@
 # web-stuff
-To run the webserver, run:
+This repo holds the website and main codebase for the Skill Issue team, completing DECO3801 in S2 2023.
+
+## Setup
+This project uses `poetry` for python dependency management. Poetry is available for install from [their website](https://python-poetry.org/).
+
+Once poetry is installed, you should have a shell tool available on your system, invoked as `poetry`. This can also be used interchangeably with `python -m poetry` or `py -m poetry` depending on your installation & setup.
+
+## Running
+All commands should be run from the root folder of the repository.
+
+To start the webserver, run this command:
+```bash
+poetry install && poetry run python -O -m website [host]
 ```
-poetry install
-```
 
-```
-poetry run python -m website [host]
-```
+For local use, `[host]` should be either `localhost` or `127.0.0.1`. The website will be available at port 9003 of the provided host.
 
-Note for local testing you should use `localhost` for `[host]`. The website should be available at port 9003 of the given host.
+A dockerfile is also provided. This can be built and run instead of manually installing poetry, if so desired. 
 
-Not working? Alternative flavours include using `python -m poetry` or `py -m poetry` instead of `poetry`, or spawning `poetry shell` and running `python -m website [host]` inside that shell. You may also need to run `poetry install` again, if there are any new dependencies.
+### Database
+To connect to a production database, the URI should be provided in the `DATABASE_URI` environment variable.
 
-For installing dependencies, use `poetry add <thing>`, which will pip install it into poetry, but also update poetry's internal knowledge of "what do I have installed".
+## Development
+For development use, omit the `-O` flag from the above command. This will change several behaviours of the website, including much faster calendar updates and pre-filling the database with some dummy users.
 
-If anything breaks or starts acting funny, ping andrew about it, it's his problem.
+### Structure
+The project is structured with the code all living inside `website/`. The root folder stores build/dependency information.
+
+Within `website/` sits the python files that make up the backend of the webserver. Important files are `__init__.py` for the main function; `admin.py` for the user-facing settings interface, `cal.py` for the calendar-file parsing, and `calendar.py` for the user-facing calendar display (only accessible from the custom hardware).
+
+The remainder of the files for the website live in `website/templates/`. The `.html` files in `website/templates/` are the actual html content of the website, `website/templates/css/` contains the stylesheets and fonts, `website/templates/graphics/` contains the static images for the site, and `website/templates/js` contains the frontend javascript code responsible for live updates.
+
+### Adding Dependencies
+Dependencies should be added exclusively using `poetry add [thing]`. This will automatically update the `pyproject.toml` file, `poetry.lock` file, and use `pip` to install the library itself.
 
 
-
+## Team-Specific:
 Eli's notes for their set up:
 1. Swap folders (Eli applicable only but be sure to be in the correct folder when doing the following)
 ```
