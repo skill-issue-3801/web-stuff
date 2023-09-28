@@ -1,3 +1,9 @@
+let latestJson = "";
+
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
 async function updateTimeData () {
     const now = new Date();
     /* update co-ordinates for wave */
@@ -28,22 +34,18 @@ async function updateTimeData () {
 }
 
 function changeWeek(thisWeekIndex, direction, numWeeks, datesArray) {
-    console.log(datesArray);
     datesArray.replaceAll("\'","\"");
     datesArray = Array.from(JSON.parse(datesArray));
     const currentViewingWeek = parseInt(document.getElementById("currentWeekViewing").value);
     if (direction == 0) {
         document.getElementById("currentWeekViewing").value = thisWeekIndex;
-        update();
-        dayHeadingDates(datesArray[thisWeekIndex]);
-    } else if (direction == -1 && currentViewingWeek > 0) {
+        putWeeksEvents(thisWeekIndex, datesArray);
+    } else if (direction == -1 && currentViewingWeek >= 0) {
         document.getElementById("currentWeekViewing").value = currentViewingWeek - 1;
-        update();
-        dayHeadingDates(datesArray[currentViewingWeek - 1]);
-    } else if (direction == 1 && currentViewingWeek < numWeeks) {
+        putWeeksEvents(currentViewingWeek - 1, datesArray);
+    } else if (direction == 1 && currentViewingWeek < numWeeks - 1) {
         document.getElementById("currentWeekViewing").value = currentViewingWeek + 1;
-        update();
-        dayHeadingDates(datesArray[currentViewingWeek + 1]);
+        putWeeksEvents(currentViewingWeek + 1, datesArray);
     }
 } 
 
@@ -55,6 +57,25 @@ function dayHeadingDates(datesArray) {
     document.getElementById("thursdayDate").innerHTML = datesArray[4];
     document.getElementById("fridayDate").innerHTML = datesArray[5];
     document.getElementById("saturdayDate").innerHTML = datesArray[6];
+}
+
+async function putWeeksEvents(viewingWeek, datesArray) {
+    writeTimeLabels();
+    while (latestJson == "") {
+        // just wait untill update has called once, its easier this way
+        await delay(1000);
+    }
+    // add new events
+    for (const event of latestJson[viewingWeek]) {
+        render(event);
+    }
+    // find who is highlighted right now and click their button to highlight them
+    const highlightedPerson = document.getElementById("currentlyHighlighted").value;
+    document.getElementById(highlightedPerson).click();
+
+    dayHeadingDates(datesArray[viewingWeek]);
+    // generate "current time" wave
+    updateTimeData();
 }
 
 function uidSelect(person, uids) {
@@ -96,12 +117,7 @@ function render(event) {
     document.getElementById("calendarGridMain").innerHTML += constructed;
 }
 
-async function update() {
-    let response = await fetch("/calendar/do_update", {method: "POST"});
-    let text = await response.json();
-    console.log("UPDATING CALENDAR EVENTS");
-
-    // clear old events
+function writeTimeLabels() {
     document.getElementById("calendarGridMain").innerHTML = `<div id = "currentTime" style = "grid-area: r00-00 / cSunday / r-00-00 / c-1;">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</div>
                     <div class = "timeLabel" style = "grid-area: r00-00 / c00-00 / r01-00 / c00-00;"><p>12:00 AM</p></div>
                     <div class = "timeLabel" style = "grid-area: r01-00 / c00-00 / r02-00 / c00-00;"><p>1:00 AM</p></div>
@@ -128,6 +144,14 @@ async function update() {
                     <div class = "timeLabel" style = "grid-area: r22-00 / a00-00 / r23-00 / a00-00;"><p>10:00 PM</p></div>
                     <div class = "timeLabel" style = "grid-area: r23-00 / a00-00 / r-1 / a00-00;"><p>11:00 PM</p></div>
                     `;
+}
+
+async function update() {
+    let response = await fetch("/calendar/do_update", {method: "POST"});
+    let text = await response.json();
+    console.log("UPDATING CALENDAR EVENTS");
+
+    writeTimeLabels();
 
     const viewingWeek = document.getElementById("currentWeekViewing").value;
     // add new events
@@ -141,6 +165,7 @@ async function update() {
     
     // generate "current time" wave
     updateTimeData();
+    latestJson = text;
 }
 
 async function main() {
