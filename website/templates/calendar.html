@@ -26,13 +26,14 @@
         <h1 class="calendarViewTopText" id="datetime">.</h1>       
         <section>
             <form name="userHighlightForm" class="tempHighlightControl">
+                <input type="hidden" id="currentlyHighlighted" name="currentlyHighlighted" value="all">
+                <input type="hidden" id="currentWeekViewing" name="currentWeekViewing" value="{{thisWeekIndex}}">
                 <div class="viewChange">
-                    <button type="button" class="btn" onclick="changeWeek({{todayDate}}, 0); uidSelect('all', 'all');">Reset View</button>
-                    <button type="button" class="btn" id="backOneWeek" onclick="changeWeek({{todayDate}}, -1);">Back a week</button>
-                    <button type="button" class="btn" id="forwardOneWeek" onclick="changeWeek({{todayDate}}, +1);">Forward a week</button>
+                    <button type="button" class="btn" onclick="changeWeek({{thisWeekIndex}}, 0, {{numWeeks}}, '{{datesArray}}');">Reset View</button>
+                    <button type="button" class="btn" id="backOneWeek" onclick="changeWeek({{thisWeekIndex}}, -1, {{numWeeks}}, '{{datesArray}}');">Back a week</button>
+                    <button type="button" class="btn" id="forwardOneWeek" onclick="changeWeek({{thisWeekIndex}}, +1, {{numWeeks}}, '{{datesArray}}');">Forward a week</button>
                 </div>
                 <div class="radio-button-container userHighlight">
-                    <input type="hidden" id="currentlyHighlighted" name="currentlyHighlighted" value="all">
                     <label>
                         <input type="radio" name="person" id="all" value="all" onclick="uidSelect('all', 'all');">
                         <label for="all">All</label>
@@ -52,37 +53,37 @@
                     </div>
                     <div id="Sunday" class="{{'todayHeader' if todayIndex == 0 else ''}}">
                         <p>Sunday</p>
-                        <p>{{dates[0]}}</p>
+                        <p id="sundayDate">{{datesArray[thisWeekIndex][0]}}</p>
                     </div>
 
                     <div id="Monday" class="{{'todayHeader' if todayIndex == 1 else ''}}">
                         <p>Monday</p>
-                        <p>{{dates[1]}}</p>
+                        <p id="mondayDate">{{datesArray[thisWeekIndex][1]}}</p>
                     </div>
 
                     <div id="Tuesday" class="{{'todayHeader' if todayIndex == 2 else ''}}">
                         <p>Tuesday</p>
-                        <p>{{dates[2]}}</p>
+                        <p id="tuesdayDate">{{datesArray[thisWeekIndex][2]}}</p>
                     </div>
 
                     <div id="Wednesday" class="{{'todayHeader' if todayIndex == 3 else ''}}">
                         <p>Wednesday</p>
-                        <p>{{dates[3]}}</p>
+                        <p id="wednesdayDate">{{datesArray[thisWeekIndex][3]}}</p>
                     </div>
 
                     <div id="Thursday" class="{{'todayHeader' if todayIndex == 4 else ''}}">
                         <p>Thursday</p>
-                        <p>{{dates[4]}}</p>
+                        <p id="thursdayDate">{{datesArray[thisWeekIndex][4]}}</p>
                     </div>
 
                     <div id="Friday" class="{{'todayHeader' if todayIndex == 5 else ''}}">
                         <p>Friday</p>
-                        <p>{{dates[5]}}</p>
+                        <p id="fridayDate">{{datesArray[thisWeekIndex][5]}}</p>
                     </div>
 
                     <div id="Saturday" class="{{'todayHeader' if todayIndex == 6 else ''}}">
                         <p>Saturday</p>
-                        <p>{{dates[6]}}</p>
+                        <p id="saturdayDate">{{datesArray[thisWeekIndex][6]}}</p>
                     </div>
                 </div>
                 <div class="calendarGrid" id="calendarGridMain">
@@ -111,7 +112,8 @@
                     <div class = "timeLabel" style = "grid-area: r21-00 / a00-00 / r22-00 / a00-00;"><p>9:00 PM</p></div>
                     <div class = "timeLabel" style = "grid-area: r22-00 / a00-00 / r23-00 / a00-00;"><p>10:00 PM</p></div>
                     <div class = "timeLabel" style = "grid-area: r23-00 / a00-00 / r-1 / a00-00;"><p>11:00 PM</p></div>
-                    {% for event in events %}
+
+                    {% for event in events[thisWeekIndex] %}
                         <div class="event {{event['uid']}}" style = "grid-area: r{{event['rowstart']}} / 
                                 a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}};">
                             <p id="eventHeading">{{event['summary']}}</p>

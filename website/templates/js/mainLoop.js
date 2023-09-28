@@ -27,15 +27,35 @@ async function updateTimeData () {
     document.getElementById("datetime").innerHTML = displayString;
 }
 
-function changeWeek(today, direction) {
+function changeWeek(thisWeekIndex, direction, numWeeks, datesArray) {
+    console.log(datesArray);
+    datesArray.replaceAll("\'","\"");
+    datesArray = Array.from(JSON.parse(datesArray));
+    const currentViewingWeek = parseInt(document.getElementById("currentWeekViewing").value);
     if (direction == 0) {
-        alert("reset to today")
-    } else if (direction == -1) {
-        alert("look back one week")
-    } else {
-        alert("look forward one week")
+        document.getElementById("currentWeekViewing").value = thisWeekIndex;
+        update();
+        dayHeadingDates(datesArray[thisWeekIndex]);
+    } else if (direction == -1 && currentViewingWeek > 0) {
+        document.getElementById("currentWeekViewing").value = currentViewingWeek - 1;
+        update();
+        dayHeadingDates(datesArray[currentViewingWeek - 1]);
+    } else if (direction == 1 && currentViewingWeek < numWeeks) {
+        document.getElementById("currentWeekViewing").value = currentViewingWeek + 1;
+        update();
+        dayHeadingDates(datesArray[currentViewingWeek + 1]);
     }
 } 
+
+function dayHeadingDates(datesArray) {
+    document.getElementById("sundayDate").innerHTML = datesArray[0];
+    document.getElementById("mondayDate").innerHTML = datesArray[1];
+    document.getElementById("tuesdayDate").innerHTML = datesArray[2];
+    document.getElementById("wednesdayDate").innerHTML = datesArray[3];
+    document.getElementById("thursdayDate").innerHTML = datesArray[4];
+    document.getElementById("fridayDate").innerHTML = datesArray[5];
+    document.getElementById("saturdayDate").innerHTML = datesArray[6];
+}
 
 function uidSelect(person, uids) {
     resetHighlighted()
@@ -47,8 +67,6 @@ function uidSelect(person, uids) {
                 elements[i].classList.add("highlightedEvent");
             }
         }
-    } else {
-
     }
 }
 
@@ -111,8 +129,9 @@ async function update() {
                     <div class = "timeLabel" style = "grid-area: r23-00 / a00-00 / r-1 / a00-00;"><p>11:00 PM</p></div>
                     `;
 
+    const viewingWeek = document.getElementById("currentWeekViewing").value;
     // add new events
-    for (const event of text) {
+    for (const event of text[viewingWeek]) {
         render(event);
     }
 
