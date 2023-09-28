@@ -1,4 +1,5 @@
 import logging
+import math
 import pytz
 import json
 from .cal import *
@@ -44,10 +45,12 @@ def default(db_session, globals):
     return render_template(
         "calendar.html",
         events=globals.events,
+        datesArray = dates_array(firstDay),
+        numWeeks = total_weeks_loaded,
+        thisWeekIndex = math.floor(total_weeks_loaded /2),
         family=familyMembers,
-        dates=dates,
         todayIndex=(today.weekday() + 1) % 7,
-        todayDate = today,
+        firstDay = firstDay,
         uids=uids_to_div_dict(family)
     )
 
@@ -88,17 +91,18 @@ def do_update(family, today, hashes):
     for member in family:
         member.eventsHash = hashes[member.name]
         member.userObject = userObjects[member.name]
-    return json.dumps(calendarise_events(evs, family))
-
+    return json.dumps(calendarise_events(evs, family, today))
 
 def log_events(events):
     logging.warning("Events:")
-    for event in events:
-        logging.warning(
-            "{} {} {} {}".format(
-                event["summary"], event["start"], event["uid"], str(event["attendees"])
+    for week in events:
+        for event in week:
+            logging.warning(
+                "{} {} {} {}".format(
+                    event["summary"], event["start"], event["uid"], str(event["attendees"])
+                )
             )
-        )
+        logging.warning("...")
 
 
 @calendar.route("/do_update", methods=["POST"])
