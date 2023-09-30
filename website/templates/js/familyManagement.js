@@ -70,3 +70,6 @@ function validateForm(whichForm) {
   }
 }
 
+function dismissAlert() {
+  document.getElementById('alert').style.display = "none";
+}

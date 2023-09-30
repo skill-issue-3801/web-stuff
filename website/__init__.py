@@ -16,7 +16,7 @@ def main(db_url, args):
 
     app.config["SQLALCHEMY_DATABASE_URI"] = db_url
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
+    app.secret_key = 'a string of random bytes, need this to be able to flash messages'
     DB.init_app(app)
 
     with app.app_context():

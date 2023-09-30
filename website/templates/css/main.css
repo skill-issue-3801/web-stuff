@@ -592,3 +592,27 @@ as-is or find some way to hide them that doesn't hide the message*/
   width: auto;
   max-width: 48%;
 }
+
+#alert {
+  padding: 5px 10px 5px 10px;
+  border-radius: 10px;
+}
+
+#alert p {
+  color: white;
+}
+
+#dismissAlertButton {
+  float: right;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.alert-error {
+  background-color: var(--light-coral);
+}
+
+.alert-success {
+  background-color: var(--skobeloff);
+}
