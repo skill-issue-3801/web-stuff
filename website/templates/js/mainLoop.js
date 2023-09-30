@@ -1,5 +1,41 @@
 let latestJson = "";
 
+var inactiveTimeout;
+var screensaver_active = false;
+var idletime = 5;
+
+document.onkeypress = function () {
+    console.log("you pressed something!!");
+    detectedSomething();
+}
+
+document.onmousemove = function() {
+    console.log("you moved your mouse!");
+    detectedSomething();
+}
+
+function detectedSomething() {
+    clearTimeout(inactiveTimeout);
+    if (screensaver_active) {
+        stop_screensaver();
+    }
+    inactiveTimeout = setTimeout(show_screensaver, 1000 * idletime);
+}
+
+// show screensaver function
+function show_screensaver(){
+    document.getElementById('screensaver').style.display = "block";
+    screensaver_active = true;
+    console.log("on");
+}
+
+// stop screensaver
+function stop_screensaver(){
+   document.getElementById('screensaver').style.display = "none";
+    screensaver_active = false;
+    console.log("off");
+}
+
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
