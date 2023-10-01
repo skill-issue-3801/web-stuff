@@ -4,6 +4,30 @@
 <h1>{% block title %} Family {% endblock %}</h1>
 <p>Edit, add and remove family members here.<br></p>
 
+{% with messages = get_flashed_messages(with_categories=true) %} 
+    {% if messages %} 
+        {% for category, message in messages %} 
+            {% if category == 'error' %}
+                <div id="alert" class="alert alert-error">
+                    <p>{{ message }}
+                        <button id="dismissAlertButton" type="button" onclick="dismissAlert()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </p>
+                </div>
+            {% else %}
+                <div id="alert" class="alert alert-success">
+                    <p>{{ message }}
+                        <button id="dismissAlertButton" type="button" onclick="dismissAlert()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </p>
+                </div>
+            {% endif %} 
+        {% endfor %}
+    {% endif %} 
+{% endwith %}
+
 <div id="familyContainer">
     <!--family member icons w names above them and edit and delete buttons below them-->
     {% for member in family%}
