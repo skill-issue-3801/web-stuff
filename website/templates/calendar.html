@@ -115,7 +115,8 @@
                         <div class="event {{event['uid']}}" style = "grid-area: r{{event['rowstart']}} / 
                                 a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}};">
                             <p id="eventHeading">{{event['summary']}}</p>
-                            <p>{{event['start']}} - {{event['end']}}</p>
+                            <!-- wat -->
+                            <p>{{'12' if ((event['start'][:2] | int) % (12 | int)) == 0 else (((event['start'][:2] | int) % (12 | int)) | string())}}:{{event['start'][3:]}} {{'PM' if (event['start'][:2] | int) >= (12 | int) else 'AM'}} - {{'12' if ((event['end'][:2] | int) % (12 | int)) == 0 else (((event['end'][:2] | int) % (12 | int)) | string())}}:{{event['end'][3:]}} {{'PM' if (event['end'][:2] | int) >= 12 else 'AM'}}</p>
                             {% for person in event['attendees'] %}
                                 <img class="icon" src="{{url_for('static', filename=person['icon'])}}"> 
                                 <p>{{person['name']}}</p>
@@ -133,13 +134,6 @@
             </div>
         </section>
 </main>
-
-<!--
-  Note on keybindings: they function using mousetrap.
-
-  0,1,2,3 -> Highlight User $x
-  a -> Highlight All Users
--->
 
 <script type="text/javascript" src="{{url_for('static', filename='js/calendarTimes.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/mainLoop.js')}}"></script>
