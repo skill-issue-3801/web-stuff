@@ -11,26 +11,6 @@ admin = Blueprint("admin", __name__)
 logger = logging.getLogger(__name__)
 
 
-# Connects to the Calendar set up page (config)
-@admin.route("/add_calendars", methods=["GET"])
-def add_calendars():
-    return render_template("calendarSetUp.html")
-
-
-@admin.route("/add_calendars", methods=["POST"])
-@has_db
-def calendars_post(db_session):
-    db_session.add(
-        FamilyMember(
-            name="NAME", url="URL", calendarType="apple", eventsHash=0, userObject=None
-        )
-    )
-    db_session.commit()
-    db_session.close()
-
-    return add_calendars()
-
-
 @admin.route("/", methods=["GET"])
 @has_db
 def manage_family(db_session):
@@ -140,4 +120,3 @@ def delete_family_member(db_session):
 @admin.route("/help", methods=["GET"])
 def help():
     return render_template("guide.html")
-
