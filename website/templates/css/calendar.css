@@ -68,6 +68,7 @@
     width: var(--calendar-width);
 }
 
+/* Top bar of the calendar to show the days and dates */
 .calendarDays {
     display: grid;
     column-gap: var(--column-gap);
@@ -77,6 +78,8 @@
     background-color: var(--grid-background-colour);
 
 }
+
+/* Individual days within the calendarDay grid */
 .calendarDays div {
     width: 100%;
     text-align: center;
@@ -86,11 +89,13 @@
     font-size: 1em;
 }
 
+/* Styling the text to white */
 .calendarDays p {
     color: white;
 }
 
 /* Calendar days */
+/* Time grid section is left to ensure the same sizing as the calendar grid below it */
 #timeEmptySpace {
     grid-area: time;
 }
@@ -125,7 +130,7 @@
 
 /* Event in the calendar grid below */
 /* Key:
-    "c" - coloumn name (soz for the spelling mistake, its embedded  now)
+    "c" - coloumn name (apologies for the spelling mistake, its embedded  now)
     "r" - row name
     "a" - grid area name
     */

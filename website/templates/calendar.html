@@ -121,7 +121,7 @@
                             <p>{{'12' if ((event['start'][:2] | int) % (12 | int)) == 0 else (((event['start'][:2] | int) % (12 | int)) | string())}}:{{event['start'][3:]}} {{'PM' if (event['start'][:2] | int) >= (12 | int) else 'AM'}} - {{'12' if ((event['end'][:2] | int) % (12 | int)) == 0 else (((event['end'][:2] | int) % (12 | int)) | string())}}:{{event['end'][3:]}} {{'PM' if (event['end'][:2] | int) >= 12 else 'AM'}}</p>
                             {% for person in event['attendees'] %}
                             <img class="icon" src="{{url_for('static', filename=person['icon'])}}"> 
-                            <!-- <p>{{person['name']}}</p> -->
+                            <p>{{person['name']}}</p>
                             {% endfor %}
                         </div>
                     {% endfor %}
@@ -131,7 +131,7 @@
                     <div class="timeRows">
 
                     </div>
-                    <!-- !!!!!!!!!!!!!!!!!!!!!!!!! Below is the top row of the calendar -->
+                    <!-- Below is the top row of the calendar -->
                 </div>
             </div>
         </section>
