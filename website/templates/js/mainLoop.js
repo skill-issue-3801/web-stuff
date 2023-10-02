@@ -12,7 +12,7 @@ async function updateTimeData () {
     coordinates = `r${hour}-${minutes} / cSunday / r${hour}-${minutes} / c-1`;
     document.getElementById("currentTime").style["gridArea"] = coordinates;
 
-    document.getElementById("currentTime").scrollIntoView(true);
+    document.getElementById("currentTime").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
 
     /* now do date and time up top*/
     const day = now.toLocaleString('en-GB', {day: 'numeric'});
@@ -26,8 +26,9 @@ async function updateTimeData () {
         default:
             mod = "th";
     }
+
     const displayString = (
-        now.toLocaleString('en-GB', {hour: 'numeric', minute: 'numeric', hour12: true }) + ", " + 
+        now.toLocaleString('en-GB', {hour:'numeric', minute:'numeric', hour12: true}) + ", " + 
         now.toLocaleString('en-GB', {weekday: 'long'}) + " " + day + mod + " " +
         now.toLocaleString('en-GB', {month: 'long'}));
     document.getElementById("datetime").innerHTML = displayString;
@@ -106,11 +107,21 @@ function render(event) {
         <p>${person['name']}</p>
         `;
     }
+
+    stEventHrs = Number(event['start'].split(':')[0]);
+    stEventMin = event['start'].split(':')[1];
+    ndEventHrs = Number(event['end'].split(':')[0]);
+    ndEventMin = event['end'].split(':')[1];
+
+    stEventAMPM = stEventHrs >= 12 ? 'AM' : 'PM';
+    ndEventAMPM = ndEventHrs >= 12 ? 'AM' : 'PM';
+    stEventHrs = (stEventHrs % 12) ? (stEventHrs % 12) : 0;
+    ndEventHrs = (ndEventHrs % 12) ? (ndEventHrs % 12) : 0;
     
     constructed = `
     <div class="event ${event['uid']}" style="grid-area:r${event['rowstart']} / a${event['colstart']} / r${event['rowend']} / a${event['colend']};">
     <p id="eventHeading">${event['summary']}<p>
-    <p>${event['start']} - ${event['end']}</p>
+    <p>${stEventHrs}:${stEventMin} ${stEventAMPM} - ${ndEventHrs}:${ndEventMin} ${ndEventAMPM}</p>
     ${people}
     </div>
     `;
@@ -162,8 +173,7 @@ async function update() {
     // find who is highlighted right now and click their button to highlight them
     const highlightedPerson = document.getElementById("currentlyHighlighted").value;
     document.getElementById(highlightedPerson).click();
-    
-    // generate "current time" wave
+
     updateTimeData();
     latestJson = text;
 }

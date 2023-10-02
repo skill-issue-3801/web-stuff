@@ -24,7 +24,7 @@ def main(db_url, args):
         Base.metadata.create_all(s.connection())
         s.commit()
 
-    app.register_blueprint(admin, url_prefix="/admin")
+    app.register_blueprint(admin, url_prefix="")
     app.register_blueprint(calendar, url_prefix="/calendar")
 
     if __debug__:
@@ -51,11 +51,11 @@ def main(db_url, args):
                 )
             )
 
-            name="test 2"
-            link="https://calendar.google.com/calendar/ical/406051a36534cc9f88d8df0d7fe1fb69dff521e5713ec771bc80e9d8e461f391%40group.calendar.google.com/private-3f7d09cd72dfeb37f715568fbb3ef85c/basic.ics"
-            calendarType="google"
-            email="a@c.b"
-            icon="graphics/ocean-icons/Slug_2.png"
+            name = "test 2"
+            link = "https://calendar.google.com/calendar/ical/406051a36534cc9f88d8df0d7fe1fb69dff521e5713ec771bc80e9d8e461f391%40group.calendar.google.com/private-3f7d09cd72dfeb37f715568fbb3ef85c/basic.ics"
+            calendarType = "google"
+            email = "a@c.b"
+            icon = "graphics/ocean-icons/Slug_2.png"
             eventsHash = 0
             userObject = User(name, link, calendarType, email)
             s.add(

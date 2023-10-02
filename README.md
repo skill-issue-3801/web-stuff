@@ -22,7 +22,7 @@ A dockerfile is also provided. This can be built and run instead of manually ins
 To connect to a production database, the URI should be provided in the `DATABASE_URI` environment variable.
 
 ## Development
-For development use, omit the `-O` flag from the above command. This will change several behaviours of the website, including much faster calendar updates and pre-filling the database with some dummy users.
+For development use, omit the `-O` flag from the above command. This will change several behaviours of the website, including much faster calendar updates and pre-filling the database with some dummy users. It will also 'unlock' the calendar endpoint, that is otherwise usually locked and only accessible from the hardware (raspberry pi) component.
 
 ### Structure
 The project is structured with the code all living inside `website/`. The root folder stores build/dependency information.
