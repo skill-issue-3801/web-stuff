@@ -20,9 +20,6 @@
 }
 
 
-/* Media moved to base.css! */
-
-
 /** 
 
     *Global Varibles*
@@ -300,28 +297,6 @@ input[type=radio]:checked {
   transition: 0.4s;
 }
 
-.navigationBar a:focus {
-  text-decoration: none;
-  font-weight: bold;
-  color: var(--indigo-dye);
-  background: var(--light-coral);
-}
-
-.navigationBar a:hover {
-  text-decoration: underline;
-  font-weight: bold;
-  color: var(--indigo-dye);
-  background: var(--light-coral);
-  transition: 0.4s;
-}
-
-.navigationBar a:active {
-  background: var(--light-coral);
-  color: var(--mint-green);
-  text-decoration: none;
-}
-
-
 
 /* family container stuff here */
 #familyContainer {
@@ -441,7 +416,7 @@ as-is or find some way to hide them that doesn't hide the message*/
 
 
 
-/*media queries*/
+/*For when screen is not full screen (mobile screen)*/
 @media only screen and (max-width: 1000px) {
   h1 {
     font-size: 2.3em;

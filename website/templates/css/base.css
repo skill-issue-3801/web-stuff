@@ -1,5 +1,15 @@
 /* base.html and it's inheriting files css */
 
+:root {
+    /* CSS HEX */
+    --mint-green: #d3f2e9ff;
+    --cambridge-blue: #7ca8a1ff;
+    --skobeloff: #0a7b79ff;
+    --indigo-dye: #1d406bff;
+    --sandy-brown: #f4a363ff;
+    --light-coral: #db767dff;
+  }
+
 /* Background Video */
 #baseWaterBackgroundVideo{
     position: fixed;
@@ -15,9 +25,20 @@
 .navImage {
     justify-content: center;
     width: 15vw;
+    display: flex;
+    align-items: center;
 }
 
-/* Nav A tag styling */
+
+.navigationBar a {
+    text-align: center;
+    border-radius: 0.5vw;
+    font-family: var(--body-font);
+    transition: 0.2s;
+    line-height: 3em;
+}
+
+/* Navigation bar A tag styling to look like buttons*/
 .navigationBar a:link {
     color: var(--mint-green);
     text-decoration: none;
@@ -50,7 +71,23 @@
 }
 
 
-/*For when it's full screen*/
+/* Navigation bar container styles and placement */
+.navWrapper .navigationBar {
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 15vw;
+    height: 100vh;
+    background-color: var(--indigo-dye);
+    color: var(--mint-green);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+
+
+/*For when it's full screen - container of .content*/
 .baseContent {
     margin-left: 15vw;
     display: flex;
@@ -66,37 +103,7 @@
     background: var(--mint-green);
 }
 
-
-.navWrapper .navigationBar {
-    top: 0;
-    left: 0;
-    position: fixed;
-    width: 15vw;
-    height: 100vh;
-    background-color: var(--indigo-dye);
-    color: var(--mint-green);
-    display: flex;
-    flex-direction: column;
-    /* Trying to work out if side nav bunched at the top looks better?? */
-    /* gap: 5%;
-    align-content: space-around;
-    justify-content: space-evenly; */
-    align-items: stretch;
-}
-
-.navigationBar a {
-    outline: none;
-    text-align: center;
-    /* width:15vw;
-    padding-top: 6vh;
-    padding-bottom: 6vh; */
-    border-radius: 0.5vw;
-    font-family: var(--body-font);
-    transition: 0.2s;
-    line-height: 3em;
-}
-
-
+/* Content within baseContent */
 .content {
     height: 100%;
     width: 100%;

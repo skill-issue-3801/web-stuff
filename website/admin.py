@@ -1,6 +1,6 @@
 import logging
 
-from flask import Blueprint, request, render_template, redirect, flash
+from flask import Blueprint, request, render_template, redirect, flash, url_for
 
 from .cal import User, is_valid_url
 from .models import FamilyMember
@@ -12,35 +12,6 @@ logger = logging.getLogger(__name__)
 
 
 @admin.route("/", methods=["GET"])
-def default():
-    return """<p>This is the admin page.<br>
-<a href="/admin/add_calendars">Add calendars.</a><br>
-<a href="/admin/manage_family">Change family settings.</a><br>
-<a href="/admin/help">Get help.</a><br>
-<a href="/admin/settings">Advanced settings.</a></p>"""
-
-
-# Connects to the Calendar set up page (config)
-@admin.route("/add_calendars", methods=["GET"])
-def add_calendars():
-    return render_template("calendarSetUp.html")
-
-
-@admin.route("/add_calendars", methods=["POST"])
-@has_db
-def calendars_post(db_session):
-    db_session.add(
-        FamilyMember(
-            name="NAME", url="URL", calendarType="apple", eventsHash=0, userObject=None
-        )
-    )
-    db_session.commit()
-    db_session.close()
-
-    return add_calendars()
-
-
-@admin.route("/manage_family", methods=["GET"])
 @has_db
 def manage_family(db_session):
     family = db_session.query(FamilyMember).all()
@@ -48,7 +19,7 @@ def manage_family(db_session):
     return render_template("manageFamily.html", family=family)
 
 
-@admin.route("/manage_family", methods=["POST"])
+@admin.route("/", methods=["POST"])
 @has_global_stuff
 def family_post(db_session, globals):
     if request.form.get("formName") == "addFamilyMember":
@@ -62,7 +33,7 @@ def family_post(db_session, globals):
         globals.familyChanges = True
     db_session.commit()
     db_session.close()
-    return redirect("/admin/manage_family")
+    return redirect(url_for("manage_family"))
 
 
 def add_family_member(db_session):
@@ -157,18 +128,3 @@ def delete_family_member(db_session):
 @admin.route("/help", methods=["GET"])
 def help():
     return render_template("guide.html")
-
-
-@admin.route("/customise", methods=["GET"])
-def customise():
-    return render_template("customise.html")
-
-
-@admin.route("/customise", methods=["POST"])
-@has_db
-def customise_post(db_session):
-    db_session.add()
-    db_session.commit()
-    db_session.close()
-
-    return customise()
