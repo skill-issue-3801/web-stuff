@@ -139,11 +139,22 @@ function resetHighlighted() {
 
 function render(event) {
     people = "";
-    for (const person of event['attendees']) {
-        people += `<img class="icon" src="/templates/${person['icon']}">
-
-        <p>${person['name']}</p>
-        `;
+    if (event['short']) {
+        people += `<p>`;
+        let first = true;
+        for (const person of event['attendees']) {
+            if (first) {
+                first = false;
+            } else {
+                people += `, `;
+            }
+            people += `${person['name']}`;
+        }
+        people += `</p>`;
+    } else {
+        for (const person of event['attendees']) {
+            people += `<img class="icon" src="/templates/${person['icon']}"><p>${person['name']}</p>`;
+        }
     }
 
     stEventHrs = Number(event['start'].split(':')[0]);
@@ -226,7 +237,7 @@ async function main() {
         setInterval(update, 300000); // 300 seconds (5 minutes) for prod
     } else {
         console.log("Running in dev mode.");
-        setInterval(update, 10000); // 10 seconds for dev
+        setInterval(update, 300000); // 10 seconds for dev
     }
     update();
 }
