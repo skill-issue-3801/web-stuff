@@ -24,7 +24,7 @@ def main(db_url, args):
         Base.metadata.create_all(s.connection())
         s.commit()
 
-    app.register_blueprint(admin, url_prefix="/admin")
+    app.register_blueprint(admin, url_prefix="")
     app.register_blueprint(calendar, url_prefix="/calendar")
 
     if __debug__:

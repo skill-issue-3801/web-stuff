@@ -11,15 +11,6 @@ admin = Blueprint("admin", __name__)
 logger = logging.getLogger(__name__)
 
 
-@admin.route("/", methods=["GET"])
-def default():
-    return """<p>This is the admin page.<br>
-<a href="/admin/add_calendars">Add calendars.</a><br>
-<a href="/admin/manage_family">Change family settings.</a><br>
-<a href="/admin/help">Get help.</a><br>
-<a href="/admin/settings">Advanced settings.</a></p>"""
-
-
 # Connects to the Calendar set up page (config)
 @admin.route("/add_calendars", methods=["GET"])
 def add_calendars():
@@ -40,7 +31,7 @@ def calendars_post(db_session):
     return add_calendars()
 
 
-@admin.route("/manage_family", methods=["GET"])
+@admin.route("/", methods=["GET"])
 @has_db
 def manage_family(db_session):
     family = db_session.query(FamilyMember).all()
@@ -48,7 +39,7 @@ def manage_family(db_session):
     return render_template("manageFamily.html", family=family)
 
 
-@admin.route("/manage_family", methods=["POST"])
+@admin.route("/", methods=["POST"])
 @has_global_stuff
 def family_post(db_session, globals):
     if request.form.get("formName") == "addFamilyMember":
@@ -150,17 +141,3 @@ def delete_family_member(db_session):
 def help():
     return render_template("guide.html")
 
-
-@admin.route("/customise", methods=["GET"])
-def customise():
-    return render_template("customise.html")
-
-
-@admin.route("/customise", methods=["POST"])
-@has_db
-def customise_post(db_session):
-    db_session.add()
-    db_session.commit()
-    db_session.close()
-
-    return customise()
