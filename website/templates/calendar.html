@@ -7,7 +7,7 @@
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
     <!-- Calendar.css is for calendar view styles only -->
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/calendar.css')}}">
-
+    <script src="{{url_for('static', filename='js/mousetrap.js')}}"></script>
 </head>
 <!-- 
     For example details on how templating works please see the following website
@@ -117,7 +117,8 @@
                         <div class="event {{event['uid']}}" style = "grid-area: r{{event['rowstart']}} / 
                                 a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}};">
                             <p id="eventHeading">{{event['summary']}}</p>
-                            <p>{{event['start']}} - {{event['end']}}</p>
+                            <!-- wat -->
+                            <p>{{'12' if ((event['start'][:2] | int) % (12 | int)) == 0 else (((event['start'][:2] | int) % (12 | int)) | string())}}:{{event['start'][3:]}} {{'PM' if (event['start'][:2] | int) >= (12 | int) else 'AM'}} - {{'12' if ((event['end'][:2] | int) % (12 | int)) == 0 else (((event['end'][:2] | int) % (12 | int)) | string())}}:{{event['end'][3:]}} {{'PM' if (event['end'][:2] | int) >= 12 else 'AM'}}</p>
                             {% for person in event['attendees'] %}
                                 <img class="icon" src="{{url_for('static', filename=person['icon'])}}"> 
                                 <p>{{person['name']}}</p>
@@ -135,13 +136,25 @@
             </div>
         </section>
 </main>
+
 <script type="text/javascript" src="{{url_for('static', filename='js/calendarTimes.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/mainLoop.js')}}"></script>
 <script>
-    window.onload = function (){
+    window.onload = function () {
         updateTimeData();
         resetHighlighted();
     }
+
+    Mousetrap.bind('a', function() { document.getElementById('all').click(); });
+    Mousetrap.bind('u', function() { document.getElementById('calendarGridMain').scrollBy({top: -120, left: 0, behavior: 'smooth' }); });
+    Mousetrap.bind('d', function() { document.getElementById('calendarGridMain').scrollBy({top: 120, left: 0, behavior: 'smooth' }); });
+    Mousetrap.bind('f', function() { document.getElementById('forwardOneWeek').click(); });
+    Mousetrap.bind('b', function() { document.getElementById('backOneWeek').click(); });
 </script>
+{% for user in uids.keys() %}
+    <script>
+        Mousetrap.bind('{{loop.index0}}', function() { document.getElementById('{{user}}').click(); });
+    </script>
+{% endfor %}
 </body>
 </html>
