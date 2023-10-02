@@ -14,7 +14,9 @@ weekdays = {
     5: "Friday",
     6: "Saturday",
 }
-
+load_past_weeks = 5
+load_future_weeks = 5
+total_weeks_loaded = load_past_weeks + load_future_weeks + 1
 
 class User:
     """An object representing a user/family member
@@ -179,15 +181,15 @@ def update_user_name(names, name, newName, user):
     return True
 
 
-def edges_of_week(today):
+def time_frame_to_download(today):
     day = (today.weekday() + 1) % 7
-    sunday = today - timedelta(days=day)
-    saturday = sunday + timedelta(days=6)
-    return (sunday, saturday)
+    start = today - timedelta(days=day, weeks = load_past_weeks)
+    end = today + timedelta(days=6-day, weeks = load_future_weeks)
+    return (start, end)
 
 
 def check_cal_for_updates(url, caltype, hash, today):
-    start, end = edges_of_week(today)
+    start, end = time_frame_to_download(today)
     if url == None:
         return False
     evs = icalevents.events(
@@ -213,7 +215,7 @@ def update_events(family, today, hashes, names, emails):
             member.set_hash(
                 hashes[member.get_name()]
             )  # record hash of events before processing
-            start, end = edges_of_week(today)
+            start, end = time_frame_to_download(today)
             evs = icalevents.events(
                 url=member.get_link(),
                 start=start,
@@ -300,22 +302,26 @@ def get_email_owner(email, family):
             return member.get_name()
     return None
 
-
-def calendarise_events(events, family):
+def get_weeks_index(day, firstSunday):
+    thisWeekStart = day - timedelta(days=((day.weekday() + 1) % 7))
+    return (int((thisWeekStart - firstSunday).days / 7))
+    
+def calendarise_events(events, family, today):
     familyMembers = {}
     for person in family:
         familyMembers[person.name] = person
-
-    parsedEvents = []
+    
+    parsedEvents = [[] for _ in range(total_weeks_loaded)]
+    firstSunday = today - timedelta(days=((today.weekday() + 1) % 7), weeks=load_past_weeks)
+    
     for event in events:
         manstart = event.start
-
         while manstart.date() <= event.end.date():
             if (manstart.date() == event.end.date()) or (
                 event.end
                 == ((event.start + timedelta(days=1)).replace(hour=00, minute=00))
             ):
-                parsedEvents.append(
+                parsedEvents[get_weeks_index(manstart.date(), firstSunday)].append(
                     htmlEvent(
                         event.summary,
                         event.uid,
@@ -330,7 +336,7 @@ def calendarise_events(events, family):
                 break
             else:
                 manualEnd = (event.start).replace(hour=00, minute=00)
-                parsedEvents.append(
+                parsedEvents[get_weeks_index(manstart.date(), firstSunday)].append(
                     htmlEvent(
                         event.summary,
                         event.uid,
@@ -344,7 +350,6 @@ def calendarise_events(events, family):
                 )
                 manstart = (event.start + timedelta(days=1)).replace(hour=00, minute=1)
     return parsedEvents
-
 
 class htmlEvent(dict):
     def __init__(self, summary, uid, attendees, family, start, end, gridStart, gridEnd):
@@ -361,6 +366,15 @@ class htmlEvent(dict):
             rowend=get_timecode(gridEnd, "end"),
         )
 
+def dates_array(firstDayThisWeek):
+    dates = [[0]*7 for _ in range(total_weeks_loaded)]
+    firstDayInArray = firstDayThisWeek - timedelta(weeks = load_past_weeks)
+    counter = 0
+    for i in range (0, total_weeks_loaded):
+        for j in range (0, 7):
+            dates[i][j] = (firstDayInArray + timedelta(days = counter)).day
+            counter+=1
+    return dates
 
 def get_timecode(date, startEnd):
     if date.strftime("%H:%M") == "00:00":

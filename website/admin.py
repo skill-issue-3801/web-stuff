@@ -1,6 +1,6 @@
 import logging
 
-from flask import Blueprint, request, render_template, redirect
+from flask import Blueprint, request, render_template, redirect, flash
 
 from .cal import User, is_valid_url
 from .models import FamilyMember
@@ -39,7 +39,7 @@ def family_post(db_session, globals):
 def add_family_member(db_session):
     name = request.form.get("name")
     if db_session.query(FamilyMember).filter_by(name=name).first():
-        logging.warning("that name is already being used")
+        flash("Sorry, user could not be added. That name is already being used by another family member", category='error')
         return
 
     link = request.form.get("link")
@@ -50,7 +50,7 @@ def add_family_member(db_session):
         logging.warning("invalid url")
         return
     elif db_session.query(FamilyMember).filter_by(url=link).first():
-        logging.warning("that url is already being used")
+        flash("Sorry, user could not be added. That calenader url is already being used by another family member", category='error')
         return
 
     if request.form.get("email") == "":
@@ -58,7 +58,7 @@ def add_family_member(db_session):
     else:
         email = request.form.get("email")
     if email != None and db_session.query(FamilyMember).filter_by(email=email).first():
-        logging.warning("that email is already being used")
+        flash("Sorry, user could not be added. That email is already being used by another family member", category='error')
         return
 
     icon = request.form.get("icon")
@@ -74,46 +74,54 @@ def add_family_member(db_session):
         userObject=userObject,
     )
     db_session.add(row)
+    flash("Welcome to the family {}!".format(name), category='success')
 
 
 def edit_family_member(db_session):
     originalName = request.form.get("personName")
     name = request.form.get("name")
+    if (name != originalName and db_session.query(FamilyMember).filter(FamilyMember.name!=originalName).filter_by(name=name).first()):
+        flash("Sorry, you can't update {}'s name to {}, another family member with that name already exists".format(originalName, name), category='error')
+        return
+    
     link = request.form.get("link")
     caltype = request.form.get("calendarType")
     if link == "":
         link = None
-    elif not is_valid_url(link, caltype):
-        logging.warning("invalid url")
+    elif (db_session.query(FamilyMember).filter(FamilyMember.name!=originalName).filter_by(url=link).first()):
+        flash("Sorry that calendar url is already being used by another family member, could not update {}'s url".format(name), category='error')
         return
+    
     if request.form.get("email") == "":
         email = None
     else:
         email = request.form.get("email")
+    if email != None and (db_session.query(FamilyMember).filter(FamilyMember.name!=originalName).filter_by(email=email).first()):
+        flash("Sorry, you cant update {}'s email to {}, it is already being used by another family member".format(name, email), category='error')
+        return
+    
     icon = request.form.get("icon")
-
     person = db_session.query(FamilyMember).get(originalName)
     userObject = User(name, link, caltype, email)
+    
     if originalName != name:
-        logging.warning("change name")
         person.name = name
     if email != person.email:
-        logging.warning("change email address")
         person.email = email
     if link != person.url:
-        logging.warning("change url")
         person.url = link
         person.calendarType = caltype
     if icon != person.icon:
-        logging.warning("change icon")
         person.icon = icon
     person.userObject = userObject
+    flash("{}'s information was successfully updated!".format(name), category='success')
 
 
 def delete_family_member(db_session):
     name = request.form["submit"]
     person = db_session.query(FamilyMember).get(name)
     db_session.delete(person)
+    flash("Successfully deleted {}".format(person.name), category='success')
 
 
 # Connects to the Guide page

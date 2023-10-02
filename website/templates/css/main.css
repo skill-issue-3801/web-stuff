@@ -56,7 +56,11 @@
 }
 
 /**Below is fine to touch, carefully (notes to keep Ali from breaking things)**/
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: var(--heading-font);
   color: var(--indigo-dye);
 }
@@ -67,7 +71,11 @@ p {
 }
 
 /** https://matthewjamestaylor.com/responsive-font-size#how - trusting this formula**/
-body, button, input, label, b {
+body,
+button,
+input,
+label,
+b {
   font-size: calc(15px + 0.390625vw);
 }
 
@@ -184,7 +192,11 @@ h5 {
   flex-direction: column;
 }
 
-.form-container h1, h2, h3, h4, h5 {
+.form-container h1,
+h2,
+h3,
+h4,
+h5 {
   color: var(--mint-green);
   font-family: var(--body-font);
 }
@@ -211,6 +223,7 @@ h5 {
   font-weight: bold;
   cursor: pointer;
 }
+
 /* TODO: Make cursor pointer when hover over slug icons */
 .radio-button-container label:hover {
   cursor: pointer;
@@ -381,7 +394,7 @@ input[type=radio]:checked {
   border-radius: 10px;
   padding: 0% 10% 0% 10%;
   line-height: 2em;
-  
+
 }
 
 /* Add a red background color to the cancel button */
@@ -414,7 +427,8 @@ as-is or find some way to hide them that doesn't hide the message*/
   height: 0;
 
 }
-.iconSelect input[type="radio"]:checked + img {
+
+.iconSelect input[type="radio"]:checked+img {
   background-color: var(--sandy-brown);
 }
 
@@ -436,15 +450,19 @@ as-is or find some way to hide them that doesn't hide the message*/
   h2 {
     font-size: 1.5em;
   }
+
   h3 {
     font-size: 1.4em;
   }
+
   h4 {
     font-size: 1.3em;
   }
+
   h5 {
     font-size: 1.2em;
   }
+
   body {
     font-size: 1.7em;
   }
@@ -518,7 +536,18 @@ as-is or find some way to hide them that doesn't hide the message*/
     cursor: pointer;
     /* width: 10vw;
     height: 4vw; */
-  }  
+  }
+
+  .guideImgBox {
+    flex-direction: column !important;
+    align-items: center;
+    height: auto !important;
+    gap: 2vh;
+  }
+
+  .guideImg2 {
+    max-width: 100% !important;
+  }
 
 }
 
@@ -536,7 +565,54 @@ as-is or find some way to hide them that doesn't hide the message*/
   display: flex;
 }
 
-#guide-tab-nav a{
+#guide-tab-nav a {
   padding-left: 2%;
 }
 
+.guideImgBox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 30%;
+  margin: 2vh;
+}
+
+.guideImg1 {
+  max-height: 55vh;
+  border-radius: 3%;
+  max-width: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.guideImg2 {
+  height: auto;
+  border-radius: 3%;
+  width: auto;
+  max-width: 48%;
+}
+
+#alert {
+  padding: 5px 10px 5px 10px;
+  border-radius: 10px;
+}
+
+#alert p {
+  color: white;
+}
+
+#dismissAlertButton {
+  float: right;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.alert-error {
+  background-color: var(--light-coral);
+}
+
+.alert-success {
+  background-color: var(--skobeloff);
+}
