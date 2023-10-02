@@ -43,14 +43,39 @@ function changeWeek(thisWeekIndex, direction, numWeeks, datesArray) {
     if (direction == 0) {
         document.getElementById("currentWeekViewing").value = thisWeekIndex;
         putWeeksEvents(thisWeekIndex, datesArray);
-    } else if (direction == -1 && currentViewingWeek >= 0) {
+        document.getElementById("weeksAgoAheadFlag").innerHTML = flagString(thisWeekIndex, thisWeekIndex);
+    } else if (direction == -1 && currentViewingWeek > 0) {
         document.getElementById("currentWeekViewing").value = currentViewingWeek - 1;
         putWeeksEvents(currentViewingWeek - 1, datesArray);
+        document.getElementById("weeksAgoAheadFlag").innerHTML = flagString(thisWeekIndex, currentViewingWeek - 1);
     } else if (direction == 1 && currentViewingWeek < numWeeks - 1) {
         document.getElementById("currentWeekViewing").value = currentViewingWeek + 1;
         putWeeksEvents(currentViewingWeek + 1, datesArray);
+        document.getElementById("weeksAgoAheadFlag").innerHTML = flagString(thisWeekIndex, currentViewingWeek + 1);;
     }
 } 
+
+function flagString(thisWeekIndex, viewingWeek) {
+    if (viewingWeek == thisWeekIndex) {
+        document.getElementById("weeksAgoAheadFlag").style.display = "none";
+        return("");
+    }
+    const diff = thisWeekIndex - viewingWeek;
+    var fs = "";
+    fs += Math.abs(diff);
+    if (Math.abs(diff) == 1) {
+        fs += " week";
+    } else {
+        fs += " weeks";
+    }
+    if (diff < 0) {
+        fs += " ahead";
+    } else {
+        fs += " ago";
+    }
+    document.getElementById("weeksAgoAheadFlag").style.display = "block";
+    return(fs);
+}
 
 function dayHeadingDates(datesArray) {
     document.getElementById("sundayDate").innerHTML = datesArray[0];
@@ -65,7 +90,7 @@ function dayHeadingDates(datesArray) {
 async function putWeeksEvents(viewingWeek, datesArray) {
     writeTimeLabels();
     while (latestJson == "") {
-        // just wait untill update has called once, its easier this way
+        // just wait until update has called once, its easier this way
         await delay(1000);
     }
     // add new events
