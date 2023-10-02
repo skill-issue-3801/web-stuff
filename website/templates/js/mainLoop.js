@@ -52,17 +52,19 @@ async function updateTimeData () {
 
     /* now do date and time up top*/
     const day = now.toLocaleString('en-GB', {day: 'numeric'});
-    switch (day % 10) {
+     switch (day % 10) {
         case 1:
             mod = "st";
+            break;
         case 2:
             mod = "nd";
+            break;
         case 3:
             mod = "rd";
+            break;
         default:
             mod = "th";
     }
-
     const displayString = (
         now.toLocaleString('en-GB', {hour:'numeric', minute:'numeric', hour12: true}) + ", " + 
         now.toLocaleString('en-GB', {weekday: 'long'}) + " " + day + mod + " " +
