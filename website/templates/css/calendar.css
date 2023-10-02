@@ -321,3 +321,7 @@
     display: none;
     border: solid 3px var(--light-coral);
 }
+
+#weeksAgoAheadFlag {
+    background-color: var(--sandy-brown);
+}

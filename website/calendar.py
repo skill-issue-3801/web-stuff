@@ -104,7 +104,6 @@ def log_events(events):
                     event["summary"], event["start"], event["uid"], str(event["attendees"])
                 )
             )
-        logging.warning("...")
 
 
 @calendar.route("/do_update", methods=["POST"])
