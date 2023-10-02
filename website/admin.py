@@ -1,6 +1,6 @@
 import logging
 
-from flask import Blueprint, request, render_template, redirect, flash
+from flask import Blueprint, request, render_template, redirect, flash, url_for
 
 from .cal import User, is_valid_url
 from .models import FamilyMember
@@ -33,7 +33,7 @@ def family_post(db_session, globals):
         globals.familyChanges = True
     db_session.commit()
     db_session.close()
-    return redirect("/admin/manage_family")
+    return redirect(url_for("manage_family"))
 
 
 def add_family_member(db_session):
