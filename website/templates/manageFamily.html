@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{% block title %} Family {% endblock %}</h1>
-<p>Edit, add and remove family members here.<br></p>
+<h1>{% block title %} Home Reef {% endblock %}</h1>
+<p>Edit, add and remove reef members here.<br></p>
 
 {% with messages = get_flashed_messages(with_categories=true) %} 
     {% if messages %} 
@@ -57,7 +57,7 @@
 
     <!-- A button to open the popup form -->
     <button id="form-button" onclick="openForm()">
-        <p>Add Family Member</p>
+        <p>Add Reef Member</p>
     </button>
     </div>
 
@@ -65,7 +65,7 @@
     <!-- The edit form -->
     <div class="form-popup" id="editForm">
         <form action="" name="editForm" class="form-container" method="POST" id="edit_form" onsubmit="return validateForm('editForm')">
-            <h1>Edit Family Member</h1>
+            <h1>Edit Reef Member</h1>
             <input type="hidden" name="formName" value="editFamilyMember">
             <input type="hidden" id = "personName" name="personName" value="">
             <label for="name"><b>Name:</b></label>
@@ -126,7 +126,7 @@
     <!-- The add form -->
     <div class="form-popup" id="familyForm">
         <form name="addForm" action="" class="form-container" method="POST" onsubmit="return validateForm('addForm')">
-            <h1>Add Family Member</h1>
+            <h1>Add Reef Member</h1>
             <input type="hidden" name="formName" value="addFamilyMember">
             <label for="name"><b>Name:</b></label>
             <input type="text" placeholder="Enter Name" name="name" required>

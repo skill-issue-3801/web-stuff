@@ -268,10 +268,12 @@
 }
 
 .event {
-    background-color: var(--light-coral-transparent);
+    background-color: var(--light-coral);
     border-radius: 10px;
     padding: 5%;
     padding-left:10px;
+    padding-bottom: 10%;    
+    overflow:hidden;
 }
 
 .highlightedEvent {
@@ -294,6 +296,7 @@
 #eventHeading {
     font-weight: 700;
 }
+
 .icon {
     height: 40px;
     width: auto;

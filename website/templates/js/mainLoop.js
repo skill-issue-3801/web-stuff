@@ -122,7 +122,9 @@ function render(event) {
     <div class="event ${event['uid']}" style="grid-area:r${event['rowstart']} / a${event['colstart']} / r${event['rowend']} / a${event['colend']};">
     <p id="eventHeading">${event['summary']}<p>
     <p>${stEventHrs}:${stEventMin} ${stEventAMPM} - ${ndEventHrs}:${ndEventMin} ${ndEventAMPM}</p>
-    ${people}
+    <div class="eventAttendees">
+        ${people}
+    </div>
     </div>
     `;
     document.getElementById("calendarGridMain").innerHTML += constructed;
