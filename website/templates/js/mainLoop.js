@@ -70,6 +70,12 @@ async function updateTimeData () {
         now.toLocaleString('en-GB', {weekday: 'long'}) + " " + day + mod + " " +
         now.toLocaleString('en-GB', {month: 'long'}));
     document.getElementById("datetime").innerHTML = displayString;
+    
+    const days = document.getElementsByClassName("todayHeader");
+    for (var i = 0; i < days.length; i++) {
+        days[i].classList.add("todayHeader");
+    }
+    document.getElementById(now.toLocaleString('en-GB', {weekday: 'long'})).classList.add("todayHeader");
 }
 
 function changeWeek(thisWeekIndex, direction, numWeeks, datesArray) {
@@ -262,7 +268,7 @@ async function main() {
         setInterval(update, 300000); // 300 seconds (5 minutes) for prod
     } else {
         console.log("Running in dev mode.");
-        setInterval(update, 300000); // 10 seconds for dev
+        setInterval(update, 10000); // 10 seconds for dev
     }
     update();
 }
