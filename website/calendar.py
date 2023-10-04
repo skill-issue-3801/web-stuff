@@ -8,7 +8,7 @@ from .base import has_global_stuff
 from .models import FamilyMember
 
 #     Above is for later, "{{ utc_dt }}" is the variable for date time in html
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
 from .app import app
 
@@ -20,7 +20,9 @@ logger = logging.getLogger(__name__)
 @calendar.route("/", methods=["GET"])
 @has_global_stuff
 def default(db_session, globals):
-    if not __debug__:
+    # this is dodgy but oh well
+    if not __debug__ and not (request.headers.get("User-Agent") == "Mozilla/5.0 (X11; Ubuntu; Linux aarch64; rv:109.0) Gecko/20100101 Firefox/115.0"):
+        print("Rejected request from '{}'".format(request.headers.get("User-Agent")))
         return "Raspberry Pi access only.", 403
 
     family = db_session.query(FamilyMember).all()
