@@ -197,6 +197,31 @@ function writeTimeLabels() {
                     `;
 }
 
+function dimCalendarView(value) {
+    // Set given value to a float
+    let dimValue = parseFloat(value);
+    console.log("dimValue given is " + dimValue);
+    // Get current opacity
+    let currentDimOpacity = document.getElementsByClassName("dimmingContent")[0].style.opacity;
+    console.log("Current opacity is " + currentDimOpacity);
+    document.getElementsByClassName("dimmingContent")[0].style.opacity = dimValue;
+
+    // Get the current opacity and turn it into a float
+    let currentDimOpacityFloat = parseFloat(currentDimOpacity);
+    // Add floats together
+    let newDimOpacity = dimValue + currentDimOpacityFloat;
+    // Ensuring it doesn't exceed 0 or 1 for opacity.
+    if (newDimOpacity >= 1) {
+        document.getElementsByClassName("dimmingContent")[0].style.opacity = "1";
+    }
+    else if (newDimOpacity <= 0) {
+        document.getElementsByClassName("dimmingContent")[0].style.opacity = "0";
+    } else {
+        // Change opacity and change it to a string
+        document.getElementsByClassName("dimmingContent")[0].style.opacity = newDimOpacity.toString();
+    }
+}
+
 async function update() {
     let response = await fetch("/calendar/do_update", {method: "POST"});
     let text = await response.json();

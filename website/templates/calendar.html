@@ -34,6 +34,8 @@
                     <button type="button" class="btn" onclick="uidSelect('all', 'all'); changeWeek({{thisWeekIndex}}, 0, {{numWeeks}}, '{{datesArray}}');">Reset View</button>
                     <button type="button" class="btn" id="backOneWeek" onclick="changeWeek({{thisWeekIndex}}, -1, {{numWeeks}}, '{{datesArray}}');">Back a week</button>
                     <button type="button" class="btn" id="forwardOneWeek" onclick="changeWeek({{thisWeekIndex}}, +1, {{numWeeks}}, '{{datesArray}}');">Forward a week</button>
+                    <button type="button" class="btn" id="dimIncrease" onclick="dimCalendarView(0.1)">Dim increase</button>
+                    <button type="button" class="btn" id="dimDecrease" onclick="dimCalendarView(-0.1)">Dim decrease</button>
                 </div>
                 <div class="radio-button-container userHighlight">
                     <label>

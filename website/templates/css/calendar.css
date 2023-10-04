@@ -65,7 +65,8 @@
     width: 100vw;
     z-index: 1;
     /* Change the 'a' in rgba, closer to 1 the darker it is */
-    background-color: rgba(0, 0, 0, 0.0);
+    background-color: rgb(0, 0, 0);
+    opacity: 0;
 }
 
 
@@ -311,7 +312,7 @@
     right: 0;
     background: var(--mint-green);
     padding:10px;
-
+    z-index: 1;
 }
 
 .event p{
