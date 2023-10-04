@@ -252,7 +252,11 @@
 }
 
 /* Forces the items in the calendar to max out their width */
-.calendarGrid div {
+.calendarGrid {
+    width: 100%;
+}
+
+#calendarGridMain {
     width: 100%;
 }
 
@@ -315,4 +319,15 @@
 
 #weeksAgoAheadFlag {
     background-color: var(--sandy-brown);
+}
+
+.eventAttendees {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5%;
+}
+
+.personWrapper {
+    display: block;
 }

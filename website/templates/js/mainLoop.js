@@ -142,7 +142,7 @@ function render(event) {
         people += `</p>`;
     } else {
         for (const person of event['attendees']) {
-            people += `<img class="icon" src="/templates/${person['icon']}"><p>${person['name']}</p>`;
+            people += `<div class="personWrapper"><img class="icon" src="/templates/${person['icon']}"><p>${person['name']}</p></div>`;
         }
     }
 
