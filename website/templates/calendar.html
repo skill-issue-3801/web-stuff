@@ -128,8 +128,10 @@
                                     </p>
                                 {% else %}
                                     {% for person in event['attendees'] %}
-                                        <img class="icon" src="{{url_for('static', filename=person['icon'])}}">
-                                        <p>{{person['name']}}</p>
+                                        <div class="personWrapper">
+                                            <img class="icon" src="{{url_for('static', filename=person['icon'])}}">
+                                            <p>{{person['name']}}</p>
+                                        </div>
                                     {% endfor %}
                             {% endif %}
                         </div>
