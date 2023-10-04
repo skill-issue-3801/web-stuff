@@ -42,6 +42,10 @@
     padding-top: var(--content-pad-top);
 }
 
+.baseContent {
+    background-color: var(--indigo-dye);
+}
+
 /* Background Video */
 #waterBackgroundVideo{
     position: fixed;
@@ -51,6 +55,17 @@
     min-height: 100%;
     z-index: -1;
     object-fit: fill;
+    transition: 10s;
+}
+
+/* Background Video */
+.waterBackgroundDay{
+    opacity: 0.8;
+}
+
+/* Background Video */
+.waterBackgroundNight{
+    opacity: 0.3;
 }
 
 .calendarViewTopText {

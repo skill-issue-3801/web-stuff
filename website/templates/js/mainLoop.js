@@ -4,19 +4,38 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-async function updateTimeData () {
+
+function updateWaterBackground() {
+    // day and night version of water background, inspired by https://wordpress.stackexchange.com/questions/375122/change-background-image-based-on-the-hour
+    if (document.getElementById("waterBackgroundVideo") != null) {
+        //change background of #waterBackgroundVideo to fit time of day
+        var d = new Date();
+        var n = d.getHours();
+        if (n >= 20 || n <= 6) {
+            // Between 8pm and 6am, apply night class to #waterBackgroundVideo
+            document.getElementById("waterBackgroundVideo").className = "waterBackgroundNight";
+        } else {
+            // Else apply day class to #waterBackgroundVideo
+            document.getElementById("waterBackgroundVideo").className = "waterBackgroundDay";
+        }
+
+    }
+}
+
+
+async function updateTimeData() {
     const now = new Date();
     /* update co-ordinates for wave */
     hour = (now.getHours()).toString().padStart(2, '0');
-    minutes = ((15 * (Math.floor(now.getMinutes()/15))).toString()).padStart(2, '0');
+    minutes = ((15 * (Math.floor(now.getMinutes() / 15))).toString()).padStart(2, '0');
     coordinates = `r${hour}-${minutes} / cSunday / r${hour}-${minutes} / c-1`;
     document.getElementById("currentTime").style["gridArea"] = coordinates;
 
     document.getElementById("currentTime").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
 
     /* now do date and time up top*/
-    const day = now.toLocaleString('en-GB', {day: 'numeric'});
-     switch (day % 10) {
+    const day = now.toLocaleString('en-GB', { day: 'numeric' });
+    switch (day % 10) {
         case 1:
             mod = "st";
             break;
@@ -30,14 +49,16 @@ async function updateTimeData () {
             mod = "th";
     }
     const displayString = (
-        now.toLocaleString('en-GB', {hour:'numeric', minute:'numeric', hour12: true}) + ", " + 
-        now.toLocaleString('en-GB', {weekday: 'long'}) + " " + day + mod + " " +
-        now.toLocaleString('en-GB', {month: 'long'}));
+        now.toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', hour12: true }) + ", " +
+        now.toLocaleString('en-GB', { weekday: 'long' }) + " " + day + mod + " " +
+        now.toLocaleString('en-GB', { month: 'long' }));
     document.getElementById("datetime").innerHTML = displayString;
+
+    updateWaterBackground();
 }
 
 function changeWeek(thisWeekIndex, direction, numWeeks, datesArray) {
-    datesArray.replaceAll("\'","\"");
+    datesArray.replaceAll("\'", "\"");
     datesArray = Array.from(JSON.parse(datesArray));
     const currentViewingWeek = parseInt(document.getElementById("currentWeekViewing").value);
     if (direction == 0) {
@@ -53,12 +74,12 @@ function changeWeek(thisWeekIndex, direction, numWeeks, datesArray) {
         putWeeksEvents(currentViewingWeek + 1, datesArray);
         document.getElementById("weeksAgoAheadFlag").innerHTML = flagString(thisWeekIndex, currentViewingWeek + 1);;
     }
-} 
+}
 
 function flagString(thisWeekIndex, viewingWeek) {
     if (viewingWeek == thisWeekIndex) {
         document.getElementById("weeksAgoAheadFlag").style.display = "none";
-        return("");
+        return ("");
     }
     const diff = thisWeekIndex - viewingWeek;
     var fs = "";
@@ -74,7 +95,7 @@ function flagString(thisWeekIndex, viewingWeek) {
         fs += " ago";
     }
     document.getElementById("weeksAgoAheadFlag").style.display = "block";
-    return(fs);
+    return (fs);
 }
 
 function dayHeadingDates(datesArray) {
@@ -155,7 +176,7 @@ function render(event) {
     ndEventAMPM = ndEventHrs >= 12 ? 'AM' : 'PM';
     stEventHrs = (stEventHrs % 12) ? (stEventHrs % 12) : 0;
     ndEventHrs = (ndEventHrs % 12) ? (ndEventHrs % 12) : 0;
-    
+
     constructed = `
     <div class="event ${event['uid']}" style="grid-area:r${event['rowstart']} / a${event['colstart']} / r${event['rowend']} / a${event['colend']};">
     <p id="eventHeading">${event['summary']}<p>
@@ -198,7 +219,7 @@ function writeTimeLabels() {
 }
 
 async function update() {
-    let response = await fetch("/calendar/do_update", {method: "POST"});
+    let response = await fetch("/calendar/do_update", { method: "POST" });
     let text = await response.json();
     console.log("UPDATING CALENDAR EVENTS");
 
