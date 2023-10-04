@@ -33,6 +33,8 @@
     --grid-background-colour: rgba(252, 251, 244, 0.3);
 }
 /* ELI SORT OUT SPACING SIZING WITH BIGGER PADDING */
+
+
 .content {
     height: 100%;
     display: flex;
@@ -52,6 +54,20 @@
     z-index: -1;
     object-fit: fill;
 }
+
+/* Class used to control the dimming options 
+    accessible through the keypresses */
+.dimmingContent {
+    position:fixed;
+    right: 0;
+    bottom:0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+    /* Change the 'a' in rgba, closer to 1 the darker it is */
+    background-color: rgba(0, 0, 0, 0.0);
+}
+
 
 .calendarViewTopText {
     /* Mint green, global varibles cant be called within other css files. */
