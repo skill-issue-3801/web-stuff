@@ -33,7 +33,7 @@ def family_post(db_session, globals):
         globals.familyChanges = True
     db_session.commit()
     db_session.close()
-    return redirect(url_for("manage_family"))
+    return redirect(url_for("admin.manage_family"))
 
 
 def add_family_member(db_session):
