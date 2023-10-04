@@ -234,11 +234,9 @@ h5 {
   cursor: pointer;
 }
 
-/* TODO: Make cursor pointer when hover over slug icons */
 .radio-button-container label:hover {
   cursor: pointer;
 }
-
 
 input[type=radio] {
   appearance: none;
@@ -345,6 +343,7 @@ input[type=radio]:checked {
 .familyMemberContainer:hover {
   font-weight: bold;
   transition: 0.4s;
+
 }
 
 .familyMemberContainer:hover .familyMember {
@@ -353,7 +352,7 @@ input[type=radio]:checked {
 }
 
 .familyMemberContainer:hover img {
-  transform: scale(1.3) translateY(1.5vh);
+  transform: scale(1.3);
 }
 
 .familyMember img {
@@ -418,7 +417,7 @@ input[type=radio]:checked {
   height: 8vw;
 }
 
-/* Guide tab styling */
+/* Guide tab styling, links to Apple and Google sections */
 .guideTabLinksSelectedBorder {
   border-bottom: 0.5vh solid var(--sandy-brown);
 }

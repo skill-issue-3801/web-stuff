@@ -127,6 +127,7 @@
     color: white;
 }
 
+/* style the current time and wave */
 #currentTime {
     height:10vh;
     grid-area: r00-00 / cSunday / r-00-00 / c-1;
