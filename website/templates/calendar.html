@@ -15,6 +15,7 @@
  -->
 
 <body class="baseContent">
+    <div class="dimmingContent"></div>
     <div>
         <video autoplay muted loop id="waterBackgroundVideo" class="waterBackgroundDay">
             <source src="{{url_for('static', filename='graphics/Base_Water_HD.mp4')}}" type="video/mp4">
@@ -30,9 +31,11 @@
                 <input type="hidden" id="currentlyHighlighted" name="currentlyHighlighted" value="all">
                 <input type="hidden" id="currentWeekViewing" name="currentWeekViewing" value="{{thisWeekIndex}}">
                 <div class="viewChange">
-                    <button type="button" class="btn" onclick="uidSelect('all', 'all'); changeWeek({{thisWeekIndex}}, 0, {{numWeeks}}, '{{datesArray}}');">Reset View</button>
+                    <button type="button" class="btn" onclick="uidSelect('all', 'all'); changeWeek({{thisWeekIndex}}, 0, {{numWeeks}}, '{{datesArray}}'); dimCalendarView(0);">Reset View</button>
                     <button type="button" class="btn" id="backOneWeek" onclick="changeWeek({{thisWeekIndex}}, -1, {{numWeeks}}, '{{datesArray}}');">Back a week</button>
                     <button type="button" class="btn" id="forwardOneWeek" onclick="changeWeek({{thisWeekIndex}}, +1, {{numWeeks}}, '{{datesArray}}');">Forward a week</button>
+                    <button type="button" class="btn" id="dimIncrease" onclick="dimCalendarView(0.1)">Dim increase</button>
+                    <button type="button" class="btn" id="dimDecrease" onclick="dimCalendarView(-0.1)">Dim decrease</button>
                 </div>
                 <div class="radio-button-container userHighlight">
                     <label>
@@ -50,7 +53,7 @@
             <div class="calendarContent">
                 <div class="calendarDays">
                     <div id="timeEmptySpace">
-                        <p>time</p>
+                        <p>Time</p>
                     </div>
                     <div id="Sunday" class="{{'todayHeader' if todayIndex == 0 else ''}}">
                         <p>Sunday</p>
