@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CalendarApp</title>
+    <!-- Main.css is for global styles only -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <!-- Calendar.css is for calendar view styles only -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/calendar.css')}}">
+    <script src="{{url_for('static', filename='js/mousetrap.js')}}"></script>
+</head>
+<body>
+    <div class="slugsOnAmbient">
+
+    </div>
+    <div class="foregroundScreen">
+        <!-- <img class="fullscreenImage foregroundImage" style="height: 100vh;" src="graphics/ambient-screen/Screensaver_foreground_reef.png"> </div> -->
+        <img class="fullscreenImage foregroundImage" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_foreground_reef.png')}}"> </div>
+    <div class="backgroundScreen">
+        <img class="fullscreenImage backgroundImage" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_background_cave.png')}}"> </div>
+    </div>
+</body>
+</html>
