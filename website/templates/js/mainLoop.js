@@ -4,6 +4,37 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
+var inactiveTimeout;
+var screensaver_active = false;
+var idletime = 5;
+
+document.onkeypress = function () {
+    detectedSomething();
+}
+
+document.onmousemove = function() {
+    detectedSomething();
+}
+
+function detectedSomething() {
+    clearTimeout(inactiveTimeout);
+    if (screensaver_active) {
+        stop_screensaver();
+    }
+    inactiveTimeout = setTimeout(show_screensaver, 1000 * idletime);
+}
+
+// show screensaver function
+function show_screensaver(){
+    document.getElementById('screensaver').style.display = "block";
+    screensaver_active = true;
+}
+
+// stop screensaver
+function stop_screensaver(){
+    document.getElementById('screensaver').style.display = "none";
+    screensaver_active = false;
+}
 
 function updateWaterBackground() {
     // day and night version of water background, inspired by https://wordpress.stackexchange.com/questions/375122/change-background-image-based-on-the-hour
