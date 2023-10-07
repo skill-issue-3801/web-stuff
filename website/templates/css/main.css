@@ -26,9 +26,6 @@
       To use write var(--heading-font) in place of where you'd type 'Belgiano'
 
 **/
-
-
-/**DO NOT TOUCH ANYTHING HERE**/
 :root {
   /** Global Fonts **/
   --heading-font: Belgiano;
@@ -52,7 +49,7 @@
   --light-coral: hsla(356, 58%, 66%, 1);
 }
 
-/**Below is fine to touch, carefully (notes to keep Ali from breaking things)**/
+/**Standard styling**/
 h1,
 h2,
 h3,
@@ -67,7 +64,27 @@ p {
   color: var(--indigo-dye);
 }
 
-/** https://matthewjamestaylor.com/responsive-font-size#how - trusting this formula**/
+/* unvisited link */
+a:link {
+  color: var(--skobeloff);
+}
+
+/* visited link */
+a:visited {
+  color: var(--indigo-dye);
+}
+
+/* mouse over link */
+a:hover {
+  color: var(--sandy-brown);
+}
+
+/* selected link */
+a:active {
+  color: var(--sandy-brown);
+}
+
+/** Responsive text sizes by Matthew James Taylor, September 2023, https://matthewjamestaylor.com/responsive-font-size#how**/
 body,
 button,
 input,
@@ -103,7 +120,6 @@ h5 {
   font-family: var(--body-font);
   color: var(--indigo-dye);
   opacity: 1;
-  /* Firefox */
 }
 
 :-ms-input-placeholder {
@@ -119,7 +135,7 @@ h5 {
 }
 
 
-/*family member form things*/
+/*Family member form styling*/
 
 /* Button used to open the add family member form */
 #form-button {
@@ -137,14 +153,14 @@ h5 {
   margin-bottom: 2vh;
 }
 
-/* Button used to open the add family member form */
+/* Text in button used to open the add family member form */
 #form-button>p {
   font-family: var(--body-font);
   color: var(--mint-green);
   text-decoration: none;
 }
 
-/* Button used to open the add family member form */
+/* Text effects on hover, family member form button*/
 #form-button:hover>p {
   font-family: var(--body-font);
   color: var(--mint-green);
@@ -189,11 +205,8 @@ h5 {
   flex-direction: column;
 }
 
-.form-container h1,
-h2,
-h3,
-h4,
-h5 {
+/* change text in form */
+.form-container h1, .form-container h2, .form-container h3, .form-container h4, .form-container h5 {
   color: var(--mint-green);
   font-family: var(--body-font);
 }
@@ -221,11 +234,9 @@ h5 {
   cursor: pointer;
 }
 
-/* TODO: Make cursor pointer when hover over slug icons */
 .radio-button-container label:hover {
   cursor: pointer;
 }
-
 
 input[type=radio] {
   appearance: none;
@@ -234,7 +245,6 @@ input[type=radio] {
   background-color: var(--mint-green);
   border-radius: 50%;
   margin: 1vw;
-  transition: 0.2s;
   cursor: pointer;
 }
 
@@ -333,6 +343,7 @@ input[type=radio]:checked {
 .familyMemberContainer:hover {
   font-weight: bold;
   transition: 0.4s;
+
 }
 
 .familyMemberContainer:hover .familyMember {
@@ -341,7 +352,7 @@ input[type=radio]:checked {
 }
 
 .familyMemberContainer:hover img {
-  transform: scale(1.3) translateY(1.5vh);
+  transform: scale(1.3);
 }
 
 .familyMember img {
@@ -390,17 +401,11 @@ input[type=radio]:checked {
   cursor: pointer;
 }
 
-/* hi ali! this is the stuff for icon selection radio buttons. it looks nicer if the radio buttons
-are hidden but this also hides the "required" error message, up to you if you wanna just leave it 
-as-is or find some way to hide them that doesn't hide the message*/
-
-/*hi Kiah!!! I got around this sneakily >:) btw thank you for doing the html/css!! - was not expecting that at all so will take on some new tasks :] */
+/* Icon select in form styling section */
 .iconSelect input[type="radio"] {
-  /*display: none;*/
   appearance: none;
   width: 0;
   height: 0;
-
 }
 
 .iconSelect input[type="radio"]:checked+img {
@@ -412,11 +417,86 @@ as-is or find some way to hide them that doesn't hide the message*/
   height: 8vw;
 }
 
+/* Guide tab styling, links to Apple and Google sections */
+.guideTabLinksSelectedBorder {
+  border-bottom: 0.5vh solid var(--sandy-brown);
+}
+
+.guide-tab-link {
+  background-color: var(--mint-green);
+  opacity: 0.7;
+  padding: 10% 20%;
+  border-radius: 10%;
+  text-align: center;
+}
+
+.guide-tab-link:hover {
+  opacity: 1;
+}
+
+#guide-tab-nav {
+  background-color: var(--cambridge-blue);
+  padding-top: 2%;
+  padding-bottom: 2%;
+  display: flex;
+}
+
+#guide-tab-nav a {
+  padding-left: 2%;
+}
+
+/* Styling images on guide page */
+.guideImgBox {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 30%;
+  margin: 2vh;
+}
+
+.guideImg1 {
+  max-height: 55vh;
+  border-radius: 3%;
+  max-width: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.guideImg2 {
+  height: auto;
+  border-radius: 3%;
+  width: auto;
+  max-width: 48%;
+}
 
 
+/* Alert styling */
+#alert {
+  padding: 5px 10px 5px 10px;
+  border-radius: 10px;
+}
 
+#alert p {
+  color: white;
+}
 
-/*For when screen is not full screen (mobile screen)*/
+#dismissAlertButton {
+  float: right;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.alert-error {
+  background-color: var(--light-coral);
+}
+
+.alert-success {
+  background-color: var(--skobeloff);
+}
+
+/*For when screen is mobile dimensions*/
 @media only screen and (max-width: 1000px) {
   h1 {
     font-size: 2.3em;
@@ -509,8 +589,6 @@ as-is or find some way to hide them that doesn't hide the message*/
     padding: 0% 5% 0% 5%;
     border: none;
     cursor: pointer;
-    /* width: 10vw;
-    height: 4vw; */
   }
 
   .guideImgBox {
@@ -524,70 +602,4 @@ as-is or find some way to hide them that doesn't hide the message*/
     max-width: 100% !important;
   }
 
-}
-
-.guideTabLinksSelectedBorder {
-  border-bottom: 0.5vh solid var(--sandy-brown);
-}
-
-.guide-tab-link:hover {
-  background-color: rgb(171, 255, 254) !important;
-}
-
-#guide-tab-nav {
-  background-color: var(--mint-green);
-  padding: 2%;
-  display: flex;
-}
-
-#guide-tab-nav a {
-  padding-left: 2%;
-}
-
-.guideImgBox {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  height: 30%;
-  margin: 2vh;
-}
-
-.guideImg1 {
-  max-height: 55vh;
-  border-radius: 3%;
-  max-width: 100%;
-  width: auto;
-  object-fit: contain;
-}
-
-.guideImg2 {
-  height: auto;
-  border-radius: 3%;
-  width: auto;
-  max-width: 48%;
-}
-
-#alert {
-  padding: 5px 10px 5px 10px;
-  border-radius: 10px;
-}
-
-#alert p {
-  color: white;
-}
-
-#dismissAlertButton {
-  float: right;
-  background-color: transparent;
-  border: none;
-  color: white;
-}
-
-.alert-error {
-  background-color: var(--light-coral);
-}
-
-.alert-success {
-  background-color: var(--skobeloff);
 }
