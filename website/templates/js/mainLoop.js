@@ -86,6 +86,12 @@ async function updateTimeData() {
     document.getElementById("datetime").innerHTML = displayString;
 
     updateWaterBackground();
+
+    const days = document.getElementsByClassName("todayHeader");
+    for (var i = 0; i < days.length; i++) {
+        days[i].classList.remove("todayHeader");
+    }
+    document.getElementById(now.toLocaleString('en-GB', {weekday: 'long'})).classList.add("todayHeader");
 }
 
 function changeWeek(thisWeekIndex, direction, numWeeks, datesArray) {
