@@ -123,18 +123,22 @@
                             <p id="eventHeading">{{event['summary']}}</p>
                             <!-- wat -->
                             <p>{{'12' if ((event['start'][:2] | int) % (12 | int)) == 0 else (((event['start'][:2] | int) % (12 | int)) | string())}}:{{event['start'][3:]}} {{'PM' if (event['start'][:2] | int) >= (12 | int) else 'AM'}} - {{'12' if ((event['end'][:2] | int) % (12 | int)) == 0 else (((event['end'][:2] | int) % (12 | int)) | string())}}:{{event['end'][3:]}} {{'PM' if (event['end'][:2] | int) >= 12 else 'AM'}}</p>
-                            {% if event['short'] == true %}
-                                    <p> 
-                                        {% for person in event['attendees']%}
-                                            {{person['name']}}{% if loop.index != (event['attendees'] | length) %}, {% endif %}
+                            <div class="eventAttendees">
+                                {% if event['short'] == true %}
+                                        <p> 
+                                            {% for person in event['attendees']%}
+                                                {{person['name']}}{% if loop.index != (event['attendees'] | length) %}, {% endif %}
+                                            {% endfor %}
+                                        </p>
+                                    {% else %}
+                                        {% for person in event['attendees'] %}
+                                            <div class="personWrapper">
+                                                <img class="icon" src="{{url_for('static', filename=person['icon'])}}">
+                                                <p>{{person['name']}}</p>
+                                            </div>
                                         {% endfor %}
-                                    </p>
-                                {% else %}
-                                    {% for person in event['attendees'] %}
-                                        <img class="icon" src="{{url_for('static', filename=person['icon'])}}">
-                                        <p>{{person['name']}}</p>
-                                    {% endfor %}
-                            {% endif %}
+                                {% endif %}
+                            </div>
                         </div>
                     {% endfor %}
 
