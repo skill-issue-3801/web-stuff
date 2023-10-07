@@ -163,9 +163,7 @@ async function putWeeksEvents(viewingWeek, datesArray) {
     for (const event of latestJson[viewingWeek]) {
         render(event);
     }
-    // find who is highlighted right now and click their button to highlight them
-    const highlightedPerson = document.getElementById("currentlyHighlighted").value;
-    document.getElementById(highlightedPerson).click();
+    highlightEvents();
 
     dayHeadingDates(datesArray[viewingWeek]);
     // generate "current time" wave

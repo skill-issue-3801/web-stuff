@@ -354,5 +354,5 @@
 .default1 { }
 .default2 { }
 .default3 { }
-.default+4 { }
-.default+5 { background-color: var(--mint-green); }
+.default4 { }
+.default5 { background-color: var(--mint-green); }
