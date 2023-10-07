@@ -28,12 +28,14 @@ function detectedSomething() {
 // show screensaver function
 function show_screensaver(){
     document.getElementById('screensaver').style.display = "block";
+    document.getElementById('calendarContent').style.display = "none";
     screensaver_active = true;
 }
 
 // stop screensaver
 function stop_screensaver(){
     document.getElementById('screensaver').style.display = "none";
+    document.getElementById('calendarContent').style.display = "flex";
     screensaver_active = false;
     deselectUsers();
     resetHighlighted();
