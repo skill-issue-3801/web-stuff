@@ -416,3 +416,7 @@
 .default3 { filter: brightness(1.75);}
 .default4 { filter: brightness(2.0);}
 .default5 { filter: brightness(2.5);}
+
+.soundEffects {
+    display: none;
+}

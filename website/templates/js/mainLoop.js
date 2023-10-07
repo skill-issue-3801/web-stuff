@@ -174,6 +174,9 @@ function uidSelect(name) {
 
 function highlightEvents() {
     console.log("highight events");
+    // Play's a pop sound for each selection and deselection.
+    // This will be annoying, need to work out mechanics, for now it sits here
+    document.getElementById("bubblePopSound").play();
     var people = document.getElementsByClassName("userSelectRadio");
     const current = document.getElementById("selectedUserBrightness").value;
     for (var i = 0; i < people.length; i++) {

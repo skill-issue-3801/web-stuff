@@ -158,6 +158,19 @@
     <img id="screensaverImage" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_Home.png')}}">
 </div>
 
+<section class="soundEffects">
+    <audio controls id="bubblePopSound">
+        <source src="{{url_for('static', filename='sounds/bubble-pop-shortened.wav')}}" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio> 
+
+    <audio controls id="multipleBubblesSound">
+        <source src="{{url_for('static', filename='sounds/bubble-multiple-shortened.wav')}}" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio> 
+
+</section>
+
 <script type="text/javascript" src="{{url_for('static', filename='js/calendarTimes.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/mainLoop.js')}}"></script>
 <script>
