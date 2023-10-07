@@ -30,6 +30,7 @@
             <form name="userHighlightForm" class="tempHighlightControl">
                 <input type="hidden" id="currentlyHighlighted" name="currentlyHighlighted" value="all">
                 <input type="hidden" id="currentWeekViewing" name="currentWeekViewing" value="{{thisWeekIndex}}">
+                <input type="hidden" id="selectedUserBrightness" name="selectedUserBrightness" value="default">
                 <div class="viewChange">
                     <button type="button" class="btn" onclick="uidSelect('all', 'all'); changeWeek({{thisWeekIndex}}, 0, {{numWeeks}}, '{{datesArray}}'); dimCalendarView(0);">Reset View</button>
                     <button type="button" class="btn" id="backOneWeek" onclick="changeWeek({{thisWeekIndex}}, -1, {{numWeeks}}, '{{datesArray}}');">Back a week</button>
@@ -46,6 +47,9 @@
                         </label>
                     {% endfor%}
                 </div>
+                <label for="userBrightness">Selected user brightness:</label>
+                <button id="userBrightnessUp" type="button" class="btn" name="userBrightness" value="up" onclick="userBrightnessChange(1);">up</button>
+                <button id="userBrightnessDown" type="button" class="btn" name="userBrightness" value="down" onclick="userBrightnessChange(-1);">down</button>
             </form>
             <div class="calendarContent">
                 <div class="calendarDays">
@@ -115,7 +119,7 @@
                     <div class = "timeLabel" style = "grid-area: r23-00 / a00-00 / r-1 / a00-00;"><p>11:00 PM</p></div>
 
                     {% for event in events[thisWeekIndex] %}
-                        <div class="event {{event['uid']}}" style = "grid-area: r{{event['rowstart']}} / 
+                        <div class="event {{event['uid']}} default" style = "grid-area: r{{event['rowstart']}} / 
                                 a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}};">
                             <p id="eventHeading">{{event['summary']}}</p>
                             <!-- wat -->
@@ -158,6 +162,7 @@
     window.onload = function () {
         updateTimeData();
         resetHighlighted();
+        deselectUsers();
     }
 
     Mousetrap.bind('a', function() { document.getElementById('all').click(); });

@@ -333,7 +333,7 @@
 }
 
 .highlightedEvent {
-    background-color: var(--mint-green);
+    border: solid 3px var(--mint-green);
 }
 
 .tempHighlightControl {
@@ -391,3 +391,16 @@
     display: none;
     border: solid 3px var(--light-coral);
 }
+
+.default-5 { opacity: 0.1; }
+.default-4 { opacity: 0.2; }
+.default-3 { opacity: 0.4; }
+.default-2 { opacity: 0.6; }
+.default-1 { opacity: 0.8; }
+.default {}
+// these should probably be the coral colour but getting lighter but idk how to do that
+.default1 { filter: brightness(1.25);}
+.default2 { filter: brightness(1.5);}
+.default3 { filter: brightness(1.75);}
+.default4 { filter: brightness(2.0);}
+.default5 { filter: brightness(2.5);}

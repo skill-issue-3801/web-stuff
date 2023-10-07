@@ -1,4 +1,5 @@
 let latestJson = "";
+let userBrightnessArray = ['default-5', 'default-4', 'default-3', 'default-2', 'default-1', 'default', 'default1', 'default2', 'default3','default4', 'default5'];
 
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
@@ -34,6 +35,9 @@ function show_screensaver(){
 function stop_screensaver(){
     document.getElementById('screensaver').style.display = "none";
     screensaver_active = false;
+    deselectUsers();
+    resetHighlighted();
+    document.getElementById("selectedUserBrightness").value = "default";
 }
 
 function updateWaterBackground() {
@@ -49,10 +53,8 @@ function updateWaterBackground() {
             // Else apply day class to #waterBackgroundVideo
             document.getElementById("waterBackgroundVideo").className = "waterBackgroundDay";
         }
-
     }
 }
-
 
 async function updateTimeData() {
     const now = new Date();
@@ -171,6 +173,7 @@ function uidSelect(name) {
 function highlightEvents() {
     console.log("highight events");
     var people = document.getElementsByClassName("userSelectRadio");
+    const current = document.getElementById("selectedUserBrightness").value;
     for (var i = 0; i < people.length; i++) {
         if (people[i].checked) {
             var uids = (people[i].value).replaceAll("\'","\"");
@@ -179,6 +182,7 @@ function highlightEvents() {
                 var evs = document.getElementsByClassName(uid);
                 for (var j = 0; j < evs.length; j++) {
                     evs[j].classList.add("highlightedEvent");
+                    evs[j].classList.add(current);
                 }
             }
         }
@@ -194,8 +198,26 @@ function deselectUsers() {
 
 function resetHighlighted() {
     var elements = document.getElementsByClassName("event");
+    const current = document.getElementById("selectedUserBrightness").value;
     for (var i = 0; i < elements.length; i++) {
         elements[i].classList.remove("highlightedEvent");
+        elements[i].classList.remove(current);
+        elements[i].classList.add("default");
+    }
+}
+
+function userBrightnessChange(delta) {
+    const current = document.getElementById("selectedUserBrightness").value;
+    console.log("current: " + current);
+    if (!(delta == -1 && current == 'default-5') && !(delta == 1 && current == 'default5')) {
+        const highlighted = document.getElementsByClassName("highlightedEvent");
+        const newSetting = userBrightnessArray[(userBrightnessArray.indexOf(current) + delta)];
+        console.log("new: " + newSetting);
+        for (var i = 0; i < highlighted.length; i++) {
+            highlighted[i].classList.remove(current);
+            highlighted[i].classList.add(newSetting);
+        }
+        document.getElementById("selectedUserBrightness").value = newSetting;
     }
 }
 
