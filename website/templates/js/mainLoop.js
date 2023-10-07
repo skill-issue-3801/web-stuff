@@ -1,8 +1,9 @@
 let latestJson = "";
+let userBrightnessArray = ['default-5', 'default-4', 'default-3', 'default-2', 'default-1', 'default', 'default1', 'default2', 'default3','default4', 'default5'];
 
 var inactiveTimeout;
 var screensaver_active = false;
-var idletime = 5;
+var idletime = 10;
 
 document.onkeypress = function () {
     //console.log("you pressed something!!");
@@ -26,14 +27,16 @@ function detectedSomething() {
 function show_screensaver(){
     document.getElementById('screensaver').style.display = "block";
     screensaver_active = true;
-    //console.log("on");
+    //reset to defaults
+    deselectUsers();
+    resetHighlighted();
+    document.getElementById("selectedUserBrightness").value = "default";
 }
 
 // stop screensaver
 function stop_screensaver(){
-   document.getElementById('screensaver').style.display = "none";
+    document.getElementById('screensaver').style.display = "none";
     screensaver_active = false;
-    //console.log("off");
 }
 
 function delay(time) {
@@ -152,12 +155,12 @@ function uidSelect(name) {
     console.log("clicked " + name);
     resetHighlighted();
     highlightEvents();
-    
 }
 
 function highlightEvents() {
     console.log("highight events");
     var people = document.getElementsByClassName("userSelectRadio");
+    const current = document.getElementById("selectedUserBrightness").value;
     for (var i = 0; i < people.length; i++) {
         if (people[i].checked) {
             var uids = (people[i].value).replaceAll("\'","\"");
@@ -166,6 +169,7 @@ function highlightEvents() {
                 var evs = document.getElementsByClassName(uid);
                 for (var j = 0; j < evs.length; j++) {
                     evs[j].classList.add("highlightedEvent");
+                    evs[j].classList.add(current);
                 }
             }
         }
@@ -183,8 +187,26 @@ function deselectUsers() {
 function resetHighlighted() {
     console.log("reset highlighted");
     var elements = document.getElementsByClassName("event");
+    const current = document.getElementById("selectedUserBrightness").value;
     for (var i = 0; i < elements.length; i++) {
         elements[i].classList.remove("highlightedEvent");
+        elements[i].classList.remove(current);
+        elements[i].classList.add("default");
+    }
+}
+
+function userBrightnessChange(delta) {
+    const current = document.getElementById("selectedUserBrightness").value;
+    console.log("current: " + current);
+    if (!(delta == -1 && current == 'default-5') && !(delta == 1 && current == 'default5')) {
+        const highlighted = document.getElementsByClassName("highlightedEvent");
+        const newSetting = userBrightnessArray[(userBrightnessArray.indexOf(current) + delta)];
+        console.log("new: " + newSetting);
+        for (var i = 0; i < highlighted.length; i++) {
+            highlighted[i].classList.remove(current);
+            highlighted[i].classList.add(newSetting);
+        }
+        document.getElementById("selectedUserBrightness").value = newSetting;
     }
 }
 

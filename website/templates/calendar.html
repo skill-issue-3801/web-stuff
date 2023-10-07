@@ -29,6 +29,7 @@
             <form name="userHighlightForm" class="tempHighlightControl">
                 <input type="hidden" id="currentlyHighlighted" name="currentlyHighlighted" value="all">
                 <input type="hidden" id="currentWeekViewing" name="currentWeekViewing" value="{{thisWeekIndex}}">
+                <input type="hidden" id="selectedUserBrightness" name="selectedUserBrightness" value="default">
                 <div class="viewChange">
                     <button type="button" class="btn" onclick="uidSelect('all', 'all'); changeWeek({{thisWeekIndex}}, 0, {{numWeeks}}, '{{datesArray}}');">Reset View</button>
                     <button type="button" class="btn" id="backOneWeek" onclick="changeWeek({{thisWeekIndex}}, -1, {{numWeeks}}, '{{datesArray}}');">Back a week</button>
@@ -43,6 +44,11 @@
                         </label>
                     {% endfor%}
                 </div>
+                <label for="userBrightness">Selected user brightness:</label>
+                <button id="userBrightnessUp" type="button" class="btn" name="userBrightness" value="up" onclick="userBrightnessChange(1);">up</button>
+                <button id="userBrightnessDown" type="button" class="btn" name="userBrightness" value="down" onclick="userBrightnessChange(-1);">down</button>
+
+                
             </form>
             <div class="calendarContent">
                 <div class="calendarDays">
@@ -112,12 +118,13 @@
                     <div class = "timeLabel" style = "grid-area: r23-00 / a00-00 / r-1 / a00-00;"><p>11:00 PM</p></div>
 
                     {% for event in events[thisWeekIndex] %}
-                        <div class="event {{event['uid']}}" style = "grid-area: r{{event['rowstart']}} / 
+                        <div class="event {{event['uid']}} default" style = "grid-area: r{{event['rowstart']}} / 
                                 a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}};">
                             <p id="eventHeading">{{event['summary']}}</p>
                             <!-- wat -->
                             <p>{{'12' if ((event['start'][:2] | int) % (12 | int)) == 0 else (((event['start'][:2] | int) % (12 | int)) | string())}}:{{event['start'][3:]}} {{'PM' if (event['start'][:2] | int) >= (12 | int) else 'AM'}} - {{'12' if ((event['end'][:2] | int) % (12 | int)) == 0 else (((event['end'][:2] | int) % (12 | int)) | string())}}:{{event['end'][3:]}} {{'PM' if (event['end'][:2] | int) >= 12 else 'AM'}}</p>
-                            {% if event['short'] == true %}
+                            <div class="eventAttendees">
+                                {% if event['short'] == true %}
                                     <p> 
                                         {% for person in event['attendees']%}
                                             {{person['name']}}{% if loop.index != (event['attendees'] | length) %}, {% endif %}
@@ -131,6 +138,7 @@
                                         </div>
                                     {% endfor %}
                             {% endif %}
+                            </div>
                         </div>
                     {% endfor %}
 
@@ -145,7 +153,7 @@
         </section>
 
         <div id="screensaver">
-            <h1>SCREEN SAVER BABEY!!!!!</h1>
+            
         </div>
 </main>
 

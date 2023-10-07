@@ -286,7 +286,7 @@
 }
 
 .highlightedEvent {
-    background-color: var(--mint-green);
+    border: solid 2px var(--mint-green);
 }
 
 .tempHighlightControl {
@@ -340,3 +340,15 @@
 .personWrapper {
     display: block;
 }
+
+.default-5 { opacity: 0.1; }
+.default-4 { opacity: 0.2; }
+.default-3 { opacity: 0.4; }
+.default-2 { opacity: 0.6; }
+.default-1 { opacity: 0.8; }
+.default {}
+.default1 { }
+.default2 { }
+.default3 { }
+.default4 { }
+.default5 { background-color: var(--mint-green); }
