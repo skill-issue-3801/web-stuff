@@ -38,13 +38,10 @@
                     <button type="button" class="btn" id="dimDecrease" onclick="dimCalendarView(-0.1)">Dim decrease</button>
                 </div>
                 <div class="radio-button-container userHighlight">
-                    <label>
-                        <input type="radio" name="person" id="all" value="all" onclick="uidSelect('all', 'all');">
-                        <label for="all">All</label>
-                    </label>
+                    <button type="button" class="btn" onclick="resetHighlighted(); deselectUsers();">Reset Highlighted</button>
                     {% for user in uids.keys() %}
                         <label>
-                            <input type="radio" name="person" id="{{user}}" value="{{uids[user]}}" onclick="uidSelect('{{user}}', {{uids[user]}});">
+                            <input type="checkbox" class="userSelectRadio" id="{{user}}" value="{{uids[user]}}" onclick="uidSelect('{{user}}');">
                             <label for="{{user}}">{{user}}</label>
                         </label>
                     {% endfor%}

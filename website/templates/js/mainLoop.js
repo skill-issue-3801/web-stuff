@@ -155,25 +155,40 @@ async function putWeeksEvents(viewingWeek, datesArray) {
     for (const event of latestJson[viewingWeek]) {
         render(event);
     }
-    // find who is highlighted right now and click their button to highlight them
-    const highlightedPerson = document.getElementById("currentlyHighlighted").value;
-    document.getElementById(highlightedPerson).click();
-
+    
+    highlightEvents();
     dayHeadingDates(datesArray[viewingWeek]);
     // generate "current time" wave
     updateTimeData();
 }
 
-function uidSelect(person, uids) {
-    resetHighlighted()
-    document.getElementById("currentlyHighlighted").value = person;
-    if (uids != "all") {
-        for (uid in uids) {
-            var elements = document.getElementsByClassName(uids[uid]);
-            for (var i = 0; i < elements.length; i++) {
-                elements[i].classList.add("highlightedEvent");
+function uidSelect(name) {
+    console.log("clicked " + name);
+    resetHighlighted();
+    highlightEvents();
+}
+
+function highlightEvents() {
+    console.log("highight events");
+    var people = document.getElementsByClassName("userSelectRadio");
+    for (var i = 0; i < people.length; i++) {
+        if (people[i].checked) {
+            var uids = (people[i].value).replaceAll("\'","\"");
+            uids = Array.from(JSON.parse(uids));
+            for (const uid of uids) {
+                var evs = document.getElementsByClassName(uid);
+                for (var j = 0; j < evs.length; j++) {
+                    evs[j].classList.add("highlightedEvent");
+                }
             }
         }
+    }   
+}
+
+function deselectUsers() {
+    var users = document.getElementsByClassName("userSelectRadio");
+    for (var i = 0; i < users.length; i++) {
+        users[i].checked = false;
     }
 }
 
@@ -293,11 +308,8 @@ async function update() {
     for (const event of text[viewingWeek]) {
         render(event);
     }
-
-    // find who is highlighted right now and click their button to highlight them
-    const highlightedPerson = document.getElementById("currentlyHighlighted").value;
-    document.getElementById(highlightedPerson).click();
-
+    
+    highlightEvents();
     updateTimeData();
     latestJson = text;
 }
