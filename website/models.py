@@ -12,7 +12,7 @@ class Settings(Base):
 
 
 class FamilyMember(Base):
-    __tablename__ = "familyMembers"
+    __tablename__ = "familymembers"
 
     name = Column("name", String, primary_key=True)
     url = Column("url", String, unique=True, nullable=True)
