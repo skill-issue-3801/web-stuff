@@ -74,6 +74,7 @@ def add_family_member(db_session):
         userObject=userObject,
     )
     db_session.add(row)
+    print("Successfully added to log.")
     flash("Welcome to the family {}!".format(name), category='success')
 
 
