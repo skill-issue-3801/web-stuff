@@ -23,13 +23,14 @@
         </video>
     </div>
 
-    <main class="content">
+    <main class="content" id="calendarContent">
         <h1 class="calendarViewTopText" id="datetime">.</h1>
         <h3 id="weeksAgoAheadFlag" style="display: none;"></h3>      
         <section>
             <form name="userHighlightForm" class="tempHighlightControl">
                 <input type="hidden" id="currentlyHighlighted" name="currentlyHighlighted" value="all">
                 <input type="hidden" id="currentWeekViewing" name="currentWeekViewing" value="{{thisWeekIndex}}">
+                <input type="hidden" id="selectedUserBrightness" name="selectedUserBrightness" value="default">
                 <div class="viewChange">
                     <button type="button" class="btn" onclick="uidSelect('all', 'all'); changeWeek({{thisWeekIndex}}, 0, {{numWeeks}}, '{{datesArray}}'); dimCalendarView(0);">Reset View</button>
                     <button type="button" class="btn" id="backOneWeek" onclick="changeWeek({{thisWeekIndex}}, -1, {{numWeeks}}, '{{datesArray}}');">Back a week</button>
@@ -38,54 +39,54 @@
                     <button type="button" class="btn" id="dimDecrease" onclick="dimCalendarView(-0.1)">Dim decrease</button>
                 </div>
                 <div class="radio-button-container userHighlight">
-                    <label>
-                        <input type="radio" name="person" id="all" value="all" onclick="uidSelect('all', 'all');">
-                        <label for="all">All</label>
-                    </label>
+                    <button type="button" class="btn" onclick="resetHighlighted(); deselectUsers();">Reset Highlighted</button>
                     {% for user in uids.keys() %}
                         <label>
-                            <input type="radio" name="person" id="{{user}}" value="{{uids[user]}}" onclick="uidSelect('{{user}}', {{uids[user]}});">
+                            <input type="checkbox" class="userSelectRadio" id="{{user}}" value="{{uids[user]}}" onclick="uidSelect('{{user}}');">
                             <label for="{{user}}">{{user}}</label>
                         </label>
                     {% endfor%}
                 </div>
+                <label for="userBrightness">Selected user brightness:</label>
+                <button id="userBrightnessUp" type="button" class="btn" name="userBrightness" value="up" onclick="userBrightnessChange(1);">up</button>
+                <button id="userBrightnessDown" type="button" class="btn" name="userBrightness" value="down" onclick="userBrightnessChange(-1);">down</button>
             </form>
             <div class="calendarContent">
                 <div class="calendarDays">
                     <div id="timeEmptySpace">
                         <p>Time</p>
                     </div>
-                    <div id="Sunday" class="{{'todayHeader' if todayIndex == 0 else ''}}">
+                    <div id="Sunday">
                         <p>Sunday</p>
                         <p id="sundayDate">{{datesArray[thisWeekIndex][0]}}</p>
                     </div>
 
-                    <div id="Monday" class="{{'todayHeader' if todayIndex == 1 else ''}}">
+                    <div id="Monday">
                         <p>Monday</p>
                         <p id="mondayDate">{{datesArray[thisWeekIndex][1]}}</p>
                     </div>
 
-                    <div id="Tuesday" class="{{'todayHeader' if todayIndex == 2 else ''}}">
+                    <div id="Tuesday">
                         <p>Tuesday</p>
                         <p id="tuesdayDate">{{datesArray[thisWeekIndex][2]}}</p>
                     </div>
 
-                    <div id="Wednesday" class="{{'todayHeader' if todayIndex == 3 else ''}}">
+                    <div id="Wednesday">
                         <p>Wednesday</p>
                         <p id="wednesdayDate">{{datesArray[thisWeekIndex][3]}}</p>
                     </div>
 
-                    <div id="Thursday" class="{{'todayHeader' if todayIndex == 4 else ''}}">
+                    <div id="Thursday">
                         <p>Thursday</p>
                         <p id="thursdayDate">{{datesArray[thisWeekIndex][4]}}</p>
                     </div>
 
-                    <div id="Friday" class="{{'todayHeader' if todayIndex == 5 else ''}}">
+                    <div id="Friday">
                         <p>Friday</p>
                         <p id="fridayDate">{{datesArray[thisWeekIndex][5]}}</p>
                     </div>
 
-                    <div id="Saturday" class="{{'todayHeader' if todayIndex == 6 else ''}}">
+                    <div id="Saturday">
                         <p>Saturday</p>
                         <p id="saturdayDate">{{datesArray[thisWeekIndex][6]}}</p>
                     </div>
@@ -118,23 +119,27 @@
                     <div class = "timeLabel" style = "grid-area: r23-00 / a00-00 / r-1 / a00-00;"><p>11:00 PM</p></div>
 
                     {% for event in events[thisWeekIndex] %}
-                        <div class="event {{event['uid']}}" style = "grid-area: r{{event['rowstart']}} / 
+                        <div class="event {{event['uid']}} default" style = "grid-area: r{{event['rowstart']}} / 
                                 a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}};">
                             <p id="eventHeading">{{event['summary']}}</p>
                             <!-- wat -->
                             <p>{{'12' if ((event['start'][:2] | int) % (12 | int)) == 0 else (((event['start'][:2] | int) % (12 | int)) | string())}}:{{event['start'][3:]}} {{'PM' if (event['start'][:2] | int) >= (12 | int) else 'AM'}} - {{'12' if ((event['end'][:2] | int) % (12 | int)) == 0 else (((event['end'][:2] | int) % (12 | int)) | string())}}:{{event['end'][3:]}} {{'PM' if (event['end'][:2] | int) >= 12 else 'AM'}}</p>
-                            {% if event['short'] == true %}
-                                    <p> 
-                                        {% for person in event['attendees']%}
-                                            {{person['name']}}{% if loop.index != (event['attendees'] | length) %}, {% endif %}
+                            <div class="eventAttendees">
+                                {% if event['short'] == true %}
+                                        <p> 
+                                            {% for person in event['attendees']%}
+                                                {{person['name']}}{% if loop.index != (event['attendees'] | length) %}, {% endif %}
+                                            {% endfor %}
+                                        </p>
+                                    {% else %}
+                                        {% for person in event['attendees'] %}
+                                            <div class="personWrapper">
+                                                <img class="icon" src="{{url_for('static', filename=person['icon'])}}">
+                                                <p>{{person['name']}}</p>
+                                            </div>
                                         {% endfor %}
-                                    </p>
-                                {% else %}
-                                    {% for person in event['attendees'] %}
-                                        <img class="icon" src="{{url_for('static', filename=person['icon'])}}">
-                                        <p>{{person['name']}}</p>
-                                    {% endfor %}
-                            {% endif %}
+                                {% endif %}
+                            </div>
                         </div>
                     {% endfor %}
 
@@ -149,12 +154,44 @@
         </section>
 </main>
 
+<div id="screensaver">
+    <img id="screensaverImage" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_Home.png')}}">
+</div>
+
+<section class="soundEffects">
+    <audio controls id="bubblePopSound">
+        <!-- Credit as per Licence
+            Title: bubble(7).wav
+            Author: Glaneur de sons
+            Source: https://freesound.org/people/Glaneur%20de%20sons/sounds/104946/
+            Licence: Creative Common's 3.0 - https://creativecommons.org/licenses/by/3.0/ 
+            Changes: Sound was shortened and made quieter -->
+        <!-- Glaneur de sons. (2010). bubble(7).wav [Sound]. freesound. https://freesound.org/people/Glaneur%20de%20sons/sounds/104946/ -->
+        <source src="{{url_for('static', filename='sounds/bubble-pop-shortened.wav')}}" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio> 
+
+    <audio controls id="multipleBubblesSound">
+        <!-- Credit as per Licence
+            Title: Bubble_pops
+            Author: soundman2733
+            Source: https://freesound.org/people/soundman2733/sounds/654915/
+            Licence: https://creativecommons.org/licenses/by/4.0/
+            Changes: Sound was shortened and made quieter -->
+        <!-- soundman2733. (2022). Bubble_pops [Sound]. freesound. https://freesound.org/people/soundman2733/sounds/654915/ -->
+        <source src="{{url_for('static', filename='sounds/bubble-multiple-shortened.wav')}}" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio> 
+
+</section>
+
 <script type="text/javascript" src="{{url_for('static', filename='js/calendarTimes.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename='js/mainLoop.js')}}"></script>
 <script>
     window.onload = function () {
         updateTimeData();
         resetHighlighted();
+        deselectUsers();
     }
 
     Mousetrap.bind('a', function() { document.getElementById('all').click(); });

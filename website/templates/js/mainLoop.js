@@ -1,9 +1,46 @@
 let latestJson = "";
+let userBrightnessArray = ['default-5', 'default-4', 'default-3', 'default-2', 'default-1', 'default', 'default1', 'default2', 'default3','default4', 'default5'];
 
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
+var inactiveTimeout;
+var screensaver_active = false;
+var idletime = 5;
+
+document.onkeypress = function () {
+    detectedSomething();
+}
+
+document.onmousemove = function() {
+    detectedSomething();
+}
+
+function detectedSomething() {
+    clearTimeout(inactiveTimeout);
+    if (screensaver_active) {
+        stop_screensaver();
+    }
+    inactiveTimeout = setTimeout(show_screensaver, 1000 * idletime);
+}
+
+// show screensaver function
+function show_screensaver(){
+    document.getElementById('screensaver').style.display = "block";
+    document.getElementById('calendarContent').style.display = "none";
+    screensaver_active = true;
+}
+
+// stop screensaver
+function stop_screensaver(){
+    document.getElementById('screensaver').style.display = "none";
+    document.getElementById('calendarContent').style.display = "flex";
+    screensaver_active = false;
+    deselectUsers();
+    resetHighlighted();
+    document.getElementById("selectedUserBrightness").value = "default";
+}
 
 function updateWaterBackground() {
     // day and night version of water background, inspired by https://wordpress.stackexchange.com/questions/375122/change-background-image-based-on-the-hour
@@ -18,10 +55,8 @@ function updateWaterBackground() {
             // Else apply day class to #waterBackgroundVideo
             document.getElementById("waterBackgroundVideo").className = "waterBackgroundDay";
         }
-
     }
 }
-
 
 async function updateTimeData() {
     const now = new Date();
@@ -55,6 +90,12 @@ async function updateTimeData() {
     document.getElementById("datetime").innerHTML = displayString;
 
     updateWaterBackground();
+
+    const days = document.getElementsByClassName("todayHeader");
+    for (var i = 0; i < days.length; i++) {
+        days[i].classList.remove("todayHeader");
+    }
+    document.getElementById(now.toLocaleString('en-GB', {weekday: 'long'})).classList.add("todayHeader");
 }
 
 function changeWeek(thisWeekIndex, direction, numWeeks, datesArray) {
@@ -118,32 +159,70 @@ async function putWeeksEvents(viewingWeek, datesArray) {
     for (const event of latestJson[viewingWeek]) {
         render(event);
     }
-    // find who is highlighted right now and click their button to highlight them
-    const highlightedPerson = document.getElementById("currentlyHighlighted").value;
-    document.getElementById(highlightedPerson).click();
-
+    
+    highlightEvents();
     dayHeadingDates(datesArray[viewingWeek]);
     // generate "current time" wave
     updateTimeData();
 }
 
-function uidSelect(person, uids) {
-    resetHighlighted()
-    document.getElementById("currentlyHighlighted").value = person;
-    if (uids != "all") {
-        for (uid in uids) {
-            var elements = document.getElementsByClassName(uids[uid]);
-            for (var i = 0; i < elements.length; i++) {
-                elements[i].classList.add("highlightedEvent");
+function uidSelect(name) {
+    console.log("clicked " + name);
+    resetHighlighted();
+    highlightEvents();
+}
+
+function highlightEvents() {
+    console.log("highight events");
+    // Play's a pop sound for each selection and deselection.
+    // This will be annoying, need to work out mechanics, for now it sits here
+    document.getElementById("bubblePopSound").play();
+    var people = document.getElementsByClassName("userSelectRadio");
+    const current = document.getElementById("selectedUserBrightness").value;
+    for (var i = 0; i < people.length; i++) {
+        if (people[i].checked) {
+            var uids = (people[i].value).replaceAll("\'","\"");
+            uids = Array.from(JSON.parse(uids));
+            for (const uid of uids) {
+                var evs = document.getElementsByClassName(uid);
+                for (var j = 0; j < evs.length; j++) {
+                    evs[j].classList.add("highlightedEvent");
+                    evs[j].classList.add(current);
+                }
             }
         }
+    }   
+}
+
+function deselectUsers() {
+    var users = document.getElementsByClassName("userSelectRadio");
+    for (var i = 0; i < users.length; i++) {
+        users[i].checked = false;
     }
 }
 
 function resetHighlighted() {
     var elements = document.getElementsByClassName("event");
+    const current = document.getElementById("selectedUserBrightness").value;
     for (var i = 0; i < elements.length; i++) {
         elements[i].classList.remove("highlightedEvent");
+        elements[i].classList.remove(current);
+        elements[i].classList.add("default");
+    }
+}
+
+function userBrightnessChange(delta) {
+    const current = document.getElementById("selectedUserBrightness").value;
+    console.log("current: " + current);
+    if (!(delta == -1 && current == 'default-5') && !(delta == 1 && current == 'default5')) {
+        const highlighted = document.getElementsByClassName("highlightedEvent");
+        const newSetting = userBrightnessArray[(userBrightnessArray.indexOf(current) + delta)];
+        console.log("new: " + newSetting);
+        for (var i = 0; i < highlighted.length; i++) {
+            highlighted[i].classList.remove(current);
+            highlighted[i].classList.add(newSetting);
+        }
+        document.getElementById("selectedUserBrightness").value = newSetting;
     }
 }
 
@@ -256,11 +335,8 @@ async function update() {
     for (const event of text[viewingWeek]) {
         render(event);
     }
-
-    // find who is highlighted right now and click their button to highlight them
-    const highlightedPerson = document.getElementById("currentlyHighlighted").value;
-    document.getElementById(highlightedPerson).click();
-
+    
+    highlightEvents();
     updateTimeData();
     latestJson = text;
 }
