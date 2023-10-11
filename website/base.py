@@ -26,7 +26,6 @@ def has_db(fn):
         s.expire_on_commit = False
         with s.begin_nested():
             result = fn(s, *args, **kwargs)
-        s.commit()
         return result
 
     return decorated
@@ -39,7 +38,6 @@ def has_global_stuff(fn):
         s.expire_on_commit = False
         with s.begin_nested():
             result = fn(s, Global, *args, **kwargs)
-        s.commit()
         return result
 
     return decorated

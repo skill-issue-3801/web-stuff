@@ -32,7 +32,6 @@ def default(db_session, globals):
     if anyChanges or globals.familyChanges:
         jsonfile = do_update(family, today, hashes)
         globals.set_events(json.loads(jsonfile))
-        db_session.commit()
 
     globals.familyChanges = False
     anyChanges = False

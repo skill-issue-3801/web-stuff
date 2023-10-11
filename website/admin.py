@@ -31,8 +31,6 @@ def family_post(db_session, globals):
     elif request.form.get("formName") == "deleteFamilyMember":
         delete_family_member(db_session)
         globals.familyChanges = True
-    db_session.commit()
-    db_session.close()
     return redirect(url_for("admin.manage_family"))
 
 
