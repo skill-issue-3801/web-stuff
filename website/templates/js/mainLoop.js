@@ -6,7 +6,7 @@ function delay(time) {
 }
 
 var inactiveTimeout;
-var screensaver_active = false;
+var screensaver_active = true;
 var idletime = 5;
 
 document.onkeypress = function () {

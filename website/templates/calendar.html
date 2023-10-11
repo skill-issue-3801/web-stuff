@@ -23,7 +23,7 @@
         </video>
     </div>
 
-    <main class="content" id="calendarContent">
+    <main class="content" id="calendarContent" style="display:none;">
         <h1 class="calendarViewTopText" id="datetime">.</h1>
         <h3 id="weeksAgoAheadFlag" style="display: none;"></h3>      
         <section>
@@ -154,7 +154,7 @@
         </section>
 </main>
 
-<div id="screensaver">
+<div id="screensaver" style="display: block;">
     <img id="screensaverImage" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_Home.png')}}">
 </div>
 
@@ -189,6 +189,7 @@
 <script type="text/javascript" src="{{url_for('static', filename='js/mainLoop.js')}}"></script>
 <script>
     window.onload = function () {
+        show_screensaver();
         updateTimeData();
         resetHighlighted();
         deselectUsers();

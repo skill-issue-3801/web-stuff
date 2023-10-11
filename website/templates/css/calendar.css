@@ -396,7 +396,6 @@
     /* for Internet Explorer, Edge */
     scrollbar-width: none;
     display: none;
-    border: solid 3px var(--light-coral);
 }
 
 #screensaverImage {
