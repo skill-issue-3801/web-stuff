@@ -49,9 +49,9 @@ function updateRequirements(urlId, typeId) {
 
 function validateForm(whichForm) {
   var url = document.forms[whichForm]["link"].value;
-  var type = document.forms[whichForm]["calendarType"].value;
+  var type = document.forms[whichForm]["calendartype"].value;
   if (url == "") {
-    var type = document.forms[whichForm]["calendarType"].value = "none"
+    var type = document.forms[whichForm]["calendartype"].value = "none"
   } 
   else if (type == 'apple' && (url.slice(0,42) != "webcal://p122-caldav.icloud.com/published/")) {
     alert("That is not a valid Apple calendar url, please use the guides to find your correct url")

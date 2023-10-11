@@ -33,14 +33,14 @@
     {% for member in family%}
     <div class="familyMemberContainer" , id="{{member.name}}Box">
         <!--<p> Url: {{member.url}}</p>
-        <p> calendarType: {{member.calendarType}}</p>
+        <p> calendartype: {{member.calendartype}}</p>
         <p> email: {{member.email}}</p>-->
         <figure class="familyMember">
             <img class='icon' src="{{url_for('static', filename=member.icon)}}">
         </figure>
         <p>{{ member.name }}</p>
         <div class="manageFamilyBtns">
-            <button onclick="openEditForm('{{member.name}}', '{{member.email}}', '{{member.calendarType}}', '{{member.url}}', '{{member.icon}}')" class="editFamilyMember">Edit</button>
+            <button onclick="openEditForm('{{member.name}}', '{{member.email}}', '{{member.calendartype}}', '{{member.url}}', '{{member.icon}}')" class="editFamilyMember">Edit</button>
             <form method="POST">
                 <input type="hidden" name="formName" value="deleteFamilyMember">
                 <button type="submit" name="submit" class="deleteFamilyMember" method="POST"
@@ -77,11 +77,11 @@
             <b>Calendar Type:</b>
             <div class="radio-button-container">
                 <div class="radio-button-and-label">
-                    <input type="radio" id="editGoogle" name="calendarType" value="google">
+                    <input type="radio" id="editGoogle" name="calendartype" value="google">
                     <label for="google">Google</label>
                 </div>
                 <div class="radio-button-and-label">
-                    <input type="radio" id="editApple" name="calendarType" value="apple">
+                    <input type="radio" id="editApple" name="calendartype" value="apple">
                     <label for="apple">Apple</label>
                 </div>
             </div>
@@ -137,11 +137,11 @@
             <b>Calendar Type:</b>
             <div class="radio-button-container">
                 <div class="radio-button-and-label">
-                    <input type="radio" id="addGoogle" name="calendarType" value="google">
+                    <input type="radio" id="addGoogle" name="calendartype" value="google">
                     <label for="google">Google</label>
                 </div>
                 <div class="radio-button-and-label">
-                    <input type="radio" id="addApple" name="calendarType" value="apple">
+                    <input type="radio" id="addApple" name="calendartype" value="apple">
                     <label for="apple">Apple</label>
                 </div>
             </div>

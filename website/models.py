@@ -16,12 +16,12 @@ class FamilyMember(Base):
 
     name = Column("name", String, primary_key=True)
     url = Column("url", String, unique=True, nullable=True)
-    calendarType = Column("calendar_type", String, nullable=True)
+    calendartype = Column("calendartype", String, nullable=True)
     email = Column("email", String, nullable=True, unique=True)
     # string for path to icon image
     icon = Column("icon", String, nullable=False)
     # hash of a string of this users' events, used to quickly check if there have been any changes
     # since last checked to avoid re-processing
-    eventsHash = Column("events_hash", Integer, nullable=False)
+    eventshash = Column("eventshash", Integer, nullable=False)
     # pickled python object of class User
-    userObject = Column("user_object", PickleType, nullable=False)
+    userobject = Column("userobject", PickleType, nullable=False)

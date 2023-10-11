@@ -43,7 +43,7 @@ def add_family_member(db_session):
         return
 
     link = request.form.get("link")
-    caltype = request.form.get("calendarType")
+    caltype = request.form.get("calendartype")
     if link == "":
         link = None
     elif not is_valid_url(link, caltype):
@@ -63,15 +63,15 @@ def add_family_member(db_session):
 
     icon = request.form.get("icon")
     eventsHash = 0
-    userObject = User(name, link, caltype, email)
+    userobject = User(name, link, caltype, email)
     row = FamilyMember(
         name=name,
         url=link,
-        calendarType=caltype,
+        calendartype=caltype,
         email=email,
         icon=icon,
         eventsHash=eventsHash,
-        userObject=userObject,
+        userobject=userobject,
     )
     db_session.add(row)
     print("Successfully added to log.")
@@ -86,7 +86,7 @@ def edit_family_member(db_session):
         return
     
     link = request.form.get("link")
-    caltype = request.form.get("calendarType")
+    caltype = request.form.get("calendartype")
     if link == "":
         link = None
     elif (db_session.query(FamilyMember).filter(FamilyMember.name!=originalName).filter_by(url=link).first()):
@@ -103,7 +103,7 @@ def edit_family_member(db_session):
     
     icon = request.form.get("icon")
     person = db_session.query(FamilyMember).get(originalName)
-    userObject = User(name, link, caltype, email)
+    userobject = User(name, link, caltype, email)
     
     if originalName != name:
         person.name = name
@@ -111,10 +111,10 @@ def edit_family_member(db_session):
         person.email = email
     if link != person.url:
         person.url = link
-        person.calendarType = caltype
+        person.calendartype = caltype
     if icon != person.icon:
         person.icon = icon
-    person.userObject = userObject
+    person.userobject = userobject
     flash("{}'s information was successfully updated!".format(name), category='success')
 
 
