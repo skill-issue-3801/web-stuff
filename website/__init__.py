@@ -13,6 +13,10 @@ from .cal import User
 
 def main(db_url, args):
     logging.basicConfig(level=logging.INFO)
+    logging.getLogger("sqlalchemy.engine").setLevel(logging.DEBUG)
+    logging.getLogger("sqlalchemy.pool").setLevel(logging.DEBUG)
+    logging.getLogger("sqlalchemy.dialects").setLevel(logging.DEBUG)
+    logging.getLogger("sqlalchemy.orm").setLevel(logging.DEBUG)
 
     app.config["SQLALCHEMY_DATABASE_URI"] = db_url
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
