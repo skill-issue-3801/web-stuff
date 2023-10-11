@@ -69,15 +69,15 @@ def check_for_update(family, today, hashes):
     for member in family:
         if member.url != None:
             newHash = check_cal_for_updates(
-                member.url, member.calendartype, member.eventsHash, today
+                member.url, member.calendartype, member.eventshash, today
             )
             if newHash == False:
-                hashes[member.name] = member.eventsHash
+                hashes[member.name] = member.eventshash
             else:
                 hashes[member.name] = newHash
                 anyChanges = True
         else:
-            hashes[member.name] = member.eventsHash
+            hashes[member.name] = member.eventshash
     return anyChanges
 
 
@@ -93,7 +93,7 @@ def do_update(family, today, hashes):
             emails.append(user.get_email())
     evs = update_events(userobjects.values(), today, hashes, names, emails)
     for member in family:
-        member.eventsHash = hashes[member.name]
+        member.eventshash = hashes[member.name]
         member.userobject = userobjects[member.name]
     return json.dumps(calendarise_events(evs, family, today))
 

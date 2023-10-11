@@ -62,7 +62,7 @@ def add_family_member(db_session):
         return
 
     icon = request.form.get("icon")
-    eventsHash = 0
+    eventshash = 0
     userobject = User(name, link, caltype, email)
     row = FamilyMember(
         name=name,
@@ -70,7 +70,7 @@ def add_family_member(db_session):
         calendartype=caltype,
         email=email,
         icon=icon,
-        eventsHash=eventsHash,
+        eventshash=eventshash,
         userobject=userobject,
     )
     db_session.add(row)
