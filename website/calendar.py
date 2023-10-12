@@ -32,7 +32,6 @@ def default(db_session, globals):
     if anyChanges or globals.familyChanges:
         jsonfile = do_update(family, today, hashes)
         globals.set_events(json.loads(jsonfile))
-        db_session.commit()
 
     globals.familyChanges = False
     anyChanges = False
@@ -60,7 +59,7 @@ def default(db_session, globals):
 def uids_to_div_dict(family):
     peoplesUid = {}
     for member in family:
-        peoplesUid[member.name] = member.userObject.get_uids()
+        peoplesUid[member.name] = member.userobject.get_uids()
     return peoplesUid
 
 def check_for_update(family, today, hashes):
@@ -68,31 +67,31 @@ def check_for_update(family, today, hashes):
     for member in family:
         if member.url != None:
             newHash = check_cal_for_updates(
-                member.url, member.calendarType, member.eventsHash, today
+                member.url, member.calendartype, member.eventshash, today
             )
             if newHash == False:
-                hashes[member.name] = member.eventsHash
+                hashes[member.name] = member.eventshash
             else:
                 hashes[member.name] = newHash
                 anyChanges = True
         else:
-            hashes[member.name] = member.eventsHash
+            hashes[member.name] = member.eventshash
     return anyChanges
 
 def do_update(family, today, hashes):
-    userObjects = {}
+    userobjects = {}
     for member in family:
-        userObjects[member.name] = member.userObject
+        userobjects[member.name] = member.userobject
     names = []
     emails = []
-    for user in userObjects.values():
+    for user in userobjects.values():
         names.append(user.get_name())
         if user.get_email() != None:
             emails.append(user.get_email())
-    evs = update_events(userObjects.values(), today, hashes, names, emails)
+    evs = update_events(userobjects.values(), today, hashes, names, emails)
     for member in family:
-        member.eventsHash = hashes[member.name]
-        member.userObject = userObjects[member.name]
+        member.eventshash = hashes[member.name]
+        member.userobject = userobjects[member.name]
     return json.dumps(calendarise_events(evs, family, today))
 
 def log_events(events):

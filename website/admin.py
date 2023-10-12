@@ -31,8 +31,6 @@ def family_post(db_session, globals):
     elif request.form.get("formName") == "deleteFamilyMember":
         delete_family_member(db_session)
         globals.familyChanges = True
-    db_session.commit()
-    db_session.close()
     return redirect(url_for("admin.manage_family"))
 
 
@@ -43,7 +41,7 @@ def add_family_member(db_session):
         return
 
     link = request.form.get("link")
-    caltype = request.form.get("calendarType")
+    caltype = request.form.get("calendartype")
     if link == "":
         link = None
     elif not is_valid_url(link, caltype):
@@ -62,18 +60,20 @@ def add_family_member(db_session):
         return
 
     icon = request.form.get("icon")
-    eventsHash = 0
-    userObject = User(name, link, caltype, email)
+    eventshash = 0
+    userobject = User(name, link, caltype, email)
     row = FamilyMember(
         name=name,
         url=link,
-        calendarType=caltype,
+        calendartype=caltype,
         email=email,
         icon=icon,
-        eventsHash=eventsHash,
-        userObject=userObject,
+        eventshash=eventshash,
+        userobject=userobject,
     )
     db_session.add(row)
+    db_session.flush()
+    print("Successfully added to log.")
     flash("Welcome to the family {}!".format(name), category='success')
 
 
@@ -85,7 +85,7 @@ def edit_family_member(db_session):
         return
     
     link = request.form.get("link")
-    caltype = request.form.get("calendarType")
+    caltype = request.form.get("calendartype")
     if link == "":
         link = None
     elif (db_session.query(FamilyMember).filter(FamilyMember.name!=originalName).filter_by(url=link).first()):
@@ -102,7 +102,7 @@ def edit_family_member(db_session):
     
     icon = request.form.get("icon")
     person = db_session.query(FamilyMember).get(originalName)
-    userObject = User(name, link, caltype, email)
+    userobject = User(name, link, caltype, email)
     
     if originalName != name:
         person.name = name
@@ -110,10 +110,10 @@ def edit_family_member(db_session):
         person.email = email
     if link != person.url:
         person.url = link
-        person.calendarType = caltype
+        person.calendartype = caltype
     if icon != person.icon:
         person.icon = icon
-    person.userObject = userObject
+    person.userobject = userobject
     flash("{}'s information was successfully updated!".format(name), category='success')
 
 

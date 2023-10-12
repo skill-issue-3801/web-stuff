@@ -13,6 +13,10 @@ from .cal import User
 
 def main(db_url, args):
     logging.basicConfig(level=logging.INFO)
+    logging.getLogger("sqlalchemy.engine").setLevel(logging.DEBUG)
+    logging.getLogger("sqlalchemy.pool").setLevel(logging.DEBUG)
+    logging.getLogger("sqlalchemy.dialects").setLevel(logging.DEBUG)
+    logging.getLogger("sqlalchemy.orm").setLevel(logging.DEBUG)
 
     app.config["SQLALCHEMY_DATABASE_URI"] = db_url
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -33,20 +37,20 @@ def main(db_url, args):
 
             name = "Rose"
             url = "https://calendar.google.com/calendar/ical/8b3d1384c9c8c2b83d89bbdfc618e9643c020a37f917797154bb8bc15313d399%40group.calendar.google.com/private-61d6eaf479c9245fe2746f578b6d9b3b/basic.ics"
-            calendarType = "google"
+            calendartype = "google"
             email = None
             icon = "graphics/ocean-icons/Slug_1.png"
-            eventsHash = 0
-            userObject = User(name, url, calendarType, email)
+            eventshash = 0
+            userobject = User(name, url, calendartype, email)
             s.add(
                 FamilyMember(
                     name=name,
                     url=url,
-                    calendarType=calendarType,
+                    calendartype=calendartype,
                     email=email,
                     icon=icon,
-                    eventsHash=eventsHash,
-                    userObject=userObject,
+                    eventshash=eventshash,
+                    userobject=userobject,
                 )
             )
 
@@ -58,11 +62,11 @@ def main(db_url, args):
                 FamilyMember(
                     name=name,
                     url=url,
-                    calendarType=calendarType,
+                    calendartype=calendartype,
                     email=email,
                     icon=icon,
-                    eventsHash=eventsHash,
-                    userObject=userObject,
+                    eventshash=eventshash,
+                    userobject=userobject,
                 )
             )
 
@@ -74,11 +78,11 @@ def main(db_url, args):
                 FamilyMember(
                     name=name,
                     url=url,
-                    calendarType=calendarType,
+                    calendartype=calendartype,
                     email=email,
                     icon=icon,
-                    eventsHash=eventsHash,
-                    userObject=userObject,
+                    eventshash=eventshash,
+                    userobject=userobject,
                 )
             )
 
@@ -90,11 +94,11 @@ def main(db_url, args):
                 FamilyMember(
                     name=name,
                     url=url,
-                    calendarType=calendarType,
+                    calendartype=calendartype,
                     email=email,
                     icon=icon,
-                    eventsHash=eventsHash,
-                    userObject=userObject,
+                    eventshash=eventshash,
+                    userobject=userobject,
                 )
             )
 
