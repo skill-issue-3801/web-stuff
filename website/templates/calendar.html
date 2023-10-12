@@ -28,6 +28,7 @@
         <h3 id="weeksAgoAheadFlag" style="display: none;"></h3>      
         <section>
             <form name="userHighlightForm" class="tempHighlightControl">
+                <p id="homeAndAway" style="display:none;">{{homeAndAway}}</p>
                 <input type="hidden" id="currentlyHighlighted" name="currentlyHighlighted" value="all">
                 <input type="hidden" id="currentWeekViewing" name="currentWeekViewing" value="{{thisWeekIndex}}">
                 <input type="hidden" id="selectedUserBrightness" name="selectedUserBrightness" value="default">
@@ -155,7 +156,22 @@
 </main>
 
 <div id="screensaver" style="display: block;">
-    <img id="screensaverImage" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_Home.png')}}">
+    <img class="screensaverImage" id="screensaverImage0" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_Home.png')}}" style="display: block;">
+    <img class="screensaverImage" id="screensaverImage1356" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_1_3_5_6_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage135" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_1_3_5_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage13" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_1_3_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage156" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_1_5_6_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage15" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_1_5_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage163" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_1_6_3_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage16" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_1_6_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage1" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_1_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage356" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_3_5_6_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage35" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_3_5_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage36" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_3_6_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage3" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_3_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage56" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_5_6_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage5" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_5_Away.png')}}" style="display: none;">
+    <img class="screensaverImage" id="screensaverImage6" src="{{url_for('static', filename='graphics/ambient-screen/Screensaver_Slug_6_Away.png')}}" style="display: none;">
 </div>
 
 <section class="soundEffects">
@@ -179,7 +195,7 @@
             Licence: https://creativecommons.org/licenses/by/4.0/
             Changes: Sound was shortened and made quieter -->
         <!-- soundman2733. (2022). Bubble_pops [Sound]. freesound. https://freesound.org/people/soundman2733/sounds/654915/ -->
-        <source src="{{url_for('static', filename='sounds/bubble-multiple-shortened.wav')}}" type="audio/wav">
+        <source src="{{url_for('static', filename='sounds/bubble-multiple-shortened .wav')}}" type="audio/wav">
         Your browser does not support the audio element.
     </audio> 
 
@@ -193,6 +209,7 @@
         updateTimeData();
         resetHighlighted();
         deselectUsers();
+        getHomeAndAway();
     }
 
     Mousetrap.bind('a', function() { document.getElementById('all').click(); });

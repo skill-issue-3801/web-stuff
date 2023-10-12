@@ -1,5 +1,14 @@
 let latestJson = "";
+var homeAndAway = {};
 let userBrightnessArray = ['default-5', 'default-4', 'default-3', 'default-2', 'default-1', 'default', 'default1', 'default2', 'default3','default4', 'default5'];
+
+var currentScreenSaver = "screensaverImage0";
+
+function getHomeAndAway() {
+    var stuff = document.getElementById("homeAndAway").innerHTML;
+    homeAndAway = JSON.parse(stuff.replaceAll("\'", "\""));
+    checkWhosHome();
+}
 
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
@@ -67,7 +76,7 @@ async function updateTimeData() {
     document.getElementById("currentTime").style["gridArea"] = coordinates;
 
     document.getElementById("currentTime").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-
+    checkWhosHome();
     /* now do date and time up top*/
     const day = now.toLocaleString('en-GB', { day: 'numeric' });
     switch (day % 10) {
@@ -96,6 +105,25 @@ async function updateTimeData() {
         days[i].classList.remove("todayHeader");
     }
     document.getElementById(now.toLocaleString('en-GB', {weekday: 'long'})).classList.add("todayHeader");
+}
+
+function checkWhosHome() {
+    const now = new Date();
+    /* update co-ordinates for wave */
+    hour = (now.getHours()).toString().padStart(2, '0');
+    minutes = ((15 * (Math.floor(now.getMinutes() / 15))).toString()).padStart(2, '0');
+    const timecode = `${hour}-${minutes}`;
+    console.log(timecode);
+    console.log(homeAndAway[timecode]);
+    if ((homeAndAway[timecode] != undefined) && currentScreenSaver != `screensaverImage${homeAndAway[timecode]}`) {
+        console.log("...");
+        console.log(currentScreenSaver);
+        console.log(`screensaverImage${homeAndAway[timecode]}`);
+        document.getElementById(`screensaverImage${homeAndAway[timecode]}`).style.display = "block";
+        document.getElementById(currentScreenSaver).style.display = "none";
+        
+        currentScreenSaver = `screensaverImage${homeAndAway[timecode]}`;
+    }
 }
 
 function changeWeek(thisWeekIndex, direction, numWeeks, datesArray) {

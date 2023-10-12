@@ -398,7 +398,7 @@
     display: none;
 }
 
-#screensaverImage {
+.screensaverImage {
     width: 100vw;
     overflow: hidden;
 }
