@@ -16,8 +16,8 @@ function delay(time) {
 
 var inactiveTimeout;
 var screensaver_active = true;
-var screensaverIdleTime;
-var scrollbackIdleTime;
+var screensaverIdleTime = 20; 
+var scrollbackIdleTime = 20; 
 
 document.onkeypress = function () {
     detectedSomething();
@@ -384,14 +384,10 @@ async function main() {
         console.log("Running in prod mode.");
         setInterval(update, 300000); // 300 seconds (5 minutes) for prod
         setInterval(updateClock, 5000); //5 seconds
-        screensaverIdleTime = 20 //seconds
-        scrollbackIdleTime = 20; //seconds
     } else {
         console.log("Running in dev mode.");
         setInterval(update, 10000); // 10 seconds for dev
         setInterval(updateClock, 5000); //5 seconds
-        screensaverIdleTime = 20; //seconds
-        scrollbackIdleTime = 20; //seconds
     }
     update();
 }
