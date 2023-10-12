@@ -385,12 +385,19 @@ def build_away_array(today, weeksEvents):
     for event in weeksEvents:
         if (event['colstart'] == today.strftime("%A")):
             t = event['rowstart']
-            while ((t != event['rowend']) and t != "00-00"):
+            while ((t != decrement_timecode(event['rowend'])) and t != "00-00"):
                 for person in event['attendees']:
                     day[t] = day[t] | (1 << (icon_number(person) - 1))
                 t = increment_timecode(t)
     return(day)
                 
+def decrement_timecode(timecode):
+    if timecode == "00-00":
+        return "23-45"
+    if timecode[-2:] == "00":
+        return((str(int(timecode[0:2]) - 1)).zfill(2)+ "-00")
+    else:
+        return(timecode[0:3] + (str(int(timecode[-2:]) - 15)).zfill(2))
 
 def increment_timecode(timecode):
     if timecode == "23-45":
