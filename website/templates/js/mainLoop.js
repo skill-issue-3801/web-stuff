@@ -72,18 +72,22 @@ function updateWaterBackground() {
 async function updateClock() {
     const now = new Date();
     const day = now.toLocaleString('en-GB', { day: 'numeric' });
-    switch (day % 10) {
-        case 1:
-            mod = "st";
-            break;
-        case 2:
-            mod = "nd";
-            break;
-        case 3:
-            mod = "rd";
-            break;
-        default:
-            mod = "th";
+    if (day > 10 && day < 20) {
+        mod = "th";
+    } else {
+        switch (day % 10) {
+            case 1:
+                mod = "st";
+                break;
+            case 2:
+                mod = "nd";
+                break;
+            case 3:
+                mod = "rd";
+                break;
+            default:
+                mod = "th";
+        }
     }
     const displayString = (
         now.toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric', hour12: true }) + ", " +
