@@ -16,7 +16,8 @@ function delay(time) {
 
 var inactiveTimeout;
 var screensaver_active = true;
-var idletime = 5;
+var screensaverIdleTime;
+var scrollbackIdleTime;
 
 document.onkeypress = function () {
     detectedSomething();
@@ -31,7 +32,8 @@ function detectedSomething() {
     if (screensaver_active) {
         stop_screensaver();
     }
-    inactiveTimeout = setTimeout(show_screensaver, 1000 * idletime);
+    inactiveTimeout = setTimeout(show_screensaver, 1000 * screensaverIdleTime);
+    scrollBackTimeout = setTimeout(scrollToWave, 1000 * scrollbackIdleTime);
 }
 
 // show screensaver function
@@ -67,17 +69,8 @@ function updateWaterBackground() {
     }
 }
 
-async function updateTimeData() {
+async function updateClock() {
     const now = new Date();
-    /* update co-ordinates for wave */
-    hour = (now.getHours()).toString().padStart(2, '0');
-    minutes = ((15 * (Math.floor(now.getMinutes() / 15))).toString()).padStart(2, '0');
-    coordinates = `r${hour}-${minutes} / cSunday / r${hour}-${minutes} / c-1`;
-    document.getElementById("currentTime").style["gridArea"] = coordinates;
-
-    document.getElementById("currentTime").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-    checkWhosHome();
-    /* now do date and time up top*/
     const day = now.toLocaleString('en-GB', { day: 'numeric' });
     switch (day % 10) {
         case 1:
@@ -97,6 +90,22 @@ async function updateTimeData() {
         now.toLocaleString('en-GB', { weekday: 'long' }) + " " + day + mod + " " +
         now.toLocaleString('en-GB', { month: 'long' }));
     document.getElementById("datetime").innerHTML = displayString;
+}
+
+function scrollToWave() {
+    document.getElementById("currentTime").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+}
+async function updateTimeData() {
+    const now = new Date();
+    /* update co-ordinates for wave */
+    hour = (now.getHours()).toString().padStart(2, '0');
+    minutes = ((15 * (Math.floor(now.getMinutes() / 15))).toString()).padStart(2, '0');
+    coordinates = `r${hour}-${minutes} / cSunday / r${hour}-${minutes} / c-1`;
+    document.getElementById("currentTime").style["gridArea"] = coordinates;
+
+    checkWhosHome();
+    /* now do date and time up top*/
+    updateClock();
 
     updateWaterBackground();
 
@@ -113,12 +122,7 @@ function checkWhosHome() {
     hour = (now.getHours()).toString().padStart(2, '0');
     minutes = ((15 * (Math.floor(now.getMinutes() / 15))).toString()).padStart(2, '0');
     const timecode = `${hour}-${minutes}`;
-    console.log(timecode);
-    console.log(homeAndAway[timecode]);
     if ((homeAndAway[timecode] != undefined) && currentScreenSaver != `screensaverImage${homeAndAway[timecode]}`) {
-        console.log("...");
-        console.log(currentScreenSaver);
-        console.log(`screensaverImage${homeAndAway[timecode]}`);
         document.getElementById(`screensaverImage${homeAndAway[timecode]}`).style.display = "block";
         document.getElementById(currentScreenSaver).style.display = "none";
         
@@ -196,15 +200,15 @@ async function putWeeksEvents(viewingWeek, datesArray) {
 
 function uidSelect(name) {
     console.log("clicked " + name);
+    // Play's a pop sound for each selection and deselection.
+    // This will be annoying, need to work out mechanics, for now it sits here
+    document.getElementById("bubblePopSound").play();
     resetHighlighted();
     highlightEvents();
 }
 
 function highlightEvents() {
     console.log("highight events");
-    // Play's a pop sound for each selection and deselection.
-    // This will be annoying, need to work out mechanics, for now it sits here
-    document.getElementById("bubblePopSound").play();
     var people = document.getElementsByClassName("userSelectRadio");
     const current = document.getElementById("selectedUserBrightness").value;
     for (var i = 0; i < people.length; i++) {
@@ -375,9 +379,15 @@ async function main() {
     if (check) {
         console.log("Running in prod mode.");
         setInterval(update, 300000); // 300 seconds (5 minutes) for prod
+        setInterval(updateClock, 5000); //5 seconds
+        screensaverIdleTime = 20 //seconds
+        scrollbackIdleTime = 20; //seconds
     } else {
         console.log("Running in dev mode.");
-        setInterval(update, 300000); // 10 seconds for dev
+        setInterval(update, 10000); // 10 seconds for dev
+        setInterval(updateClock, 5000); //5 seconds
+        screensaverIdleTime = 20; //seconds
+        scrollbackIdleTime = 20; //seconds
     }
     update();
 }
