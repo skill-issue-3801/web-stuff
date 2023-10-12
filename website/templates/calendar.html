@@ -124,7 +124,7 @@
                                 a{{event['colstart']}} / r{{event['rowend']}} / a{{event['colend']}};">
                             <p id="eventHeading">{{event['summary']}}</p>
                             <!-- wat -->
-                            <p>{{'12' if ((event['start'][:2] | int) % (12 | int)) == 0 else (((event['start'][:2] | int) % (12 | int)) | string())}}:{{event['start'][3:]}} {{'PM' if (event['start'][:2] | int) >= (12 | int) else 'AM'}} - {{'12' if ((event['end'][:2] | int) % (12 | int)) == 0 else (((event['end'][:2] | int) % (12 | int)) | string())}}:{{event['end'][3:]}} {{'PM' if (event['end'][:2] | int) >= 12 else 'AM'}}</p>
+                            <p>{{event['start']}} - {{event['end']}}</p>
                             <div class="eventAttendees">
                                 {% if event['short'] == true %}
                                         <p> 

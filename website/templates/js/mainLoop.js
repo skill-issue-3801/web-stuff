@@ -287,7 +287,7 @@ function render(event) {
     constructed = `
     <div class="event ${event['uid']}" style="grid-area:r${event['rowstart']} / a${event['colstart']} / r${event['rowend']} / a${event['colend']};">
     <p id="eventHeading">${event['summary']}<p>
-    <p>${stEventHrs}:${stEventMin} ${stEventAMPM} - ${ndEventHrs}:${ndEventMin} ${ndEventAMPM}</p>
+    <p>${event['start']} - ${event['end']}</p>
     <div class="eventAttendees">
         ${people}
     </div>
