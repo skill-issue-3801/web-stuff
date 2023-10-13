@@ -36,14 +36,18 @@ function detectedSomething() {
 // show screensaver function
 function show_screensaver() {
     console.log("show ss");
+    document.getElementById('screensaver').style.animation = "fadeIn 1.5s";
     document.getElementById('screensaver').style.display = "block";
-    document.getElementById('calendarContent').style.display = "none";
+    document.getElementById('calendarContent').style.animation = "fadeOut 1.5s";
+    delay(1400).then(() => {document.getElementById('calendarContent').style.display = "none"});
     screensaver_active = true;
 }
 
 // stop screensaver
 function stop_screensaver(){
-    document.getElementById('screensaver').style.display = "none";
+    document.getElementById('screensaver').style.animation = "fadeOut 1.5s";
+    delay(1400).then(() => {document.getElementById('screensaver').style.display = "none"});
+    document.getElementById('calendarContent').style.animation = "fadeIn 1.5s";
     document.getElementById('calendarContent').style.display = "flex";
     screensaver_active = false;
     deselectUsers();

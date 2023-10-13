@@ -395,8 +395,18 @@
     -ms-overflow-style: none;
     /* for Internet Explorer, Edge */
     scrollbar-width: none;
-    display: none;
 }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+  
 
 .screensaverImage {
     width: 100vw;
