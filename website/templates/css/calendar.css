@@ -410,11 +410,11 @@
 .default-1 { opacity: 0.8; }
 .default {}
 /* these should probably be the coral colour but getting lighter but idk how to do that */
-.default1 { filter: brightness(1.25);}
-.default2 { filter: brightness(1.5);}
-.default3 { filter: brightness(1.75);}
-.default4 { filter: brightness(2.0);}
-.default5 { filter: brightness(2.5);}
+.default1 { background-color: color-mix(in srgb, var(--light-coral) 80%, white);}
+.default2 { background-color: color-mix(in srgb, var(--light-coral) 60%, white);}
+.default3 { background-color: color-mix(in srgb, var(--light-coral) 40%, white);}
+.default4 { background-color: color-mix(in srgb, var(--light-coral) 20%, white);}
+.default5 { background-color: white;}
 
 .soundEffects {
     display: none;
