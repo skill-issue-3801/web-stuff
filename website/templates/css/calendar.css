@@ -47,6 +47,7 @@
 
 .baseContent {
     background-color: var(--indigo-dye);
+    overflow-y: hidden;
 }
 
 /* Background Video */
@@ -385,7 +386,7 @@
 #screensaver {
     width: 100%;
     /* height: 100%; */
-    position: absolute;
+    position: fixed;
     left: 0px;
     /* top: 0px; */
     /* Bottom is to test it out for now, 
