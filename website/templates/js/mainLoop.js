@@ -17,7 +17,6 @@ function delay(time) {
 var inactiveTimeout;
 var screensaver_active = true;
 var screensaverIdleTime = 20; 
-var scrollbackIdleTime = 20; 
 
 document.onkeypress = function () {
     detectedSomething();
@@ -33,11 +32,10 @@ function detectedSomething() {
         stop_screensaver();
     }
     inactiveTimeout = setTimeout(show_screensaver, 1000 * screensaverIdleTime);
-    scrollBackTimeout = setTimeout(scrollToWave, 1000 * scrollbackIdleTime);
 }
-
 // show screensaver function
-function show_screensaver(){
+function show_screensaver() {
+    console.log("show ss");
     document.getElementById('screensaver').style.display = "block";
     document.getElementById('calendarContent').style.display = "none";
     screensaver_active = true;
@@ -51,6 +49,7 @@ function stop_screensaver(){
     deselectUsers();
     resetHighlighted();
     document.getElementById("selectedUserBrightness").value = "default";
+    scrollToWave();
 }
 
 function updateWaterBackground() {
@@ -97,6 +96,7 @@ async function updateClock() {
 }
 
 function scrollToWave() {
+    console.log("scroll to wave");
     document.getElementById("currentTime").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
 }
 async function updateTimeData() {
