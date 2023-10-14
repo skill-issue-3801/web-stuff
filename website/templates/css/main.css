@@ -198,10 +198,12 @@ h5 {
   padding-right: 5vw;
   padding-top: 2vh;
   padding-bottom: 2vh;
+  border-radius: 10px;
   background-color: var(--indigo-dye);
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
+  align-content: space-between;
   flex-direction: column;
 }
 
@@ -287,6 +289,7 @@ input[type=radio]:checked {
   cursor: pointer;
   width: 100%;
   margin-bottom: 1%;
+  border-radius: 10px;
 }
 
 /* Add a red background color to the cancel button */
@@ -410,6 +413,7 @@ input[type=radio]:checked {
   appearance: none;
   width: 0;
   height: 0;
+  display: none;
 }
 
 .iconSelect input[type="radio"]:checked+img {
