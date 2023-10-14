@@ -314,10 +314,11 @@ input[type=radio]:checked {
 /* family container stuff here */
 #familyContainer {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 5%;
 }
 
 .familyMemberContainer {
