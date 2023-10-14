@@ -8,7 +8,7 @@
     {% if messages %} 
         {% for category, message in messages %} 
             {% if category == 'error' %}
-                <div id="alert" class="alert alertError">
+                <div id="alert" class="alert alert-error">
                     <p>{{ message }}
                         <button id="dismissAlertButton" type="button" onclick="dismissAlert()">
                             <span aria-hidden="true">&times;</span>
@@ -16,7 +16,7 @@
                     </p>
                 </div>
             {% else %}
-                <div id="alert" class="alert alertSuccess">
+                <div id="alert" class="alert alert-success">
                     <p>{{ message }}
                         <button id="dismissAlertButton" type="button" onclick="dismissAlert()">
                             <span aria-hidden="true">&times;</span>
@@ -56,15 +56,15 @@
     <!--Member creation and edit-->
 
     <!-- A button to open the popup form -->
-    <button id="formButton" onclick="openForm()">
+    <button id="form-button" onclick="openForm()">
         <p>Add Reef Member</p>
     </button>
     </div>
 
 
     <!-- The edit form -->
-    <div class="formPopup" id="editForm">
-        <form action="" name="editForm" class="formContainer" method="POST" id="edit_form" onsubmit="return validateForm('editForm')">
+    <div class="form-popup" id="editForm">
+        <form action="" name="editForm" class="form-container" method="POST" id="edit_form" onsubmit="return validateForm('editForm')">
             <h1>Edit Reef Member</h1>
             <input type="hidden" name="formName" value="editFamilyMember">
             <input type="hidden" id = "personName" name="personName" value="">
@@ -115,8 +115,8 @@
 
 
     <!-- The add form -->
-    <div class="formPopup" id="familyForm">
-        <form name="addForm" action="" id="family_form" class="formContainer" method="POST" onsubmit="return validateForm('addForm')">
+    <div class="form-popup" id="familyForm">
+        <form name="addForm" action="" id="family_form" class="form-container" method="POST" onsubmit="return validateForm('addForm')">
             <h1>Add Reef Member</h1>
             <input type="hidden" name="formName" value="addFamilyMember">
             <label for="name" name="name"><b>Name: *</b></label>

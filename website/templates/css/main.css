@@ -138,7 +138,7 @@ h5 {
 /*Family member form styling*/
 
 /* Button used to open the add family member form */
-#formButton {
+#form-button {
   font-family: var(--body-font);
   background-color: var(--cambridge-blue);
   color: var(--indigo-dye);
@@ -154,14 +154,14 @@ h5 {
 }
 
 /* Text in button used to open the add family member form */
-#formButton>p {
+#form-button>p {
   font-family: var(--body-font);
   color: var(--mint-green);
   text-decoration: none;
 }
 
 /* Text effects on hover, family member form button*/
-#formButton:hover>p {
+#form-button:hover>p {
   font-family: var(--body-font);
   color: var(--mint-green);
   text-decoration: underline;
@@ -174,7 +174,7 @@ h5 {
 }
 
 /* The popup form - hidden by default */
-.formPopup {
+.form-popup {
   font-family: var(--body-font);
   color: var(--mint-green);
   display: none;
@@ -184,13 +184,13 @@ h5 {
   z-index: 9;
 }
 
-.formPopup p {
+.form-popup p {
   font-family: var(--body-font);
   color: var(--mint-green);
 }
 
 /* Add styles to the form container */
-.formContainer {
+.form-container {
   width: 60vw;
   height: 95vh;
   margin-bottom: 2.5vh;
@@ -208,7 +208,7 @@ h5 {
 }
 
 /* change text in form */
-.formContainer h1, .formContainer h2, .formContainer h3, .formContainer h4, .formContainer h5 {
+.form-container h1, .form-container h2, .form-container h3, .form-container h4, .form-container h5 {
   color: var(--mint-green);
   font-family: var(--body-font);
 }
@@ -256,8 +256,8 @@ input[type=radio]:checked {
 
 
 /* Full-width input fields */
-.formContainer input[type=text],
-.formContainer input[type=email] {
+.form-container input[type=text],
+.form-container input[type=email] {
   color: var(--skobeloff);
   width: 100%;
   padding: 2vh;
@@ -267,8 +267,8 @@ input[type=radio]:checked {
 }
 
 /* When the inputs get focus, do something */
-.formContainer input[type=text]:focus,
-.formContainer input[type=email]:focus {
+.form-container input[type=text]:focus,
+.form-container input[type=email]:focus {
   background-color: var(--mint-green);
   outline: none;
 }
@@ -281,7 +281,7 @@ input[type=radio]:checked {
 }
 
 /* Set a style for the button */
-.formContainer .btn {
+.form-container .btn {
   font-family: var(--body-font);
   color: var(--mint-green);
   padding: 2vh;
@@ -293,17 +293,17 @@ input[type=radio]:checked {
 }
 
 /* Add a red background color to the cancel button */
-.formContainer .cancel {
+.form-container .cancel {
   background-color: var(--light-coral);
 }
 
-.formContainer .confirm {
+.form-container .confirm {
   background-color: var(--skobeloff);
 }
 
 /* Add some hover effects to buttons */
-.formContainer .btn:hover,
-#formButton:hover {
+.form-container .btn:hover,
+#form-button:hover {
   text-decoration: underline;
   font-weight: bold;
   background-color: var(--sandy-brown);
@@ -496,11 +496,11 @@ input[type=radio]:checked {
   color: white;
 }
 
-.alertError {
+.alert-error {
   background-color: var(--light-coral);
 }
 
-.alertSuccess {
+.alert-success {
   background-color: var(--skobeloff);
 }
 
@@ -542,7 +542,7 @@ input[type=radio]:checked {
     font-size: 1.5em;
   }
 
-  .formContainer {
+  .form-container {
     width: 100vw;
     height: 100vh;
     margin: 0vh;
@@ -557,7 +557,7 @@ input[type=radio]:checked {
     flex-direction: column;
   }
 
-  .formPopup {
+  .form-popup {
     font-family: var(--body-font);
     color: var(--mint-green);
     display: none;
@@ -578,14 +578,14 @@ input[type=radio]:checked {
     height: 30vw;
   }
 
-  .formContainer .btn {
+  .form-container .btn {
     font-size: 1.2em;
     padding: 1vh;
     border-radius: 10px;
   }
 
   /* Button used to open the add family member form */
-  #formButton {
+  #form-button {
     width: 30vw;
     height: 30vw;
   }
