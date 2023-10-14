@@ -11,17 +11,21 @@
     --column-gap: 2vw;
     --row-gap: 2vh;
 
-
+    /* Set values of the calendar grid */
     --calendar-width: calc(100vw - var(--content-pad-left-right)*2);
     --calendar-height: 70vh;
 
     --time-coloumn-size: 5vw;
+    /* Based on the size of the calendar calculate the day column sizes */
     --calendar-size-without-gaps: calc(var(--calendar-width) - var(--time-coloumn-size) - 2vw*8);
     --coloumn-size: calc(var(--calendar-size-without-gaps)/7);
+    /* Set row size to standard 1vh */
     --row-size: 1vh;
 
+    /* For the day's above the calendar grid make the row size 10vh */
     --days-row-size: 10vh;
 
+    /* Universal colours */
     --mint-green: #d3f2e9ff;
     --cambridge-blue: #7ca8a1ff;
     --skobeloff: #0a7b79ff;
@@ -29,13 +33,11 @@
     --sandy-brown: #f4a363ff;
     --light-coral: #db767d;
     --light-coral-transparent: rgba(219, 118, 125, 0.8);
-
+    /* Transparent calendar background */
     --grid-background-colour: rgba(252, 251, 244, 0.3);
 }
 
-/* ELI SORT OUT SPACING SIZING WITH BIGGER PADDING */
-
-
+/* All content wrapper of calendar.css */
 .content {
     height: 100%;
     display: flex;
@@ -45,6 +47,7 @@
     padding-top: var(--content-pad-top);
 }
 
+/* Container of all content */
 .baseContent {
     background-color: var(--indigo-dye);
     overflow-y: hidden;
@@ -73,7 +76,8 @@
 }
 
 /* Class used to control the dimming options 
-    accessible through the keypresses */
+    accessible through the keypresses.
+    Changes made using mainLoop.js*/
 .dimmingContent {
     position:fixed;
     right: 0;
@@ -81,14 +85,12 @@
     height: 100vh;
     width: 100vw;
     z-index: 1;
-    /* Change the 'a' in rgba, closer to 1 the darker it is */
     background-color: rgb(0, 0, 0);
     opacity: 0;
 }
 
-
+/* Text that display's the current time, day and date */
 .calendarViewTopText {
-    /* Mint green, global varibles cant be called within other css files. */
     color: var(--mint-green);
     font-size: 3em;
     padding-bottom: 2%;
@@ -175,12 +177,16 @@
 }
 
 /* Event in the calendar grid below */
-/* Key:
+/* Key for varibles:
     "c" - coloumn name (apologies for the spelling mistake, its embedded  now)
     "r" - row name
     "a" - grid area name
     */
 
+
+/* calendarGrid works by using display:grid and then using the grid-area.
+    By using gridArea we can give each individual space in that grid a name,
+    thus allowing us to assign a div to span an area in the grid. */
 .calendarGrid {
     /* Arbitary background colour */
     background-color: var(--grid-background-colour);
@@ -196,6 +202,7 @@
     display: grid;
     column-gap: var(--column-gap);
     row-gap: var(--row-gap);
+    /* The following is where the area's are assigned names, made using regex and a spreadsheet. */
     grid-template-columns: [c00-00] var(--time-coloumn-size) [cSunday] var(--coloumn-size) [cMonday] var(--coloumn-size) [cTuesday] var(--coloumn-size) [cWednesday] var(--coloumn-size) [cThursday] var(--coloumn-size) [cFriday] var(--coloumn-size) [cSaturday] var(--coloumn-size);
     /* Regex for later if below needs to change -- find: \([0-9][0-9]\-[0-9][0-9]\) replace: \[\1\] var\(\-\-row\-size\) */
     grid-template-rows: [r00-00] var(--row-size) [r00-15] var(--row-size) [r00-30] var(--row-size) [r00-45] var(--row-size) [r01-00] var(--row-size) [r01-15] var(--row-size) [r01-30] var(--row-size) [r01-45] var(--row-size) [r02-00] var(--row-size) [r02-15] var(--row-size) [r02-30] var(--row-size) [r02-45] var(--row-size) [r03-00] var(--row-size) [r03-15] var(--row-size) [r03-30] var(--row-size) [r03-45] var(--row-size) [r04-00] var(--row-size) [r04-15] var(--row-size) [r04-30] var(--row-size) [r04-45] var(--row-size) [r05-00] var(--row-size) [r05-15] var(--row-size) [r05-30] var(--row-size) [r05-45] var(--row-size) [r06-00] var(--row-size) [r06-15] var(--row-size) [r06-30] var(--row-size) [r06-45] var(--row-size) [r07-00] var(--row-size) [r07-15] var(--row-size) [r07-30] var(--row-size) [r07-45] var(--row-size) [r08-00] var(--row-size) [r08-15] var(--row-size) [r08-30] var(--row-size) [r08-45] var(--row-size) [r09-00] var(--row-size) [r09-15] var(--row-size) [r09-30] var(--row-size) [r09-45] var(--row-size) [r10-00] var(--row-size) [r10-15] var(--row-size) [r10-30] var(--row-size) [r10-45] var(--row-size) [r11-00] var(--row-size) [r11-15] var(--row-size) [r11-30] var(--row-size) [r11-45] var(--row-size) [r12-00] var(--row-size) [r12-15] var(--row-size) [r12-30] var(--row-size) [r12-45] var(--row-size) [r13-00] var(--row-size) [r13-15] var(--row-size) [r13-30] var(--row-size) [r13-45] var(--row-size) [r14-00] var(--row-size) [r14-15] var(--row-size) [r14-30] var(--row-size) [r14-45] var(--row-size) [r15-00] var(--row-size) [r15-15] var(--row-size) [r15-30] var(--row-size) [r15-45] var(--row-size) [r16-00] var(--row-size) [r16-15] var(--row-size) [r16-30] var(--row-size) [r16-45] var(--row-size) [r17-00] var(--row-size) [r17-15] var(--row-size) [r17-30] var(--row-size) [r17-45] var(--row-size) [r18-00] var(--row-size) [r18-15] var(--row-size) [r18-30] var(--row-size) [r18-45] var(--row-size) [r19-00] var(--row-size) [r19-15] var(--row-size) [r19-30] var(--row-size) [r19-45] var(--row-size) [r20-00] var(--row-size) [r20-15] var(--row-size) [r20-30] var(--row-size) [r20-45] var(--row-size) [r21-00] var(--row-size) [r21-15] var(--row-size) [r21-30] var(--row-size) [r21-45] var(--row-size) [r22-00] var(--row-size) [r22-15] var(--row-size) [r22-30] var(--row-size) [r22-45] var(--row-size) [r23-00] var(--row-size) [r23-15] var(--row-size) [r23-30] var(--row-size) [r23-45] var(--row-size);
@@ -308,7 +315,7 @@
     width: 100%;
 }
 
-/* Event example */
+/* Event example to use for javascript. */
 /* Grid-area follows this order: grid-row-start, grid-column-start, grid-row-end and grid-column-end */
 #EVENT1 {
     justify-self: center;
@@ -319,11 +326,12 @@
 }
 
 
-
+/* Border around today's day */
 .todayHeader {
     border-style: solid;
 }
 
+/* Styling the calendar div's that are placed on the calendar grid. */
 .event {
     background-color: var(--light-coral);
     border-radius: 10px;
@@ -333,6 +341,7 @@
     overflow: hidden;
 }
 
+/* Highlighting of a selected user's events */
 .highlightedEvent {
     border: solid 3px var(--mint-green);
 }
@@ -346,32 +355,39 @@
     z-index: 1;
 }
 
+/* Adjusting the font size in event div's */
 .event p {
     font-size: 1.3em;
 }
 
+/* Bold the heading text in event div's */
 #eventHeading {
     font-weight: 700;
 }
 
+/* Adjust the icon's size in the event div's */
 .icon {
     height: 40px;
     width: auto;
 }
 
+/* Adjust text style of time's */
 .timeLabel {
     padding-left: 10px;
     font-size: 1.5em;
 }
 
+/* Change text colour of time's */
 .timeLabel p {
     color: white !important;
 }
 
+/* background colour of the div that indicates if the screen has moved ahead or behind. */
 #weeksAgoAheadFlag {
     background-color: var(--sandy-brown);
 }
 
+/* Format the people attending the event in the event div's */
 .eventAttendees {
     display: flex;
     flex-direction: row;
@@ -379,18 +395,16 @@
     gap: 5%;
 }
 
+/* Format the people attending by giving it a wrapper */
 .personWrapper {
     display: block;
 }
 
+/* Ambient screensaver styles and positions */
 #screensaver {
     width: 100%;
-    /* height: 100%; */
     position: fixed;
     left: 0px;
-    /* top: 0px; */
-    /* Bottom is to test it out for now, 
-        Changes will be made for projector */
     bottom: -20px;
     overflow: hidden;
     -ms-overflow-style: none;
@@ -398,6 +412,7 @@
     scrollbar-width: none;
 }
 
+/* Transitions of screensaver to calendar and vice versa. */
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
@@ -408,12 +423,13 @@
     100% { opacity: 0; }
 }
   
-
+/* Make the screensaver fill the screen. */
 .screensaverImage {
     width: 100vw;
     overflow: hidden;
 }
 
+/* Background darkening with time */
 .default-5 { opacity: 0.1; }
 .default-4 { opacity: 0.2; }
 .default-3 { opacity: 0.4; }
@@ -427,6 +443,7 @@
 .default4 { background-color: color-mix(in srgb, var(--light-coral) 20%, white);}
 .default5 { background-color: white;}
 
+/* Hide the sound effect's div, javascript is used to play them. */
 .soundEffects {
     display: none;
 }

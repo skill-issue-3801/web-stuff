@@ -1,4 +1,4 @@
-/** Univeral variables and styles **/
+/** Universal variables and styles **/
 
 * {
   margin: 0;
@@ -378,12 +378,8 @@ input[type=radio]:checked {
   font-family: var(--body-font);
   font-size: calc(10px + 0.390625vw);
   color: var(--mint-green);
-  /* padding: 5% 1%; */
   border: none;
   cursor: pointer;
-  /* width: 5vw;
-  height: 2vw; */
-  /* Below is new as of 26.09.23 */
   border-radius: 10px;
   padding: 0% 10% 0% 10%;
   line-height: 2em;
