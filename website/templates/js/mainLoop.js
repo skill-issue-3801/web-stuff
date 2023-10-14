@@ -35,7 +35,6 @@ function detectedSomething() {
 }
 // show screensaver function
 function show_screensaver() {
-    console.log("show ss");
     document.getElementById('screensaver').style.animation = "fadeIn 1.5s";
     document.getElementById('screensaver').style.display = "block";
     document.getElementById('calendarContent').style.animation = "fadeOut 1.5s";
@@ -100,7 +99,6 @@ async function updateClock() {
 }
 
 function scrollToWave() {
-    console.log("scroll to wave");
     document.getElementById("currentTime").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
 }
 async function updateTimeData() {
@@ -207,7 +205,6 @@ async function putWeeksEvents(viewingWeek, datesArray) {
 }
 
 function uidSelect(name) {
-    console.log("clicked " + name);
     // Play's a pop sound for each selection and deselection.
     // This will be annoying, need to work out mechanics, for now it sits here
     document.getElementById("bubblePopSound").play();
@@ -216,7 +213,6 @@ function uidSelect(name) {
 }
 
 function highlightEvents() {
-    console.log("highight events");
     var people = document.getElementsByClassName("userSelectRadio");
     const current = document.getElementById("selectedUserBrightness").value;
     for (var i = 0; i < people.length; i++) {
@@ -253,11 +249,9 @@ function resetHighlighted() {
 
 function userBrightnessChange(delta) {
     const current = document.getElementById("selectedUserBrightness").value;
-    console.log("current: " + current);
     if (!(delta == -1 && current == 'default-5') && !(delta == 1 && current == 'default5')) {
         const highlighted = document.getElementsByClassName("highlightedEvent");
         const newSetting = userBrightnessArray[(userBrightnessArray.indexOf(current) + delta)];
-        console.log("new: " + newSetting);
         for (var i = 0; i < highlighted.length; i++) {
             highlighted[i].classList.remove(current);
             highlighted[i].classList.add(newSetting);
@@ -366,7 +360,6 @@ function dimCalendarView(value) {
 async function update() {
     let response = await fetch("/calendar/do_update", { method: "POST" });
     let text = await response.json();
-    console.log("UPDATING CALENDAR EVENTS");
 
     writeTimeLabels();
 
