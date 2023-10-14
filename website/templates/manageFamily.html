@@ -68,7 +68,7 @@
             <h1>Edit Reef Member</h1>
             <input type="hidden" name="formName" value="editFamilyMember">
             <input type="hidden" id = "personName" name="personName" value="">
-            <label for="editName" name="name"><b>Name:</b></label>
+            <label for="editName" name="name"><b>Name: *</b></label>
             <input id="editName" placeholder="Enter Name" type="text" name="name" autocomplete="given-name" required>
             <label for="editEmail" name="email"><b>Email:</b></label>
             <input id="editEmail" type="email" placeholder="Enter Email" name="email" autocomplete="email">
@@ -85,7 +85,7 @@
                     <label for="editApple" name="apple">Apple</label>
                 </div>
             </div>
-            <b>Icon:</b>
+            <b>Icon: *</b>
             <div class="radio-button-container iconSelect">
                 <label for="graphics/ocean-icons/Slug_1.png" name="icon1">
                     <input type="radio" name="icon" id="graphics/ocean-icons/Slug_1.png" value="graphics/ocean-icons/Slug_1.png" required>
@@ -119,7 +119,7 @@
         <form name="addForm" action="" id="family_form" class="form-container" method="POST" onsubmit="return validateForm('addForm')">
             <h1>Add Reef Member</h1>
             <input type="hidden" name="formName" value="addFamilyMember">
-            <label for="name" name="name"><b>Name:</b></label>
+            <label for="name" name="name"><b>Name: *</b></label>
             <input type="text" placeholder="Enter Name" id="name" name="name" autocomplete="given-name" required>
             <label for="email" name="email"><b>Email:</b></label>
             <input type="email" placeholder="Enter Email" id="email" name="email" autocomplete="email">
@@ -136,7 +136,7 @@
                     <label for="addApple" name="apple">Apple</label>
                 </div>
             </div>
-            <b>Icon:</b>
+            <b>Icon: *</b>
             <div class="radio-button-container iconSelect">
                 <label for="slug_1_family_form" name="icon1">
                     <input type="radio" name="icon" id="slug_1_family_form" value="graphics/ocean-icons/Slug_1.png" required>
