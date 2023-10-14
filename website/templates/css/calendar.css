@@ -6,7 +6,7 @@
 }
 
 :root {
-    --content-pad-left-right: 5vw;
+    --content-pad-left-right: 4vw;
     --content-pad-top: 3.5vh;
     --column-gap: 2vw;
     --row-gap: 2vh;
@@ -305,6 +305,10 @@
         "23-45 23-45-Sunday 23-45-Monday 23-45-Tuesday 23-45-Wednesday 23-45-Thursday 23-45-Friday 23-45-Saturday "
 
 }
+
+.calendarGrid::-webkit-scrollbar {
+    display: none;
+  }
 
 /* Forces the items in the calendar to max out their width */
 .calendarGrid {
