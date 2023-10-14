@@ -15,7 +15,7 @@
     --calendar-width: calc(100vw - var(--content-pad-left-right)*2);
     --calendar-height: 70vh;
 
-    --time-coloumn-size: 5vw;
+    --time-coloumn-size: 7vw;
     /* Based on the size of the calendar calculate the day column sizes */
     --calendar-size-without-gaps: calc(var(--calendar-width) - var(--time-coloumn-size) - 2vw*8);
     --coloumn-size: calc(var(--calendar-size-without-gaps)/7);
