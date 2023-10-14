@@ -32,9 +32,6 @@
     <!--family member icons w names above them and edit and delete buttons below them-->
     {% for member in family%}
     <div class="familyMemberContainer" , id="{{member.name}}Box">
-        <!--<p> Url: {{member.url}}</p>
-        <p> calendartype: {{member.calendartype}}</p>
-        <p> email: {{member.email}}</p>-->
         <figure class="familyMember">
             <img class='icon' src="{{url_for('static', filename=member.icon)}}">
         </figure>

@@ -7,17 +7,10 @@
     <!-- Main.css is for global styles only -->
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
     <!-- Base.css is for base.css globals -->
-    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}">
-    <!-- Calendar.css is for calendar view styles only -->
-    
-
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/base.css')}}">    
 </head>
-<!-- 
-    For example details on how templating works please see the following website
-    https://www.digitalocean.com/community/tutorials/how-to-use-templates-in-a-flask-application
- -->
 
-<body class="baseContent" >
+<body class="baseContent">
     <div>
         <video autoplay muted loop id="baseWaterBackgroundVideo">
             <source src="{{url_for('static', filename='graphics/Base_Water_HD.mp4')}}" type="video/mp4">
@@ -27,7 +20,6 @@
 
     <aside class="navWrapper">
         <nav class="navigationBar">
-            <!--can put an icon here :) to look nice-->
             <div><img class="navImage" src="{{url_for('static', filename='graphics/ocean-decor/Coral composition.png')}}"></div>
             <a class="navLink" href="{{url_for('admin.help')}}">Guide</a>
             <a class="navLink" href="{{url_for('admin.manage_family')}}">Home Reef</a>
