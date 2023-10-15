@@ -281,7 +281,7 @@ def process_attendees(calowner, event, family, names, emails):
                         event.attendee.add(user_name)
             elif type(cpy_att) == icalparser.Attendee:
                 # if there is 1 attendee
-                user_name = get_email_owner(att, family)
+                user_name = get_email_owner(str(cpy_att), family)
                 if user_name != None:  # add them if they are family
                     event.attendee.add(user_name)
         else:  # event organised by another family member, we will append form their calendar
