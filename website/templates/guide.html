@@ -5,13 +5,15 @@
 <p> This is the page for the user guide.</p>
 
 <p> Reef Mates integrates digital calendars from the 2 most popular calendar platforms, Google Calendar and Apple/iCalendar.
-            Both of these platforms allow users to keep a private calendar that they can share read-only access to
-            through a secret URL.</p>
-<p> This means your calendar is only viewable to you and others you trust to share this secret URL with.</p>
-<p> We encourage users to follow one of the below tutorial for their preferred online calendar platform to find their
-    secret URL.
-    This tutorial does not include account creation for any of these platforms.</p>
+    Both of these platforms allow users to keep a private calendar that they can share read-only access to
+    through a secret URL.</p>
 <br>
+<p> This means your calendar is only viewable to you and others you trust to share this secret URL with. We encourage users 
+    to follow the provided tutorial for their preferred online calendar platform to find their secret URL. These 
+    tutorials do not include account creation for either platform.</p>
+<br>
+<p>After adding a calendar to your profile, you can invite other family members to your events using one of the methods
+    described in the "Inviting People" guide below.</p>
 <br>
 <div id="guide-tab-nav">
     <a href="javascript:void(0)" onclick="showTab(event, 'Google');">
@@ -19,6 +21,9 @@
     </a>
     <a href="javascript:void(0)" onclick="showTab(event, 'Apple');">
         <div class="guide-tab-link">Apple Calendar</div>
+    </a>
+    <a href="javascript:void(0)" onclick="showTab(event, 'Invite');">
+        <div class="guide-tab-link">Inviting People</div>
     </a>
 </div>
 
@@ -36,12 +41,10 @@
         Calendars”.</p>
     <div class="guideImgBox">
         <img src="{{url_for('static', filename='graphics/guide-google-1.png')}}" class="guideImg2">
-
-
         <img src="{{url_for('static', filename='graphics/guide-google-2.png')}}" class="guideImg2">
     </div>
     <br>
-    <h2 id="google-step-2"> 2. Finding the secret URL</h2>
+    <h3 id="google-step-2"> 2. Finding the secret URL</h3>
     <p> Click the 3 dots beside your calendar, then select “Settings and Sharing”.</p>
     <div class="guideImgBox">
         <img src="{{url_for('static', filename='graphics/guide-google-3.png')}}" class="guideImg1">
@@ -75,7 +78,7 @@
         <img src="{{url_for('static', filename='graphics/guide-apple-2.png')}}" class="guideImg2">
     </div>
     <br>
-    <h2 id="apple-step-2"> 2. Finding the secret URL</h2>
+    <h3 id="apple-step-2"> 2. Finding the secret URL</h3>
     <p> When you hover over your calendar, a little person icon should appear, click that, the select “Share Calendar”.
     </p>
     <div class="guideImgBox">
@@ -94,6 +97,37 @@
     <div class="guideImgBox">
         <img src="{{url_for('static', filename='graphics/guide-apple-5.png')}}" class="guideImg1">
     </div>
+</div>
+<div id="Invite" class="guide-content-container calendar-type" style="display:none">
+    <br>
+    <h2> Inviting Other Family Members to your Events</h2>
+    <h3 id="inviting-method-1"> Method 1: Inviting by name</h3>
+    <p> Any family member can be invited to an event by including their name in the first line of the event description/notes. If you wish 
+        to invite multiple family members, just separate their names by commas. It is important when adding someone this way that you spell 
+        their name the same way it appears on their profile on the <a href="{{url_for('admin.manage_family')}}">Home Reef</a>, including capitalisation and punctuation, otherwise they 
+        won't be recognised as invited.</p>
+    <div class="guideImgBox">
+        <img src="{{url_for('static', filename='graphics/guide-invite-1.png')}}" class="guideImg1">
+    </div>
+    <div class="guideImgBox">
+        <img src="{{url_for('static', filename='graphics/guide-invite-2.png')}}" class="guideImg1">
+    </div>
+    <h3 id="inviting-method-2"> Method 2: Inviting by email</h3>
+    <p> This method can only be used to invite family members with an email address attached to their profile. Type the family members' email 
+        address into “Add guests” on Google calendar, or “Add Invitees” on Apple calendar.</p>
+    <div class="guideImgBox">
+        <img src="{{url_for('static', filename='graphics/guide-invite-3.png')}}" class="guideImg1">
+    </div>
+    <div class="guideImgBox">
+        <img src="{{url_for('static', filename='graphics/guide-invite-4.png')}}" class="guideImg1">
+    </div>
+    <p> In Google calendar you have the option to send an email to this person to let them know they have been invited to your event. If the 
+        email address is the one associated with their google account (if they have one), the event is automatically added to their calendar 
+        as well.</p>
+    <p> On Apple calendar the email invitation automatically happens. The event will only appear on the invitee's calendar if the address used 
+        is the @icloud.com address associated with their apple account (if they have one).
+    <p> Google and Apple calendar users can still invite each other to events by email, they just won't appear automatically on the invitees 
+        calendar unless they use the same platform.</p>        
 </div>
 
 <script type="text/javascript" src="{{url_for('static', filename='js/guideCalendarTabs.js')}}"></script>
