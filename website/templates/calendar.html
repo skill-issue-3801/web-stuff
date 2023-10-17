@@ -230,6 +230,10 @@
     Mousetrap.bind('d', function() { document.getElementById('calendarGridMain').scrollBy({top: 120, left: 0, behavior: 'smooth' }); });
     Mousetrap.bind('f', function() { document.getElementById('forwardOneWeek').click(); });
     Mousetrap.bind('b', function() { document.getElementById('backOneWeek').click(); });
+    Mousetrap.bind('q', function() { document.getElementById('dimIncrease').click();});
+    Mousetrap.bind('w', function() {document.getElementById('dimDecrease').click();});
+    Mousetrap.bind('7', function() {document.getElementById('userBrightnessUp').click();});
+    Mousetrap.bind('8', function() {document.getElementById('userBrightnessDown').click();});
 </script>
 {% for user in uids.keys() %}
     <script>
