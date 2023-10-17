@@ -451,3 +451,9 @@
 .soundEffects {
     display: none;
 }
+
+/* Cursor hide on calendar view.
+    Acknowledging this makes it difficult to use in development but it can be shut off later */
+.hideCursorCalendar {
+    cursor: none;
+}

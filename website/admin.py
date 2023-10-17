@@ -37,7 +37,7 @@ def family_post(db_session, globals):
 def add_family_member(db_session):
     name = request.form.get("name")
     if db_session.query(FamilyMember).filter_by(name=name).first():
-        flash("Sorry, user could not be added. That name is already being used by another family member", category='error')
+        flash("Sorry, user could not be added. That name is already being used by another reef member", category='error')
         return
 
     link = request.form.get("link")
@@ -48,7 +48,7 @@ def add_family_member(db_session):
         logging.warning("invalid url")
         return
     elif db_session.query(FamilyMember).filter_by(url=link).first():
-        flash("Sorry, user could not be added. That calenader url is already being used by another family member", category='error')
+        flash("Sorry, user could not be added. That calenader url is already being used by another reef member", category='error')
         return
 
     if request.form.get("email") == "":
@@ -56,7 +56,7 @@ def add_family_member(db_session):
     else:
         email = request.form.get("email")
     if email != None and db_session.query(FamilyMember).filter_by(email=email).first():
-        flash("Sorry, user could not be added. That email is already being used by another family member", category='error')
+        flash("Sorry, user could not be added. That email is already being used by another reef member", category='error')
         return
 
     icon = request.form.get("icon")
@@ -74,14 +74,14 @@ def add_family_member(db_session):
     db_session.add(row)
     db_session.flush()
     print("Successfully added to log.")
-    flash("Welcome to the family {}!".format(name), category='success')
+    flash("Welcome to the Reef {}!".format(name), category='success')
 
 
 def edit_family_member(db_session):
     originalName = request.form.get("personName")
     name = request.form.get("name")
     if (name != originalName and db_session.query(FamilyMember).filter(FamilyMember.name!=originalName).filter_by(name=name).first()):
-        flash("Sorry, you can't update {}'s name to {}, another family member with that name already exists".format(originalName, name), category='error')
+        flash("Sorry, you can't update {}'s name to {}, another reef member with that name already exists".format(originalName, name), category='error')
         return
     
     link = request.form.get("link")
@@ -89,7 +89,7 @@ def edit_family_member(db_session):
     if link == "":
         link = None
     elif (db_session.query(FamilyMember).filter(FamilyMember.name!=originalName).filter_by(url=link).first()):
-        flash("Sorry that calendar url is already being used by another family member, could not update {}'s url".format(name), category='error')
+        flash("Sorry that calendar url is already being used by another reef member, could not update {}'s url".format(name), category='error')
         return
     
     if request.form.get("email") == "":
@@ -97,7 +97,7 @@ def edit_family_member(db_session):
     else:
         email = request.form.get("email")
     if email != None and (db_session.query(FamilyMember).filter(FamilyMember.name!=originalName).filter_by(email=email).first()):
-        flash("Sorry, you cant update {}'s email to {}, it is already being used by another family member".format(name, email), category='error')
+        flash("Sorry, you cant update {}'s email to {}, it is already being used by another reef member".format(name, email), category='error')
         return
     
     icon = request.form.get("icon")
