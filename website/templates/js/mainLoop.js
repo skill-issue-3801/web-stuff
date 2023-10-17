@@ -16,7 +16,8 @@ function delay(time) {
 
 var inactiveTimeout;
 var screensaver_active = true;
-var screensaverIdleTime = 20; 
+var screensaverIdleTime = 20;
+var transitioning = false;
 
 document.onkeypress = function () {
     detectedSomething();
@@ -34,25 +35,39 @@ function detectedSomething() {
     inactiveTimeout = setTimeout(show_screensaver, 1000 * screensaverIdleTime);
 }
 // show screensaver function
-function show_screensaver() {
+async function show_screensaver() {
+    while (transitioning) {
+        await delay(500);
+    }
+    transitioning = true;
     document.getElementById('screensaver').style.animation = "fadeIn 1.5s";
     document.getElementById('screensaver').style.display = "block";
     document.getElementById('calendarContent').style.animation = "fadeOut 1.5s";
-    delay(1400).then(() => {document.getElementById('calendarContent').style.display = "none"});
-    screensaver_active = true;
+    delay(1400).then(() => {
+        document.getElementById('calendarContent').style.display = "none";
+        transitioning = false;
+        screensaver_active = true;
+    });
 }
 
 // stop screensaver
-function stop_screensaver(){
-    document.getElementById('screensaver').style.animation = "fadeOut 1.5s";
-    delay(1400).then(() => {document.getElementById('screensaver').style.display = "none"});
+async function stop_screensaver(){
+    while (transitioning) {
+        await delay(500);
+    }
+    screensaver_active = false;
+    transitioning = true;
     document.getElementById('calendarContent').style.animation = "fadeIn 1.5s";
     document.getElementById('calendarContent').style.display = "flex";
-    screensaver_active = false;
     deselectUsers();
     resetHighlighted();
     document.getElementById("selectedUserBrightness").value = "default";
     scrollToWave();
+    document.getElementById('screensaver').style.animation = "fadeOut 1.5s";
+    delay(1400).then(() => {
+        document.getElementById('screensaver').style.display = "none"; 
+        transitioning = false;
+    });
 }
 
 function updateWaterBackground() {
