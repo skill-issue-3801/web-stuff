@@ -61,8 +61,8 @@ function updateWaterBackground() {
         //change background of #waterBackgroundVideo to fit time of day
         var d = new Date();
         var n = d.getHours();
-        if (n >= 20 || n <= 6) {
-            // Between 8pm and 6am, apply night class to #waterBackgroundVideo
+        if (n >= 19 || n <= 6) {
+            // Between 7pm and 6am, apply night class to #waterBackgroundVideo
             document.getElementById("waterBackgroundVideo").className = "waterBackgroundNight";
         } else {
             // Else apply day class to #waterBackgroundVideo
