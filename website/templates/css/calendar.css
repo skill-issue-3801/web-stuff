@@ -389,6 +389,12 @@
 /* background colour of the div that indicates if the screen has moved ahead or behind. */
 #weeksAgoAheadFlag {
     background-color: var(--sandy-brown);
+    position: absolute;
+    top: var(--content-pad-top);
+    right: var(--content-pad-left-right);
+    padding:15px 25px 15px 25px;
+    border-radius: 10px;
+    font-size: 1.1em;
 }
 
 /* Format the people attending the event in the event div's */
