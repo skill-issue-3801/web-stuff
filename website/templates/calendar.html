@@ -32,7 +32,7 @@
                 <input type="hidden" id="currentWeekViewing" name="currentWeekViewing" value="{{thisWeekIndex}}">
                 <input type="hidden" id="selectedUserBrightness" name="selectedUserBrightness" value="default">
                 <div class="viewChange">
-                    <button type="button" class="btn" onclick="uidSelect('all', 'all'); changeWeek({{thisWeekIndex}}, 0, {{numWeeks}}, '{{datesArray}}'); dimCalendarView(0);">Reset View</button>
+                    <button type="button" class="btn" id="resetWeek" onclick="changeWeek({{thisWeekIndex}}, 0, {{numWeeks}}, '{{datesArray}}'); dimCalendarView(0);">Reset Week</button>
                     <button type="button" class="btn" id="backOneWeek" onclick="changeWeek({{thisWeekIndex}}, -1, {{numWeeks}}, '{{datesArray}}');">Back a week</button>
                     <button type="button" class="btn" id="forwardOneWeek" onclick="changeWeek({{thisWeekIndex}}, +1, {{numWeeks}}, '{{datesArray}}');">Forward a week</button>
                     <button type="button" class="btn" id="dimIncrease" onclick="dimCalendarView(0.1)">Dim increase</button>

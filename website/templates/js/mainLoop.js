@@ -61,6 +61,7 @@ async function stop_screensaver(){
     document.getElementById('calendarContent').style.display = "flex";
     document.getElementById("selectedUserBrightness").value = "default";
     scrollToWave();
+    document.getElementById('resetWeek').click();
     document.getElementById('screensaver').style.animation = "fadeOut 1.5s";
     delay(1400).then(() => {
         document.getElementById('screensaver').style.display = "none"; 
