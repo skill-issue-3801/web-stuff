@@ -59,7 +59,7 @@ def default(db_session, globals):
 def uids_to_div_dict(family):
     peoplesUid = {}
     for member in family:
-        peoplesUid[member.name] = member.userobject.get_uids()
+        peoplesUid[member.name] = list(dict.fromkeys(member.userobject.get_uids()))
     return peoplesUid
 
 def check_for_update(family, today, hashes):
