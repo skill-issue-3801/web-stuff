@@ -395,8 +395,8 @@ async function main() {
     let resp = await fetch("/is_prod", { method: "POST" });
     let check = await resp.json();
     if (check) {
-        let hiddenButtons = document.getElementsByClassName("tempHighlightControl")[0];
-        hiddenButtons.style.display = "none";
+        //let hiddenButtons = document.getElementsByClassName("tempHighlightControl")[0];
+        //hiddenButtons.style.display = "none";
 
         console.log("Running in prod mode.");
         setInterval(update, 300000); // 300 seconds (5 minutes) for prod
