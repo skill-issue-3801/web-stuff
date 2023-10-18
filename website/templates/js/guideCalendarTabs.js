@@ -8,7 +8,7 @@ function showTab(event, tabName) {
     }
 
     // Get's the tab nav link elements
-    guideTabLinks = document.getElementsByClassName("guide-tab-link");
+    guideTabLinks = document.getElementsByClassName("guideTab");
     // Removes the underline class from all tab nav links
     for (i = 0; i < x.length; i++) {
         guideTabLinks[i].className = guideTabLinks[i].className.replace(" guideTabLinksSelectedBorder", "");

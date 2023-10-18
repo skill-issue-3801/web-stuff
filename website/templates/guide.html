@@ -2,28 +2,27 @@
 
 {% block content %}
 <h1>{% block title %} Guide {% endblock %}</h1>
-<p> This is the page for the user guide.</p>
-
-<p> Reef Mates integrates digital calendars from the 2 most popular calendar platforms, Google Calendar and Apple/iCalendar.
-    Both of these platforms allow users to keep a private calendar that they can share read-only access to
-    through a secret URL.</p>
-<br>
-<p> This means your calendar is only viewable to you and others you trust to share this secret URL with. We encourage users 
-    to follow the provided tutorial for their preferred online calendar platform to find their secret URL. These 
-    tutorials do not include account creation for either platform.</p>
-<br>
-<p>After adding a calendar to your profile, you can invite other family members to your events using one of the methods
-    described in the "Inviting People" guide below.</p>
-<br>
+<div style="padding: 2% 0 5% 0;">
+    <p> Reef Mates integrates digital calendars from the two most popular calendar platforms, Google Calendar and Apple/iCalendar.
+        Both of these platforms allow users to keep a private calendar that they can share read-only access to
+        through a secret URL.</p>
+    <br>
+    <p> This means your calendar is only viewable to you and others you trust to share this secret URL with. We encourage users 
+        to follow the provided tutorial for their preferred online calendar platform to find their secret URL. These 
+        tutorials do not include account creation for either platform.</p>
+    <br>
+    <p>After adding a calendar to your profile, you can invite other family members to your events using one of the methods
+        described in the "Inviting People" guide below.</p>
+</div>
 <div id="guide-tab-nav">
     <a href="javascript:void(0)" onclick="showTab(event, 'Google');">
-        <div class="guide-tab-link guideTabLinksSelectedBorder">Google Calendar</div>
+        <div class="guideTab guideTabLinksSelectedBorder">Google Calendar</div>
     </a>
     <a href="javascript:void(0)" onclick="showTab(event, 'Apple');">
-        <div class="guide-tab-link">Apple Calendar</div>
+        <div class="guideTab">Apple Calendar</div>
     </a>
     <a href="javascript:void(0)" onclick="showTab(event, 'Invite');">
-        <div class="guide-tab-link">Inviting People</div>
+        <div class="guideTab">Inviting People</div>
     </a>
 </div>
 
@@ -32,29 +31,28 @@
     <h2 id="google-start"> Google calendar</h2>
     <h3 id="google-step-1"> 1. Create a new calendar</h3>
     <p> If you already have a calendar set up that you want to use for this purpose, please skip to <a
-            href="#google-step-2">step 2</a>.</p>
-    <p> Open google calendar on desktop, in the left column there is a collection of “My Calendars”. To make a new
-        calendar, click
-        the + sign next to “Other Calendars”, then select “Create new Calendar”. You can name the calendar anything,
-        then select
-        “Create Calendar”. Afterwards, click the back arrow, and your newly created calendar should appear under “My
+            href="#google-step-2">step 2</a>.
+    </p>
+    <p> Open google calendar on desktop, in the left column there is a collection of “My Calendars”. 
+        To make a new calendar, click the + sign next to “Other Calendars”, then select “Create new Calendar”. You can name the calendar anything,
+        then select “Create Calendar”. Afterwards, click the back arrow, and your newly created calendar should appear under “My
         Calendars”.</p>
     <div class="guideImgBox">
-        <img src="{{url_for('static', filename='graphics/guide-google-1.png')}}" class="guideImg2">
-        <img src="{{url_for('static', filename='graphics/guide-google-2.png')}}" class="guideImg2">
+        <img src="{{url_for('static', filename='graphics/guide-google-1.png')}}" class="guideImg1">
+        <img src="{{url_for('static', filename='graphics/guide-google-3.png')}}" class="guideImg1">
     </div>
     <br>
     <h3 id="google-step-2"> 2. Finding the secret URL</h3>
     <p> Click the 3 dots beside your calendar, then select “Settings and Sharing”.</p>
     <div class="guideImgBox">
-        <img src="{{url_for('static', filename='graphics/guide-google-3.png')}}" class="guideImg1">
-    </div>
-    <div class="guideImgBox">
-        <img src="{{url_for('static', filename='graphics/guide-google-4.png')}}" class="guideImg1">
+        <img src="{{url_for('static', filename='graphics/guide-google-2.png')}}" class="guideImg1">
     </div>
     <p> Scroll down to the “Integrate Calendar” section, this has a censored URL labelled “Secret address in iCal
         format”. Click the
         copy button on the right side to copy the URL to your clipboard.</p>
+    <div class="guideImgBox">
+        <img src="{{url_for('static', filename='graphics/guide-google-4.png')}}" class="guideImg1">
+    </div>
     <p> Google might provide a security warning telling you to only give this URL to people you trust. Now you can paste
         this URL in the URL section of the form when adding a new reef member to the <a href="{{url_for('admin.manage_family')}}">Home Reef</a>.</p>
     <div class="guideImgBox">
