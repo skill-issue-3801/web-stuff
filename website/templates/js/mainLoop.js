@@ -59,8 +59,6 @@ async function stop_screensaver(){
     transitioning = true;
     document.getElementById('calendarContent').style.animation = "fadeIn 1.5s";
     document.getElementById('calendarContent').style.display = "flex";
-    deselectUsers();
-    resetHighlighted();
     document.getElementById("selectedUserBrightness").value = "default";
     scrollToWave();
     document.getElementById('screensaver').style.animation = "fadeOut 1.5s";
