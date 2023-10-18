@@ -40,6 +40,7 @@ def main(db_url, args):
             calendartype = "google"
             email = None
             icon = "graphics/ocean-icons/Slug_1.png"
+            iconindex = '0'
             eventshash = 0
             userobject = User(name, url, calendartype, email)
             s.add(
@@ -49,6 +50,7 @@ def main(db_url, args):
                     calendartype=calendartype,
                     email=email,
                     icon=icon,
+                    iconindex=iconindex,
                     eventshash=eventshash,
                     userobject=userobject,
                 )
@@ -57,6 +59,7 @@ def main(db_url, args):
             name = "Eden"
             url = "https://calendar.google.com/calendar/ical/9062b4ce5a3b1b15ba9e901454417dc0362a7576c967b63d7aa2e0e12561cf04%40group.calendar.google.com/private-b1725a4a26321058c715e75c353d80ae/basic.ics"
             icon = "graphics/ocean-icons/Slug_6.png"
+            iconindex = '3'
             userobject = User(name, url, calendartype, email)
             s.add(
                 FamilyMember(
@@ -65,6 +68,7 @@ def main(db_url, args):
                     calendartype=calendartype,
                     email=email,
                     icon=icon,
+                    iconindex=iconindex,
                     eventshash=eventshash,
                     userobject=userobject,
                 )
@@ -73,6 +77,7 @@ def main(db_url, args):
             name = "Sarah"
             url = "https://calendar.google.com/calendar/ical/8330378fae6a0e018310a99cde5b9a96bd5ae359059078593bfc4259181d1222%40group.calendar.google.com/private-618208b88c6b36f5a5f75460c71f4aaa/basic.ics"
             icon = "graphics/ocean-icons/Slug_5.png"
+            iconindex = '1'
             userobject = User(name, url, calendartype, email)
             s.add(
                 FamilyMember(
@@ -81,6 +86,7 @@ def main(db_url, args):
                     calendartype=calendartype,
                     email=email,
                     icon=icon,
+                    iconindex=iconindex,
                     eventshash=eventshash,
                     userobject=userobject,
                 )
@@ -89,6 +95,7 @@ def main(db_url, args):
             name = "Wendall"
             url = "https://calendar.google.com/calendar/ical/9a10fca10921df108cb568fe942ef0b1d75095228d164104ea3880d830e6defc%40group.calendar.google.com/private-1ad1b63e3255bc1a06b816d93ece94b6/basic.ics"
             icon = "graphics/ocean-icons/Slug_3.png"
+            iconindex = '2'
             userobject = User(name, url, calendartype, email)
             s.add(
                 FamilyMember(
@@ -97,6 +104,7 @@ def main(db_url, args):
                     calendartype=calendartype,
                     email=email,
                     icon=icon,
+                    iconindex=iconindex,
                     eventshash=eventshash,
                     userobject=userobject,
                 )

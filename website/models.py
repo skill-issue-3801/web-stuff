@@ -20,6 +20,7 @@ class FamilyMember(Base):
     email = Column("email", String, nullable=True, unique=True)
     # string for path to icon image
     icon = Column("icon", String, nullable=False)
+    iconindex = Column("iconindex", Integer, nullable=False)
     # hash of a string of this users' events, used to quickly check if there have been any changes
     # since last checked to avoid re-processing
     eventshash = Column("eventshash", Integer, nullable=False)
