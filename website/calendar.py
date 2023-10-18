@@ -37,8 +37,10 @@ def default(db_session, globals):
     anyChanges = False
     log_events(globals.events)
     familyMembers = {}
+    peoplesIndex = {}
     for person in family:
         familyMembers[person.name] = person
+        peoplesIndex[person.name] = person.iconindex
     firstDay = today - timedelta(days=((today.weekday() + 1) % 7))
     dates = []
     for i in range(0, 7):
@@ -52,6 +54,7 @@ def default(db_session, globals):
         family=familyMembers,
         todayIndex=(today.weekday() + 1) % 7,
         firstDay = firstDay,
+        peoplesIndex=peoplesIndex,
         uids=uids_to_div_dict(family),
         homeAndAway=build_away_array(today, globals.events[math.floor(total_weeks_loaded /2)])
     )
@@ -59,7 +62,7 @@ def default(db_session, globals):
 def uids_to_div_dict(family):
     peoplesUid = {}
     for member in family:
-        peoplesUid[member.name] = member.userobject.get_uids()
+        peoplesUid[member.name] = list(dict.fromkeys(member.userobject.get_uids()))
     return peoplesUid
 
 def check_for_update(family, today, hashes):
