@@ -140,6 +140,7 @@
     background-repeat: repeat;
     background-image: url("data:image/svg+xml;utf8,%3Csvg width=%222000%22 height=%221400%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath fill=%22none%22 d=%22M0 0h2000v1400H0z%22%2F%3E%3Cpath d=%22M0 700h0c60.31-15.771 120.622-31.542 182-27 61.378 4.542 123.825 29.398 184 41s118.08 9.952 177-5 118.857-43.204 181-42c62.143 1.204 126.494 31.865 187 50s117.167 23.745 176 10c58.833-13.745 119.838-46.844 182-50 62.162-3.156 125.483 23.632 187 37 61.517 13.368 121.231 13.315 179 2 57.769-11.315 113.592-33.893 183-37 69.408-3.107 152.402 13.255 185 20 32.598 6.745 14.799 3.872 37 1%22 fill=%22none%22 stroke=%22%23fff%22 stroke-width=%227%22 stroke-linecap=%22round%22%2F%3E%3C%2Fsvg%3E");
     opacity: 0.8;
+    z-index: 5;
 }
 
 /* Calendar days */
@@ -338,6 +339,7 @@
 /* Styling the calendar div's that are placed on the calendar grid. */
 .event {
     background-color: var(--light-coral);
+    border: solid 3px var(--light-coral);
     border-radius: 10px;
     padding: 5%;
     padding-left: 10px;
@@ -439,19 +441,12 @@
     overflow: hidden;
 }
 
-/* Background darkening with time */
 .default-5 { opacity: 0.1; }
 .default-4 { opacity: 0.2; }
 .default-3 { opacity: 0.4; }
 .default-2 { opacity: 0.6; }
 .default-1 { opacity: 0.8; }
 .default {}
-/* these should probably be the coral colour but getting lighter but idk how to do that */
-.default1 { background-color: color-mix(in srgb, var(--light-coral) 80%, white);}
-.default2 { background-color: color-mix(in srgb, var(--light-coral) 60%, white);}
-.default3 { background-color: color-mix(in srgb, var(--light-coral) 40%, white);}
-.default4 { background-color: color-mix(in srgb, var(--light-coral) 20%, white);}
-.default5 { background-color: white;}
 
 /* Hide the sound effect's div, javascript is used to play them. */
 .soundEffects {
