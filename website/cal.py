@@ -364,7 +364,7 @@ class htmlEvent(dict):
             colend=adjust_for_midnight(gridEnd),
             rowstart=get_timecode(gridStart, "start"),
             rowend=get_timecode(gridEnd, "end"),
-            short=(end-start <= timedelta(minutes=60)),
+            short=(end-start <= timedelta(minutes=75)),
         )
 
 def dates_array(firstDayThisWeek):
