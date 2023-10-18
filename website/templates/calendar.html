@@ -13,7 +13,7 @@
 </head>
 
 
-<body class="baseContent">
+<body class="baseContent hideCursorCalendar">
     <div class="dimmingContent"></div>
     <div>
         <video autoplay muted loop id="waterBackgroundVideo" class="waterBackgroundDay">
@@ -41,7 +41,6 @@
                 <div class="radio-button-container userHighlight">
                     <button type="button" class="btn" onclick="resetHighlighted(); deselectUsers();">Reset Highlighted</button>
                     {% for user in uids.keys() %}
-                    {{uids[user]}}
                         <label>
                             <input type="checkbox" class="userSelectRadio" id="{{user}}" value="{{uids[user]}}" onclick="uidSelect('{{user}}');">
                             <label for="{{user}}">{{user}}</label>
