@@ -112,7 +112,10 @@ async function updateClock() {
     document.getElementById("datetime").innerHTML = displayString;
 }
 
-function scrollToWave() {
+async function scrollToWave() {
+    while (document.getElementById("currentTime").style["gridArea"] == "") {
+        delay(500);
+    }
     document.getElementById("currentTime").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
 }
 async function updateTimeData() {
