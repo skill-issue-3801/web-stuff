@@ -114,6 +114,7 @@ def update(db_session, globals):
 
     if anyChanges or globals.familyChanges:
         jsonfile = do_update(family, today, hashes)
+        globals.events = json.loads(jsonfile)
         return jsonfile
     else:
         return json.dumps(globals.events)
