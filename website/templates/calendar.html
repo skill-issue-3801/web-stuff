@@ -41,7 +41,7 @@
                 <div class="radio-button-container userHighlight">
                     <button type="button" class="btn" onclick="resetHighlighted(); deselectUsers();">Reset Highlighted</button>
                     {% for user in uids.keys() %}
-                    {{uids[user][0]}}
+                    {{uids[user]}}
                         <label>
                             <input type="checkbox" class="userSelectRadio" id="{{user}}" value="{{uids[user]}}" onclick="uidSelect('{{user}}');">
                             <label for="{{user}}">{{user}}</label>

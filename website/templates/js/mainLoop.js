@@ -11,7 +11,7 @@ function getHomeAndAway() {
 }
 
 function delay(time) {
-    return new Promise(resolve => setTimeout(resolve, time)); 
+    return new Promise(resolve => setTimeout(resolve, time));
 }
 
 var inactiveTimeout;
@@ -113,6 +113,9 @@ async function updateClock() {
 }
 
 async function scrollToWave() {
+    while (document.getElementById("currentTime").style["gridArea"] == "") {
+        delay(500);
+    }
     document.getElementById("currentTime").scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
 }
 async function updateTimeData() {
