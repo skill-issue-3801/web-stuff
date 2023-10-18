@@ -1,6 +1,6 @@
 let latestJson = "";
 var homeAndAway = {};
-let userBrightnessArray = ['default-5', 'default-4', 'default-3', 'default-2', 'default-1', 'default', 'default1', 'default2', 'default3','default4', 'default5'];
+let userBrightnessArray = ['default-5', 'default-4', 'default-3', 'default-2', 'default-1', 'default'];
 
 var currentScreenSaver = "screensaverImage0";
 
@@ -262,7 +262,7 @@ function resetHighlighted() {
 
 function userBrightnessChange(delta) {
     const current = document.getElementById("selectedUserBrightness").value;
-    if (!(delta == -1 && current == 'default-5') && !(delta == 1 && current == 'default5')) {
+    if (!(delta == -1 && current == 'default-5') && !(delta == 1 && current == 'default')) {
         const highlighted = document.getElementsByClassName("highlightedEvent");
         const newSetting = userBrightnessArray[(userBrightnessArray.indexOf(current) + delta)];
         for (var i = 0; i < highlighted.length; i++) {
