@@ -233,7 +233,7 @@
 </script>
 {% for user in uids.keys() %}
     <script>
-        Mousetrap.bind('{{peoplesIndex[user]}}', function() { document.getElementById('{{user}}').click(); });
+        Mousetrap.bind('{{loop.index0}}', function() { document.getElementById('{{user}}').click(); });
     </script>
 {% endfor %}
 </body>

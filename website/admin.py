@@ -60,17 +60,6 @@ def add_family_member(db_session):
         return
 
     icon = request.form.get("icon")
-    if icon == "graphics/ocean-icons/Slug_1.png":
-        iconindex = '0'
-    elif icon == "graphics/ocean-icons/Slug_3.png":
-        iconindex = '2'
-    elif icon == "graphics/ocean-icons/Slug_5.png":
-        iconindex = '1'
-    elif icon == "graphics/ocean-icons/Slug_6.png":
-        iconindex = '3'
-    else:
-        flash("Thats not a valid icon", category='error')
-        return
     eventshash = 0
     userobject = User(name, link, caltype, email)
     row = FamilyMember(
@@ -79,7 +68,6 @@ def add_family_member(db_session):
         calendartype=caltype,
         email=email,
         icon=icon,
-        iconindex=iconindex,
         eventshash=eventshash,
         userobject=userobject,
     )
