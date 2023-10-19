@@ -37,10 +37,8 @@ def default(db_session, globals):
     anyChanges = False
     log_events(globals.events)
     familyMembers = {}
-    peoplesindex = {}
     for person in family:
         familyMembers[person.name] = person
-        peoplesindex[person.name] = person.iconindex
     firstDay = today - timedelta(days=((today.weekday() + 1) % 7))
     dates = []
     for i in range(0, 7):
@@ -53,11 +51,24 @@ def default(db_session, globals):
         thisWeekIndex = math.floor(total_weeks_loaded /2),
         family=familyMembers,
         todayIndex=(today.weekday() + 1) % 7,
-        firstDay = firstDay,
-        peoplesindex=peoplesindex,
+        firstDay=firstDay,
+        peoplesindex=get_icon_indexes(family),
         uids=uids_to_div_dict(family),
         homeAndAway=build_away_array(today, globals.events[math.floor(total_weeks_loaded /2)])
     )
+
+def get_icon_indexes(family):
+    peoplesIndexes = {}
+    for member in family:
+        if member.icon == "graphics/ocean-icons/Slug_1.png":
+            peoplesIndexes[member.name] = '0'
+        elif member.icon == "graphics/ocean-icons/Slug_3.png":
+            peoplesIndexes[member.name] = '2'
+        elif member.icon == "graphics/ocean-icons/Slug_5.png":
+            peoplesIndexes[member.name] = '1'
+        elif member.icon == "graphics/ocean-icons/Slug_6.png":
+            peoplesIndexes[member.name] = '3'
+    return (peoplesIndexes)
 
 def uids_to_div_dict(family):
     peoplesUid = {}
