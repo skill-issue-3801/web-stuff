@@ -159,10 +159,12 @@ function changeWeek(thisWeekIndex, direction, numWeeks, datesArray) {
         putWeeksEvents(thisWeekIndex, datesArray);
         document.getElementById("weeksAgoAheadFlag").innerHTML = flagString(thisWeekIndex, thisWeekIndex);
     } else if (direction == -1 && currentViewingWeek > 0) {
+        document.getElementById("swishSound").play();
         document.getElementById("currentWeekViewing").value = currentViewingWeek - 1;
         putWeeksEvents(currentViewingWeek - 1, datesArray);
         document.getElementById("weeksAgoAheadFlag").innerHTML = flagString(thisWeekIndex, currentViewingWeek - 1);
     } else if (direction == 1 && currentViewingWeek < numWeeks - 1) {
+        document.getElementById("swishSound").play();
         document.getElementById("currentWeekViewing").value = currentViewingWeek + 1;
         putWeeksEvents(currentViewingWeek + 1, datesArray);
         document.getElementById("weeksAgoAheadFlag").innerHTML = flagString(thisWeekIndex, currentViewingWeek + 1);;

@@ -209,6 +209,18 @@
         Your browser does not support the audio element.
     </audio> 
 
+    <audio controls id="swishSound">
+        <!-- Creative Commons 4.0
+            Title: Bell(deep)A
+            Author: InspectorJ
+            Source: https://freesound.org/people/InspectorJ/sounds/394428/
+            Licence: https://creativecommons.org/licenses/by/4.0/
+            Changes: Sound was shortened and made quieter -->
+        <!-- InspectorJ. (2017). Bamboo Swing, D4.wav [Sound]. freesound. https://freesound.org/people/InspectorJ/sounds/394428/ -->
+        <source src="{{url_for('static', filename='sounds/swish-shortened.wav')}}" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
 </section>
 
 <script type="text/javascript" src="{{url_for('static', filename='js/mainLoop.js')}}"></script>

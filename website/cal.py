@@ -2,6 +2,8 @@ import json
 import math
 import validators
 from datetime import timedelta, datetime
+# icalevents is an external python library by Jazzband, first published in 2017
+# Jazzband. (2017). Icalevents [Programming Library]. GitHub. https://github.com/jazzband/icalevents/
 from icalevents import icalevents, icalparser
 
 accepted_calendars = ["google", "apple", "none"]
