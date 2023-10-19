@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 @has_global_stuff
 def default(db_session, globals):
     # this is dodgy but oh well
-    if not __debug__ and not (request.headers.get("User-Agent") == "Mozilla/5.0 (X11; Ubuntu; Linux aarch64; rv:109.0) Gecko/20100101 Firefox/115.0"):
+    if not __debug__ and not (request.headers.get("User-Agent") == "Mozilla/5.0 (X11; Ubuntu; Linux aarch64; rv:109.0) Gecko/20100101 Firefox/118.0"):
         print("Rejected request from '{}'".format(request.headers.get("User-Agent")))
         return "Raspberry Pi access only.", 403
 
