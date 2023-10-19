@@ -230,6 +230,17 @@ def update_events(family, today, hashes, names, emails):
     fill_uids(family, return_events)
     return return_events
 
+def fill_uids_calendarised(family, events):
+    newUids = {}
+    for member in family:
+        newUids[member] = []
+    for week in events:
+        for event in week:     
+            for attendee in event['attendees']:
+                newUids[attendee['name']].append(event['uid'])
+    for person in newUids.keys():
+        newUids[person] = list(dict.fromkeys(newUids[person]))
+    return(newUids)       
 
 def fill_uids(family, events):
     newUids = {}

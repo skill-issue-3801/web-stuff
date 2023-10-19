@@ -35,7 +35,7 @@ def default(db_session, globals):
 
     globals.familyChanges = False
     anyChanges = False
-    log_events(globals.events)
+    #log_events(globals.events)
     familyMembers = {}
     for person in family:
         familyMembers[person.name] = person
@@ -43,6 +43,7 @@ def default(db_session, globals):
     dates = []
     for i in range(0, 7):
         dates.append((firstDay + timedelta(days=i)).strftime("%d"))
+    uids = fill_uids_calendarised(familyMembers.keys(), globals.events)
     return render_template(
         "calendar.html",
         events=globals.events,
@@ -53,7 +54,7 @@ def default(db_session, globals):
         todayIndex=(today.weekday() + 1) % 7,
         firstDay=firstDay,
         peoplesindex=get_icon_indexes(family),
-        uids=uids_to_div_dict(family),
+        uids=uids,
         homeAndAway=build_away_array(today, globals.events[math.floor(total_weeks_loaded /2)])
     )
 
@@ -69,12 +70,6 @@ def get_icon_indexes(family):
         elif member.icon == "graphics/ocean-icons/Slug_6.png":
             peoplesIndexes[member.name] = '3'
     return (peoplesIndexes)
-
-def uids_to_div_dict(family):
-    peoplesUid = {}
-    for member in family:
-        peoplesUid[member.name] = list(dict.fromkeys(member.userobject.get_uids()))
-    return peoplesUid
 
 def check_for_update(family, today, hashes):
     anyChanges = False
