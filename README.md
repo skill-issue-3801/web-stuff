@@ -35,31 +35,17 @@ The remainder of the files for the website live in `website/templates/`, using [
 Dependencies should be added exclusively using `poetry add [thing]`. This will automatically update the `pyproject.toml` file, `poetry.lock` file, and use `pip` to install the library itself.
 
 
-## Team-Specific:
-Eli's notes for their set up:
-1. Swap folders (Eli applicable only but be sure to be in the correct folder when doing the following)
-```
-cd .\web-stuff\
-```
-2. install poetry deps if haven't already
+## Window's Powershell Terminal Specific Set Up:
+For those using a code editor in Windows, the website can be run in a code editor's terminal with the following commands. `python` and `py` are interchangeable depending on your installation. 
+1. Install poetry dependancies if not already done so
 ```
 python -m pip install poetry
 ```
-3. Poetry shell
+2. Run poetry shell to set up the virtual environment
 ```
 python -m poetry shell
 ```
-4. To run
+3. Run the website locally
 ```
 python -m poetry run python -m website localhost
 ```
-
--------------------------
-Ali's setup:
-start: crtl shift `
-1. cd .\web-stuff\ (don't need if in vs terminal)
-2. py -m pip install poetry
-3. py -m poetry install
-4. py -m poetry shell
-5. py -m poetry run python -m website localhost
-end: ctrl `
